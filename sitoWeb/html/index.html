@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ita" dir="ltr">
+<html lang="it" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8">
     <title>World Wine Web - pagina corrente</title>
+    <link rel="stylesheet" type="text/css" href="/css/basicStyle.css">
   </head>
   <body>
     <header>
@@ -11,9 +12,10 @@
     </header>
     <nav>
         <section>
+            <h2>Utente</h2>
             <p>nome utente</p>
             <p>ruolo</p>
-            <img src="" alt="nome cognome" \>
+            <img src="" alt="nome cognome" />
         </section>
         <ul>
             <li><a href="#">Home</a></li>
@@ -29,5 +31,77 @@
             <li><a href="#">Logout</a></li>
         </ul>
     </nav>
+
+    <main>
+        <div class="utilityBar">
+            <h2>Nome pagina</h2>
+            <h3>Nome prodotto</h3>
+            <form class="filter" action="index.html" method="post">
+                <section>
+                    <h4>Macrocategoria</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
+                            <label for="filterVino"> Vino </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="categoria2" value="spumante" id="filterSpumante"/>
+                            <label for="filterSpumante"> Spumante </label>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Colore</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
+                            <label for="filterRed"> Rosso </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="colore2" value="bianco" id="filterWhite"/>
+                            <label for="filterWhite"> Bianco </label>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Gas</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
+                            <label for="filterFermo"> Fermo </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="gas2" value="frizzante" id="filterFrizzante"/>
+                            <label for="filterFrizzante"> Frizzante </label>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Tenore zuccherino</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
+                            <label for="filterDry"> Dry </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="sugar2" value="extraDry" id="filterExtraDry"/>
+                            <label for="filterExtraDry"> Extra Dry </label>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Cantina</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
+                            <label for="filterGinopino"> Gino Pino </label>
+                        </li>
+                    </ul>
+                </section>
+            </form>
+        </div>
+    </main>
+
+    <footer></footer>
   </body>
 </html>
