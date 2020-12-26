@@ -4,15 +4,120 @@
 
 :root {
     --background-red: #690B22;
+    --background-red-light: #9C3D49;
     --background-ligh: #EEEEEE;
     --background-dark: #424242;
 
-    --ligh: #EEEEEE;
+    --primary: #690B22;
+    --primary-light: #9C3D49;
+    --primary-dark: #3B0000;
+
+    --secondary: #EEEEEE;
+    --secondary-light: #FFFFFF;
+    --secondary-dark: #BCBCBC;
+
+    --text-dark: #424242;
+    --text-light: #EEEEEE;
+}
+
+/*
+    Fonts
+*/
+html {
+    font-family: 'Poppins', 'Roboto', 'Open Sans', sans-serif;
+    font-style: normal;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 63px;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 54px;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 36px;
+}
+
+h4 {
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 36px;
+}
+
+h5 {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 27px;
+}
+
+h6 {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 24px;
+}
+
+p, a, li {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 24px;
+}
+
+/*Media query*/
+@media screen and (min-width: 480px) {
+    h1 {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 63px;
+    }
+
+    h2 {
+        font-size: 36px;
+        font-weight: 300;
+        line-height: 54px;
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 36px;
+    }
+
+    h4 {
+        font-size: 24px;
+        font-weight: 200;
+        line-height: 36px;
+    }
+
+    h5 {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 27px;
+    }
+
+    h6 {
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 24px;
+    }
+
+    p, a, li {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 24px;
+    }
 }
 
 header {
     background-color: var(--background-red);
-    color: #EEEEEE;
+    color: var(--text-light);
     padding: 3%;
     display: flex;
     position: relative;
@@ -22,38 +127,45 @@ header {
 header h1 {
     text-align: center;
     vertical-align: middle;
-    padding: 1%;
     width: 100%;
 }
 
 header button {
-    align-items: flex-start;
-    padding: 1.5%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    vertical-align: middle;
 }
 
-nav {
+body nav {
     background-color: var(--background-red);
+    /*display: none;*/
 }
 
-
-nav ul li {
+body nav ul li {
     list-style-type: none;
+    text-transform: uppercase;
 }
 
-nav ul li a, nav h2, nav p{
-    color: var(--ligh);
+body nav ul li a, body nav h2, body nav p, body nav img {
+    color: var(--text-light);
     text-decoration: none;
+    text-align: right;
+}
+
+body nav img {
+    float: right;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 div.utilityBar{
-    background-color: #9C3D49;
+    background-color: var(--background-red-light);
 }
 
 div.utilityBar h2, div.utilityBar h3, div.utilityBar h4, div.utilityBar ul li{
-    color: var(--ligh);
+    color: var(--text-light);
 }
 
 div.utilityBar ul li{
