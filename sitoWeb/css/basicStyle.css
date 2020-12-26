@@ -1,0 +1,65 @@
+* {
+  margin: 0px;
+}
+
+:root {
+    --background-red: #690B22;
+    --background-ligh: #EEEEEE;
+    --background-dark: #424242;
+
+    --ligh: #EEEEEE;
+}
+
+header {
+    background-color: var(--background-red);
+    color: #EEEEEE;
+    padding: 3%;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+
+header h1 {
+    text-align: center;
+    vertical-align: middle;
+    padding: 1%;
+    width: 100%;
+}
+
+header button {
+    align-items: flex-start;
+    padding: 1.5%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+nav {
+    background-color: var(--background-red);
+}
+
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a, nav h2, nav p{
+    color: var(--ligh);
+    text-decoration: none;
+}
+
+div.utilityBar{
+    background-color: #9C3D49;
+}
+
+div.utilityBar h2, div.utilityBar h3, div.utilityBar h4, div.utilityBar ul li{
+    color: var(--ligh);
+}
+
+div.utilityBar ul li{
+    list-style-type: none;
+}
+
+div.utilityBar h2, div.utilityBar h3 {
+    text-align: center;
+}
