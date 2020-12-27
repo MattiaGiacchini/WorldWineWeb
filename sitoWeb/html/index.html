@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-        <p>≡</p>
+        <button type="button" name="menu">≡</button>
         <h1>World Wine Web</h1>
     </header>
     <nav>
@@ -38,8 +38,11 @@
 
     <main>
         <div class="utilityBar">
-            <h2>Nome pagina</h2>
-            <h3>Nome prodotto</h3>
+            <div class="titleBar">
+                <h2>Nome pagina</h2>
+                <h3>Nome prodotto</h3>
+                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+            </div>
             <form class="filter" action="index.html" method="post">
                 <section>
                     <h4>Macrocategoria</h4>
@@ -102,6 +105,7 @@
                         </li>
                     </ul>
                 </section>
+                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
             </form>
         </div>
     </main>
