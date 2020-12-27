@@ -1,0 +1,97 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wineCard {
+    display: inline-block;
+    width: 88%;
+    margin: 6%;
+    box-shadow: 0px 4px 5px 3px grey;
+}
+
+.wineCard-Container {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+
+    display: grid;
+    grid-template-columns: 7fr 10px 15fr;
+    grid-gap: 0px;
+    grid-column-gap: 1px;
+}
+
+.wineCard-Container > * {
+    height: 100%;
+}
+
+.fotoVino {
+    height: 100%;
+    max-width: 100%;
+    object-fit:cover;
+}
+
+.etichetta {
+    height: 100%;
+    padding: 0% 3% 0%;
+}
+
+.wineCard .rosso {
+    background-color: #690b22;
+}
+.wineCard .rose {
+    background-color: #b46271;
+}
+.wineCard .bianco {
+    background-color: #987254;
+}
+
+.etichetta > * {
+    display: block;
+    text-align: center;
+}
+
+.etichetta > h4 {
+    border-bottom: 1px solid;
+    width: 100%;
+}
+
+.etichetta > img {
+   width: 50%;
+   margin-left: auto;
+   margin-right: auto;
+   background: linear-gradient(to right, #B9653D 50%, #C4C4C4 50%);
+}
+
+.LiterVol {
+    display: flex;
+    justify-content: space-between;
+}
+
+.etichetta > h5:first-of-type{
+    text-align: left;
+    border: 1px black solid;
+}
+
+.etichetta > h5:last-of-type {
+    text-align: right;
+    border: 1px black solid;
+}
+
+.etichetta > h6 {
+    text-align: left;
+}
+.etichetta > p:last-of-type {
+    text-align: left;
+}
+
+@media screen and (min-width: 480px) {
+    .wineCard {
+        display: inline-block;
+        width: 340px;
+        margin: 2%;
+        box-shadow: 0px 4px 5px 3px grey;
+    }
+}
