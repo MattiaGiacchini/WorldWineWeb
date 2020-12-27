@@ -148,8 +148,19 @@ body > header > p {
 
 body nav {
     background-color: var(--background-red);
-    /*display: none;*/
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
 }
+
+body > nav > section {
+    text-align: right;
+    right: 10px;
+    top: 10px;
+}
+
 
 body nav ul li {
     list-style-type: none;
