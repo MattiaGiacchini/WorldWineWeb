@@ -7,6 +7,7 @@
     --background-red-light: #9C3D49;
     --background-ligh: #EEEEEE;
     --background-dark: #424242;
+    --background-deactivated: #C4C4C4;
 
     --primary: #690B22;
     --primary-light: #9C3D49;
@@ -18,11 +19,16 @@
 
     --text-dark: #424242;
     --text-light: #EEEEEE;
+    --text-deactivated: #767676;
+
+
 
     --border-radius-button: 40px;
-    --border-radius-form: 15%;
+    --border-radius-form: 15px;
+    --border-radius-tile: 15px;
 
     --button-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);
+    --tile-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 /*
@@ -111,6 +117,11 @@ input {
 }
 body {
     background-color: var(--background-ligh);
+}
+
+.mainContent {
+    justify-content: center;
+    display: flex;
 }
 
 header {
