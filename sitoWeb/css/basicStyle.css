@@ -18,6 +18,11 @@
 
     --text-dark: #424242;
     --text-light: #EEEEEE;
+
+    --border-radius-button: 40px;
+    --border-radius-form: 15%;
+
+    --button-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);
 }
 
 /*
@@ -29,7 +34,7 @@ html {
 }
 
 h1 {
-    font-size: 35px;
+    font-size: 31px;
     font-weight: 800;
     line-height: 63px;
 }
@@ -64,7 +69,7 @@ h6 {
     line-height: 24px;
 }
 
-p, a, li {
+p, a, li, button, form input {
     font-size: 18px;
     font-weight: normal;
     line-height: 24px;
@@ -108,26 +113,39 @@ p, a, li {
         line-height: 24px;
     }
 
-    p, a, li {
+    p, a, li, button, form input {
         font-size: 16px;
         font-weight: normal;
         line-height: 24px;
     }
 }
 
+input {
+    background-color: var(--background-ligh);
+}
+body {
+    background-color: var(--background-ligh);
+}
+
 header {
     background-color: var(--background-red);
     color: var(--text-light);
-    padding: 3%;
+    padding: 2%;
     display: flex;
     position: relative;
+    vertical-align: middle;
+    align-items: center;
     justify-content: space-between;
+    z-index: 5;
+    height: 5%;
+    min-height: 60px;
 }
 
 header h1 {
+    height: 50px;
     text-align: center;
-    vertical-align: middle;
-    width: 100%;
+    width: 90%;
+    line-height: 50px;
 }
 
 header button {
@@ -135,14 +153,25 @@ header button {
     height: 50px;
     border-radius: 50%;
     vertical-align: middle;
+    background-color: var(--background-ligh);
+    color: var(--text-dark);
 }
 
 body nav {
-    background-color: var(--background-red);
-    /*display: none;*/
+    background: linear-gradient(to right, var(--background-red) 80%, var(--background-dark) 20%);
+    padding-bottom: 5%;
+    width: 100%;
 }
 
-body nav ul li {
+body > nav > section {
+    text-align: right;
+    right: 10px;
+    display:
+    top: 10px;
+}
+
+
+body nav ul li, input {
     list-style-type: none;
     text-transform: uppercase;
 }
@@ -162,16 +191,68 @@ body nav img {
 
 div.utilityBar{
     background-color: var(--background-red-light);
+    vertical-align: middle;
+    padding-bottom: 5%;
 }
 
-div.utilityBar h2, div.utilityBar h3, div.utilityBar h4, div.utilityBar ul li{
+div.titleBar{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+
+div.utilityBar {
     color: var(--text-light);
 }
 
 div.utilityBar ul li{
     list-style-type: none;
+    text-align: left;
 }
 
-div.utilityBar h2, div.utilityBar h3 {
+div.utilityBar ul {
+    padding-left: 5%;
+}
+
+div.titleBar h2, div.titleBar h3 {
+    text-align: left;
+    padding-left: 5%;
+    width: 100%;
+}
+
+div.titleBar h3 {
+    display: none;
+}
+
+div.titleBar #filterDropdown {
+    vertical-align: middle;
+    float: right;
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--text-light);
+}
+
+div.utilityBar section {
+    padding-bottom: 2%;
+}
+
+form.filter {
+    padding-left: 5%;
+    align-content: center;
+}
+
+form input[type = submit]{
+    height: 50px;
+    width: 200px;
+    background-color: var(--background-ligh);
+    color: var(--text-dark);
+    border-radius: var(--border-radius-button);
+    box-shadow: var(--button-shadow);
+    margin-top: 5%;
+    border: none;
     text-align: center;
+}
+
+form {
+    align-items: center;
 }

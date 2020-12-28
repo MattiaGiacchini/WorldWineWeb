@@ -3,12 +3,14 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8">
-    <title>World Wine Web - pagina corrente</title>
     <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <title>World Wine Web - pagina corrente</title>
   </head>
   <body>
     <header>
-        <button type="button" name="showMenu">≡</button>
+        <button type="button" name="menu">≡</button>
         <h1>World Wine Web</h1>
     </header>
     <nav>
@@ -36,8 +38,11 @@
 
     <main>
         <div class="utilityBar">
-            <h2>Nome pagina</h2>
-            <h3>Nome prodotto</h3>
+            <div class="titleBar">
+                <h2>Nome pagina</h2>
+                <h3>Nome prodotto</h3>
+                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+            </div>
             <form class="filter" action="index.html" method="post">
                 <section>
                     <h4>Macrocategoria</h4>
@@ -100,6 +105,7 @@
                         </li>
                     </ul>
                 </section>
+                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
             </form>
         </div>
     </main>
