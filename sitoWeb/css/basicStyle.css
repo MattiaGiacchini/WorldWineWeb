@@ -6,6 +6,7 @@
     --background-red: #690B22;
     --background-red-light: #9C3D49;
     --background-ligh: #EEEEEE;
+    --background-white: #FFFFFF;
     --background-dark: #424242;
     --background-deactivated: #C4C4C4;
 
@@ -120,8 +121,8 @@ body {
 }
 
 .mainContent {
-    justify-content: center;
     display: flex;
+    justify-content: space-around;
 }
 
 header {
