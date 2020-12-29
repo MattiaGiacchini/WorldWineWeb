@@ -41,56 +41,24 @@
     <main>
         <div class="utilityBar">
             <div class="titleBar">
-                <h2>Notifiche</h2>
-                <h3>Nome prodotto</h3>
-                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+                <h2>Login</h2>
             </div>
-            <form class="filter" action="index.html" method="post">
-
-                <section>
-                    <h4>ordina per data</h4>
-                    <ul>
-                        <li>
-                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
-                            <label for="crescente"> Crescente </label>
-                        </li>
-                        <li>
-                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
-                            <label for="decrescente"> Decrescente </label>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Visualizza le notifiche</h4>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="stato" value="daLeggere" id="daLeggere" checked/>
-                            <label for="daLeggere"> da leggere </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="stato" value="giaLetti" id="giaLetti" checked/>
-                            <label for="giaLetti"> già letti </label>
-                        </li>
-                    </ul>
-                </section>
-                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
-            </form>
         </div>
 
         <form action="#" method="POST">
-            <h2>Login</h2>
             <ul>
                 <li>
-                    <label for="username">Username:</label><input type="text" id="username" name="username" />
+                    <label for="username">Username:</label> <input type="text" id="username" name="username" />
                 </li>
                 <li>
-                    <label for="password">Password:</label><input type="password" id="password" name="password" />
+                    <label for="password">Password:</label> <input type="password" id="password" name="password" />
                 </li>
                 <li>
                     <input type="submit" name="submit" value="Invia" />
                 </li>
             </ul>
         </form>
+        <p>Non hai un account? <a href="#"> Iscriviti </a></p>
     </main>
     <footer></footer>
 </body>
