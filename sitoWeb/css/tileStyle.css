@@ -1,0 +1,104 @@
+.mainContent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.tile, .tile.etichetta, .tile.collaboratore {
+    min-height: 100px;
+    width: 94%;
+    margin: 2% 2%;
+    background-color: var(--background-white);
+    box-shadow: var(--tile-shadow);
+    border-radius: var(--border-radius-tile);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tile.etichetta {
+    justify-content: flex-start;
+}
+
+.tileContent {
+    padding: 0.5% 2%;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: middle;
+    color: var(--text-dark);
+}
+
+.tile.etichetta .tileContent {
+    width: 100%;
+}
+
+.tileContent h3, .tileContent h4 {
+    display: flex;
+    font-size: 19px;;
+    line-height: 24px;
+}
+
+.tileContent h4 {
+    font-weight: 300;
+}
+
+ .tileContent p:not(.tileImportantInfo) {
+    line-height: 20px;
+    font-size: 14px;
+ }
+
+ .tileImportantInfo {
+    font-size: 19px;
+    font-weight: bolder;
+ }
+
+.tileFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tile.etichetta .tileFooter {
+    justify-content: flex-end;
+}
+
+.tileImg {
+    grid-area: wineImg;
+    border-radius: 15px 0px 0px 15px;
+    height: 100px;
+    max-width: 20%;
+    object-fit: cover;
+}
+
+.tile.collaboratore .tileImg {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+
+}
+
+.tile.deactivated, .tile.etichetta.deactivated {
+    background-color: var(--background-deactivated);
+    color: var(--text-deactivated);
+    box-shadow: none;
+}
+
+.tile.deactivated > img {
+    filter: opacity(60%);
+    filter:saturate(-100%);
+}
+
+.tile.deactivated .tileContent, .tile.etichetta.deactivated .tileContent {
+    color: var(--text-deactivated);
+}
+
+@media screen and (min-width: 480px) {
+    .tile {
+        width: 400px;
+        margin: 1% 1%;
+    }
+}

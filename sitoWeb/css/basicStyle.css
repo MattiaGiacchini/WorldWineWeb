@@ -6,7 +6,9 @@
     --background-red: #690B22;
     --background-red-light: #9C3D49;
     --background-ligh: #EEEEEE;
+    --background-white: #FFFFFF;
     --background-dark: #424242;
+    --background-deactivated: #C4C4C4;
 
     --primary: #690B22;
     --primary-light: #9C3D49;
@@ -18,11 +20,16 @@
 
     --text-dark: #424242;
     --text-light: #EEEEEE;
+    --text-deactivated: #767676;
+
+
 
     --border-radius-button: 40px;
-    --border-radius-form: 15%;
+    --border-radius-form: 15px;
+    --border-radius-tile: 15px;
 
     --button-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);
+    --tile-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 /*
@@ -36,7 +43,7 @@ html {
 h1 {
     font-size: 31px;
     font-weight: 800;
-    line-height: 63px;
+    line-height: 200px;
 }
 
 h2 {
@@ -79,44 +86,30 @@ p, a, li, button, form input {
 @media screen and (min-width: 480px) {
     h1 {
         font-size: 42px;
-        font-weight: 800;
-        line-height: 63px;
     }
 
     h2 {
         font-size: 36px;
-        font-weight: 300;
-        line-height: 54px;
     }
 
     h3 {
         font-size: 24px;
-        font-weight: bold;
-        line-height: 36px;
     }
 
     h4 {
         font-size: 24px;
-        font-weight: 200;
-        line-height: 36px;
     }
 
     h5 {
         font-size: 18px;
-        font-weight: bold;
-        line-height: 27px;
     }
 
     h6 {
         font-size: 16px;
-        font-weight: 900;
-        line-height: 24px;
     }
 
     p, a, li, button, form input {
         font-size: 16px;
-        font-weight: normal;
-        line-height: 24px;
     }
 }
 
@@ -125,6 +118,11 @@ input {
 }
 body {
     background-color: var(--background-ligh);
+}
+
+.mainContent {
+    display: flex;
+    justify-content: space-around;
 }
 
 header {
@@ -191,8 +189,8 @@ body nav img {
 
 div.utilityBar{
     background-color: var(--background-red-light);
+    color: var(--text-light);
     vertical-align: middle;
-    padding-bottom: 5%;
 }
 
 div.titleBar{
@@ -201,16 +199,9 @@ div.titleBar{
     justify-content: space-between;
 }
 
-div.utilityBar {
-    color: var(--text-light);
-}
-
-div.utilityBar ul li{
+div.utilityBar ul {
     list-style-type: none;
     text-align: left;
-}
-
-div.utilityBar ul {
     padding-left: 5%;
 }
 
@@ -239,6 +230,7 @@ div.utilityBar section {
 form.filter {
     padding-left: 5%;
     align-content: center;
+    padding-bottom: 5%;
 }
 
 form input[type = submit]{
