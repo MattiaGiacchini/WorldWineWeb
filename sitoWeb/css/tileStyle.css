@@ -5,7 +5,7 @@
     width: 100%;
 }
 
-.tile, .tile.etichetta {
+.tile, .tile.etichetta, .tile.collaboratore {
     min-height: 100px;
     width: 94%;
     margin: 2% 2%;
@@ -72,6 +72,13 @@
     height: 100px;
     max-width: 20%;
     object-fit: cover;
+}
+
+.tile.collaboratore .tileImg {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+
 }
 
 .tile.deactivated, .tile.etichetta.deactivated {
