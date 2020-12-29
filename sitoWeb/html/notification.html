@@ -41,69 +41,35 @@
     <main>
         <div class="utilityBar">
             <div class="titleBar">
-                <h2>Nome pagina</h2>
+                <h2>Notifiche</h2>
                 <h3>Nome prodotto</h3>
                 <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
             </div>
             <form class="filter" action="index.html" method="post">
+
                 <section>
-                    <h4>Macrocategoria</h4>
+                    <h4>ordina per data</h4>
                     <ul>
                         <li>
-                            <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
-                            <label for="filterVino"> Vino </label>
+                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
+                            <label for="crescente"> Crescente </label>
                         </li>
                         <li>
-                            <input type="checkbox" name="categoria2" value="spumante" id="filterSpumante"/>
-                            <label for="filterSpumante"> Spumante </label>
+                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
+                            <label for="decrescente"> Decrescente </label>
                         </li>
                     </ul>
                 </section>
                 <section>
-                    <h4>Colore</h4>
+                    <h4>Visualizza le notifiche</h4>
                     <ul>
                         <li>
-                            <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
-                            <label for="filterRed"> Rosso </label>
+                            <input type="checkbox" name="stato" value="daLeggere" id="daLeggere" checked/>
+                            <label for="daLeggere"> da leggere </label>
                         </li>
                         <li>
-                            <input type="checkbox" name="colore2" value="bianco" id="filterWhite"/>
-                            <label for="filterWhite"> Bianco </label>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Gas</h4>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
-                            <label for="filterFermo"> Fermo </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="gas2" value="frizzante" id="filterFrizzante"/>
-                            <label for="filterFrizzante"> Frizzante </label>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Tenore zuccherino</h4>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
-                            <label for="filterDry"> Dry </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="sugar2" value="extraDry" id="filterExtraDry"/>
-                            <label for="filterExtraDry"> Extra Dry </label>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Cantina</h4>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
-                            <label for="filterGinopino"> Gino Pino </label>
+                            <input type="checkbox" name="stato" value="giaLetti" id="giaLetti" checked/>
+                            <label for="giaLetti"> già letti </label>
                         </li>
                     </ul>
                 </section>
@@ -111,14 +77,14 @@
             </form>
         </div>
 
-        <div class="mainContent">
+        <div class="mainContent notice">
 
             <div class="tile notice">
                 <div class="tileContent">
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il prodotto #454745 Vino pinot pianoc di tenuta coccapanne, presente nella tua lista dei favoriti, è tornato disponibile</p>
                 </div>
             </div>
             <div class="tile notice">
@@ -126,7 +92,7 @@
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
                 </div>
             </div>
             <div class="tile notice">
@@ -134,7 +100,7 @@
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
                 </div>
             </div>
             <div class="tile notice">
@@ -142,7 +108,7 @@
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
                 </div>
             </div>
             <div class="tile notice">
@@ -150,7 +116,7 @@
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il prodotto #454745 Vino pinot pianoc di tenuta coccapanne, presente nella tua lista dei favoriti, è tornato disponibile</p>
                 </div>
             </div>
             <div class="tile notice">
@@ -158,7 +124,71 @@
                     <h3>Order Update</h3>
                     <input type="button" name="" value="segna come letto">
                     <p>22/10/2021 - 15:16</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il prodotto #454745 Vino pinot pianoc di tenuta coccapanne, presente nella tua lista dei favoriti, è tornato disponibile</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il prodotto #454745 Vino pinot pianoc di tenuta coccapanne, presente nella tua lista dei favoriti, è tornato disponibile</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il tuo ordine n. 52436543 è stato spedito.</p>
+                </div>
+            </div>
+            <div class="tile notice">
+                <div class="tileContent">
+                    <h3>Order Update</h3>
+                    <input type="button" name="" value="segna come letto">
+                    <p>22/10/2021 - 15:16</p>
+                    <p>Il prodotto #454745 Vino pinot pianoc di tenuta coccapanne, presente nella tua lista dei favoriti, è tornato disponibile</p>
                 </div>
             </div>
 

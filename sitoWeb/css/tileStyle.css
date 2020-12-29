@@ -96,9 +96,14 @@
     color: var(--text-deactivated);
 }
 
+.mainContent.notice {
+  align-items: baseline;
+}
+
 .tile.notice > .tileContent {
     width: 100%;
     display: grid;
+    grid-template-columns: 50% 50%;
     grid-template-areas:
         'type   date'
         'lorem  lorem'
@@ -122,15 +127,17 @@
 
 .tile.notice > .tileContent > p:last-of-type {
     padding-top: 5px;
-    padding-bottom: : 5px;
+    padding-bottom: 5px;
     grid-area: lorem;
+    width: 100%;
+    min-height: 40px;
     border-top: 1px solid black;
 }
 
 .tile.notice > .tileContent > input {
     grid-area: button;
     height: 30px;
-    margin: 0px auto 20px auto;
+    margin: 0px 0px 20px auto;
 }
 
 
