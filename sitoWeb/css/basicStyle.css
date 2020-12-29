@@ -233,7 +233,7 @@ form.filter {
     padding-bottom: 5%;
 }
 
-form input[type = submit]{
+form input[type = submit], input[type = button]{
     height: 50px;
     width: 200px;
     background-color: var(--background-ligh);
