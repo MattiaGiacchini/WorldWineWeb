@@ -33,13 +33,15 @@
     color: var(--text-dark);
 }
 
-.tile.etichetta .tileContent {
+.tile.etichetta .tileContent, .tile.magazzino .tileContent {
     width: 100%;
+    margin-left: 2%;
 }
 
-.tileContent h3, .tileContent h4 {
+.tileContent h3, .tileContent h4, .tile.magazzino p:first-of-type {
     display: flex;
     font-size: 19px;;
+    font-weight: bold;
     line-height: 24px;
     text-overflow: clip;
 }
@@ -88,6 +90,15 @@
     width: 70%;
 }
 
+.tile.magazzino {
+    min-height: 80px;
+    height: 80px;
+}
+
+.tile.magazzino > p {
+    padding: 3% 3% 0 0;
+}
+
 .tile.deactivated, .tile.etichetta.deactivated {
     background-color: var(--background-deactivated);
     color: var(--text-deactivated);
@@ -107,5 +118,4 @@
         width: 400px;
         margin: 1% 1%;
     }
-
 }

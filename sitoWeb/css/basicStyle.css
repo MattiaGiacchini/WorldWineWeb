@@ -21,6 +21,8 @@
     --text-dark: #424242;
     --text-light: #EEEEEE;
     --text-deactivated: #767676;
+    --text-green: #4CAF50;
+    --text-red: #F44336;
 
 
 
@@ -130,7 +132,8 @@ header {
     color: var(--text-light);
     padding: 2%;
     display: flex;
-    position: relative;
+    position: sticky;
+    top: 0;
     vertical-align: middle;
     align-items: center;
     justify-content: space-between;
