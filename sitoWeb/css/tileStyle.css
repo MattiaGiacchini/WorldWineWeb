@@ -96,6 +96,44 @@
     color: var(--text-deactivated);
 }
 
+.tile.notice > .tileContent {
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        'type   date'
+        'lorem  lorem'
+        'button   button';
+}
+
+.tile.notice > .tileContent > h3 {
+    grid-area: type;
+    margin-top: auto;
+    padding-top: 3px;
+    text-align: left;
+}
+
+.tile.notice > .tileContent > p:first-of-type {
+    grid-area:  date;
+    box-sizing: border-box;
+    text-align: right;
+    margin-top: auto;
+    padding-right: 5px;
+}
+
+.tile.notice > .tileContent > p:last-of-type {
+    padding-top: 5px;
+    padding-bottom: : 5px;
+    grid-area: lorem;
+    border-top: 1px solid black;
+}
+
+.tile.notice > .tileContent > input {
+    grid-area: button;
+    height: 30px;
+    margin: 0px auto 20px auto;
+}
+
+
 @media screen and (min-width: 480px) {
     .tile {
         width: 400px;
