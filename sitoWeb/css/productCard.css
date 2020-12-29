@@ -52,7 +52,7 @@
     background-color: #987254;
 }
 
-.etichetta {
+article.wineCard .etichetta {
     height: 100%;
     padding: 0% 3% 0%;
     display: grid;
@@ -70,13 +70,12 @@
         'pres   pres    hear';
 }
 
-.etichetta > * {
-    display: block;
+article.wineCard .etichetta > * {
     text-align: center;
 }
 
 /* cantina */
-.etichetta > h4 {
+article.wineCard .etichetta > h4 {
     grid-area: cant;
     border-bottom: 1px solid;
     width: 100%;
@@ -90,27 +89,27 @@
 }
 
 /* nome del vino */
-.etichetta > h3 {
+article.wineCard .etichetta > h3 {
     grid-area: nome;
 }
 
 /* origine */
-.etichetta > p.origine{
+article.wineCard .etichetta > p.origine{
     grid-area: orig;
 }
 
 /* eventuale certificato */
-.etichetta > p.certificato{
+article.wineCard .etichetta > p.certificato{
     grid-area: cert;
 }
 
 /* eventuale annata */
-.etichetta > p.annata {
+article.wineCard .etichetta > p.annata {
     grid-area: anno;
 }
 
 /* immagine recensione */
-.etichetta > img {
+article.wineCard .etichetta > img {
    grid-area: rewi;
    width: 50%;
    min-height: 15px;
@@ -119,29 +118,29 @@
 /*   background: linear-gradient(to right, #B9653D 50%, #C4C4C4 50%)*/;
 }
 
-.etichetta > h5:first-of-type{
+article.wineCard .etichetta > h5:first-of-type{
     text-align: left;
     border: 1px black solid;
 }
 
-.etichetta > h5:last-of-type {
+article.wineCard .etichetta > h5:last-of-type {
     text-align: right;
     border: 1px black solid;
 }
 
 /* prezzo */
-.etichetta > h6 {
+article.wineCard .etichetta > h6 {
     grid-area: cost;
     text-align: left;
 }
 
 /* disponibilità */
-.etichetta > p:last-of-type {
+article.wineCard .etichetta > p:last-of-type {
     grid-area: pres;
     text-align: left;
 }
 
-.etichetta > input.preference {
+article.wineCard .etichetta > input.preference {
     margin-left: auto;
     grid-area: hear;
     height: 40px;
@@ -152,11 +151,11 @@
     background-size: cover;
 }
 
-.etichetta > input.favourite {
+article.wineCard .etichetta > input.favourite {
     background-color: #ffbf00;
 }
 
-.etichetta > input.not-favourite {
+article.wineCard .etichetta > input.not-favourite {
     background-color:inherit;
 }
 
