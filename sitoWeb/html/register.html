@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <h1>World Wine Web</h1>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../img/user.png" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="#">Magazzino</a></li>
+            <li><a href="#">Listino</a></li>
+            <li><a href="#">Collaboratori</a></li>
+            <li><a href="#">Carrello</a></li>
+            <li><a href="#">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Register</h2>
+            </div>
+        </div>
+
+        <form action="#" method="POST">
+            <ul>
+                <li>
+                    <p>Registrati come</p>
+                    <label for="business">azienda</label>
+                    <input type="radio" id="business" name="register" value="business"/>
+                    <label for="private">privato</label>
+                    <input type="radio" id="private" name="register" value="private"/>
+                </li>
+                <li>
+                    <label for="company" class="business">Denominazione Sociale</label>
+                    <input class="business" type="text" id="company" name="company" />
+                </li>
+                <li>
+                    <label for="pIva" class="business">Partita IVA</label>
+                    <input class="business" type="text" id="pIva" name="pIva" />
+                </li>
+                <li>
+                    <label for="name" class="private">Nome</label>
+                    <input class="private" type="text" id="name" name="name" />
+                </li>
+                <li>
+                    <label for="surname" class="private">Cognome</label>
+                    <input class="private" type="text" id="surname" name="surname" />
+                </li>
+                <li>
+                    <label for="cf" class="private">Codice Fiscale</label>
+                    <input class="private" type="text" id="cf" name="cf" />
+                </li>
+                <li>
+                    <label for="born" class="private">Data di Nascita</label>
+                    <input class="private" type="date" id="born" name="born" />
+                </li>
+                <li>
+                    <label for="mail">e-mail</label>
+                    <input type="email" id="mail" name="mail" />
+                </li>
+                <li>
+                    <label for="pwd">Password</label>
+                    <input type="password" id="pwd" name="pwd" />
+                </li>
+                <li>
+                    <label for="confirmPwd">Conferma Password</label>
+                    <input type="password" id="confirmPwd" name="confirmPwd" />
+                </li>
+                <li>
+                    <input type="submit" name="submit" value="Registrati" />
+                </li>
+            </ul>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
