@@ -45,11 +45,20 @@
             </div>
         </div>
 
-        <form class = "newWineLabel" action="#" method="POST">
+        <form name="newWineLabel" class="newWineLabel" action="#" method="POST">
             <ul>
                 <li>
                     <label for="id">ID Etichetta</label>
                     <input type="text" id="id" name="id" disabled readonly />
+                </li>
+                <li>
+                    <fieldset>
+                        <legend>Categoria</legend>
+                        <label for="vino" > Vino </label>
+                        <input type="radio" name="categoria" value="vino" id="vino">
+                        <label for="spumante">Spumante</label>
+                        <input type="radio" name="categoria" value="spumante" id="spumante">
+                    </fieldset>
                 </li>
                 <li>
                     <label for="name"> Nome Etichetta </label>
@@ -58,20 +67,69 @@
                 <li>
                     <label for="description"> Descrizione </label>
                     <textarea name="description" rows="5" cols="80" id="description"
+                        maxlength="500"  required
                         placeholder="massimo 500 caratteri..."></textarea>
+                </li>
+                <li>
+                    <fieldset>
+                        <legend>Colore</legend>
+                        <label for="red"> Rosso </label>
+                        <input type="radio" name="color" value="red" checked>
+                        <label for="rose"> Rosé </label>
+                        <input type="radio" name="color" value="rose">
+                        <label for="white"> Rosso </label>
+                        <input type="radio" name="color" value="white">
+                    </fieldset>
                 </li>
                 <li>
                     <label for="alcol">Titolo alcolico</label>
                     <input type="number" name="alcol" value="0" id="alcol"
-                        min="0.0" max="100.0" step="0.1">
+                        min="0.0" max="100.0" step="0.1" required>
                 </li>
                 <li>
-                    <label for="color">Colore</label>
-                    <select id="color" name="color">
-                        <option value="red">Rosso</option>
-                        <option value="rose">Rosé</option>
-                        <option value="white">Bianco</option>
+                    <label for="zucchero">Tenore Zuccherino</label>
+                    <select name="zucchero" id="zucchero" required>
+                        <option value=""></option>
+                        <optgroup label="Spumante" class="spumante">
+                            <option value="brutNature">Brut Nature</option>
+                            <option value="extraBrut">Extra Brut</option>
+                            <option value="brut">Brut</option>
+                            <option value="extraDry">Extra Dry</option>
+                            <option value="dry">Dry</option>
+                            <option value="demiSec">Demi Sec</option>
+                            <option value="dolce">Dolce</option>
+                        </optgroup>
+                        <optgroup label="Vino" class="vino">
+                            <option value="secco">Secco</option>
+                            <option value="abboccato">Abboccato</option>
+                            <option value="amabile">Amabile</option>
+                            <option value="dolce">Dolce</option>
+                        </optgroup>
                     </select>
+                </li>
+                <li>
+                    <fieldset class="vino">
+                        <legend>Fermo o Frizzante</legend>
+                        <label for="fermo">Fermo</label>
+                        <input type="radio" name="gas" value="fermo" id="fermo">
+                        <label for="frizzante">Frizzante</label>
+                        <input type="radio" name="gas" value="frizzante" id="frizzante" checked>
+                    </fieldset>
+                </li>
+                <li>
+                    <label for="cantina">Cantina</label>
+                    <select name="cantina" id="cantina" required>
+                        <option value=""></option>
+                        <option value="aggiungiNuovaCantina">Aggiungi Nuova Cantina</option>
+                        <optgroup label="Cantine a database">
+                            <option value="cantina1">cantina1</option>
+                            <option value="cantina2">cantina2</option>
+                            <option value="cantina3">cantina3</option>
+                            <option value="cantina4">cantina4</option>
+                            <option value="cantina5">cantina5</option>
+                        </optgroup>
+                    </select>
+                    <input type="text" name="nomeCantina" value="" disabled required>
                 </li>
                 <li>
                     <input type="submit" name="submit" value="Conferma"/>
