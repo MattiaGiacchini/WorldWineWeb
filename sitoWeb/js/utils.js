@@ -21,7 +21,6 @@ $(document).ready(function(){
 
     warehouseLoad.each(function(){
         warehouseLoadingValue = Number($(this).html());
-        console.log(warehouseLoadingValue);
         if(warehouseLoadingValue > 0){
             $(this).css("color", "#4CAF50");
         } else {
