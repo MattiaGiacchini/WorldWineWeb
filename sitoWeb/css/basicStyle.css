@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 * {
   margin: 0px;
 }
@@ -27,7 +29,7 @@
 
 
     --border-radius-button: 40px;
-    --border-radius-form: 15px;
+    --border-radius-form: 5px;
     --border-radius-tile: 15px;
 
     --button-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);
@@ -228,26 +230,4 @@ div.titleBar #filterDropdown {
 
 div.utilityBar section {
     padding-bottom: 2%;
-}
-
-form.filter {
-    padding-left: 5%;
-    align-content: center;
-    padding-bottom: 5%;
-}
-
-form input[type = submit], input[type = button]{
-    height: 50px;
-    width: 200px;
-    background-color: var(--background-ligh);
-    color: var(--text-dark);
-    border-radius: var(--border-radius-button);
-    box-shadow: var(--button-shadow);
-    margin-top: 5%;
-    border: none;
-    text-align: center;
-}
-
-form {
-    align-items: center;
 }
