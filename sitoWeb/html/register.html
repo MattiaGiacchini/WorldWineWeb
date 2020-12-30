@@ -48,15 +48,17 @@
         <form class = "register" action="#" method="POST">
             <ul>
                 <li>
-                    <p>Registrati come</p>
-                    <label for="business">azienda</label>
-                    <input type="radio" id="business" name="register" value="business" step="1"/>
-                    <label for="private">privato</label>
-                    <input type="radio" id="private" name="register" value="private" step="1"/>
+                    <fieldset>
+                        <legend>Registrati come</legend>
+                        <label for="business">azienda</label>
+                        <input type="radio" id="business" name="register" value="business" />
+                        <label for="private">privato</label>
+                        <input type="radio" id="private" name="register" value="private" />
+                    </fieldset>
                 </li>
                 <li class="business">
                     <label class="business" for="company">Denominazione Sociale</label>
-                    <input class="business" type="text" id="company" name="company" required step="2"/>
+                    <input class="business" type="text" id="company" name="company" required />
                 </li>
                 <li class="business">
                     <label class="business" for="pIva">Partita IVA</label>
