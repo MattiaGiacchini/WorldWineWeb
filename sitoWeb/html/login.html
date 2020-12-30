@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <h1>World Wine Web</h1>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../img/user.png" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="#">Magazzino</a></li>
+            <li><a href="#">Listino</a></li>
+            <li><a href="#">Collaboratori</a></li>
+            <li><a href="#">Carrello</a></li>
+            <li><a href="#">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Login</h2>
+            </div>
+        </div>
+
+        <form action="#" method="POST">
+            <ul>
+                <li>
+                    <label for="username">Username:</label> <input type="text" id="username" name="username" />
+                </li>
+                <li>
+                    <label for="password">Password:</label> <input type="password" id="password" name="password" />
+                </li>
+                <li>
+                    <input type="submit" name="submit" value="Invia" />
+                </li>
+            </ul>
+        </form>
+        <p>Non hai un account? <a href="#"> Iscriviti </a></p>
+    </main>
+    <footer></footer>
+</body>
+</html>
