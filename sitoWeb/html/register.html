@@ -50,13 +50,13 @@
                 <li>
                     <p>Registrati come</p>
                     <label for="business">azienda</label>
-                    <input type="radio" id="business" name="register" value="business"/>
+                    <input type="radio" id="business" name="register" value="business" step="1"/>
                     <label for="private">privato</label>
-                    <input type="radio" id="private" name="register" value="private"/>
+                    <input type="radio" id="private" name="register" value="private" step="1"/>
                 </li>
                 <li class="business">
                     <label class="business" for="company">Denominazione Sociale</label>
-                    <input class="business" type="text" id="company" name="company" required/>
+                    <input class="business" type="text" id="company" name="company" required step="2"/>
                 </li>
                 <li class="business">
                     <label class="business" for="pIva">Partita IVA</label>
@@ -72,23 +72,28 @@
                 </li>
                 <li class="private">
                     <label class="private" for="cf">Codice Fiscale</label>
-                    <input class="private" type="text" id="cf" name="cf" />
+                    <input class="private" type="text" id="cf" name="cf"
+                    pattern="^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$"/>
                 </li>
                 <li class="private">
-                    <label class="private" for="born">Data di Nascita</label>
-                    <input class="private" type="date" id="born" name="born" />
+                    <label class="private" for="birthday">Data di Nascita</label>
+                    <input class="private" type="date" id="birthday" name="birthday" max="2002-12-29"/>
                 </li>
                 <li>
-                    <label for="mail">e-mail</label>
-                    <input type="email" id="mail" name="mail"/>
+                    <label for="email">e-mail</label>
+                    <input type="email" id="email" name="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        title="L'email inserita è incompleta oppure incorretta" />
                 </li>
                 <li>
-                    <label for="pwd">Password</label>
-                    <input type="password" id="pwd" name="pwd"/>
+                    <label for="psw">Password</label>
+                    <input type="password" id="psw" name="psw"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="La password deve contenere almeno un numero e una lettera maiuscola e minuscola e almeno 8 o più caratteri "/>
                 </li>
                 <li>
-                    <label for="confirmPwd">Conferma Password</label>
-                    <input type="password" id="confirmPwd" name="confirmPwd"/>
+                    <label for="psw-repeat">Conferma Password</label>
+                    <input class="" type="password" id="psw-repeat" name="psw-repeat"/>
                 </li>
                 <li>
                     <input type="submit" name="submit" value="Registrati"/>
