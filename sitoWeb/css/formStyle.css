@@ -6,6 +6,7 @@ form:not(.filter) {
     background-color: var(--background-dark);
     color: var(--text-light);
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -95,7 +96,6 @@ form input:hover {
 
 input:active{
     box-shadow: inset 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
-    /*box-shadow: none !important;*/
 }
 
 
