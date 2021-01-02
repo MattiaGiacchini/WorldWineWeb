@@ -230,11 +230,14 @@ div.titleBar h3 {
 }
 
 div.titleBar #filterDropdown {
+    margin: 8px;
+    width: 150px;
     vertical-align: middle;
     float: right;
     background-color: transparent;
-    border-color: transparent;
     color: var(--text-light);
+    border: 2px solid;
+    border-color: var(--background-ligh);
 }
 
 div.utilityBar section {
