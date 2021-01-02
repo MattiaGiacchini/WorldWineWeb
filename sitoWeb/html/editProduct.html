@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="../js/utils.js"></script>
-    <script type="text/javascript" src="../js/wineLabelModuleController.js"></script>
     <title>World Wine Web - pagina corrente</title>
   </head>
   <body>
@@ -51,8 +50,35 @@
                     <input type="button" name="" value="Modifica Etichetta">
                 </li>
                 <li>
-
-                    <label for=""></label>
+                    <fieldset>
+                        <legend>Contenitore 1</legend>
+                        <label for="visible1">Visibile a Catalogo</label>
+                        <input type="checkbox" name="Visibile1" id="visible1" value="visible">
+                        <label for="nomeContenitore1">Contenitore</label>
+                        <select class="" name="" id="nomeContenitore1">
+                            <optgroup label="Bottiglia di vetro">
+                                <option value="1">0,375L</option>
+                                <option value="2">0,75L</option>
+                                <option value="3">1,5L</option>
+                            </optgroup>
+                            <optgroup label="Tetra-pack">
+                                <option value="4">0,5L</option>
+                                <option value="5">1L</option>
+                            </optgroup>
+                        </select>
+                        <label for="prezzo1">Prezzo</label>
+                        <input type="number" name="prezzo1" id="prezzo1" value="" min="0.00" step="0.01">
+                        <label for="foto1">Immagine del vino</label>
+                        <input type="file" id="foto1" name="" value="" accept="image/*">
+                    </fieldset>
+                </li>
+                <li>
+                    <fieldset>
+                        <p>Assegna l'etichetta ad un contenitore</p>
+                    </fieldset>
+                </li>
+                <li>
+                    <input type="submit" name="" value="Conferma">
                 </li>
             </ul>
         </form>

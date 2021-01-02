@@ -98,6 +98,19 @@ input:active{
     box-shadow: inset 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
 }
 
+form.editProduct fieldset {
+    border-radius: var(--border-radius-form);
+}
+
+form.editProduct fieldset {
+    display: grid;
+    grid-template-columns: 1fr, 2fr;
+}
+
+form.editProduct fieldset input[type = file] {
+    width: 100%;
+    text-transform: inherit;
+}
 
 @media screen and (min-width: 480px) {
     form:not(.filter) {
