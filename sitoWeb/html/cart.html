@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+        <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/cart.css">
+        <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+        <script type="text/javascript" src="../js/utils.js"></script>
+        <script type="text/javascript" src="../js/wineCard.js"></script>
+
+        <title>World Wine Web - Carrello</title>
+    </head>
+    <body>
+        <header>
+            <button type="button" name="menu">≡</button>
+            <h1>World Wine Web</h1>
+        </header>
+        <nav>
+            <section>
+                <a href="#">
+                    <h2>Dani/Login</h2>
+                    <p>ruolo</p>
+                    <img src="../img/user.png" alt="nome cognome dell'utente" />
+                </a>
+            </section>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gestione Ordini</a></li>
+                <li><a href="#">Magazzino</a></li>
+                <li><a href="#">Listino</a></li>
+                <li><a href="#">Collaboratori</a></li>
+                <li><a href="#">Carrello</a></li>
+                <li><a href="#">Ordini</a></li>
+                <li><a href="#">Vini speciali</a></li>
+                <li><a href="#">Area Personale</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div class="utilityBar">
+                <div class="titleBar">
+                    <h2>Carrello</h2>
+                    <h3>Nome prodotto</h3>
+                </div>
+            </div>
+
+            <section class="articoli">
+                <h3>Articoli</h3>
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/vino.png" alt="vino">
+                    <div class="tileContent">
+                            <h3>Pinot Bianco</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        <div class="tileFooter">
+                            <p>Quantità: 1 pezzi</p>
+                            <p class="tileImportantInfo">25,00 €</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/vino.png" alt="vino">
+                    <div class="tileContent">
+                            <h3>Pinot Bianco</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        <div class="tileFooter">
+                            <p>Quantità: 2 pezzi</p>
+                            <p class="tileImportantInfo">35,00 €</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/vino.png" alt="vino">
+                    <div class="tileContent">
+                            <h3>Pinot Bianco</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        <div class="tileFooter">
+                            <p>Quantità: 5 pezzi</p>
+                            <p class="tileImportantInfo">5,00 €</p>
+                        </div>
+                    </div>
+                </article>
+
+
+            </section>
+            <section class="riepilogoOrdine">
+                <h3>Riepilogo ordine</h3>
+                <article class="tile riepilogo">
+                    <div class="tileContent">
+                        <div class="tileBody">
+                            <p>Totale ordine</p>
+                            <p>120,00 €</p>
+                        </div>
+                    </div>
+                </article>
+
+                <form class="singleButtonForm" action="checkout.html" method="post">
+                    <input type="submit" name="checkout" value="checkout">
+                </form>
+
+            </section>
+
+        </main>
+    </body>
+</html>

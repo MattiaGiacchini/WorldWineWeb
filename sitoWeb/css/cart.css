@@ -1,0 +1,27 @@
+section.articoli h3, section.riepilogoOrdine h3 {
+    padding: 2% 0 0 5%;
+    width: 90%;
+    display: block;
+}
+
+.riepilogoOrdine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.riepilogoOrdine button {
+    margin-bottom: 5%;
+}
+
+section.articoli, section.riepilogoOrdine {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+section.riepilogoOrdine .tile.riepilogo{
+    width: 90%;
+    margin: 1% auto;
+}

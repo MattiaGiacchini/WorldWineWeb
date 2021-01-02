@@ -8,7 +8,7 @@
 .tile {
     min-height: 100px;
     width: 94%;
-    margin: 2% 2%;
+    margin: 2% auto;
     background-color: var(--background-white);
     box-shadow: var(--tile-shadow);
     border-radius: var(--border-radius-tile);
@@ -33,12 +33,12 @@
     color: var(--text-dark);
 }
 
-.tile.etichetta .tileContent, .tile.magazzino .tileContent {
+.tile.etichetta .tileContent, .tile.magazzino .tileContent, .tile.riepilogo .tileContent {
     width: 100%;
     margin-left: 2%;
 }
 
-.tileContent h3, .tileContent h4, .tile.magazzino p:first-of-type {
+.tileContent h3, .tileContent h4, .tile.magazzino p:first-of-type, .tile.riepilogo p:first-of-type, .tile.riepilogo p:last-of-type {
     display: flex;
     font-size: 19px;;
     font-weight: bold;
@@ -46,7 +46,7 @@
     text-overflow: clip;
 }
 
-.tileContent h4 {
+.tileContent h4, .tile.riepilogo p:last-child {
     font-weight: 300;
 }
 
@@ -90,14 +90,19 @@
     width: 70%;
 }
 
-.tile.magazzino {
+.tile.magazzino, .tile.riepilogo {
     min-height: 80px;
     height: 80px;
 }
 
-.tile.magazzino > p {
-    padding: 3% 3% 0 0;
+.tile.magazzino .tileContent > p {
+    padding-right: 10%;
 }
+
+/*
+.tile.magazzino > p, .tile.riepilogo p {
+    padding: 3% 3% 0 0;
+}*/
 
 .tile.deactivated, .tile.etichetta.deactivated {
     background-color: var(--background-deactivated);

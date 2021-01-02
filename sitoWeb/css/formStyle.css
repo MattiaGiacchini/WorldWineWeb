@@ -22,7 +22,7 @@ form:not(.filter) ul li {
     width: 90%;
 }
 
-form:not(.filter) ul {
+form:not(.filter) ul, form fieldset ul{
     width: 80%;
     padding: 0;
     display: flex;
@@ -31,30 +31,33 @@ form:not(.filter) ul {
     justify-content: center;
 }
 
-form input {
+form input, select {
     background-color: var(--secondary);
     color: var(--text-dark);
     border-radius: var(--border-radius-form);
     border: none;
 }
 
-form:not(.filter) input[type = text], form:not(.filter) input[type = password] {
+form input, select {
     width: 100%;
     height: 30px;
 }
 
-form input[type=password] {
-    letter-spacing: 0.3em;
+form input[type = checkbox], form input[type = radio] {
+    width: 20px;
+    height: 20px;
 }
 
-
+form input[type = password] {
+    letter-spacing: 0.3em;
+}
 
 form input :disabled{
     background-color: var(--text-deactivated);
     color: var(--text-dark);
 }
 
-form input[type = submit], input[type = button]{
+form input[type = submit], input[type = button], button, a.button{
     height: 50px;
     width: 200px;
     background-color: var(--background-ligh);
@@ -66,15 +69,34 @@ form input[type = submit], input[type = button]{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 700;
 }
 
-div.radio-group {
+form input[type = submit]{
+    min-width: 200px;
+    display: inline-block;
+}
+
+form fieldset {
+    width: 100%;
+    padding: 0;
+    margin: 8% 0;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    border: none;
 }
 
-div.radio-group input {
+form fieldset.payment {
+    flex-direction: column;
+}
+
+form fieldset legend {
+    padding-left: 5%;
+}
+
+form fieldset input[type = radio] {
     margin: 0 10% 0 2%;
 }
 
@@ -90,14 +112,21 @@ input.unmatch {
     box-shadow: 0 0 5px 2px var(--text-red) ;
 }
 
-form input:hover {
+form input:hover, button:hover, a.button:hover{
     transform: scale(1.02);
 }
 
-input:active{
+input:active, button:active, a.button:active{
     box-shadow: inset 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
 }
 
+form.singleButtonForm {
+    background-color: transparent;
+}
+
+form.checkout ul {
+    margin-bottom: 10%;
+}
 
 @media screen and (min-width: 480px) {
     form:not(.filter) {
@@ -115,11 +144,6 @@ input:active{
         margin-top: 15px;
         display: flex;
     }
-
-    form:not(.filter) input[type = text], form:not(.filter) input[type = password], form:not(.filter) input[type = email], form:not(.filter) input[type = date], form:not(.filter) input[type = description] {
-        width: 100%;;
-        height: 30px;
-    }
 }
 
 @media screen and (min-width: 800px) {
@@ -129,4 +153,10 @@ input:active{
         justify-content: center;
         align-items: baseline;
     }
+
+    form.checkout ul {
+        margin-top: 3%;
+        margin-bottom: 10%;
+    }
+
 }
