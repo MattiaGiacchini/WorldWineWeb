@@ -31,7 +31,7 @@ $(document).ready(function(){
     const varietale   = $("form.newWineLabel .varietale");
     const noIg        = $("form.newWineLabel .noIg");
 
-    let lastCatSelected = document.forms["newWineLabel"]["categoria"].value;
+    let lastCatSelected;
 
     function changeForm() {
         let actualCatSelected = document.forms["newWineLabel"]["categoria"].value;
@@ -46,13 +46,6 @@ $(document).ready(function(){
             getInLi(newCantina);
         } else {
             getOutLi(newCantina);
-        }
-
-        // Verifica se è presente o meno l'identificativo dell'Etichetta
-        if(document.forms["newWineLabel"]["id"].value == "") {
-            getOutLiInstant(idBox);
-        } else {
-            getInLiInstant(idBox);
         }
 
         // verifica se si tratta di un vino o di uno spumante
@@ -101,34 +94,42 @@ $(document).ready(function(){
         }
     }
 
-    /**
-    *   selezione vino oppure spumante
-    */
-    $("form.newWineLabel input[name = categoria]").on("change", changeForm);
-    //document.getElementById("categoria").addEventListener("change", changeForm);
+    // VARIABILE DI TEST
+    // document.forms["newWineLabel"]["id"].value = "c";
 
-    /**
-    *   Aggiungi o meno nuova cantina
-    */
-    document.getElementById("cantina").addEventListener("change", changeForm);
+    // Verifica se è presente o meno l'identificativo dell'Etichetta
+    if(document.forms["newWineLabel"]["id"].value == "") {
+        getOutLiInstant(idBox);
 
-    /**
-    *   Indicazione geografica presente o meno
-    */
-    $("form.newWineLabel input[name = ig]").on("change", changeForm);
+        /**
+        *   selezione vino oppure spumante
+        */
+        $("form.newWineLabel input[name = categoria]").on("change", changeForm);
+        //document.getElementById("categoria").addEventListener("change", changeForm);
 
-    /**
-    *   Vino Generico oppure varietale
-    */
-    $("form.newWineLabel input[name = classificazione]").on("change", changeForm);
+        /**
+        *   Aggiungi o meno nuova cantina
+        */
+        document.getElementById("cantina").addEventListener("change", changeForm);
 
-    /**
-    *   apparizione o scoparsa del vitigno da aggiungere
-    */
-    document.getElementById("vitigno").addEventListener("change", changeForm);
+        /**
+        *   Indicazione geografica presente o meno
+        */
+        $("form.newWineLabel input[name = ig]").on("change", changeForm);
 
+        /**
+        *   Vino Generico oppure varietale
+        */
+        $("form.newWineLabel input[name = classificazione]").on("change", changeForm);
 
-    document.forms["newWineLabel"]["categoria"].value = "vino";
-    document.forms["newWineLabel"]["classificazione"].value = "generico";
+        /**
+        *   apparizione o scoparsa del vitigno da aggiungere
+        */
+        document.getElementById("vitigno").addEventListener("change", changeForm);
+    } else {
+        getInLiInstant(idBox);
+        $("form.newWineLabel > ul > li").find("*").not("[type = button]").attr("disabled", true);
+    }
+
     changeForm();
 });
