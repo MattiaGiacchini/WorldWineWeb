@@ -1,12 +1,20 @@
-section.articoli h3, section.riepilogoOrdine h3 {
+section.articoli > h3, section.riepilogoOrdine > h3 {
     padding: 2% 0 0 5%;
     width: 90%;
     display: block;
 }
 
+section.riepilogoOrdine h3 {}
+
 .riepilogoOrdine {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+}
+
+.articoli {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
 }
 
@@ -24,4 +32,30 @@ section.articoli, section.riepilogoOrdine {
 section.riepilogoOrdine .tile.riepilogo{
     width: 90%;
     margin: 1% auto;
+}
+
+div.quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 60%;
+}
+
+div.quantity input {
+    max-width: 30%;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    color: var(--text-dark);
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+}
+
+p.tileImportantInfo {
+    margin-right: 5px;
+}
+
+section.articoli .tileContent {
+    padding: 0;
 }

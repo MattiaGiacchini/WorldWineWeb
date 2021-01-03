@@ -88,6 +88,10 @@ form fieldset {
     border: none;
 }
 
+form textarea {
+    resize: vertical;
+}
+
 form fieldset.payment {
     flex-direction: column;
 }
