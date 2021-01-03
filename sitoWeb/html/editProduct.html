@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/containerModuleController.js"></script>
     <title>World Wine Web - pagina corrente</title>
   </head>
   <body>
@@ -40,42 +41,36 @@
     <main>
         <div class="utilityBar">
             <div class="titleBar">
-                <h2>Nuova Etichetta</h2>
+                <h2>Gestione Prodotto</h2>
             </div>
         </div>
-
         <form name="editProduct" class="editProduct" action="#" method="GET">
             <ul>
                 <li>
                     <input type="button" name="" value="Modifica Etichetta">
                 </li>
                 <li>
-                    <fieldset>
-                        <legend>Contenitore 1</legend>
-                        <label for="visible1">Visibile a Catalogo</label>
-                        <input type="checkbox" name="Visibile1" id="visible1" value="visible">
-                        <label for="nomeContenitore1">Contenitore</label>
-                        <select class="" name="" id="nomeContenitore1">
-                            <optgroup label="Bottiglia di vetro">
-                                <option value="1">0,375L</option>
-                                <option value="2">0,75L</option>
-                                <option value="3">1,5L</option>
-                            </optgroup>
-                            <optgroup label="Tetra-pack">
-                                <option value="4">0,5L</option>
-                                <option value="5">1L</option>
-                            </optgroup>
-                        </select>
-                        <label for="prezzo1">Prezzo di vendita:  €</label>
-                        <input type="number" name="prezzo1" id="prezzo1" value="" min="0.00" step="0.01">
-                        <label for="foto1">Immagine del vino</label>
-                        <input type="file" id="foto1" name="" value="" accept="image/*">
-                    </fieldset>
+                    <label for="id">Contenitore</label>
+                    <select class="id" name="id" id="id">
+                        <option value=""></option>
+                        <optgroup label="visibili a catalogo">
+                            <option value="">Bottiglia di vetro - 0,375L</option>
+                            <option value="">Bottiglia di vetro - 0,75L</option>
+                        </optgroup>
+                        <optgroup label="non visibili a catalogo">
+                            <option value="">Bottiglia di vetro - 1,5L</option>
+                            <option value="">Bottiglia di vetro - 3L</option>
+                        </optgroup>
+                    </select>
                 </li>
                 <li>
-                    <fieldset class="newContainer">
-                        <input type="button" name="" value="+"/>
-                        <p>Assegna l'etichetta ad un nuovo Contenitore</p>
+                    <fieldset class="modify">
+                        <label for="visible">Visibile a catalogo</label>
+                        <input type="checkbox" name="Visibile" id="visible" value="true">
+                        <label for="price">Prezzo €</label>
+                        <input type="number" name="price" id="price" value="0.00" min="0.00" step="0.01">
+                        <label for="photo">Foto del Prodotto</label>
+                        <input type="file" id="photo" name="photo" value="" accept="image/*"/>
                     </fieldset>
                 </li>
                 <li>
