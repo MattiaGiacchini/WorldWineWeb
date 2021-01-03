@@ -8,7 +8,7 @@ $(document).ready(function() {
     window.onload = calculateCartValue();
 
     function updateCart(){
-        $("p#cartValue").text(cartValue + " €");
+        $("p#cartValue").text(cartValue.toFixed(2) + " €");
     }
 
     function calculateCartValue(){

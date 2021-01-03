@@ -4,11 +4,8 @@ section.articoli > h3, section.riepilogoOrdine > h3 {
     display: block;
 }
 
-section.riepilogoOrdine h3 {}
-
 .riepilogoOrdine {
     display: flex;
-    flex-direction: column;
     justify-content: center;
 }
 
@@ -30,6 +27,11 @@ section.articoli, section.riepilogoOrdine {
 }
 
 section.riepilogoOrdine .tile.riepilogo{
+    width: 90%;
+    margin: 1% auto;
+}
+
+section.riepilogoOrdine ul {
     width: 90%;
     margin: 1% auto;
 }

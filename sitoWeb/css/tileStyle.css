@@ -99,6 +99,12 @@
     padding-right: 10%;
 }
 
+.tile.magazzino > p {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2%;
+}
+
 /*
 .tile.magazzino > p, .tile.riepilogo p {
     padding: 3% 3% 0 0;
