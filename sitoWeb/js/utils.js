@@ -19,6 +19,10 @@ $(document).ready(function(){
         $(".filter").slideToggle();
     });
 
+    $("#addNewColaborator").click(function(){
+        location.href = "register.html";
+    })
+
     warehouseLoad.each(function(){
         warehouseLoadingValue = Number($(this).html());
         if(warehouseLoadingValue > 0){

@@ -5,9 +5,16 @@
     width: 100%;
 }
 
-.tile {
+a.tileLink {
     min-height: 100px;
     width: 94%;
+    margin: 2% auto;
+    display: flex;
+}
+
+.tile {
+    min-height: 100px;
+    width: 40vh;
     margin: 2% auto;
     background-color: var(--background-white);
     box-shadow: var(--tile-shadow);
@@ -87,6 +94,7 @@
 }
 
 .tile.collaboratore .tileContent {
+    height: 100px;
     width: 70%;
 }
 
@@ -168,8 +176,14 @@
     margin: 0px 0px 20px auto;
 }
 
+a.tileLink {
+    width: auto;
+    margin: 1%;
+    text-decoration: none;
+}
 
 @media screen and (min-width: 480px) {
+
     .tile {
         width: 400px;
         margin: 1% 1%;

@@ -243,3 +243,8 @@ div.titleBar #filterDropdown {
 div.utilityBar section {
     padding-bottom: 2%;
 }
+
+button#addNewColaborator {
+    margin-bottom: 5%;
+    display: block;
+}
