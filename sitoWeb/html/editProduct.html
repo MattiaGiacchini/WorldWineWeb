@@ -66,19 +66,23 @@
                                 <option value="5">1L</option>
                             </optgroup>
                         </select>
-                        <label for="prezzo1">Prezzo</label>
+                        <label for="prezzo1">Prezzo di vendita:  €</label>
                         <input type="number" name="prezzo1" id="prezzo1" value="" min="0.00" step="0.01">
                         <label for="foto1">Immagine del vino</label>
                         <input type="file" id="foto1" name="" value="" accept="image/*">
                     </fieldset>
                 </li>
                 <li>
-                    <fieldset>
-                        <p>Assegna l'etichetta ad un contenitore</p>
+                    <fieldset class="newContainer">
+                        <input type="button" name="" value="+"/>
+                        <p>Assegna l'etichetta ad un nuovo Contenitore</p>
                     </fieldset>
                 </li>
                 <li>
                     <input type="submit" name="" value="Conferma">
+                </li>
+                <li>
+                    <input type="button" class="cancel" name="" value="Annulla">
                 </li>
             </ul>
         </form>

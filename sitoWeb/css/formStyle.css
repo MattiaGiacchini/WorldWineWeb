@@ -102,14 +102,41 @@ form.editProduct fieldset {
     border-radius: var(--border-radius-form);
 }
 
-form.editProduct fieldset {
-    display: grid;
-    grid-template-columns: 1fr, 2fr;
-}
-
 form.editProduct fieldset input[type = file] {
     width: 100%;
     text-transform: inherit;
+}
+
+form.editProduct fieldset.newContainer {
+    padding: 8px;
+    display: grid;
+    grid-template-areas: '. .';
+    align-content: center;
+}
+
+form.editProduct fieldset.newContainer p {
+    display: block;
+    text-align: left;
+    margin: auto 0px auto 10px;
+    max-width: 100%;
+}
+
+
+form.editProduct fieldset input[type = button] {
+    display: block;
+    width: 50px;
+    font-size: 45px;
+    margin:auto 0px auto 5px;
+
+    background-color: var(--background-dark);
+    border: 1px solid var(--text-light);
+    color: var(--text-light);
+}
+
+form.editProduct input.cancel {
+    background-color: var(--background-dark);
+    border: 1px solid var(--text-light);
+    color: var(--text-light);
 }
 
 @media screen and (min-width: 480px) {
