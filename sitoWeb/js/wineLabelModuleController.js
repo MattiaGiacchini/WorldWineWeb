@@ -30,6 +30,7 @@ $(document).ready(function(){
     const doFull      = $("form.newWineLabel .doFull");
     const varietale   = $("form.newWineLabel .varietale");
     const noIg        = $("form.newWineLabel .noIg");
+    const newMenzione    = $("form.newWineLabel .newMenzione")
 
     let lastCatSelected;
 
@@ -86,11 +87,21 @@ $(document).ready(function(){
             } else {
                 getOutLi(newVitigno);
             }
+
+
+            // verifica se è da inserire un nuovo vino
+            if(document.forms["newWineLabel"]["menzione"].value == "new"
+                && actualIgSelection == "presente") {
+                getInLi(newMenzione);
+            } else {
+                getOutLi(newMenzione);
+            }
         } else {
             getOutLi(noIg);
             getOutLi(doFull);
             getOutLi(varietale);
             getOutLi(newVitigno);
+            getOutLi(newMenzione);
         }
     }
 
@@ -126,6 +137,11 @@ $(document).ready(function(){
         *   apparizione o scoparsa del vitigno da aggiungere
         */
         document.getElementById("vitigno").addEventListener("change", changeForm);
+
+        /**
+        *   apparizione o scoparsa del vitigno da aggiungere
+        */
+        document.getElementById("menzione").addEventListener("change", changeForm);
     } else {
         getInLiInstant(idBox);
         $("form.newWineLabel > ul > li").find("*").not("[type = button]").attr("disabled", true);
