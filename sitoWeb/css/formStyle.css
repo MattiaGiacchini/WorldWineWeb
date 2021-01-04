@@ -38,7 +38,8 @@ form input {
     border: none;
 }
 
-form:not(.filter) input[type = text], form:not(.filter) input[type = password] {
+form:not(.filter) input[type = text], form:not(.filter) input[type = password],
+form:not(.filter) select {
     width: 100%;
     height: 30px;
 }
@@ -46,8 +47,6 @@ form:not(.filter) input[type = text], form:not(.filter) input[type = password] {
 form input[type=password] {
     letter-spacing: 0.3em;
 }
-
-
 
 form input :disabled{
     background-color: var(--text-deactivated);
@@ -90,7 +89,7 @@ input.unmatch {
     box-shadow: 0 0 5px 2px var(--text-red) ;
 }
 
-form input:hover {
+form input:hover, form select:hover {
     transform: scale(1.02);
 }
 
@@ -101,9 +100,6 @@ input:active{
 /*********************************************************/
 /****************editProduct section**********************/
 /*********************************************************/
-form.editProduct {
-    height: 100%;
-}
 
 form.editProduct fieldset.selection div.grid {
     width: 100%;

@@ -80,7 +80,7 @@ h6 {
     line-height: 24px;
 }
 
-p, a, li, button, form input {
+p, a, li, button, form input, form select {
     font-size: 18px;
     font-weight: normal;
     line-height: 24px;
@@ -112,7 +112,7 @@ p, a, li, button, form input {
         font-size: 16px;
     }
 
-    p, a, li, button, form input {
+    p, a, li, button, form input, form select {
         font-size: 16px;
     }
 }
