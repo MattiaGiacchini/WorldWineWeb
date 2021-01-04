@@ -50,11 +50,6 @@
                     <input type="button" name="" value="Modifica Etichetta">
                 </li>
                 <li>
-                    <fieldset>
-                        <legend>Contenitore</legend>
-                        <input type="radio" name="" value="">
-                        <label for=""></label>
-                    </fieldset>
                     <label for="id">Contenitore</label>
                     <select class="id" name="id" id="id">
                         <option value=""></option>
@@ -70,16 +65,17 @@
                 </li>
                 <li>
                     <fieldset class="modify">
+                        <p>Impostazioni del Contenitore</p>
                         <label for="visible">Visibile a catalogo</label>
                         <input type="checkbox" name="Visibile" id="visible" value="true">
                         <label for="price">Prezzo €</label>
-                        <input type="number" name="price" id="price" value="0.00" min="0.00" step="0.01">
+                        <input type="number" name="price" id="price" value="" min="0.00" step="0.01">
                         <label for="photo">Foto del Prodotto</label>
                         <input type="file" id="photo" name="photo" value="" accept="image/*"/>
                     </fieldset>
                 </li>
                 <li>
-                    <input type="submit" name="" value="Conferma">
+                    <input type="submit" name="submit" value="Aggiorna">
                 </li>
                 <li>
                     <input type="button" class="cancel" name="" value="Annulla">

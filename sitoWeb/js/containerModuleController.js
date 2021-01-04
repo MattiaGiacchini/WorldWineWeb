@@ -1,7 +1,3 @@
-let lastCheckboxValue;
-let lastPriceValue;
-let lastPhotoValue;
-
 $(document).ready(function(){
     const inputForm = $("form.editProduct fieldset.modify")
                     .find("input");
@@ -10,16 +6,21 @@ $(document).ready(function(){
     const photo    = document.getElementById("photo");
     const submit   = $("form.editProduct input[type = submit]");
 
-    lastCheckboxValue = checkbox.checked;
-    lastPriceValue = price.value;
-    lastPhotoValue = photo.value;
+    let lastCheckboxValue = checkbox.checked;
+    let lastPriceValue    = price.value;
+    let lastPhotoValue    = photo.value;
 
+    function upLoadNewData() {
+
+    }
 
     function showAnotherProduct() {
+        upLoadNewData();
         lastCheckboxValue = checkbox.checked;
         lastPriceValue = price.value;
         lastPhotoValue = photo.value;
         setOrRemoveRequired();
+        checkVariation();
     }
 
     function setOrRemoveRequired() {
@@ -31,19 +32,22 @@ $(document).ready(function(){
     }
 
     function checkVariation(){
-        if(price.value != lastPriceValue ||
-           photo.value != lastPhotoValue ||
-           checkbox.checket != lastCheckboxValue) {
-               submit.removeAttr("disabled");
-        } else {
+        console.clear();
+        console.log("check " + (lastCheckboxValue === checkbox.checked));
+        console.log("photo " + (lastPhotoValue === photo.value));
+        console.log("price " + (lastPriceValue === price.value));
+        if(price.value == lastPriceValue &&
+           photo.value == lastPhotoValue &&
+           checkbox.checked == lastCheckboxValue) {
             submit.attr("disabled", true);
+        } else {
+            submit.removeAttr("disabled");
         }
     }
 
     checkbox.addEventListener("change", setOrRemoveRequired);
-    document.getElementById("id")
-            .addEventListener("change", showAnotherProduct);
-
+    document.getElementById("id").addEventListener("change", showAnotherProduct);
     inputForm.change(checkVariation);
-    checkVariation();
+
+    window.onload = showAnotherProduct();
 });

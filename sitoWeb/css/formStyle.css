@@ -128,24 +128,18 @@ input:active, button:active, a.button:active{
 /****************editProduct section**********************/
 /*********************************************************/
 
-form.editProduct fieldset.selection div.grid {
-    width: 100%;
-    height: 100%;
-    padding: 0px;
-    margin: 0px;
-    display: grid;
-    grid-template-columns: 20px auto;
-}
-form.editProduct fieldset.selection div.grid * {
-    margin: auto 0px auto;
-}
-
 form.editProduct fieldset.modify {
-    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
     display: grid;
     border-radius: var(--border-radius-form);
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 3px;
+}
+form.editProduct fieldset.modify p {
+    grid-column: span 6;
+    text-align: left;
+    text-decoration: underline;
 }
 /* label catalog*/
 form.editProduct fieldset.modify label:first-of-type{
@@ -165,6 +159,8 @@ form.editProduct fieldset.modify label:nth-of-type(2) {
 /* input price */
 form.editProduct fieldset.modify input[type=number] {
     grid-column: span 4;
+    padding: 0px;
+    width: 100%;
 }
 /* label Photo */
 form.editProduct fieldset.modify label:nth-of-type(3) {
