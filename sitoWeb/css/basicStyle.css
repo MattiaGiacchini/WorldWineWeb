@@ -226,7 +226,7 @@ div.titleBar h2, div.titleBar h3 {
 }
 
 div.titleBar h3 {
-    display: none;
+    display: block;
 }
 
 div.titleBar #filterDropdown {

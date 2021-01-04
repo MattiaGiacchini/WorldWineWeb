@@ -137,6 +137,7 @@ article.wineCard .etichetta > h6 {
 /* disponibilità */
 article.wineCard .etichetta > p:last-of-type {
     grid-area: pres;
+    font-size: 16px;
     text-align: left;
 }
 
