@@ -45,20 +45,20 @@
             </div>
         </div>
 
-        <form class = "register" action="#" method="POST">
+        <form class="register" action="#" method="POST">
             <ul>
                 <li>
-                    <fieldset>
+                    <fieldset class="privateOrBusiness">
                         <legend>Registrati come</legend>
-                        <label for="business">azienda</label>
-                        <input type="radio" id="business" name="register" value="business" />
-                        <label for="private">privato</label>
-                        <input type="radio" id="private" name="register" value="private" />
+                        <input type="radio" id="private" name="register" value="private" step="1"/>
+                        <label for="private">Privato</label>
+                        <input type="radio" id="business" name="register" value="business" step="1"/>
+                        <label for="business">Azienda</label>
                     </fieldset>
                 </li>
                 <li class="business">
                     <label class="business" for="company">Denominazione Sociale</label>
-                    <input class="business" type="text" id="company" name="company" required />
+                    <input class="business" type="text" id="company" name="company" required step="2" disabled="disabled" />
                 </li>
                 <li class="business">
                     <label class="business" for="pIva">Partita IVA</label>
@@ -83,7 +83,7 @@
                     <input class="private" type="date" id="birthday" name="birthday" max="2002-12-29"/>
                 </li>
                 <li>
-                    <label for="email">e-mail</label>
+                    <label for="email">E-mail</label>
                     <input type="email" id="email" name="email"
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         title="L'email inserita è incompleta oppure incorretta" />

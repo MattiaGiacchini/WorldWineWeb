@@ -22,7 +22,7 @@ form:not(.filter) ul li {
     width: 90%;
 }
 
-form:not(.filter) ul {
+form:not(.filter) ul, form fieldset ul{
     width: 80%;
     padding: 0;
     display: flex;
@@ -31,30 +31,33 @@ form:not(.filter) ul {
     justify-content: center;
 }
 
-form input {
+form input, select {
     background-color: var(--secondary);
     color: var(--text-dark);
     border-radius: var(--border-radius-form);
     border: none;
 }
 
-form:not(.filter) input[type = text], form:not(.filter) input[type = password] {
+form input, select {
     width: 100%;
     height: 30px;
 }
 
-form input[type=password] {
-    letter-spacing: 0.3em;
+form input[type = checkbox], form input[type = radio] {
+    width: 20px;
+    height: 20px;
 }
 
-
+form input[type = password] {
+    letter-spacing: 0.3em;
+}
 
 form input :disabled{
     background-color: var(--text-deactivated);
     color: var(--text-dark);
 }
 
-form input[type = submit], input[type = button]{
+form input[type = submit], input[type = button], button, a.button{
     height: 50px;
     width: 200px;
     background-color: var(--background-ligh);
@@ -66,16 +69,39 @@ form input[type = submit], input[type = button]{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 700;
 }
 
-div.radio-group {
+form input[type = submit]{
+    min-width: 200px;
+    display: inline-block;
+}
+
+form fieldset {
+    width: 100%;
+    padding: 0;
+    margin: 8% 0;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    border: none;
 }
 
-div.radio-group input {
-    margin: 0 10% 0 2%;
+form textarea {
+    resize: vertical;
+}
+
+form fieldset.payment {
+    flex-direction: column;
+}
+
+form fieldset legend {
+    padding-left: 5%;
+}
+
+form fieldset input[type = radio] {
+    margin: 0 2% 0 10%;
 }
 
 form.filter {
@@ -90,14 +116,100 @@ input.unmatch {
     box-shadow: 0 0 5px 2px var(--text-red) ;
 }
 
-form input:hover {
+form input:hover, button:hover, a.button:hover{
     transform: scale(1.02);
 }
 
-input:active{
+input:active, button:active, a.button:active{
     box-shadow: inset 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
 }
 
+/*********************************************************/
+/****************editProduct section**********************/
+/*********************************************************/
+
+form.editProduct fieldset.modify {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    border-radius: var(--border-radius-form);
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 3px;
+}
+form.editProduct fieldset.modify p {
+    grid-column: span 6;
+    text-align: left;
+    text-decoration: underline;
+}
+/* label catalog*/
+form.editProduct fieldset.modify label:first-of-type{
+    grid-column: span 5;
+}
+/* input checkbox*/
+form.editProduct fieldset.modify input[type = checkbox]{
+    height: 24px;
+    width: 24px;
+    grid-column: span 1;
+    margin: auto 0px 0px auto;
+}
+/* label price */
+form.editProduct fieldset.modify label:nth-of-type(2) {
+    grid-column: span 2;
+}
+/* input price */
+form.editProduct fieldset.modify input[type=number] {
+    grid-column: span 4;
+    padding: 0px;
+    width: 100%;
+}
+/* label Photo */
+form.editProduct fieldset.modify label:nth-of-type(3) {
+    grid-column: span 6;
+}
+/* input photo */
+form.editProduct fieldset.modify input[type = file] {
+    grid-column: span 6;
+    width: 100%;
+    text-transform: inherit;
+}
+
+/* cancel button */
+form.editProduct input.cancel {
+    background-color: var(--background-dark);
+    border: 1px solid var(--text-light);
+    color: var(--text-light);
+}
+
+
+form.singleButtonForm {
+    background-color: transparent;
+}
+
+form.checkout ul {
+    margin-bottom: 10%;
+}
+
+form.loginForm > ul > p {
+    margin-top: 4%;
+}
+
+form.loginForm > ul > p > a {
+    color: var(--text-light);
+}
+
+form fieldset.privateOrBusiness legend{
+    padding: 0;
+    margin-bottom: 2%;
+}
+
+form fieldset.privateOrBusiness input[type = radio]{
+    padding: 0;
+    margin: 0 1% 0 10%;
+}
+
+form fieldset.privateOrBusiness input[type = radio]:first-of-type {
+    margin-left: 0;
+}
 
 @media screen and (min-width: 480px) {
     form:not(.filter) {
@@ -115,11 +227,6 @@ input:active{
         margin-top: 15px;
         display: flex;
     }
-
-    form:not(.filter) input[type = text], form:not(.filter) input[type = password], form:not(.filter) input[type = email], form:not(.filter) input[type = date], form:not(.filter) input[type = description] {
-        width: 100%;;
-        height: 30px;
-    }
 }
 
 @media screen and (min-width: 800px) {
@@ -128,5 +235,10 @@ input:active{
         flex-direction: row;
         justify-content: center;
         align-items: baseline;
+    }
+
+    form.checkout ul {
+        margin-top: 3%;
+        margin-bottom: 10%;
     }
 }

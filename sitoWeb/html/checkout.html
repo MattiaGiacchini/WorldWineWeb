@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+        <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+        <link rel="stylesheet" type="text/css" href="../css/cart.css">
+        <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+        <script type="text/javascript" src="../js/utils.js"></script>
+        <script type="text/javascript" src="../js/wineCard.js"></script>
+        <script type="text/javascript" src="../js/checkout.js"></script>
+
+
+        <title>World Wine Web - Carrello</title>
+    </head>
+    <body>
+        <header>
+            <button type="button" name="menu">≡</button>
+            <h1>World Wine Web</h1>
+        </header>
+        <nav>
+            <section>
+                <a href="#">
+                    <h2>Dani/Login</h2>
+                    <p>ruolo</p>
+                    <img src="../img/user.png" alt="nome cognome dell'utente" />
+                </a>
+            </section>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gestione Ordini</a></li>
+                <li><a href="#">Magazzino</a></li>
+                <li><a href="#">Listino</a></li>
+                <li><a href="#">Collaboratori</a></li>
+                <li><a href="#">Carrello</a></li>
+                <li><a href="#">Ordini</a></li>
+                <li><a href="#">Vini speciali</a></li>
+                <li><a href="#">Area Personale</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div class="utilityBar">
+                <div class="titleBar">
+                    <h2>Riepilogo ordine</h2>
+                    <h3>Nome prodotto</h3>
+                </div>
+            </div>
+
+
+            </section>
+            <section>
+                    <form name="checkoutForm" class="checkout" action="index.html" method="post">
+                        <section class="riepilogoOrdine">
+                            <h3></h3>
+                            <article class="tile riepilogo">
+                                <div class="tileContent">
+                                    <div class="tileBody">
+                                        <p>Totale ordine</p>
+                                        <p id="cartValue">120,00 €</p>
+                                    </div>
+                                </div>
+                            </article>
+                            <ul>
+                                <li>Pinot Biano - 6pz - 25.00 €</li>
+                                <li>Pinot Grigio - 2pz - 25.00 €</li>
+                                <li>Pinot Nero - 1pz - 25.00 €</li>
+                                <li>Sangiovese - 7pz - 25.00 €</li>
+                                <li>Trebbiano - 24pz - 25.00 €</li>
+                                <li>Chardonnay - 8pz - 25.00 €</li>
+                            </ul>
+
+                        </section>
+                        <ul class="address">
+                            <li>
+                                <label for="shippingAddress">Indirizzo di spedizione</label>
+                                <select name="shippingAddress" id="shippingAddress" required>
+                                    <option value="">Seleziona indirizzo</option>
+                                    <option value="new">Aggiungi nuovo indirizzo</option>
+                                    <optgroup label="Indirizzi salvati">
+                                        <option value="address1">Via Bolsena, 11</option>
+                                        <option value="address2">Via Caduti per la Libertà, 206</option>
+                                    </optgroup>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="firstname">Nome</label>
+                                <input type="text" id="firstname" name="firstname" required readonly>
+                            </li>
+                            <li>
+                                <label for="lastname">Cognome</label>
+                                <input type="text" id="lastname" name="lastname" required readonly>
+                            </li>
+                            <li>
+                                <label for="adr">Address</label>
+                                <input type="text" id="adr" name="address" required readonly>
+                            </li>
+                            <li>
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" required readonly>
+                            </li>
+                            <li>
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" required readonly>
+                            </li>
+                            <li>
+                                <label for="zip">Codice postale</label>
+                                <input type="number" id="zip" name="zip" pattern="[0-9]{5}" required readonly>
+                            </li>
+                        </ul>
+                        <ul class="payment">
+                            <li>
+                                <label for="payment">Metodo di pagamento</label>
+                                <select name="payment" id="payment" required>
+                                    <option value="">Seleziona metodo</option>
+                                    <option value="new">Aggiungi nuovo metodo di pagamento</option>
+                                    <optgroup label="Metodi salvati">
+                                        <option value="pay1">**** **** **** *457</option>
+                                        <option value="pay2">**** **** **** *716</option>
+                                        <option value="pay3">**** **** **** *124</option>
+                                    </optgroup>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="cardname">Intestatario</label>
+                                <input type="text" id="cardname" name="cardname" required readonly>
+                            </li>
+                            <li>
+                                <label for="cardnumber">Numero della carta</label>
+                                <input type="text" id="cardnumber" name="cardnumber" required readonly>
+                            </li>
+                            <li>
+                                <label for="expiration">Scadenza</label>
+                                <input type="month" id="expiration" name="expiration" required readonly>
+                            </li>
+                            <li>
+                                <label for="cvv">CVV</label>
+                                <input type="number" id="cvv" name="cvv" pattern="[0-9]{3}" required readonly>
+                            </li>
+
+                            <li>
+                                <input id="confirmOrder" type="submit" name="submit" value="Conferma" />
+                            </li>
+                        </ul>
+                    </form>
+
+            </section>
+        </main>
+    </body>
+</html>

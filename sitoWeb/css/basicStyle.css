@@ -32,14 +32,14 @@
     --border-radius-form: 5px;
     --border-radius-tile: 15px;
 
-    --button-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);
+    --button-shadow: 5px 8px 4px rgba(0, 0, 0, 0.25);
     --tile-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 /*
     Fonts
 */
-html {
+html, button {
     font-family: 'Poppins', 'Roboto', 'Open Sans', sans-serif;
     font-style: normal;
 }
@@ -80,7 +80,7 @@ h6 {
     line-height: 24px;
 }
 
-p, a, li, button, form input {
+p, a, li, button, form input, form select {
     font-size: 18px;
     font-weight: normal;
     line-height: 24px;
@@ -112,7 +112,7 @@ p, a, li, button, form input {
         font-size: 16px;
     }
 
-    p, a, li, button, form input {
+    p, a, li, button, form input, form select {
         font-size: 16px;
     }
 }
@@ -120,6 +120,7 @@ p, a, li, button, form input {
 input {
     background-color: var(--background-ligh);
 }
+
 body {
     background-color: var(--background-ligh);
 }
@@ -158,25 +159,33 @@ header button {
     vertical-align: middle;
     background-color: var(--background-ligh);
     color: var(--text-dark);
+    margin: auto;
 }
 
 body nav {
-    background: linear-gradient(to right, var(--background-red) 80%, var(--background-dark) 20%);
+    background: var(--background-red);
     padding-bottom: 5%;
     width: 100%;
 }
 
 body > nav > section {
     text-align: right;
-    right: 10px;
-    display:
+    margin-right: 5%;
     top: 10px;
 }
 
+body > nav ul {
+    width: 95%;
+    padding: 0;
+    margin-left: 5%;
+}
 
-body nav ul li, input {
-    list-style-type: none;
+body nav ul li, input[type = button], input[type = submit], button, a.button {
     text-transform: uppercase;
+}
+
+body nav ul li {
+    list-style-type: none;
 }
 
 body nav ul li a, body nav h2, body nav p, body nav img {
@@ -221,13 +230,21 @@ div.titleBar h3 {
 }
 
 div.titleBar #filterDropdown {
+    margin: 8px;
+    width: 150px;
     vertical-align: middle;
     float: right;
     background-color: transparent;
-    border-color: transparent;
     color: var(--text-light);
+    border: 2px solid;
+    border-color: var(--background-ligh);
 }
 
 div.utilityBar section {
     padding-bottom: 2%;
+}
+
+button#addNewColaborator {
+    margin-bottom: 5%;
+    display: block;
 }

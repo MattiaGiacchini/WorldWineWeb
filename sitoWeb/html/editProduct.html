@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/containerModuleController.js"></script>
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <h1>World Wine Web</h1>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../img/user.png" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="#">Magazzino</a></li>
+            <li><a href="#">Listino</a></li>
+            <li><a href="#">Collaboratori</a></li>
+            <li><a href="#">Carrello</a></li>
+            <li><a href="#">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Gestione Prodotto</h2>
+            </div>
+        </div>
+        <form name="editProduct" class="editProduct" action="#" method="GET">
+            <ul>
+                <li>
+                    <input type="button" name="" value="Modifica Etichetta">
+                </li>
+                <li>
+                    <label for="id">Contenitore</label>
+                    <select class="id" name="id" id="id">
+                        <option value=""></option>
+                        <optgroup label="visibili a catalogo">
+                            <option value="">Bottiglia di vetro - 0,375L</option>
+                            <option value="">Bottiglia di vetro - 0,75L</option>
+                        </optgroup>
+                        <optgroup label="non visibili a catalogo">
+                            <option value="">Bottiglia di vetro - 1,5L</option>
+                            <option value="">Bottiglia di vetro - 3L</option>
+                        </optgroup>
+                    </select>
+                </li>
+                <li>
+                    <fieldset class="modify">
+                        <p>Impostazioni del Contenitore</p>
+                        <label for="visible">Visibile a catalogo</label>
+                        <input type="checkbox" name="Visibile" id="visible" value="true">
+                        <label for="price">Prezzo €</label>
+                        <input type="number" name="price" id="price" value="" min="0.00" step="0.01">
+                        <label for="photo">Foto del Prodotto</label>
+                        <input type="file" id="photo" name="photo" value="" accept="image/*"/>
+                    </fieldset>
+                </li>
+                <li>
+                    <input type="submit" name="submit" value="Aggiorna">
+                </li>
+                <li>
+                    <input type="button" class="cancel" name="" value="Annulla">
+                </li>
+            </ul>
+        </form>
+    </main>
+    <footer></footer>
+</body>
+</html>
