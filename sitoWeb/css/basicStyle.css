@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
   margin: 0px;
@@ -145,10 +145,15 @@ header {
     min-height: 60px;
 }
 
-header h1 {
+header a {
     height: 50px;
     text-align: center;
     width: 90%;
+    text-decoration: none;
+    color: var(--text-light);
+}
+
+header a h1 {
     line-height: 50px;
 }
 
@@ -249,7 +254,7 @@ div.utilityBar section {
     padding-bottom: 2%;
 }
 
-button#addNewColaborator {
+button#addNewColaborator, button#addNewLabel {
     margin-bottom: 5%;
     display: block;
 }
