@@ -20,7 +20,6 @@ $(document).ready(function() {
             cartValue = cartValue + (quantity * parseFloat(price));
         });
 
-        console.log(cartValue);
         updateCart();
 
         return;

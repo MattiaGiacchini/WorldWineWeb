@@ -14,7 +14,7 @@ a.tileLink {
 
 .tile {
     min-height: 100px;
-    width: 40vh;
+    width: 94vw;
     margin: 2% auto;
     background-color: var(--background-white);
     box-shadow: var(--tile-shadow);
@@ -78,7 +78,7 @@ a.tileLink {
 
 .tileImg {
     border-radius: 15px 0px 0px 15px;
-    max-height: 100%;
+    max-height: 100px;;
     max-width: 20%;
     object-fit: cover;
 }

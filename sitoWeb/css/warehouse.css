@@ -1,0 +1,41 @@
+section.warehouseMovements > h3 {
+    margin-left: 5%;
+    display: block;
+    width: 90%;
+}
+
+section.warehouseMovements {
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+article.tile {
+    display: flex;
+    margin: 1% auto;
+}
+
+article.tile:not(.magazzino) {
+    margin-top: 5%;
+}
+
+#loadDateTime {
+    display: none;
+}
+
+@media screen and (min-width: 480px) {
+
+    article.tile:not(.magazzino) {
+        width: 50%;
+        margin: 3% auto 1% auto;
+    }
+}
+
+@media screen and (min-width: 1080px) {
+
+    article.tile:not(.magazzino) {
+        width: 40%;
+    }
+}

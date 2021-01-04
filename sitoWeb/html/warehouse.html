@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <h1>World Wine Web</h1>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../upload/users/user.jpg" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="warehouse.html">Magazzino</a></li>
+            <li><a href="#">Listino</a></li>
+            <li><a href="collaborators.html">Collaboratori</a></li>
+            <li><a href="cart.html">Carrello</a></li>
+            <li><a href="#">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Magazzino</h2>
+                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+            </div>
+            <form class="filter" action="index.html" method="post">
+                <section>
+                    <h4>Ordine alfabetico</h4>
+                    <ul>
+                        <li>
+                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
+                            <label for="crescente"> Crescente </label>
+                        </li>
+                        <li>
+                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
+                            <label for="decrescente"> Decrescente </label>
+                        </li>
+                </section>
+                <section>
+                    <h4>Stato prodotto</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="stato" value="active" id="active" checked/>
+                            <label for="active"> Attivi </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="deactivated" id="deactivated" />
+                            <label for="deactivated"> Disattivati </label>
+                        </li>
+                    </ul>
+                </section>
+
+                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+            </form>
+        </div>
+
+
+
+        <div class="mainContent">
+            <a class="tileLink" href="warehouseManagement.html">
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/idVino/pinotBianco.png" alt="vino">
+                    <div class="tileContent">
+                        <div class="tileBody">
+                            <h3>Pinot Bianco</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        </div>
+                        <div class="tileFooter">
+                            <p>Quantità: 412547 pezzi</p>
+                            <p class="tileImportantInfo">14.99 €</p>
+                        </div>
+                    </div>
+                </article>
+            </a>
+            
+            <a class="tileLink" href="warehouseManagement.html">
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/idVino/pinotGrigio.jpg" alt="vino">
+                    <div class="tileContent">
+                        <div class="tileBody">
+                            <h3>Pinot Grigio</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        </div>
+                        <div class="tileFooter">
+                            <p>Quantità: 14785 pezzi</p>
+                            <p class="tileImportantInfo">98.50 €</p>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+            <a class="tileLink" href="warehouseManagement.html">
+                <article class="tile deactivated">
+                    <img class="tileImg" src="../upload/idVino/pinotNero.jpg" alt="vino">
+                    <div class="tileContent">
+                        <div class="tileBody">
+                            <h3>Pinot Nero</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        </div>
+                        <div class="tileFooter">
+                            <p>Quantità: 1474 pezzi</p>
+                            <p class="tileImportantInfo">544.40 €</p>
+                        </div>
+                    </div>
+                </article>
+            </a>
+            
+            <a class="tileLink" href="warehouseManagement.html">
+                <article class="tile ">
+                    <img class="tileImg" src="../upload/idVino/sangiovese.jpg" alt="vino">
+                    <div class="tileContent">
+                            <h3>Sangiovese</h3>
+                            <h4>Tenuta Coccapanne</h4>
+                            <p>0,75L</p>
+                        <div class="tileFooter">
+                            <p>Quantità: 654 pezzi</p>
+                            <p class="tileImportantInfo">11.70 €</p>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+        </div>
+
+
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
