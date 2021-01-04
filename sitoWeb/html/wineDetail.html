@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <h1>World Wine Web</h1>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../img/user.png" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="#">Magazzino</a></li>
+            <li><a href="#">Listino</a></li>
+            <li><a href="#">Collaboratori</a></li>
+            <li><a href="#">Carrello</a></li>
+            <li><a href="#">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Dettaglio Prodotto</h2>
+            </div>
+        </div>
+
+        <div class="details">
+            <article class="wineCard">
+                <div class="wineCard-Container">
+                    <img class="fotoVino" src="../upload/idVino/vino.png" alt="">
+                    <div class="colore rosso" alt="Vino Rosso"></div>
+                    <div class="etichetta">
+                        <h3>Labrusco di Modena</h3>
+                        <h4>BotteBuona</h4>
+                        <div class="LiterVol">
+                            <h5>0,75L</h5> <h5>15,0% Vol</h5>
+                        </div>
+                        <p class="origine">Rubicone - ITA</p>
+                        <p class="certificato">D.O.C.G.</p>
+                        <p class="annata">2019</p>
+                        <img src="../img/ratingStar-rev2.png" alt="4 su 5">
+                        <h6>642,90€</h6>
+                        <p>non disponibile</p>
+                        <input class="preference favourite" type="button" name="" value="">
+                    </div>
+                </div>
+            </article>
+
+            <form class="quantityToOrder" action="#" method="post">
+                <ul>
+                    <li>
+                        <label for="qnt">Quantità da Ordinare</label>
+                        <input type="number" id="qnt" name="qnt" value="" min="0" step="1">
+                    </li>
+                    <li><input type="submit" name="" value="aggiungi a carrello"></li>
+                </ul>
+            </form>
+            <details class="description">
+                <summary>Descrizione Organolettica</summary>
+                <p>Colore rosso intenso con riflessi percorsi da un vivissimo viola; gusto dal tono frizzante con profumi di mora e frutta rossa matura. Sapore avvolgente con piacevole equilibrio dato dalla acidità profilante, dal tannino strutturante, dalla morbidezza omniavvolgente. Vino di moderata gradazione alcolica, di immediata piacevolezza espressiva.</p>
+            </details>
+            <details class="property">
+                <summary>Caratteristiche</summary>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Categoria</th>
+                      <th>Nome</th>
+                      <th>Cantina</th>
+                      <th>Annata</th>
+                      <th>Certificato</th>
+                      <th>Vitigno</th>
+                      <th>Alcol(%)</th>
+                      <th>Contenitore</th>
+                      <th>Capienza(L)</th>
+                      <th>Temperatura Minima cui Servire(C°)</th>
+                      <th>Temperatura Massima cui Servire(C°)</th>
+                      <th>Abbinamenti Consigliati</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Vino</td>
+                      <td>Lambrusco di Modena</td>
+                      <td>BotteBuona</td>
+                      <td>2019</td>
+                      <td>D.O.C.G.</td>
+                      <td>Lambrusco</td>
+                      <td>15.0</td>
+                      <td>Bottiglia di Vetro</td>
+                      <td>0,75</td>
+                      <td>16</td>
+                      <td>18</td>
+                      <td>carne pesce antipasti</td>
+                    </tr>
+                  </tbody>
+              </table>
+            </details>
+            <details class="reviews">
+                <summary>Recensioni</summary>
+                    <ul>
+                        <li>
+                            <article class="review">
+                                <h4>Titolo Recensione 1</h4>
+                                <img src="../img/ratingStar-rev2.png" alt="4 su 5">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="review">
+                                <h4>Titolo Recensione 1</h4>
+                                <img src="../img/ratingStar-rev2.png" alt="4 su 5">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </li>
+                    </ul>
+            </details>
+
+        </div>
+
+
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
