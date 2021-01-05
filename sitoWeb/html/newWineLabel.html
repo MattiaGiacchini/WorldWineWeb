@@ -13,27 +13,27 @@
   <body>
     <header>
         <button type="button" name="menu">≡</button>
-        <h1>World Wine Web</h1>
+        <a href="index.html"><h1>World Wine Web</h1></a>
     </header>
     <nav>
         <section>
             <a href="#">
                 <h2>Dani/Login</h2>
                 <p>ruolo</p>
-                <img src="../img/user.png" alt="nome cognome dell'utente" />
+                <img src="../upload/users/user.jpg" alt="nome cognome dell'utente" />
             </a>
         </section>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Gestione Ordini</a></li>
-            <li><a href="#">Magazzino</a></li>
-            <li><a href="#">Listino</a></li>
-            <li><a href="#">Collaboratori</a></li>
-            <li><a href="#">Carrello</a></li>
-            <li><a href="#">Ordini</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="orders.html">Gestione Ordini</a></li>
+            <li><a href="warehouse.html">Magazzino</a></li>
+            <li><a href="labels.html">Listino</a></li>
+            <li><a href="collaborators.html">Collaboratori</a></li>
+            <li><a href="cart.html">Carrello</a></li>
+            <li><a href="orders.html">Ordini</a></li>
             <li><a href="#">Vini speciali</a></li>
             <li><a href="#">Area Personale</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="login.html">Login</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </nav>
@@ -54,10 +54,10 @@
                 <li>
                     <fieldset>
                         <legend>Categoria</legend>
+                        <input type="radio" name="categoria" value="vino" id="vino" checked />
                         <label for="vino" > Vino </label>
-                        <input type="radio" name="categoria" value="vino" id="vino" />
-                        <label for="spumante">Spumante</label>
                         <input type="radio" name="categoria" value="spumante" id="spumante" />
+                        <label for="spumante">Spumante</label>
                     </fieldset>
                 </li>
                 <li>
@@ -73,12 +73,12 @@
                 <li>
                     <fieldset>
                         <legend>Colore</legend>
+                        <input type="radio" name="colore" value="rosso" id="rosso" checked />
                         <label for="rosso"> Rosso </label>
-                        <input type="radio" name="colore" value="rosso" id="rosso "checked />
-                        <label for="rose"> Rosé </label>
                         <input type="radio" name="colore" value="rosé" id="rose" />
-                        <label for="bianco"> Bianco </label>
+                        <label for="rose"> Rosé </label>
                         <input type="radio" name="colore" value="bianco" id="bianco" />
+                        <label for="bianco"> Bianco </label>
                     </fieldset>
                 </li>
                 <li>
@@ -89,7 +89,7 @@
                 <li>
                     <label for="zucchero">Tenore Zuccherino</label>
                     <select name="zucchero" id="zucchero" required>
-                        <option value=""></option>
+                        <option value="">Ancora da selezionare...</option>
                         <optgroup label="Spumante" class="spumante">
                             <option value="brut nature">Brut Nature </option>
                             <option value="extra brut">Extra Brut </option>
@@ -110,16 +110,16 @@
                 <li class="vino">
                     <fieldset>
                         <legend>Fermo o Frizzante</legend>
-                        <label for="fermo">Fermo</label>
                         <input type="radio" name="gas" value="fermo" id="fermo" />
-                        <label for="frizzante">Frizzante</label>
+                        <label for="fermo">Fermo</label>
                         <input type="radio" name="gas" value="frizzante" id="frizzante" checked />
+                        <label for="frizzante">Frizzante</label>
                     </fieldset>
                 </li>
                 <li>
                     <label for="cantina">Cantina</label>
                     <select name="cantina" id="cantina" required>
-                        <option value=""></option>
+                        <option value="">Ancora da selezionare...</option>
                         <option value="new">Aggiungi Nuova Cantina</option>
                         <optgroup label="Italia">
                             <option value="cantina1">cantina1</option>
@@ -138,8 +138,8 @@
                 </li>
                 <li class="newCantina">
                     <label for="stato">Stato di Origine nuova cantina</label>
-                    <select class="" name="stato" id="stato" required />
-                        <option value=""></option>
+                    <select class="" name="stato" id="stato" required>
+                        <option value="">Ancora da selezionare...</option>
                         <option value="ita">Italia</option>
                         <option value="fra">Francia</option>
                         <option value="deu">Germaina</option>
@@ -153,45 +153,43 @@
                     <label for="biologico">Certificazione Biologica</label>
                     <input type="checkbox" name="biologico" value="true" id="biologico" />
                 </li>
-            </ul>
-            <ul>
                 <li class="vino">
                     <fieldset>
                         <legend>Indicazione Geografica</legend>
-                        <label for="presente">Presente</label>
                         <input type="radio" name="ig" value="presente" id="presente" />
-                        <label for="Assente">Assente</label>
+                        <label for="presente">Presente</label>
                         <input type="radio" name="ig" value="Assente" id="Assente" checked />
+                        <label for="Assente">Assente</label>
                     </fieldset>
                 </li>
                 <li class="doFull">
                     <fieldset>
                         <legend>Certificazione</legend>
-                        <label for="igp">IGP</label>
                         <input type="radio" name="certificato" value="igp" id="igp" required />
-                        <label for="igt">IGT</label>
+                        <label for="igp">IGP</label>
                         <input type="radio" name="certificato" value="igt" id="igt" required />
-                        <label for="doc">DOC</label>
+                        <label for="igt">IGT</label>
                         <input type="radio" name="certificato" value="doc" id="doc" required />
-                        <label for="docg">DOCG</label>
+                        <label for="doc">DOC</label>
                         <input type="radio" name="certificato" value="docg" id="docg" required />
-                        <label for="dop">DOP</label>
+                        <label for="docg">DOCG</label>
                         <input type="radio" name="certificato" value="dop" id="dop" required />
+                        <label for="dop">DOP</label>
                     </fieldset>
                 </li>
                 <li class="noIg">
                     <fieldset>
                         <legend>Classificazione</legend>
-                        <label for="generico">Generico</label>
                         <input type="radio" name="classificazione" value="generico" id="generico" required />
+                        <label for="generico">Generico</label>
+                        <input type="radio" name="classificazione" value="varietale" id="varietale" required />
                         <label for="varietale">Varietale</label>
-                        <input type="radio" name="classificazione" value="varietale" id="varietale" required / />
                     </fieldset>
                 </li>
                 <li class="varietale">
                     <label for="vitigno">Vitigno</label>
                     <select name="vitigno" id="vitigno">
-                        <option value=""></option>
+                        <option value="">Ancora da selezionare...</option>
                         <option value="new">Aggiungi Nuovo Vitigno</option>
                         <optgroup label="Bacca Chiara">
                             <option value="cantina1">Vitigno1</option>
@@ -206,15 +204,15 @@
                     </select>
                 </li>
                 <li class="newVitigno">
-                    <label for="baccaNuovoVitigno">Bacca del Nuovo Vitigno</label>
-                    <select name="baccaNuovoVitigno" id="baccaNuovoVitigno" required>
-                        <option value=""></option>
+                    <label for="coloreBaccaNuovoVitigno">Colore della Bacca del Nuovo Vitigno</label>
+                    <select name="coloreBaccaNuovoVitigno" id="coloreBaccaNuovoVitigno" required>
+                        <option value="">Ancora da selezionare...</option>
                         <option value="chiara">Chiara</option>
                         <option value="scura">Scura</option>
                     </select>
                 </li>
                 <li class="newVitigno">
-                    <label for="nomeNuovoVitigno">Nome del Nuovo Vitigno</label>
+                    <label for="nomeNuovoVitigno">Nome della Specie del Nuovo Vitigno</label>
                     <input type="text" name="nomeNuovoVitigno" value="" id="nomeNuovoVitigno" />
                 </li>
                 <li class="varietale">
@@ -232,7 +230,7 @@
                 <li class="doFull">
                     <label for="menzione">Menzione</label>
                     <select class="" name="menzione" id="menzione">
-                        <option value=""></option>
+                        <option value="">Ancora da selezionare...</option>
                         <option value="new">Aggiungi nuova menzione</option>
                         <optgroup label="Menzioni già utilizzate">
                             <option value="1">Passito</option>
@@ -252,12 +250,12 @@
                 <li class="doFull">
                     <fieldset>
                         <legend>Specificazione</legend>
-                        <label for="nessuna">Nessuna</label>
                         <input type="radio" name="specificazione" value="nessuna" id="nessuna" checked required />
-                        <label for="storica">Storica</label>
+                        <label for="nessuna">Nessuna</label>
                         <input type="radio" name="specificazione" value="storica" id="storica" checked required />
-                        <label for="classica">Classica</label>
+                        <label for="storica">Storica</label>
                         <input type="radio" name="specificazione" value="classica" id="classica" checked required />
+                        <label for="classica">Classica</label>
                     </fieldset>
 
                 </li>
