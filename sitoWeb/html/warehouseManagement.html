@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/warehouse.css">
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+    <script type="text/javascript" src="../js/warehouse.js"></script>
+
+    <title>World Wine Web - pagina corrente</title>
+    </head>
+    <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <a href="index.html"><h1>World Wine Web</h1></a>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../upload/users/user.jpg" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="orders.html">Gestione Ordini</a></li>
+            <li><a href="warehouse.html">Magazzino</a></li>
+            <li><a href="labels.html">Listino</a></li>
+            <li><a href="collaborators.html">Collaboratori</a></li>
+            <li><a href="cart.html">Carrello</a></li>
+            <li><a href="orders.html">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Magazzino</h2>
+                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+            </div>
+            <form class="filter" action="index.html" method="post">
+                <section>
+                    <h4>Ordine cronologico</h4>
+                    <ul>
+                        <li>
+                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
+                            <label for="crescente"> Crescente </label>
+                        </li>
+                        <li>
+                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
+                            <label for="decrescente"> Decrescente </label>
+                        </li>
+                </section>
+                <section>
+                    <h4>Stato prodotto</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="stato" value="active" id="active" checked/>
+                            <label for="active"> Attivi </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="deactivated" id="deactivated" />
+                            <label for="deactivated"> Disattivati </label>
+                        </li>
+                    </ul>
+                </section>
+
+                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+            </form>
+        </div>
+
+
+        <article class="tile ">
+            <img class="tileImg" src="../upload/idVino/pinotBianco.png" alt="vino">
+            <div class="tileContent">
+                <div class="tileBody">
+                    <h3>Pinot Bianco</h3>
+                    <h4>Tenuta Coccapanne</h4>
+                    <p>0,75L</p>
+                </div>
+                <div class="tileFooter">
+                    <p>Quantità: 412547 pezzi</p>
+                    <p class="tileImportantInfo">14.99 €</p>
+                </div>
+            </div>
+        </article>
+
+        <section class="stockManagement">
+            <h3>Gestione scorte</h3>
+            <form class="warehouseStock" action="#" method="get">
+                <ul>
+                    <li>
+                        <label for="amount">Quantità da aggiungere o rimuovere</label>
+                        <input type="number" id="amount" name="amount" required step="1" />
+                    </li>
+                    <li id="loadDateTime">
+                        <label for="currentdate">Data e ora</label>
+                        <input type="datetime-local" id="currentdate" name="currentdate" />
+                    </li>
+                    <li>
+                        <input type="submit" name="submit" value="Aggiungi">
+                    </li>
+                </ul>
+            </form>
+        </section>
+
+        <section class="warehouseMovements">
+            <h3>Movimenti magazzino</h3>
+
+            <article class="tile magazzino">
+                <div class="tileContent">
+                    <div class="tileBody">
+                        <h4>30/12/2020 - 08.35</h4>
+                        <p>ordine n. #1547</p>
+                    </div>
+                </div>
+                <p>-154</p>
+            </article>
+
+            <article class="tile magazzino">
+                <div class="tileContent">
+                    <div class="tileBody">
+                        <h4>29/12/2020 - 12.35</h4>
+                        <p>Gollinucci Marco</p>
+                    </div>
+                </div>
+                <p>+50</p>
+            </article>
+
+
+            <article class="tile magazzino">
+                <div class="tileContent">
+                    <div class="tileBody">
+                        <h4>28/12/2020 - 12.35</h4>
+                        <p>Gollinucci Marco</p>
+                    </div>
+                </div>
+                <p>+600</p>
+            </article>
+
+            <article class="tile magazzino">
+                <div class="tileContent">
+                    <div class="tileBody">
+                        <h4>27/12/2020 - 12.35</h4>
+                        <p>Gollinucci Marco</p>
+                    </div>
+                </div>
+                <p>+1000</p>
+            </article>
+
+        </section>
+
+
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

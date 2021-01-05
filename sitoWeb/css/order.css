@@ -1,0 +1,167 @@
+table td, table th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px ;
+    border-bottom: 1px solid var(--secondary-dark);
+}
+
+h3 {
+    color: var(--text-dark);
+}
+
+section.orderData {
+    width: 94vw;
+    flex-direction: column;
+}
+
+table.orderProducts tbody tr:last-of-type td {
+    border-bottom: 5px double var(--secondary-dark);
+}
+
+table tfoot tr th {
+    text-align: right;
+}
+
+table {
+    width: 94vw;
+    caption-side: bottom;
+    margin: 0 auto;
+}
+caption {
+    visibility: hidden;
+}
+
+table td:nth-child(4), table tfoot td:last-of-type {
+    text-align: right;
+}
+
+@media screen and (max-width: 350px) {
+    table.orderProducts th:first-of-type, table.orderProducts tr td:first-of-type {
+        display: none;
+    }
+
+    table.orderProducts th:nth-child(2), table.orderProducts td:nth-child(2) {
+        width: 50%;
+    }
+
+    table.orderProducts th:nth-child(3), table.orderProducts td:nth-child(3) {
+        width: 25%;
+    }
+
+    table.orderProducts th:nth-child(4), table.orderProducts td:nth-child(4) {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 480px) {
+
+    /*div.orderDetails, */
+    div.mainContent {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        max-width: 100%;
+    }
+
+    section.orderData > article.tile {
+        margin-left: 0;
+    }
+
+    div.orderDetails {
+        width: 100%;
+        margin: 0;
+    }
+
+    section.orderData {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 1%;
+        width: 55%;
+    }
+
+    section.clientData, section.orderData {
+        margin: 1%;
+    }
+
+    section.clientData {
+        display: flex;
+        flex-direction: column;
+        max-width: 40%;
+        min-width: 410px;
+    }
+
+    table {
+        width: 94%;
+    }
+
+    div.orderManagementButtons {
+        margin-top: auto;
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+@media print {
+    header > button, nav *, div.utilityBar, div.orderManagementButtons {
+        display: none;
+    }
+
+    div.mainContent {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        max-width: 100%;
+    }
+
+    section.orderData > article.tile {
+        margin-left: 0;
+    }
+
+    header {
+        background-color: var(--background-red-light);
+    }
+
+    div.orderDetails {
+        width: 100%;
+        margin: 0;
+    }
+
+    section.orderData {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 1%;
+        width: 90%;
+    }
+
+    div.orderDetails article.tile.etichetta {
+        max-width: 100%;
+    }
+
+    section.clientData, section.orderData {
+        margin: 1%;
+    }
+
+    section.clientData {
+        display: flex;
+        flex-direction: row;
+        max-width: 90%;
+        min-width: 410px;
+        justify-content: space-between;
+    }
+
+    article.tile {
+        width: 250px;
+    }
+
+    table {
+        width: 94%;
+    }
+
+    header a {
+        margin: 0, auto;
+    }
+}

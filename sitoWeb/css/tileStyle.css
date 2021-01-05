@@ -12,9 +12,9 @@ a.tileLink {
     display: flex;
 }
 
-.tile {
+.tile, .orderDetails {
     min-height: 100px;
-    width: 40vh;
+    width: 94vw;
     margin: 2% auto;
     background-color: var(--background-white);
     box-shadow: var(--tile-shadow);
@@ -45,7 +45,7 @@ a.tileLink {
     margin-left: 2%;
 }
 
-.tileContent h3, .tileContent h4, .tile.magazzino p:first-of-type, .tile.riepilogo p:first-of-type, .tile.riepilogo p:last-of-type {
+.tileContent h3, .tileContent h4, .tile.magazzino > p, .tile.magazzino h4, .tile.riepilogo p:first-of-type, .tile.riepilogo p:last-of-type {
     display: flex;
     font-size: 19px;;
     font-weight: bold;
@@ -78,7 +78,7 @@ a.tileLink {
 
 .tileImg {
     border-radius: 15px 0px 0px 15px;
-    max-height: 100%;
+    max-height: 100px;;
     max-width: 20%;
     object-fit: cover;
 }

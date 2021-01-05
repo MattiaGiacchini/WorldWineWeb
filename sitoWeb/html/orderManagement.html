@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/order.css">
+
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/wineCard.js"></script>
+
+    <title>World Wine Web - pagina corrente</title>
+  </head>
+  <body>
+    <header>
+        <button type="button" name="menu">≡</button>
+        <a href="index.html"><h1>World Wine Web</h1></a>
+    </header>
+    <nav>
+        <section>
+            <a href="#">
+                <h2>Dani/Login</h2>
+                <p>ruolo</p>
+                <img src="../upload/users/user.jpg" alt="nome cognome dell'utente" />
+            </a>
+        </section>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Gestione Ordini</a></li>
+            <li><a href="warehouse.html">Magazzino</a></li>
+            <li><a href="labels.html">Listino</a></li>
+            <li><a href="collaborators.html">Collaboratori</a></li>
+            <li><a href="cart.html">Carrello</a></li>
+            <li><a href="orders.html">Ordini</a></li>
+            <li><a href="#">Vini speciali</a></li>
+            <li><a href="#">Area Personale</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="utilityBar">
+            <div class="titleBar">
+                <h2>Ordini</h2>
+                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+            </div>
+            <form class="filter" action="index.html" method="post">
+                <section>
+                    <h4>Ordine cronologico</h4>
+                    <ul>
+                        <fieldset>
+                            <legend hidden>Ordine cronologico</legend>
+                            <li>
+                                <input type="radio" name="ordine" value="crescente" id="crescente"/>
+                                <label for="crescente"> Crescente </label>
+                            </li>
+                            <li>
+                                <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
+                                <label for="decrescente"> Decrescente </label>
+                            </li>
+                    </fieldset>
+                </section>
+                <section>
+                    <h4>Stato ordini</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="stato" value="waiting" id="waiting" checked/>
+                            <label for="waiting"> Da accettare </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="approved" id="approved" />
+                            <label for="approved"> Approvati </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="processing" id="processing" />
+                            <label for="processing"> In elaborazione </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="shipped" id="shipped" />
+                            <label for="shipped"> Spedito </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="delivered" id="delivered" />
+                            <label for="delivered"> Consegnato </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="rejected" id="rejected" />
+                            <label for="rejected"> Rifiutati </label>
+                        </li>
+                    </ul>
+                </section>
+
+                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+            </form>
+        </div>
+
+
+        <div class="mainContent">
+            <section class="orderData">
+                <h3>Dettagli ordine</h3>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>26/01/2021</h3>
+                        <h4>€ 126.24</h4>
+                        <p>Spedito</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">#47884</p>
+                        </div>
+                    </div>
+                </article>
+                <div class="orderDetails">
+                    <table class="orderProducts">
+                        <caption>Riepilogo dell'ordine</caption>
+                        <thead>
+                            <tr>
+                                <th id="prod" scope"col">Prodotto</th>
+                                <th id="desc" scope="col">Descrizione</th>
+                                <th id="qty" scope="col">Qtà</th>
+                                <th id="price" scope="col">Prezzo €</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td headers="prod" scope>VR4875</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">5</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">VB6547</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">12</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">VB5478</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">SR6587</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">4</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">R5475</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">1</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">RT6546</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">EER574</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">1</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">DF6468</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">924.50</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th id="subTot" colspan="3" scope="row">Subtotale €</th>
+                                <td headers="subTot price">1516454.21</td>
+                            </tr>
+                            <tr>
+                                <th id="IVA" colspan="3" scope="row">IVA €</th>
+                                <td headers="IVA price">65465.30</td>
+                            </tr>
+                            <tr>
+                                <th id="tot" colspan="3" scope="row">Totale Complessivo €</th>
+                                <td headers="tot price"> 5465466.99</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            <section class="clientData">
+                <h3>Dati del cliente</h3>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>Bagno Martini SNC</h3>
+                        <h4>P.IVA 11236845794</h4>
+                        <p>0544 971248</p>
+                    </div>
+                </article>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>Via Ragazzena, 147</h3>
+                        <h4>Cervia</h4>
+                        <p>Giacchini Mattia</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">48015</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>4023 6100 0143 3165</h3>
+                        <h4>02/2026</h4>
+                        <p>Giacchini Mattia</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">VISA</p>
+                        </div>
+                    </div>
+                </article>
+                <div class="orderManagementButtons">
+                    <button type="button" name="accept">Accetta</button>
+                    <button type="button" name="reject">Rifiuta</button>
+                    <button type="button" name="cancel">Annulla</button>
+                </div>
+            </section>
+        </div>
+
+
+
+
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
