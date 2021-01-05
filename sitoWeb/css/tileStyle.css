@@ -45,7 +45,7 @@ a.tileLink {
     margin-left: 2%;
 }
 
-.tileContent h3, .tileContent h4, .tile.magazzino > p, .tile.magazzino h4, .tile.riepilogo p:first-of-type, .tile.riepilogo p:last-of-type {
+.tileContent h3, .tileContent h4, .tile.magazzino > p, .tile.magazzino h4, .tile.riepilogo h4, .tile.riepilogo p:last-of-type {
     display: flex;
     font-size: 19px;;
     font-weight: bold;
