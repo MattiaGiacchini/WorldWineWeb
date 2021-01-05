@@ -75,6 +75,11 @@ $(document).ready(function(){
             // se non possiede indicazioneGeografica
             if(actualIgSelection == "presente" || actualClassificat == "varietale") {
                 getInLi(varietale);
+                if(actualIgSelection == "presente") {
+                    varietale.find("*").attr("required", true);
+                } else {
+                    varietale.find("*").removeAttr("required");   
+                }
             } else {
                 getOutLi(varietale);
             }

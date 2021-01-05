@@ -3,8 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
-    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css" />
+    <link rel="stylesheet" type="text/css" href="../css/formStyle.css" />
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="../js/utils.js"></script>
     <script type="text/javascript" src="../js/wineLabelModuleController.js"></script>
@@ -84,7 +84,7 @@
                 <li>
                     <label for="alcol">Titolo alcolico</label>
                     <input type="number" name="alcol" value="0" id="alcol"
-                        min="0.0" max="100.0" step="0.1" required>
+                        min="0.0" max="100.0" step="0.1" required />
                 </li>
                 <li>
                     <label for="zucchero">Tenore Zuccherino</label>
@@ -204,7 +204,7 @@
                     </select>
                 </li>
                 <li class="newVitigno">
-                    <label for="coloreBaccaNuovoVitigno">Colore della Bacca del Nuovo Vitigno</label>
+                    <label for="coloreBaccaNuovoVitigno">Colore della Bacca del Vitigno da aggiungere</label>
                     <select name="coloreBaccaNuovoVitigno" id="coloreBaccaNuovoVitigno" required>
                         <option value="">Ancora da selezionare...</option>
                         <option value="chiara">Chiara</option>
@@ -212,8 +212,8 @@
                     </select>
                 </li>
                 <li class="newVitigno">
-                    <label for="nomeNuovoVitigno">Nome della Specie del Nuovo Vitigno</label>
-                    <input type="text" name="nomeNuovoVitigno" value="" id="nomeNuovoVitigno" />
+                    <label for="nomeNuovoVitigno">Nome della Specie del Vitigno da aggiungere</label>
+                    <input type="text" name="nomeNuovoVitigno" value="" id="nomeNuovoVitigno" required/>
                 </li>
                 <li class="varietale">
                     <label for="anno">Annata</label>
@@ -221,7 +221,7 @@
                 </li>
                 <li class="doFull">
                     <label for="indicazioneGeografica">Indicazione Geografica</label>
-                    <input type="text" name="indicazioneGeografica" id="indicazioneGeografica" value="" />
+                    <input type="text" name="indicazioneGeografica" id="indicazioneGeografica" value="" required />
                 </li>
                 <li class="doFull">
                     <label for="vigna">Vigna di produzione (opzionale)</label>
@@ -245,19 +245,18 @@
                 </li>
                 <li class="newMenzione">
                     <label for="newMenzione">Nuova Menzione</label>
-                    <input type="text" name="newMenzione" id="newMenzione" value="" />
+                    <input type="text" name="newMenzione" id="newMenzione" value="" required/>
                 </li>
                 <li class="doFull">
                     <fieldset>
                         <legend>Specificazione</legend>
-                        <input type="radio" name="specificazione" value="nessuna" id="nessuna" checked required />
+                        <input type="radio" name="specificazione" value="nessuna" id="nessuna" checked />
                         <label for="nessuna">Nessuna</label>
-                        <input type="radio" name="specificazione" value="storica" id="storica" checked required />
+                        <input type="radio" name="specificazione" value="storica" id="storica"  />
                         <label for="storica">Storica</label>
-                        <input type="radio" name="specificazione" value="classica" id="classica" checked required />
+                        <input type="radio" name="specificazione" value="classica" id="classica"  />
                         <label for="classica">Classica</label>
                     </fieldset>
-
                 </li>
                 <li>
                     <input type="submit" name="submit" value="Conferma"/>
