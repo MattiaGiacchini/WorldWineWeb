@@ -90,6 +90,8 @@ form fieldset {
 
 form textarea {
     resize: vertical;
+    width: 100%;
+    border-radius: var(--border-radius-form);
 }
 
 form fieldset.payment {
@@ -180,6 +182,45 @@ form.editProduct input.cancel {
     color: var(--text-light);
 }
 
+/*********************************************************/
+/****************wineDetails section**********************/
+/*********************************************************/
+
+div.details form.newReview {
+    box-sizing: border-box;
+    width: 88%;
+    margin: 2% 6% 6% 6%;
+    padding: 3%;
+    text-align: left;
+}
+
+div.details form.quantityToOrder {
+    box-sizing: border-box;
+    background-color: inherit;
+    max-width: 300px;
+    width: 88%;
+    margin: 0px auto;
+    padding: 3% 0%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+div.details form.quantityToOrder label {
+    grid-column: span 3;
+    color: var(--text-dark);
+}
+
+div.details form.quantityToOrder input[type = number] {
+    grid-column: span 2;
+    background-color: var(--secondary-dark);
+}
+
+div.details form.quantityToOrder input[type = submit] {
+    grid-column: span 5;
+   /* width: 80%;*/
+}
+
+/*///////////////////////////////////////////////////////*/
 
 form.singleButtonForm {
     background-color: transparent;
@@ -219,6 +260,19 @@ form fieldset.privateOrBusiness input[type = radio]:first-of-type {
 
     ul {
         width: 100%;
+    }
+
+    form.newReview ul {
+        width: 100%;
+    }
+
+    form.newReview ul li {
+        width: 100%;
+    }
+
+    form.newReview input[type = submit] {
+        width: 100%;
+        min-width: inherit;
     }
 
     form:not(.filter) ul li {

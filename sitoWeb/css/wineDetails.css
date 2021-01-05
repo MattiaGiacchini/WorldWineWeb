@@ -1,0 +1,128 @@
+
+div.details {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.details section {
+    width: 100%;
+    height: 100%;
+    margin:0px;
+    padding: 0px;
+    text-align: center;
+}
+
+
+/* sections button */
+div.details button{
+    /*font-weight: 1000;*/
+    font-size: 18px;
+    width: 88%;
+    margin: 10px 6%;
+    box-shadow: none;
+    border-radius: var(--border-radius-form);
+    background-color: var(--secondary-dark);
+    color: var(--text-dark);
+}
+
+/*  DESCRIPTION  */
+div.details > section > p {
+    box-sizing: border-box;
+    width: 88%;
+    margin: 0% 6%;
+    padding: 0% 3%;
+    text-align: justify;
+}
+
+/* section table */
+div.details div.table {
+    box-sizing: border-box;
+    width: 88%;
+    margin: 0% 6%;
+    padding: 3%;
+}
+
+div.details table {
+    width: 100%;
+    background-color: inherit; /*var(--secondary-dark);*/
+}
+
+div.details table tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 5px 0px;
+    border-bottom: 1px solid var(--background-dark);
+}
+
+div.details table tr * {
+    display: inline-block;
+    max-width: 80%;
+}
+
+div.details table tr th {
+    text-align: left;
+    vertical-align: top;
+    margin-bottom: auto;
+}
+
+div.details table tr td {
+    text-align: right;
+    vertical-align: bottom;
+}
+
+/********* Review **************/
+div.details > section > ul {
+    box-sizing: border-box;
+    padding: inherit;
+    width: 100%;
+    width: 88%;
+    margin: 0% 6%;
+}
+
+div.details > section > ul > li {
+    box-sizing: border-box;
+    text-align: left;
+    box-shadow: 0px 4px 5px 3px grey;
+    padding: 10px;
+    list-style-type: none;
+    margin: 30px 0px;
+    background-color: var(--background-white);
+}
+
+div.details > section > ul > li > article p {
+    text-align: justify;
+}
+
+div.details > section > ul > li > article h5{
+    display: inline-block;
+}
+
+div.details > section > ul > li > article img {
+    width: 120px;
+    display: block;
+    background-color: #B9653D;
+}
+
+@media screen and (min-width: 800px) {
+    div.details section{
+        margin-top: 10px;
+    }
+
+    div.details {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    div.details > section:first-of-type {
+        width: 30%;
+    }
+    div.details > section:last-of-type {
+        width: 70%;
+    }
+}
