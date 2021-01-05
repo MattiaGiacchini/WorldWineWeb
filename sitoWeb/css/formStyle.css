@@ -104,6 +104,14 @@ form fieldset input[type = radio] {
     margin: 0 2% 0 10%;
 }
 
+form.filter fieldset input[type = radio] {
+    margin: 0 2% 0 1%;
+}
+
+form.filter fieldset {
+    display: block;
+}
+
 form.filter {
     padding-left: 5%;
     align-content: center;
@@ -183,5 +191,5 @@ form fieldset.privateOrBusiness input[type = radio]:first-of-type {
     form.checkout ul {
         margin-top: 3%;
         margin-bottom: 10%;
-    }                                                       
+    }
 }

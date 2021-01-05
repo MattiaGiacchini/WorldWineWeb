@@ -1,0 +1,67 @@
+table td, table th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px ;
+    border-bottom: 1px solid var(--secondary-dark);
+}
+
+
+
+div.orderDetails {
+    width: 94vw;
+    flex-direction: column;
+}
+
+table.orderProducts tbody tr:last-of-type td {
+    border-bottom: 5px double var(--secondary-dark);
+}
+
+table tfoot tr th {
+    text-align: right;
+}
+
+table {
+    width: 94vw;
+    caption-side: bottom;
+    margin: 0 auto;
+}
+caption {
+    visibility: hidden;
+}
+
+table td:nth-child(4), table tfoot td:last-of-type {
+    text-align: right;
+}
+
+@media screen and (max-width: 350px) {
+    table.orderProducts th:first-of-type, table.orderProducts tr td:first-of-type {
+        display: none;
+    }
+
+    table.orderProducts th:nth-child(2), table.orderProducts td:nth-child(2) {
+        width: 50%;
+    }
+
+    table.orderProducts th:nth-child(3), table.orderProducts td:nth-child(3) {
+        width: 25%;
+    }
+
+    table.orderProducts th:nth-child(4), table.orderProducts td:nth-child(4) {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 480px) {
+
+    div.orderDetails {
+        width: 60%;
+    }
+
+    table {
+        width: 94%;
+    }
+}
+
+@media print {
+
+}

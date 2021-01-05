@@ -12,7 +12,7 @@ a.tileLink {
     display: flex;
 }
 
-.tile {
+.tile, .orderDetails {
     min-height: 100px;
     width: 94vw;
     margin: 2% auto;

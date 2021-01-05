@@ -41,7 +41,7 @@ article.tile:not(.magazzino) {
     }
 }
 
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 1024px) {
 
     article.tile:not(.magazzino) {
         width: 40%;

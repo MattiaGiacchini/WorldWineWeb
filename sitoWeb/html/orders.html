@@ -44,7 +44,7 @@
     <main>
         <div class="utilityBar">
             <div class="titleBar">
-                <h2>Listino etichette</h2>
+                <h2>Ordini</h2>
                 <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
             </div>
             <form class="filter" action="index.html" method="post">
@@ -61,15 +61,31 @@
                         </li>
                 </section>
                 <section>
-                    <h4>Stato prodotto</h4>
+                    <h4>Stato ordini</h4>
                     <ul>
                         <li>
-                            <input type="checkbox" name="stato" value="active" id="active" checked/>
-                            <label for="active"> Attivi </label>
+                            <input type="checkbox" name="stato" value="waiting" id="waiting" checked/>
+                            <label for="waiting"> Da accettare </label>
                         </li>
                         <li>
-                            <input type="checkbox" name="stato" value="deactivated" id="deactivated" />
-                            <label for="deactivated"> Disattivati </label>
+                            <input type="checkbox" name="stato" value="approved" id="approved" />
+                            <label for="approved"> Approvati </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="processing" id="processing" />
+                            <label for="processing"> In elaborazione </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="shipped" id="shipped" />
+                            <label for="shipped"> Spedito </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="delivered" id="delivered" />
+                            <label for="delivered"> Consegnato </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="stato" value="rejected" id="rejected" />
+                            <label for="rejected"> Rifiutati </label>
                         </li>
                     </ul>
                 </section>
@@ -78,112 +94,110 @@
             </form>
         </div>
 
-        <button id="addNewLabel" type="button" name="button">Nuova etichetta</button>
-
 
         <div class="mainContent">
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Spedito</p>
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>In elaborazione</p>
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Da accettare</p>
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta deactivated">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Rifiutato</p>
 
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Spedito</p>
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Da accettare</p>
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
+            <a class="tileLink" href="orderManagement.html">
                 <article class="tile etichetta deactivated">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Rifiutato</p>
 
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
             </a>
 
-            <a class="tileLink" href="index.html">
-                <article class="tile etichetta deactivated">
+            <a class="tileLink" href="orderManagement.html">
+                <article class="tile etichetta">
                     <div class="tileContent">
-                            <h3>Pinot Bianco</h3>
-                            <h4>Tenuta Coccapanne</h4>
-                            <p>Modena - ITA</p>
+                            <h3>26/01/2021</h3>
+                            <h4>€ 126.24</h4>
+                            <p>Consegnato</p>
 
                         <div class="tileFooter">
-                            <p class="tileImportantInfo">Vino bianco</p>
+                            <p class="tileImportantInfo">#47884</p>
                         </div>
                     </div>
                 </article>
