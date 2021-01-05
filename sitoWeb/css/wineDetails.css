@@ -7,7 +7,7 @@ div.details {
     align-items: center;
 }
 
-div.details section {
+div.details > div {
     width: 100%;
     height: 100%;
     margin:0px;
@@ -29,7 +29,7 @@ div.details button{
 }
 
 /*  DESCRIPTION  */
-div.details > section > p {
+div.details > div > p {
     box-sizing: border-box;
     width: 88%;
     margin: 0% 6%;
@@ -77,7 +77,7 @@ div.details table tr td {
 }
 
 /********* Review **************/
-div.details > section > ul {
+div.details > div > ul {
     box-sizing: border-box;
     padding: inherit;
     width: 100%;
@@ -85,7 +85,7 @@ div.details > section > ul {
     margin: 0% 6%;
 }
 
-div.details > section > ul > li {
+div.details > div > ul > li {
     box-sizing: border-box;
     text-align: left;
     box-shadow: 0px 4px 5px 3px grey;
@@ -95,22 +95,22 @@ div.details > section > ul > li {
     background-color: var(--background-white);
 }
 
-div.details > section > ul > li > article p {
+div.details > div > ul > li > article p {
     text-align: justify;
 }
 
-div.details > section > ul > li > article h5{
+div.details > div > ul > li > article h5{
     display: inline-block;
 }
 
-div.details > section > ul > li > article img {
+div.details > div > ul > li > article img {
     width: 120px;
     display: block;
     background-color: #B9653D;
 }
 
 @media screen and (min-width: 800px) {
-    div.details section{
+    div.details > div{
         margin-top: 10px;
     }
 
@@ -119,10 +119,10 @@ div.details > section > ul > li > article img {
         align-items: flex-start;
         justify-content: space-between;
     }
-    div.details > section:first-of-type {
+    div.details > div.left {
         width: 30%;
     }
-    div.details > section:last-of-type {
+    div.details > div.right {
         width: 70%;
     }
 }

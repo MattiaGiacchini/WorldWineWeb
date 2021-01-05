@@ -49,7 +49,7 @@
         </div>
 
         <div class="details">
-            <section>
+            <div class="left">
                 <article class="wineCard">
                     <div class="wineCard-Container">
                         <img class="fotoVino" src="../upload/idVino/vino.png" alt="">
@@ -63,7 +63,7 @@
                             <p class="origine">Rubicone - ITA</p>
                             <p class="certificato">D.O.C.G.</p>
                             <p class="annata">2019</p>
-                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 2 su 5">
                             <h6>642,90€</h6>
                             <p>non disponibile</p>
                             <input class="preference favourite" type="button" name="" value="">
@@ -74,10 +74,10 @@
                 <form class="quantityToOrder" action="#" method="post">
                     <label for="qnt">Quantità da Ordinare</label>
                     <input type="number" id="qnt" name="qnt" value="" min="0" max="" step="1">
-                    <input type="submit" name="" value="aggiungi a carrello">
+                    <input type="submit" name="submit" value="aggiungi a carrello">
                 </form>
-            </section>
-            <section>
+            </div>
+            <div class="right">
                 <button>Descrizione Organolettica</button>
                 <p>Colore rosso intenso con riflessi percorsi da un vivissimo viola; gusto dal tono frizzante con profumi di mora e frutta rossa matura. Sapore avvolgente con piacevole equilibrio dato dalla acidità profilante, dal tannino strutturante, dalla morbidezza omniavvolgente. Vino di moderata gradazione alcolica, di immediata piacevolezza espressiva.</p>
                 <button>Caratteristiche</button>
@@ -145,11 +145,11 @@
                             <input type="number" id="vote" name="vote" step="1" min="1" max="5" value="" required>
                         </li>
                         <li>
-                            <label for="review">Testo della recensione</label>
-                            <textarea name="name" maxlength="500" rows="10"></textarea>
+                            <label for="text">Testo della recensione</label>
+                            <textarea name="text" id="text" maxlength="500" rows="10" required></textarea>
                         </li>
                         <li>
-                            <input type="submit" name="" value="Conferma">
+                            <input type="submit" name="submit" value="Conferma">
                         </li>
                     </ul>
                 </form>
@@ -157,7 +157,7 @@
                 <ul>
                     <li>
                         <article class="review">
-                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 1 su 5">
                             <h4>Titolo Recensione</h4>
                             <h5>09/10/2022 - utentexyz</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -165,7 +165,7 @@
                     </li>
                     <li>
                         <article class="review">
-                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 2.5 su 5">
                             <h4>Titolo Recensione</h4>
                             <h5>09/10/2022 - utentexyz</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -173,14 +173,38 @@
                     </li>
                     <li>
                         <article class="review">
-                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 4.75 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 5 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 3 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 1 su 5">
                             <h4>Titolo Recensione</h4>
                             <h5>09/10/2022 - utentexyz</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </article>
                     </li>
                 </ul>
-            </section>
+            </div>
         </div>
     </main>
     <footer></footer>
