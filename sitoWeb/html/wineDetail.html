@@ -6,9 +6,10 @@
     <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
     <link rel="stylesheet" type="text/css" href="../css/productCard.css">
     <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/wineDetails.css">
     <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="../js/utils.js"></script>
-    <script type="text/javascript" src="../js/wineCard.js"></script>
+    <script type="text/javascript" src="../js/wineDetails.js"></script>
 
     <title>World Wine Web - pagina corrente</title>
   </head>
@@ -48,102 +49,140 @@
         </div>
 
         <div class="details">
-            <article class="wineCard">
-                <div class="wineCard-Container">
-                    <img class="fotoVino" src="../upload/idVino/vino.png" alt="">
-                    <div class="colore rosso" alt="Vino Rosso"></div>
-                    <div class="etichetta">
-                        <h3>Labrusco di Modena</h3>
-                        <h4>BotteBuona</h4>
-                        <div class="LiterVol">
-                            <h5>0,75L</h5> <h5>15,0% Vol</h5>
+            <section>
+                <article class="wineCard">
+                    <div class="wineCard-Container">
+                        <img class="fotoVino" src="../upload/idVino/vino.png" alt="">
+                        <div class="colore rosso" alt="Vino Rosso"></div>
+                        <div class="etichetta">
+                            <h3>Labrusco di Modena</h3>
+                            <h4>BotteBuona</h4>
+                            <div class="LiterVol">
+                                <h5>0,75L</h5> <h5>15,0% Vol</h5>
+                            </div>
+                            <p class="origine">Rubicone - ITA</p>
+                            <p class="certificato">D.O.C.G.</p>
+                            <p class="annata">2019</p>
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <h6>642,90€</h6>
+                            <p>non disponibile</p>
+                            <input class="preference favourite" type="button" name="" value="">
                         </div>
-                        <p class="origine">Rubicone - ITA</p>
-                        <p class="certificato">D.O.C.G.</p>
-                        <p class="annata">2019</p>
-                        <img src="../img/ratingStar-rev2.png" alt="4 su 5">
-                        <h6>642,90€</h6>
-                        <p>non disponibile</p>
-                        <input class="preference favourite" type="button" name="" value="">
                     </div>
-                </div>
-            </article>
+                </article>
 
-            <form class="quantityToOrder" action="#" method="post">
-                <ul>
-                    <li>
-                        <label for="qnt">Quantità da Ordinare</label>
-                        <input type="number" id="qnt" name="qnt" value="" min="0" step="1">
-                    </li>
-                    <li><input type="submit" name="" value="aggiungi a carrello"></li>
-                </ul>
-            </form>
-            <details class="description">
-                <summary>Descrizione Organolettica</summary>
+                <form class="quantityToOrder" action="#" method="post">
+                    <label for="qnt">Quantità da Ordinare</label>
+                    <input type="number" id="qnt" name="qnt" value="" min="0" max="" step="1">
+                    <input type="submit" name="" value="aggiungi a carrello">
+                </form>
+            </section>
+            <section>
+                <button>Descrizione Organolettica</button>
                 <p>Colore rosso intenso con riflessi percorsi da un vivissimo viola; gusto dal tono frizzante con profumi di mora e frutta rossa matura. Sapore avvolgente con piacevole equilibrio dato dalla acidità profilante, dal tannino strutturante, dalla morbidezza omniavvolgente. Vino di moderata gradazione alcolica, di immediata piacevolezza espressiva.</p>
-            </details>
-            <details class="property">
-                <summary>Caratteristiche</summary>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Categoria</th>
-                      <th>Nome</th>
-                      <th>Cantina</th>
-                      <th>Annata</th>
-                      <th>Certificato</th>
-                      <th>Vitigno</th>
-                      <th>Alcol(%)</th>
-                      <th>Contenitore</th>
-                      <th>Capienza(L)</th>
-                      <th>Temperatura Minima cui Servire(C°)</th>
-                      <th>Temperatura Massima cui Servire(C°)</th>
-                      <th>Abbinamenti Consigliati</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Vino</td>
-                      <td>Lambrusco di Modena</td>
-                      <td>BotteBuona</td>
-                      <td>2019</td>
-                      <td>D.O.C.G.</td>
-                      <td>Lambrusco</td>
-                      <td>15.0</td>
-                      <td>Bottiglia di Vetro</td>
-                      <td>0,75</td>
-                      <td>16</td>
-                      <td>18</td>
-                      <td>carne pesce antipasti</td>
-                    </tr>
-                  </tbody>
-              </table>
-            </details>
-            <details class="reviews">
-                <summary>Recensioni</summary>
+                <button>Caratteristiche</button>
+                <div class="table">
+                    <table>
+                        <tr>
+                          <th id="category">Categoria</th>
+                          <td headers="category">Vino</td>
+                        </tr>
+                        <tr>
+                          <th id="name">Nome</th>
+                          <td headers="name">Lambrusco di Modena</td>
+                        </tr>
+                        <tr>
+                          <th id="wineMaker">Cantina</th>
+                          <td headers="wineMaker">BotteBuona</td>
+                        </tr>
+                        <tr>
+                          <th id="year">Annata</th>
+                          <td headers="year">2019</td>
+                        </tr>
+                        <tr>
+                          <th id="certificate">Certificato</th>
+                          <td headers="certificate">D.O.C.G.</td>
+                        </tr>
+                        <tr>
+                          <th id="wineVariety">Vitigno</th>
+                          <td headers="wineVariety">Lambrusco</td>
+                        </tr>
+                        <tr>
+                          <th id="alcol">Alcol(%)</th>
+                          <td headers="alcol">15.0</td>
+                        </tr>
+                        <tr>
+                          <th id="typeContainer">Contenitore</th>
+                          <td headers="typeContainer">Bottiglia di Vetro</td>
+                        </tr>
+                        <tr>
+                          <th id="capacityContainer">Capienza(L)</th>
+                          <td headers="capacityContainer">0,75</td>
+                        </tr>
+                        <tr>
+                          <th id="maxTemperature">Temperatura Massima cui Servire (C°)</th>
+                          <td headers="maxTemperature">18.0</td>
+                        </tr>
+                        <tr>
+                          <th id="minTemperature">Temperatura Minima cui Servire (C°)</th>
+                          <td headers="minTemperature">16.0</td>
+                        </tr>
+                        <tr>
+                          <th id="combination">Abbinamenti Consigliati</th>
+                          <td headers="combination">carne, pesce, antipasti, pesce, antipasti,carne, pesce, pesce, antipasti, pesce, antipasti,carne, pesce, pesce, antipasti, pesce, antipasti,carne, pesce, pesce, antipasti, pesce, antipasti,carne, pesce, antipasti </td>
+                        </tr>
+                    </table>
+                </div>
+                <button>Aggiungi Nuova Recensione</button>
+                <form class="newReview" action="#" method="post">
                     <ul>
                         <li>
-                            <article class="review">
-                                <h4>Titolo Recensione 1</h4>
-                                <img src="../img/ratingStar-rev2.png" alt="4 su 5">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
+                            <label for="title">Titolo della Recensione</label>
+                            <input type="text" id="title" name="title" value="" required>
                         </li>
                         <li>
-                            <article class="review">
-                                <h4>Titolo Recensione 1</h4>
-                                <img src="../img/ratingStar-rev2.png" alt="4 su 5">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
+                            <label for="vote">Voto da assegnargli (da 1 a 5 stelle)</label>
+                            <input type="number" id="vote" name="vote" step="1" min="1" max="5" value="" required>
+                        </li>
+                        <li>
+                            <label for="review">Testo della recensione</label>
+                            <textarea name="name" maxlength="500" rows="10"></textarea>
+                        </li>
+                        <li>
+                            <input type="submit" name="" value="Conferma">
                         </li>
                     </ul>
-            </details>
-
+                </form>
+                <button>Recensioni dei Clienti</button>
+                <ul>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="review">
+                            <img src="../img/ratingStar-rev2.png" alt="voto: 4 su 5">
+                            <h4>Titolo Recensione</h4>
+                            <h5>09/10/2022 - utentexyz</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </article>
+                    </li>
+                </ul>
+            </section>
         </div>
-
-
     </main>
-
     <footer></footer>
   </body>
 </html>
