@@ -13,6 +13,7 @@
 
 .wineCard {
     display: inline-block;
+    position: relative;
     background-color: white;
     width: 88%;
     min-width: 250px;
@@ -153,9 +154,10 @@ article.wineCard .etichetta > p:last-of-type {
     text-align: left;
 }
 
-article.wineCard .etichetta > button {
-    margin: auto;
-    grid-area: hear;
+article.wineCard > button {
+    position: absolute;
+    bottom: 5%;
+    right: 10px;
     height: 40px;
     width: 40px;
     border: 1px;
@@ -164,11 +166,11 @@ article.wineCard .etichetta > button {
     background-size: cover;
 }
 
-article.wineCard .etichetta > button.favourite {
+article.wineCard > button.favourite {
     background-color: #ffbf00;
 }
 
-article.wineCard .etichetta > button.not-favourite {
+article.wineCard > button.not-favourite {
     background-color:inherit;
 }
 
