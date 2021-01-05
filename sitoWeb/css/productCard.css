@@ -153,12 +153,9 @@ article.wineCard .etichetta > p:last-of-type {
     text-align: left;
 }
 
-article.wineCard > button {
-    position: relative;
-    margin: 0;
-    left: 85%;
-    top: -50px;
-
+article.wineCard .etichetta > button {
+    margin: auto;
+    grid-area: hear;
     height: 40px;
     width: 40px;
     border: 1px;
@@ -167,11 +164,11 @@ article.wineCard > button {
     background-size: cover;
 }
 
-article.wineCard > button.favourite {
+article.wineCard .etichetta > button.favourite {
     background-color: #ffbf00;
 }
 
-article.wineCard > button.not-favourite {
+article.wineCard .etichetta > button.not-favourite {
     background-color:inherit;
 }
 
