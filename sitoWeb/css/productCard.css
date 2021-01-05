@@ -13,6 +13,7 @@
 
 .wineCard {
     display: inline-block;
+    position: relative;
     background-color: white;
     width: 88%;
     min-width: 250px;
@@ -21,7 +22,7 @@
     box-shadow: 0px 4px 5px 3px grey;
 }
 
-.wineCard > a {
+.wineCard  a {
     color: inherit;
     text-decoration: inherit;
 }
@@ -34,7 +35,7 @@
     padding: 0px;
 
     display: grid;
-    grid-template-columns: 8fr 10px 14fr;
+    grid-template-columns: 9fr 14fr;
     grid-gap: 0px;
 }
 
@@ -46,16 +47,18 @@
     height: 100%;
     max-width: 100%;
     object-fit:cover;
+    box-sizing: border-box;
+    border-right: 10px solid white;
 }
 
-.wineCard div.rosso {
-    background-color: #690b22;
+.fotoVino[alt *= "rosso"] {
+    border-right: 10px solid #690b22;
 }
-.wineCard div.rose {
-    background-color: #b46271;
+.fotoVino[alt *= "rose"] {
+    border-right: 10px solid #b46271;
 }
-.wineCard div.bianco {
-    background-color: #987254;
+.fotoVino[alt *= "bianco"] {
+    border-right: 10px solid #987254;
 }
 
 article.wineCard * {
@@ -151,9 +154,10 @@ article.wineCard .etichetta > p:last-of-type {
     text-align: left;
 }
 
-article.wineCard .etichetta > input.preference {
-    margin-left: auto;
-    grid-area: hear;
+article.wineCard > button {
+    position: absolute;
+    bottom: 5%;
+    right: 10px;
     height: 40px;
     width: 40px;
     border: 1px;
@@ -162,11 +166,11 @@ article.wineCard .etichetta > input.preference {
     background-size: cover;
 }
 
-article.wineCard .etichetta > input.favourite {
+article.wineCard > button.favourite {
     background-color: #ffbf00;
 }
 
-article.wineCard .etichetta > input.not-favourite {
+article.wineCard > button.not-favourite {
     background-color:inherit;
 }
 

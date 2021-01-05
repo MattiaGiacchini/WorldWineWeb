@@ -17,7 +17,7 @@ div.details > div {
 
 
 /* sections button */
-div.details button{
+div.details > div > button{
     /*font-weight: 1000;*/
     font-size: 18px;
     width: 88%;
