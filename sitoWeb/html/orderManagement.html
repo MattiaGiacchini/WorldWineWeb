@@ -101,128 +101,134 @@
 
 
         <div class="mainContent">
-
-            <article class="tile etichetta">
-                <div class="tileContent">
+            <section class="orderData">
+                <h3>Dettagli ordine</h3>
+                <article class="tile etichetta">
+                    <div class="tileContent">
                         <h3>26/01/2021</h3>
                         <h4>€ 126.24</h4>
                         <p>Spedito</p>
-                    <div class="tileFooter">
-                        <p class="tileImportantInfo">#47884</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">#47884</p>
+                        </div>
                     </div>
+                </article>
+                <div class="orderDetails">
+                    <table class="orderProducts">
+                        <caption>Riepilogo dell'ordine</caption>
+                        <thead>
+                            <tr>
+                                <th id="prod" scope"col">Prodotto</th>
+                                <th id="desc" scope="col">Descrizione</th>
+                                <th id="qty" scope="col">Qtà</th>
+                                <th id="price" scope="col">Prezzo €</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td headers="prod" scope>VR4875</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">5</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">VB6547</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">12</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">VB5478</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">SR6587</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">4</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">R5475</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">1</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">RT6546</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">EER574</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">1</td>
+                                <td headers="price">24.50</td>
+                            </tr>
+                            <tr>
+                                <td headers="prod">DF6468</td>
+                                <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
+                                <td headers="qty">24</td>
+                                <td headers="price">924.50</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th id="subTot" colspan="3" scope="row">Subtotale €</th>
+                                <td headers="subTot price">1516454.21</td>
+                            </tr>
+                            <tr>
+                                <th id="IVA" colspan="3" scope="row">IVA €</th>
+                                <td headers="IVA price">65465.30</td>
+                            </tr>
+                            <tr>
+                                <th id="tot" colspan="3" scope="row">Totale Complessivo €</th>
+                                <td headers="tot price"> 5465466.99</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-            </article>
-
+            </section>
+            <section class="clientData">
+                <h3>Dati del cliente</h3>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>Bagno Martini SNC</h3>
+                        <h4>P.IVA 11236845794</h4>
+                        <p>0544 971248</p>
+                    </div>
+                </article>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>Via Ragazzena, 147</h3>
+                        <h4>Cervia</h4>
+                        <p>Giacchini Mattia</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">48015</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="tile etichetta">
+                    <div class="tileContent">
+                        <h3>4023 6100 0143 3165</h3>
+                        <h4>02/2026</h4>
+                        <p>Giacchini Mattia</p>
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo">VISA</p>
+                        </div>
+                    </div>
+                </article>
+                <div class="orderManagementButtons">
+                    <button type="button" name="accept">Accetta</button>
+                    <button type="button" name="reject">Rifiuta</button>
+                    <button type="button" name="cancel">Annulla</button>
+                </div>
+            </section>
         </div>
 
-        <div class="orderDetails">
-            <table class="orderProducts">
-                <caption>Riepilogo dell'ordine</caption>
-                <thead>
-                    <tr>
-                        <th id="prod" scope"col">Prodotto</th>
-                        <th id="desc" scope="col">Descrizione</th>
-                        <th id="qty" scope="col">Qtà</th>
-                        <th id="price" scope="col">Prezzo €</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td headers="prod" scope>VR4875</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">5</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">VB6547</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">12</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">VB5478</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">24</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">SR6587</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">4</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">R5475</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">1</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">RT6546</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">24</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">EER574</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">1</td>
-                        <td headers="price">24.50</td>
-                    </tr>
-                    <tr>
-                        <td headers="prod">DF6468</td>
-                        <td headers="desc">Pinot Grigio - Tenuta Coccapane</td>
-                        <td headers="qty">24</td>
-                        <td headers="price">924.50</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th id="subTot" colspan="3" scope="row">Subtotale</th>
-                        <td headers="subTot price">1516454.21 €</td>
-                    </tr>
-                    <tr>
-                        <th id="IVA" colspan="3" scope="row">IVA</th>
-                        <td headers="IVA price">65465.30 €</td>
-                    </tr>
-                    <tr>
-                        <th id="tot" colspan="3" scope="row">Totale Complessivo</th>
-                        <td headers="tot price"> 546546546456.99 €</td>
-                    </tr>
-                </tfoot>
-            </table>
 
-        </div>
-
-        <article class="tile etichetta">
-            <div class="tileContent">
-                    <h3>Bagno Martini SNC</h3>
-                    <h4>P.IVA 11236845794</h4>
-                    <p>0544 971248</p>
-            </div>
-        </article>
-
-        <article class="tile etichetta">
-            <div class="tileContent">
-                    <h3>4023 6100 0143 3165</h3>
-                    <h4>02/2026</h4>
-                    <p>Giacchini Mattia</p>
-                <div class="tileFooter">
-                    <p class="tileImportantInfo">VISA</p>
-                </div>
-            </div>
-        </article>
-
-        <article class="tile etichetta">
-            <div class="tileContent">
-                    <h3>Via Ragazzena, 147</h3>
-                    <h4>Cervia</h4>
-                    <p>Giacchini Mattia</p>
-                <div class="tileFooter">
-                    <p class="tileImportantInfo">48015</p>
-                </div>
-            </div>
-        </article>
 
 
     </main>
