@@ -49,8 +49,8 @@
                 <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
             </div>
             <form class="filter" action="index.html" method="post">
-                <section>
-                    <h4>Macrocategoria</h4>
+                <fieldset>
+                    <legend>Macrocategoria</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
@@ -61,9 +61,10 @@
                             <label for="filterSpumante"> Spumante </label>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h4>Colore</h4>
+                </fieldset>
+                    
+                <fieldset>
+                    <legend>Colore</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
@@ -74,9 +75,10 @@
                             <label for="filterWhite"> Bianco </label>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h4>Gas</h4>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Gas</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
@@ -87,9 +89,10 @@
                             <label for="filterFrizzante"> Frizzante </label>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h4>Tenore zuccherino</h4>
+                </fieldset>
+            
+                <fieldset>
+                    <legend>Tenore zuccherino</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
@@ -100,16 +103,18 @@
                             <label for="filterExtraDry"> Extra Dry </label>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h4>Cantina</h4>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Cantina</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
                             <label for="filterGinopino"> Gino Pino </label>
                         </li>
                     </ul>
-                </section>
+                </fieldset>
+                
                 <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
             </form>
         </div>
