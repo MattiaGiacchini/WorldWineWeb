@@ -22,7 +22,7 @@ form:not(.filter) ul li {
     width: 90%;
 }
 
-form fieldset ul{
+form fieldset ul, form:not(.filter) ul{
     width: 80%;
     padding: 0;
     display: flex;
@@ -259,6 +259,7 @@ form.loginForm > ul > p {
 
 form.loginForm > ul > p > a {
     color: var(--text-light);
+    text-decoration: underline;
 }
 
 form fieldset.privateOrBusiness legend{
