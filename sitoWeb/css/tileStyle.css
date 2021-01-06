@@ -170,10 +170,10 @@ a.tileLink {
     border-top: 1px solid black;
 }
 
-.tile.notice > .tileContent > input {
+.tile.notice > .tileContent > button {
     grid-area: button;
     height: 30px;
-    margin: 0px 0px 20px auto;
+    margin: auto 0px 10px auto;
 }
 
 a.tileLink {
