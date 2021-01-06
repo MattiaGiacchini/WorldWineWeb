@@ -48,8 +48,8 @@
                 <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
             </div>
             <form class="filter" action="index.html" method="post">
-                <section>
-                    <h4>Ordine alfabetico</h4>
+                <fieldset>
+                    <legend>Ordine alfabetico</legend>
                     <ul>
                         <li>
                             <input type="radio" name="ordine" value="crescente" id="crescente"/>
@@ -59,9 +59,10 @@
                             <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
                             <label for="decrescente"> Decrescente </label>
                         </li>
-                </section>
-                <section>
-                    <h4>Stato prodotto</h4>
+                    </ul>
+                </fieldset>
+                <fieldset>
+                    <legend>Stato prodotto</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="stato" value="active" id="active" checked/>
@@ -72,7 +73,7 @@
                             <label for="deactivated"> Disattivati </label>
                         </li>
                     </ul>
-                </section>
+                </fieldset>
 
                 <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
             </form>

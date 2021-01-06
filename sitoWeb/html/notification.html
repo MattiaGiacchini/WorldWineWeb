@@ -48,8 +48,8 @@
             </div>
             <form class="filter" action="index.html" method="post">
 
-                <section>
-                    <h4>Ordina per data</h4>
+                <fieldset>
+                    <legend>Ordine cronologico</legend>
                     <ul>
                         <li>
                             <input type="radio" name="ordine" value="crescente" id="crescente"/>
@@ -60,9 +60,10 @@
                             <label for="decrescente"> Decrescente </label>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h4>Visualizza le notifiche</h4>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Stato notifiche</legend>
                     <ul>
                         <li>
                             <input type="checkbox" name="stato" value="daLeggere" id="daLeggere" checked/>
@@ -73,7 +74,8 @@
                             <label for="giaLetti"> Già letti </label>
                         </li>
                     </ul>
-                </section>
+                </fieldset>
+                
                 <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
             </form>
         </div>

@@ -22,13 +22,28 @@ form:not(.filter) ul li {
     width: 90%;
 }
 
-form:not(.filter) ul, form fieldset ul{
+form fieldset ul, form:not(.filter) ul{
     width: 80%;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+form.filter fieldset ul {
+    display: block;
+}
+
+form.filter {
+    width: 70%;
+}
+
+form.filter fieldset legend {
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 36px;
+    width: 100%;
 }
 
 form input, select {
@@ -80,7 +95,7 @@ form input[type = submit]{
 form fieldset {
     width: 100%;
     padding: 0;
-    margin: 8% 0;
+    margin: 2% 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -273,12 +288,13 @@ form.checkout ul {
     margin-bottom: 10%;
 }
 
-form.loginForm > ul > p {
-    margin-top: 4%;
+form.loginForm > ul  p {
+    margin: 4% auto 0 auto;
 }
 
-form.loginForm > ul > p > a {
+form.loginForm > ul > li > p > a {
     color: var(--text-light);
+    text-decoration: underline;
 }
 
 form fieldset.privateOrBusiness legend{
