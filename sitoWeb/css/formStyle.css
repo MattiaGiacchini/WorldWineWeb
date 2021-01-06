@@ -253,11 +253,11 @@ form.checkout ul {
     margin-bottom: 10%;
 }
 
-form.loginForm > ul > p {
-    margin-top: 4%;
+form.loginForm > ul  p {
+    margin: 4% auto 0 auto;
 }
 
-form.loginForm > ul > p > a {
+form.loginForm > ul > li > p > a {
     color: var(--text-light);
     text-decoration: underline;
 }
