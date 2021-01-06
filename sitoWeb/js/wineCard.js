@@ -1,6 +1,6 @@
 $(document).ready(function(){
     let vote;
-    $("article.wineCard img[alt^=\"voto:\"]").each(function(){
+    $("article.wineCard img[alt^=\"voto:\"], article.review img[alt^=\"voto:\"]").each(function(){
         vote = $(this).attr("alt")
         vote = vote.slice(5, vote.length-4);
         vote = parseFloat(vote);
