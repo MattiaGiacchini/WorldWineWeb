@@ -258,6 +258,16 @@ div.utilityBar section {
     padding-bottom: 2%;
 }
 
+div.link {
+    background-color: var(--background-dark);
+    text-align: center;
+}
+
+div.link button {
+    margin: 30px auto;
+    border: none;
+}
+
 button#addNewColaborator, button#addNewLabel {
     margin-bottom: 5%;
     display: block;

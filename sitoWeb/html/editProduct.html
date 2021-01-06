@@ -44,15 +44,15 @@
                 <h2>Gestione Prodotto</h2>
             </div>
         </div>
+        <div class="link">
+            <button type="button" name="button" onclick="document.location='./newWineLabel.html'">Modifica Etichetta</button>
+        </div>
         <form name="editProduct" class="editProduct" action="#" method="GET">
             <ul>
                 <li>
-                    <input type="button" name="" value="Modifica Etichetta">
-                </li>
-                <li>
                     <label for="id">Contenitore</label>
                     <select class="id" name="id" id="id">
-                        <option value=""></option>
+                        <option value="">Seleziona per i dettagli...</option>
                         <optgroup label="visibili a catalogo">
                             <option value="">Bottiglia di vetro - 0,375L</option>
                             <option value="">Bottiglia di vetro - 0,75L</option>
@@ -78,7 +78,7 @@
                     <input type="submit" name="submit" value="Aggiorna">
                 </li>
                 <li>
-                    <input type="button" class="cancel" name="" value="Annulla">
+                    <input type="reset" name="" value="Annulla">
                 </li>
             </ul>
         </form>

@@ -210,10 +210,19 @@ form.editProduct fieldset.modify input[type = file] {
 }
 
 /* cancel button */
-form.editProduct input.cancel {
+form.editProduct input[type = reset] {
     background-color: var(--background-dark);
     border: 1px solid var(--text-light);
     color: var(--text-light);
+    height: 50px;
+    width: 200px;
+    border-radius: var(--border-radius-button);
+    box-shadow: var(--button-shadow);
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 /*********************************************************/
