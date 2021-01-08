@@ -1,23 +1,23 @@
 -- *********************************************
--- * SQL MySQL generation                      
+-- * SQL MySQL generation
 -- *--------------------------------------------
--- * DB-MAIN version: 11.0.1              
--- * Generator date: Dec  4 2018              
--- * Generation date: Wed Jan  6 23:21:35 2021 
--- * LUN file: C:\Users\magia\Documents\UNIVERSITA\3_ANNO\TecnologieWEB\Elaborato\worldwineweb\dataBase\WorldWineWeb.lun 
--- * Schema: SchemaConcettuale_auto/10-1 
--- ********************************************* 
+-- * DB-MAIN version: 11.0.1
+-- * Generator date: Dec  4 2018
+-- * Generation date: Wed Jan  6 23:21:35 2021
+-- * LUN file: C:\Users\magia\Documents\UNIVERSITA\3_ANNO\TecnologieWEB\Elaborato\worldwineweb\dataBase\WorldWineWeb.lun
+-- * Schema: SchemaConcettuale_auto/10-1
+-- *********************************************
 
 
 -- Database Section
--- ________________ 
+-- ________________
 
-create database SchemaConcettuale_auto;
+create database worldwineweb;
 use SchemaConcettuale_auto;
 
 
 -- Tables Section
--- _____________ 
+-- _____________
 
 create table CANTINA (
      idCantina int not null auto_increment,
@@ -208,12 +208,12 @@ create table VITIGNO (
 
 
 -- Constraints Section
--- ___________________ 
+-- ___________________
 
 -- Not implemented
 -- alter table CANTINA add constraint ID_CHK
 --     check(exists(select * from ETICHETTA
---                  where ETICHETTA.idCantina = idCantina)); 
+--                  where ETICHETTA.idCantina = idCantina));
 
 alter table CANTINA add constraint FKORIGINE
      foreign key (stato)
@@ -242,7 +242,7 @@ alter table ETICHETTA add constraint FKSPECIFICA
 -- Not implemented
 -- alter table FATTURA add constraint IDFATTURA_CHK
 --     check(exists(select * from ORDINE
---                  where ORDINE.idFattura = idFattura and ORDINE.dataFattura = data)); 
+--                  where ORDINE.idFattura = idFattura and ORDINE.dataFattura = data));
 
 alter table INDIRIZZO add constraint FKPOSIZIONE
      foreign key (stato)
@@ -294,7 +294,7 @@ alter table ORDINE add constraint FKRICHIESTA_FK
 
 alter table ORDINE add constraint FKRICHIESTA_CHK
      check((idFattura is not null and dataFattura is not null)
-           or (idFattura is null and dataFattura is null)); 
+           or (idFattura is null and dataFattura is null));
 
 alter table ORDINE add constraint FKEFFETTUAZIONE
      foreign key (idCliente -- Compound attribute --)
@@ -330,5 +330,4 @@ alter table VINO_CONFEZIONATO add constraint FKRIF_ETICHETTA
 
 
 -- Index Section
--- _____________ 
-
+-- _____________
