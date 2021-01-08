@@ -13,7 +13,7 @@
 -- ________________
 
 create database worldwineweb;
-use SchemaConcettuale_auto;
+use worldwineweb;
 
 
 -- Tables Section
