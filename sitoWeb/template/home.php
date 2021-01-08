@@ -1,154 +1,102 @@
-<!DOCTYPE html>
-<html lang="it" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/basicStyle.css">
-    <link rel="stylesheet" type="text/css" href="../css/productCard.css">
-    <link rel="stylesheet" type="text/css" href="../css/tileStyle.css">
-    <link rel="stylesheet" type="text/css" href="../css/formStyle.css">
-    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"> </script>
-    <script type="text/javascript" src="../js/utils.js"></script>
-    <script type="text/javascript" src="../js/wineCard.js"></script>
-    <link rel="shortcut icon" href="../upload/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../upload/favicon.ico" type="image/x-icon">
+<div class="utilityBar">
+    <div class="titleBar">
+        <h2><?php echo $templateParams["titoloPagina"]; ?></h2>
 
-    <title><?php echo $templateParams["titoloPagina"]; ?></title>
-  </head>
-  <body>
-    <header>
-        <button type="button" name="menu">≡</button>
-        <a href="index.html"><h1>World Wine Web</h1></a>
-    </header>
-    <nav>
-        <section>
-            <a href="#">
-                <h2>Dani/Login</h2>
-                <p>ruolo</p>
-                <img src="../upload/users/user.jpg" alt="nome cognome dell'utente" />
-            </a>
-        </section>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Gestione Ordini</a></li>
-            <li><a href="warehouse.html">Magazzino</a></li>
-            <li><a href="labels.html">Listino</a></li>
-            <li><a href="collaborators.html">Collaboratori</a></li>
-            <li><a href="cart.html">Carrello</a></li>
-            <li><a href="orders.html">Ordini</a></li>
-            <li><a href="#">Vini speciali</a></li>
-            <li><a href="#">Area Personale</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-    </nav>
+        <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
+    </div>
+    <form class="filter" action="index.html" method="post">
+        <fieldset>
+            <legend>Macrocategoria</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
+                    <label for="filterVino"> Vino </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="categoria2" value="spumante" id="filterSpumante"/>
+                    <label for="filterSpumante"> Spumante </label>
+                </li>
+            </ul>
+        </fieldset>
+            
+        <fieldset>
+            <legend>Colore</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
+                    <label for="filterRed"> Rosso </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="colore2" value="bianco" id="filterWhite"/>
+                    <label for="filterWhite"> Bianco </label>
+                </li>
+            </ul>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Gas</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
+                    <label for="filterFermo"> Fermo </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="gas2" value="frizzante" id="filterFrizzante"/>
+                    <label for="filterFrizzante"> Frizzante </label>
+                </li>
+            </ul>
+        </fieldset>
+    
+        <fieldset>
+            <legend>Tenore zuccherino</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
+                    <label for="filterDry"> Dry </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="sugar2" value="extraDry" id="filterExtraDry"/>
+                    <label for="filterExtraDry"> Extra Dry </label>
+                </li>
+            </ul>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Cantina</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
+                    <label for="filterGinopino"> Gino Pino </label>
+                </li>
+            </ul>
+        </fieldset>
+        
+        <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+    </form>
+</div>
 
-    <main>
-        <div class="utilityBar">
-            <div class="titleBar">
-                <h2>Home</h2>
+<div class="article-container">
 
-                <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
-            </div>
-            <form class="filter" action="index.html" method="post">
-                <fieldset>
-                    <legend>Macrocategoria</legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
-                            <label for="filterVino"> Vino </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="categoria2" value="spumante" id="filterSpumante"/>
-                            <label for="filterSpumante"> Spumante </label>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Colore</legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
-                            <label for="filterRed"> Rosso </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="colore2" value="bianco" id="filterWhite"/>
-                            <label for="filterWhite"> Bianco </label>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Gas</legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
-                            <label for="filterFermo"> Fermo </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="gas2" value="frizzante" id="filterFrizzante"/>
-                            <label for="filterFrizzante"> Frizzante </label>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Tenore zuccherino</legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
-                            <label for="filterDry"> Dry </label>
-                        </li>
-                        <li>
-                            <input type="checkbox" name="sugar2" value="extraDry" id="filterExtraDry"/>
-                            <label for="filterExtraDry"> Extra Dry </label>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Cantina</legend>
-                    <ul>
-                        <li>
-                            <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
-                            <label for="filterGinopino"> Gino Pino </label>
-                        </li>
-                    </ul>
-                </fieldset>
-
-                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
-            </form>
-        </div>
-
-        <div class="article-container">
-
-            <article class="wineCard">
-                <a href="#">
-                    <div class="wineCard-Container">
-                        <img class="fotoVino" src="../upload/idVino/vino.png" alt="foto vino rosso" />
-                        <div class="etichetta">
-                            <h3>Labrusco di Modena</h3>
-                            <h4>BotteBuona</h4>
-                            <div class="LiterVol">
-                                <h5>0,75L</h5> <h5>15,0% Vol</h5>
-                            </div>
-                            <p class="origine">Rubicone - ITA</p>
-                            <p class="certificato">D.O.C.G.</p>
-                            <p class="annata">2019</p>
-                            <img src="../img/ratingStar-rev2.png" alt="voto: 2 su 5" />
-                            <h6>642,90€</h6>
-                            <p>non disponibile</p>
-                        </div>
+    <article class="wineCard">
+        <a href="#">
+            <div class="wineCard-Container">
+                <img class="fotoVino" src="../upload/idVino/vino.png" alt="foto vino rosso" />
+                <div class="etichetta">
+                    <h3>Labrusco di Modena</h3>
+                    <h4>BotteBuona</h4>
+                    <div class="LiterVol">
+                        <h5>0,75L</h5> <h5>15,0% Vol</h5>
                     </div>
-                </a>
-                <button class="preference favourite" name="preference favourite"></button>
-            </article>
+                    <p class="origine">Rubicone - ITA</p>
+                    <p class="certificato">D.O.C.G.</p>
+                    <p class="annata">2019</p>
+                    <img src="../img/ratingStar-rev2.png" alt="voto: 2 su 5" />
+                    <h6>642,90€</h6>
+                    <p>non disponibile</p>
+                </div>
+            </div>
+        </a>
+        <button class="preference favourite" name="preference favourite"></button>
+    </article>
 
-        </div>
-
-    </main>
-
-    <footer></footer>
-  </body>
-</html>
+</div>

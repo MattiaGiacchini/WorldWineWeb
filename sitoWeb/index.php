@@ -1,7 +1,9 @@
 <?php
+    require_once("utils/headerFunction.php");
 
-    $templateParams["titoloPagina"] = "World Wine Web";
-    $templateParams["nomePagina"] = "home.php";
+    $templateParams["titoloPagina"] = "Home";
+    $templateParams["titoloScheda"] = "World Wine Web";
+    $templateParams["nomePagina"] = "template/home.php";
 
-    require 'template/'.$templateParams["nomePagina"];
+    require('./template/base.php');
 ?>
