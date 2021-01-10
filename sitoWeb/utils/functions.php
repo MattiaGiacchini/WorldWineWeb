@@ -1,9 +1,16 @@
 <?php
     function isUserLoggedIn() {
         if (!empty($_SESSION["idUtente"])) {
-            return $_SESSION["ruolo"];
-        } 
-        
+            return true;
+        }
         return false;
+    }
+
+    function registerLoggedUser($user){
+        $_SESSION["idUtente"] = $user["idUtente"];
+    }
+
+    function getUserRole() {
+        return $dataBase->getUserRole();
     }
 ?>

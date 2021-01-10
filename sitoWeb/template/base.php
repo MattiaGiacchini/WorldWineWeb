@@ -1,4 +1,10 @@
-<?php $userRole = isUserLoggedIn();?>
+<?php
+    if(isUserLoggedIn()){
+        $userRole = $dataBase->getUserRole($_SESSION["idUtente"]);
+    } else {
+        $userRole = false;
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -52,7 +58,7 @@
                         echo '<li><a href="orders.php">Ordini</a></li>';
                         break;
 
-                    case 'amministratore':
+                    case 'admin':
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
 
