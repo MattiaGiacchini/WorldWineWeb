@@ -249,3 +249,19 @@ INSERT INTO `stato` (`sigla`, `nome`) VALUES ('WLF', 'Wallis e Futuna');
 INSERT INTO `stato` (`sigla`, `nome`) VALUES ('YEM', 'Yemen');
 INSERT INTO `stato` (`sigla`, `nome`) VALUES ('ZMB', 'Zambia');
 INSERT INTO `stato` (`sigla`, `nome`) VALUES ('ZWE', 'Zimbabwe');
+
+
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '0.375', 'mezza bottiglia');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '0.750', 'standard');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '1.500', 'magnum');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '3.000', 'jeroboam');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '4.500', 'rehoboam');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '6.000', 'mathusalem');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '9.000', 'salmanazar');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '12.00', 'balthazar');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '15.00', 'nabuchodonosor');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '18.00', 'melchior');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '20.00', 'salomon');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '25.00', 'sovereign');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '27.00', 'goliath');
+INSERT INTO `contenitore` (`idContenitore` , `capacita`, `tipologia`) VALUES (NULL, '30.00', 'melchizedec');
