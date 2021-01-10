@@ -41,7 +41,7 @@
 
         <section class="stockManagement">
             <h3>Gestione scorte</h3>
-            <form class="warehouseStock" action="#" method="get">
+            <form class="warehouseStock" action="#" method="post">
                 <ul>
                     <li>
                         <label for="amount">Quantità da aggiungere o rimuovere</label>

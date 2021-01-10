@@ -29,6 +29,25 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        public function getCurrentDateTime() {
+            return date("Y-m-d H:i:s");
+        }
+
+        public function warehouseLoad($idContenitore, $idEtichetta, $collaboratore, $amount){
+            $currentdate = $this->getCurrentDateTime();
+            $query = "INSERT INTO modifica_scorte(idContenitore, idEtichetta, idCollaboratore, quantita, data) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("iiiis", $idContenitore, $idEtichetta, $collaboratore, $amount, $currentdate);
+            $stmt->execute();
+            var_dump($stmt);
+            /*$result = $stmt->get_result();
+            if ($result) {
+                return $result->fetch_all(MYSQLI_ASSOC);
+            } else {
+                var_dump( $result );
+            }*/
+        }
+
 
     }
 ?>
