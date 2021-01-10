@@ -12,7 +12,7 @@
 -- ________________
 drop database if exists worldwineweb;
 
-create database if not exists worldwineweb;
+create database if not exists worldwineweb DEFAULT CHARACTER SET utf8;
 use worldwineweb;
 
 
@@ -33,14 +33,15 @@ create table CARRELLO (
      constraint IDCARRELLO primary key (idCliente, idContenitore, idEtichetta));
 
 create table CATEGORIA_NOTIFICA (
-     nome char(15) not null,
+     nome char(20) not null,
      constraint IDCATEGORIA primary key (nome));
 
 create table CONTENITORE (
      idContenitore int not null auto_increment,
-     capacita decimal(7,4) not null,
+     capacita decimal(7,3) not null,
      tipologia char(20) not null,
-     constraint ID primary key (idContenitore));
+     constraint ID primary key (idContenitore),
+     constraint FKCONTENITORE_ID unique (capacita, tipologia));
 
 create table ETICHETTA (
      idEtichetta int not null auto_increment,
