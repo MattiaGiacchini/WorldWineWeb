@@ -3,7 +3,7 @@
 
     $templateParams["titoloPagina"] = "Home";
     $templateParams["titoloScheda"] = "World Wine Web";
-    $templateParams["nomePagina"] = "template/home.php";
+    $templateParams["indirizzoPagina"] = "template/home.php";
 
     require('./template/base.php');
 ?>
