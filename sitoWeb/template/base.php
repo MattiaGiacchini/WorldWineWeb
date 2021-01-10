@@ -1,4 +1,10 @@
-<?php $userRole = isUserLoggedIn();?>
+<?php
+    if(isUserLoggedIn()){
+        $userRole = $dataBase->getUserRole($_SESSION["idUtente"]);
+    } else {
+        $userRole = false;
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="it" dir="ltr">
@@ -12,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="./css/productCard.css">
     <link rel="stylesheet" type="text/css" href="./css/tileStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
-    <?php 
+    <?php
         if (isset($templateParams["cssAggiuntivi"])) {
             echo $templateParams["cssAggiuntivi"];
         }
@@ -20,15 +26,15 @@
             echo $templateParams["jsAggiuntivi"];
         }
     ?>
-    
+
     <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="./js/utils.js"></script>
-    
+
     <link rel="shortcut icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
 
   </head>
-  
+
   <body>
     <header>
         <button type="button" name="menu">≡</button>
@@ -44,41 +50,41 @@
         </section>
         <ul>
             <li><a href="index.php">Home</a></li>
-            
-            <?php 
+
+            <?php
                 switch ($userRole) {
                     case 'cliente':
                         echo '<li><a href="cart.php">Carrello</a></li>';
                         echo '<li><a href="orders.php">Ordini</a></li>';
                         break;
-                    
-                    case 'amministratore':
+
+                    case 'admin':
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
-                    
+
                     case 'collaboratore':
                         echo '<li><a href="orders.php">Gestione Ordini</a></li>';
                         echo '<li><a href="warehouse.php">Magazzino</a></li>';
                         break;
-                        
+
                     default:
                         echo '<li><a href="login.php">Login</a></li>';
                         break;
                 }
-                
+
                 if ($userRole) {
                     echo '<li><a href="personalArea.php">Area Personale</a></li>';
                     echo '<li><a href="logout.php">Logout</a></li>';
                 }
             ?>
-    
+
         </ul>
     </nav>
 
     <main>
-        <?php 
-            if(isset($templateParams["nomePagina"])) {
-                require($templateParams["nomePagina"]);
+        <?php
+            if(isset($templateParams["indirizzoPagina"])) {
+                require($templateParams["indirizzoPagina"]);
             }
          ?>
     </main>
