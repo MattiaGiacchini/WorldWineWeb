@@ -33,8 +33,10 @@ create table CARRELLO (
      constraint IDCARRELLO primary key (idCliente, idContenitore, idEtichetta));
 
 create table CATEGORIA_NOTIFICA (
+     idCategoria int not null auto_increment,
      nome char(20) not null,
-     constraint IDCATEGORIA primary key (nome));
+     constraint ID_CATEGORIA primary key (idCategoria),
+     constraint FK_CATEGORIA_NOTIFICA unique (nome));
 
 create table CONTENITORE (
      idContenitore int not null auto_increment,
@@ -58,7 +60,7 @@ create table ETICHETTA (
      annata date,
      indicazioneGeografica varchar(100),
      specificazione char(20),
-     vitigno char(20),
+     vitigno int,
      menzione char(50),
      idCantina int not null,
      constraint ID primary key (idEtichetta));
@@ -128,7 +130,7 @@ create table NOTIFICA (
      data date not null,
      messaggio varchar(500) not null,
      visualizzato char not null,
-     categoria char(15) not null,
+     categoria int not null,
      constraint IDNOTIFICA primary key (idUtente, idNotifica));
 
 create table ORDINE (
@@ -201,9 +203,11 @@ create table VINO_CONFEZIONATO (
      constraint IDVINO_CONFEZIONATO primary key (idContenitore, idEtichetta));
 
 create table VITIGNO (
+     idVitigno int not null auto_increment,
      coloreBacca char(10) not null,
      nomeSpecie char(20) not null,
-     constraint IDVITIGNO primary key (nomeSpecie));
+     constraint ID_VITIGNO primary key (idVitigno),
+     constraint VITIGNO_BACCA unique (coloreBacca, nomeSpecie));
 
 
 -- Constraints Section
@@ -228,7 +232,7 @@ alter table CARRELLO add constraint FKCAR_VIN
 
 alter table ETICHETTA add constraint FKESTRAZIONE
      foreign key (vitigno)
-     references VITIGNO (nomeSpecie);
+     references VITIGNO (idVitigno);
 
 alter table ETICHETTA add constraint FKSPECIFICA
      foreign key (menzione)
@@ -280,7 +284,7 @@ alter table MODIFICA_SCORTE add constraint FKMOD_VIN
 
 alter table NOTIFICA add constraint FKREFERENZA
      foreign key (categoria)
-     references CATEGORIA_NOTIFICA (nome);
+     references CATEGORIA_NOTIFICA (idCategoria);
 
 alter table NOTIFICA add constraint FKRICEZIONE
      foreign key (idUtente)
