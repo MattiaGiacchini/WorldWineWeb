@@ -12,17 +12,23 @@ $(document).ready(function() {
 
     // funzioni
     function showBusiness(){
-        private.hide();
-        privateInput.attr('disabled', '');
-        business.show();
-        businessInput.removeAttr('disabled');
+        private.slideUp({
+            complete: function(){
+                privateInput.attr('disabled', '');
+                businessInput.removeAttr('disabled');
+                business.slideDown();
+            }
+        });
     }
 
     function showPrivate(){
-       business.hide();
-       businessInput.attr('disabled', '');
-       private.show();
-       privateInput.removeAttr('disabled');
+       business.slideUp({
+           complete: function(){
+               businessInput.attr('disabled', '');
+               privateInput.removeAttr('disabled');
+               private.slideDown();
+           }
+       });
     }
 
     function resetCheck(){
@@ -53,5 +59,8 @@ $(document).ready(function() {
     // predisposizione documento
     $("form.register > ul > li > input").attr('required', '');
     document.getElementById("private").setAttribute("checked", "");
-    showPrivate();
+    business.hide();
+    businessInput.attr('disabled', '');
+    private.show();
+    privateInput.removeAttr('disabled');
 });
