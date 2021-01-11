@@ -13,9 +13,7 @@
 
     if(isUserLoggedIn()){
         require("./index.php");
-    }
-    else
-    {
+    } else {
         $templateParams["titoloPagina"] = "Login";
         $templateParams["titoloScheda"] = "World Wine Web - login";
         $templateParams["indirizzoPagina"] = "template/login-form.php";

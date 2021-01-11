@@ -14,21 +14,23 @@
 
     <title><?php echo $templateParams["titoloScheda"]; ?></title>
 
+    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="./js/utils.js"></script>
+
+    <?php
+        if (isset($templateParams["jsAggiuntivi"])) {
+            echo $templateParams["jsAggiuntivi"];
+        }
+        if (isset($templateParams["cssAggiuntivi"])) {
+            echo $templateParams["cssAggiuntivi"];
+        }
+    ?>
+
     <link rel="stylesheet" type="text/css" href="./css/basicStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/productCard.css">
     <link rel="stylesheet" type="text/css" href="./css/tileStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
-    <?php
-        if (isset($templateParams["cssAggiuntivi"])) {
-            echo $templateParams["cssAggiuntivi"];
-        }
-        if (isset($templateParams["jsAggiuntivi"])) {
-            echo $templateParams["jsAggiuntivi"];
-        }
-    ?>
 
-    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
-    <script type="text/javascript" src="./js/utils.js"></script>
 
     <link rel="shortcut icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">

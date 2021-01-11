@@ -6,6 +6,14 @@
 <form class="loginForm" action="#" method="POST">
     <ul>
         <?php
+            if(isset($_GET["msg"])){
+                ?>
+        <li>
+            <p><?php echo $_GET["msg"]; ?></p>
+        </li>
+                <?php
+            }
+
             if (isset($templateParams["errorelogin"])) {
                 ?>
         <li>

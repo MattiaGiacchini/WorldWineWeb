@@ -1,4 +1,8 @@
 <?php
+    function getLoggedUserId() {
+        return isset($_SESSION["idUtente"]) ? $_SESSION["idUtente"] : NULL;
+    }
+
     function isUserLoggedIn() {
         if (!empty($_SESSION["idUtente"])) {
             return true;
@@ -11,6 +15,7 @@
     }
 
     function getUserRole() {
-        return $dataBase->getUserRole();
+        return $dataBase->getUserRole(getLoggedUserId());
     }
+
 ?>
