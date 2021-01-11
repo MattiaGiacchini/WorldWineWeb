@@ -6,10 +6,11 @@
 <form class="loginForm" action="#" method="POST">
     <ul>
         <?php
-            if(isset($_GET["msg"])){
+            if(isset($_SESSION["msg"])){
+               unset($_SESSION["msg"]);
                 ?>
         <li>
-            <p><?php echo $_GET["msg"]; ?></p>
+            <p>La registrazione è avvenuta con successo!</p>
         </li>
                 <?php
             }
