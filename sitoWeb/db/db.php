@@ -10,6 +10,7 @@
             }
         }
 
+        // ritorna tutti gli stati inseriti a database
         public function getAllStates(){
             $stmt = $this->db->prepare("SELECT * FROM stato");
             $stmt->execute();
@@ -18,6 +19,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
         public function getUserRole($idUtente){
             $query = "SELECT ruolo FROM utente WHERE idUtente = ?";
             $stmt = $this->db->prepare($query);
@@ -31,6 +33,7 @@
             }
         }
 
+        // restituisce l'id dell'utente se password e email vengono riconosciute
         public function checkLogin($email, $password){
             $query = "SELECT idUtente FROM utente WHERE email = ? AND password = ?";
             $stmt = $this->db->prepare($query);
@@ -41,7 +44,15 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        // aggiunge un nuovo utente business a database
+        public function addNewBusinessUser($email, $psw, $company, $pIva){
+            return true;
+        }
 
+        // aggiunge un nuovo utente private a database
+        public function addNewPrivateUser($email, $psw, $name, $surname, $cf, $birthday) {
+            return true;
+        }
 /*
         public function insertArticle($titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore){
             $query = "INSERT INTO articolo (titoloarticolo, testoarticolo, anteprimaarticolo, dataarticolo, imgarticolo, autore) VALUES (?, ?, ?, ?, ?, ?)";
