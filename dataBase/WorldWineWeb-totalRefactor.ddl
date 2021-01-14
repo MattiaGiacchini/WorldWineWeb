@@ -67,11 +67,10 @@ create table ETICHETTA (
 
 create table FATTURA (
      idFattura int not null,
-     data date not null,
-     idCliente int not null,
+     data year not null,
      idOrdine int not null,
      constraint IDFATTURA primary key (idFattura, data),
-     constraint FKRICHIESTA_ID unique (idCliente, idOrdine));
+     constraint FKRICHIESTA_ID unique (idOrdine));
 
 create table INDIRIZZO (
      idCliente int not null,
@@ -100,21 +99,19 @@ create table METODO_DI_PAGAMENTO (
      constraint IDMETODO_DI_PAGAMENTO_1 unique (numeroCarta));
 
 create table DETTAGLIO (
-     idCliente int not null,
      idOrdine int not null,
      idContenitore int not null,
      idEtichetta int not null,
      quantita int not null,
-     constraint IDDETTAGLIO primary key (idContenitore, idEtichetta, idCliente, idOrdine));
+     constraint IDDETTAGLIO primary key (idContenitore, idEtichetta, idOrdine));
 
 create table GESTIONE_ORDINE (
-     idCliente int not null,
      idOrdine int not null,
      idCollaboratore int not null,
      data date not null,
      stato char(20) not null,
      note varchar(500),
-     constraint IDCOMANDA primary key (idCliente, idOrdine, idCollaboratore, data));
+     constraint IDCOMANDA primary key (idOrdine, idCollaboratore, data));
 
 create table MODIFICA_SCORTE (
      idContenitore int not null,
@@ -134,8 +131,8 @@ create table NOTIFICA (
      constraint IDNOTIFICA primary key (idUtente, idNotifica));
 
 create table ORDINE (
+     idOrdine int not null auto_increment,
      idCliente int not null,
-     idOrdine int not null,
      data date not null,
      statoDiAvanzamento char(20) not null,
      pagamentoIntestatario char(50) not null,
@@ -149,7 +146,7 @@ create table ORDINE (
      spedizioneCitta varchar(80) not null,
      spedizioneProvincia varchar(80) not null,
      spedizioneCap int not null,
-     constraint IDORDINE primary key (idCliente, idOrdine));
+     constraint IDORDINE primary key (idOrdine));
 
 create table PREZZO (
      idContenitore int not null,
@@ -243,8 +240,8 @@ alter table ETICHETTA add constraint FKPRODUZIONE
      references CANTINA (idCantina);
 
 alter table FATTURA add constraint FKRICHIESTA_FK
-     foreign key (idCliente, idOrdine)
-     references ORDINE (idCliente, idOrdine);
+     foreign key (idOrdine)
+     references ORDINE (idOrdine);
 
 alter table INDIRIZZO add constraint FKPOSIZIONE
      foreign key (stato)
@@ -263,16 +260,16 @@ alter table DETTAGLIO add constraint FKDET_VIN
      references VINO_CONFEZIONATO (idContenitore, idEtichetta);
 
 alter table DETTAGLIO add constraint FKDET_ORD
-     foreign key (idCliente, idOrdine)
-     references ORDINE (idCliente, idOrdine);
+     foreign key (idOrdine)
+     references ORDINE (idOrdine);
 
 alter table GESTIONE_ORDINE add constraint FKCOM_UTE
      foreign key (idCollaboratore)
      references UTENTE (idUtente);
 
 alter table GESTIONE_ORDINE add constraint FKCOM_ORD
-     foreign key (idCliente, idOrdine)
-     references ORDINE (idCliente, idOrdine);
+     foreign key (idOrdine)
+     references ORDINE (idOrdine);
 
 alter table MODIFICA_SCORTE add constraint FKMOD_UTE
      foreign key (idCollaboratore)
@@ -290,9 +287,9 @@ alter table NOTIFICA add constraint FKRICEZIONE
      foreign key (idUtente)
      references UTENTE (idUtente);
 
-alter table ORDINE add constraint FKEFFETTUAZIONE
-     foreign key (idCliente)
-     references UTENTE (idUtente);
+ alter table ORDINE add constraint FKEFFETTUAZIONE
+      foreign key (idCliente)
+      references UTENTE (idUtente);
 
 alter table PREZZO add constraint FKVALUTAZIONE
      foreign key (idContenitore, idEtichetta)
