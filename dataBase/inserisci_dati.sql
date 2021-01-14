@@ -455,8 +455,8 @@ INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (
 INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (NULL, 'Chiara', 'Vitovska')
 INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (NULL, 'Chiara', 'Zibibbo')
 
-INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Menestrello','ITA');
-INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Villa Bonaga','ITA');
-INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Casa Sant''Orsola','ITA');
-INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Terre Forti','ITA');
-INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Santa Barbara','ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Menestrello', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Villa Bonaga', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Casa Sant''Orsola', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Terre Forti', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Santa Barbara', 'ITA');
