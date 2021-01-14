@@ -185,7 +185,7 @@ create table UTENTE (
      cognome char(20),
      dataDiNascita date,
      cf char(16),
-     partitaIva bigint,
+     partitaIva bigint(11),
      ragioneSociale char(100),
      constraint IDCLIENTE primary key (idUtente),
      constraint IDCLIENTE_1 unique (email),
