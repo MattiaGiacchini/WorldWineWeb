@@ -15,7 +15,7 @@
         $templateParams["indirizzoPagina"] = "template/warehouseManagement.php";
         $templateParams["cssAggiuntivi"] = '<link rel="stylesheet" type="text/css" href="./css/warehouse.css">';
 
-        $templateParams["warehouseMovements"] = array(0 => array("date" => "25/12/2021", "time" => "08.20", "description" => "Giacchini Mattia", "amount" => +25), 1 => array("date" => "25/12/2021", "time" => "08.20", "description" => "ordine #65477", "amount" => -50)); //// TODO:
+        $templateParams["warehouseMovements"] = $dataBase->getWarehouseLoad(1,3);
 
 
         require('./template/base.php');

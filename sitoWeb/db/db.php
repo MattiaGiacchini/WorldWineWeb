@@ -39,13 +39,16 @@
             $stmt = $this->db->prepare($query);
             $stmt->bind_param("iiiis", $idContenitore, $idEtichetta, $collaboratore, $amount, $currentdate);
             $stmt->execute();
-            var_dump($stmt);
-            /*$result = $stmt->get_result();
-            if ($result) {
-                return $result->fetch_all(MYSQLI_ASSOC);
-            } else {
-                var_dump( $result );
-            }*/
+        }
+
+        public function getWarehouseLoad($idContenitore, $idEtichetta) {
+            $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContenitore, $idEtichetta);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->fetch_all(MYSQLI_ASSOC);
         }
 
 

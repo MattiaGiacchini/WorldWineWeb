@@ -70,11 +70,11 @@
                     <article class="tile magazzino">
                         <div class="tileContent">
                             <div class="tileBody">
-                                <h4><?php echo $warehouseLoad["date"]; ?> - <?php echo $warehouseLoad["time"]; ?></h4>
-                                <p><?php echo $warehouseLoad["description"]; ?></p>
+                                <h4><?php echo $warehouseLoad["data"]; ?></h4>
+                                <p><?php echo $warehouseLoad["nome"]; ?> <?php echo $warehouseLoad["cognome"] ?></p>
                             </div>
                         </div>
-                        <p><?php echo $warehouseLoad["amount"]; ?></p>
+                        <p><?php echo $warehouseLoad["quantita"]; ?></p>
                     </article>
 
                 <?php endforeach; ?>
