@@ -63,6 +63,28 @@
             return $stmt->insert_id;
         }
 */
+        public function getCurrentDateTime() {
+            return date("Y-m-d H:i:s");
+        }
+
+        public function warehouseLoad($idContenitore, $idEtichetta, $collaboratore, $amount){
+            $currentdate = $this->getCurrentDateTime();
+            $query = "INSERT INTO modifica_scorte(idContenitore, idEtichetta, idCollaboratore, quantita, data) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("iiiis", $idContenitore, $idEtichetta, $collaboratore, $amount, $currentdate);
+            $stmt->execute();
+        }
+
+        public function getWarehouseLoad($idContenitore, $idEtichetta) {
+            $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContenitore, $idEtichetta);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
 
     }
 ?>

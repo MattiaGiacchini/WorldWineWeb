@@ -14,10 +14,21 @@
 
     <title><?php echo $templateParams["titoloScheda"]; ?></title>
 
+<<<<<<< HEAD
     <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
     <script type="text/javascript" src="./js/utils.js"></script>
 
     <?php
+=======
+    <link rel="stylesheet" type="text/css" href="./css/basicStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="./css/tileStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
+    <?php
+        if (isset($templateParams["cssAggiuntivi"])) {
+            echo $templateParams["cssAggiuntivi"];
+        }
+>>>>>>> phpMatti
         if (isset($templateParams["jsAggiuntivi"])) {
             echo $templateParams["jsAggiuntivi"];
         }
@@ -26,11 +37,16 @@
         }
     ?>
 
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="./css/basicStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/productCard.css">
     <link rel="stylesheet" type="text/css" href="./css/tileStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
 
+=======
+    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
+    <script type="text/javascript" src="./js/utils.js"></script>
+>>>>>>> phpMatti
 
     <link rel="shortcut icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
@@ -60,7 +76,11 @@
                         echo '<li><a href="orders.php">Ordini</a></li>';
                         break;
 
+<<<<<<< HEAD
                     case 'admin':
+=======
+                    case 'amministratore':
+>>>>>>> phpMatti
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
 
