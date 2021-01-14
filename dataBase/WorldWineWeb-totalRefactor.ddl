@@ -202,7 +202,7 @@ create table VINO_CONFEZIONATO (
 create table VITIGNO (
      idVitigno int not null auto_increment,
      coloreBacca char(10) not null,
-     nomeSpecie char(20) not null,
+     nomeSpecie char(50) not null,
      constraint ID_VITIGNO primary key (idVitigno),
      constraint VITIGNO_BACCA unique (coloreBacca, nomeSpecie));
 
