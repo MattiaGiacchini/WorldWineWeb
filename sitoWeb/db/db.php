@@ -46,33 +46,23 @@
 
         // aggiunge un nuovo utente business a database
         public function addNewBusinessUser($email, $psw, $company, $pIva){
-            return $this->addNewUser($email, $psw, "client", NULL, NULL, NULL, NULL, $company, $pIva);
+            return $this->addNewUser($email, $psw, 'client', null, null, null, null, $company, $pIva);
         }
 
         // aggiunge un nuovo utente private a database
         public function addNewPrivateUser($email, $psw, $name, $surname, $cf, $birthday) {
-            return $this->addNewUser($email, $psw, "client", $name, $surname, $cf, $birthday, NULL, NULL);
+            return $this->addNewUser($email, $psw, 'client', $name, $surname, $cf, $birthday, null, null);
         }
 
         private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
             $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
-                      VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                      VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssssiiis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
+            $stmt->bind_param('sssssssis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
 
             return $stmt->execute();
         }
 
-/*INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`) VALUES (NULL, 'persona@persona.it', 'persona', 'client', 'mario', 'rossi', '2020-03-17', '1234567890123456', NULL, NULL);
-        public function insertArticle($titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore){
-            $query = "INSERT INTO articolo (titoloarticolo, testoarticolo, anteprimaarticolo, dataarticolo, imgarticolo, autore) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssssi',$titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore);
-            $stmt->execute();
-
-            return $stmt->insert_id;
-        }
-*/
         public function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
         }
