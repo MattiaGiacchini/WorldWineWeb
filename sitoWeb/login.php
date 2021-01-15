@@ -12,7 +12,7 @@
     }
 
     if(isUserLoggedIn()){
-        require("./index.php");
+        header("Location:./index.php");
     } else {
         $templateParams["titoloPagina"] = "Login";
         $templateParams["titoloScheda"] = "World Wine Web - login";

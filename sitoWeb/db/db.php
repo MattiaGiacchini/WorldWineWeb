@@ -46,23 +46,33 @@
 
         // aggiunge un nuovo utente business a database
         public function addNewBusinessUser($email, $psw, $company, $pIva){
-            return true;
+            return $this->addNewUser($email, $psw, 'client', null, null, null, null, $company, $pIva);
         }
 
         // aggiunge un nuovo utente private a database
         public function addNewPrivateUser($email, $psw, $name, $surname, $cf, $birthday) {
-            return true;
+            return $this->addNewUser($email, $psw, 'client', $name, $surname, $cf, $birthday, null, null);
         }
-/*
-        public function insertArticle($titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore){
-            $query = "INSERT INTO articolo (titoloarticolo, testoarticolo, anteprimaarticolo, dataarticolo, imgarticolo, autore) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssssi',$titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore);
-            $stmt->execute();
 
-            return $stmt->insert_id;
+        // aggiunge un nuovo utente collaboratore a database
+        public function addNewCollaboratorUser($email, $psw, $name, $surname, $cf, $birthday) {
+            return $this->addNewUser($email, $psw, 'collaborator', $name, $surname, $cf, $birthday, null, null);
         }
-*/
+
+        // aggiunge un nuovo utente amministratore a database
+        public function addNewAdminUser($email, $psw, $name, $surname, $cf, $birthday) {
+            return $this->addNewUser($email, $psw, 'admin', $name, $surname, $cf, $birthday, null, null);
+        }
+
+        private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
+            $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
+                      VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sssssssis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
+
+            return $stmt->execute();
+        }
+
         public function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
         }

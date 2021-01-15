@@ -5,7 +5,15 @@
 </div>
 
 <form class="register" action="#" method="POST">
-    <ul>
+    <ul><?php
+        if(isset($templateParams["erroreDiRegistrazione"])){
+            ?>
+        <li>
+            <p><?php echo $templateParams["erroreDiRegistrazione"]; ?></p>
+        </li>
+            <?php
+        }
+     ?>
         <li>
             <fieldset class="privateOrBusiness">
                 <legend>Registrati come</legend>
