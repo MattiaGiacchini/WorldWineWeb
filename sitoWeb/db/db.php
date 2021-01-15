@@ -1,6 +1,7 @@
 <?php
 
     class Database{
+        private $basicUser = "user";
         private $db;
 
         public function __construct($servername, $username, $password, $dbname, $port){
@@ -20,28 +21,31 @@
         }
 
         // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
-        public function getUserRole($idUtente){
-            $query = "SELECT ruolo FROM utente WHERE idUtente = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('i',$idUtente);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            if(count($result)==0) {
-                return false;
-            } else {
-                return $result[0]["ruolo"];
+        public function getUserRole($idUtente) {
+            if(isset($idUtente)) {
+                $query = "SELECT ruolo FROM utente WHERE idUtente = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param('i',$idUtente);
+                $stmt->execute();
+                $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                if(count($result)==0) {
+                    return $this->basicUser;
+                } else {
+                    return $result[0]["ruolo"];
+                }
             }
+            return $this->basicUser;
         }
 
         // restituisce l'id dell'utente se password e email vengono riconosciute
         public function checkLogin($email, $password){
-            $query = "SELECT idUtente FROM utente WHERE email = ? AND password = ?";
+            $query = "SELECT idUtente, nome, cognome, ragioneSociale FROM utente WHERE email = ? AND password = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ss',$email, $password);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result->fetch_all(MYSQLI_ASSOC);
+            return $result;
         }
 
         // aggiunge un nuovo utente business a database
