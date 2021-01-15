@@ -4,10 +4,7 @@
     }
 
     function isUserLoggedIn() {
-        if (!empty($_SESSION["idUtente"])) {
-            return true;
-        }
-        return false;
+        return !empty($_SESSION["idUtente"]);
     }
 
     function registerLoggedUser($user){
@@ -15,7 +12,8 @@
     }
 
     function getUserRole() {
-        return $dataBase->getUserRole(getLoggedUserId());
+        global $dataBase;
+        return isUserLoggedIn() ? $dataBase->getUserRole(getLoggedUserId()) : "user";
     }
 
 ?>
