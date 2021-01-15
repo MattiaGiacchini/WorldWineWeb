@@ -15,6 +15,7 @@
     }
 
     function getUserRole() {
+        global $dataBase;
         return $dataBase->getUserRole(getLoggedUserId());
     }
 

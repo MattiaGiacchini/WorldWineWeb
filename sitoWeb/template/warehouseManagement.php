@@ -1,4 +1,4 @@
-        <?php $product =$templateParams["product"]; ?>
+        <?php $product = $templateParams["product"]; ?>
         <div class="utilityBar">
             <div class="titleBar">
                 <h2><?php echo $templateParams["titoloPagina"] ?></h2>
@@ -25,16 +25,16 @@
 
 
         <article class="tile ">
-            <img class="tileImg" src="<?php echo UPLOAD_DIR; ?>/idVino/pinotBianco.png" alt="vino">
+            <img class="tileImg" src="<?php echo UPLOAD_DIR; ?>/idVino/3_1.png" alt="vino">
             <div class="tileContent">
                 <div class="tileBody">
-                    <h3><?php echo $product["name"] ?></h3>
-                    <h4><?php echo $product["producer"] ?></h4>
-                    <p><?php echo $product["size"] ?>L</p>
+                    <h3><?php echo $product[0]["NomeVino"] ?></h3>
+                    <h4><?php echo $product[0]["NomeCantina"] ?></h4>
+                    <p><?php echo $product[0]["capacita"] ?>L</p>
                 </div>
                 <div class="tileFooter">
-                    <p>Quantità: <?php echo $product["availability"]  ?> pezzi</p>
-                    <p class="tileImportantInfo"><?php echo $product["price"] ?> €</p>
+                    <p>Quantità: <?php echo $product[0]["scorteMagazzino"] ?> pezzi</p>
+                    <p class="tileImportantInfo"><?php echo $product[0]["prezzo"] ?> €</p>
                 </div>
             </div>
         </article>
@@ -45,7 +45,7 @@
                 <ul>
                     <li>
                         <label for="amount">Quantità da aggiungere o rimuovere</label>
-                        <input type="number" id="amount" name="amount" required step="1" />
+                        <input type="number" id="amount" name="amount" required step="1" autofocus/>
                     </li>
                     <li id="loadDateTime">
                         <label for="currentdate">Data e ora</label>

@@ -3,6 +3,10 @@ $(document).ready(function(){
     const warehouseLoad = $("article.tile.magazzino > p");
     let warehouseLoadingValue;
 
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    
     nav.hide();
     $(".filter").hide();
 
@@ -21,7 +25,8 @@ $(document).ready(function(){
 
     $("#addNewColaborator").click(function(){
         location.href = "register.html";
-    })
+    });
+
 
     warehouseLoad.each(function(){
         warehouseLoadingValue = Number($(this).html());

@@ -196,7 +196,7 @@ create table UTENTE (
 create table VINO_CONFEZIONATO (
      idContenitore int not null,
      idEtichetta int not null,
-     scorteMazzino int not null,
+     scorteMagazzino int not null,
      mediaRecensioni decimal(4,3) not null,
      constraint IDVINO_CONFEZIONATO primary key (idContenitore, idEtichetta));
 
