@@ -54,6 +54,16 @@
             return $this->addNewUser($email, $psw, 'client', $name, $surname, $cf, $birthday, null, null);
         }
 
+        // aggiunge un nuovo utente collaboratore a database
+        public function addNewCollaboratorUser($email, $psw, $name, $surname, $cf, $birthday) {
+            return $this->addNewUser($email, $psw, 'collaborator', $name, $surname, $cf, $birthday, null, null);
+        }
+
+        // aggiunge un nuovo utente amministratore a database
+        public function addNewAdminUser($email, $psw, $name, $surname, $cf, $birthday) {
+            return $this->addNewUser($email, $psw, 'admin', $name, $surname, $cf, $birthday, null, null);
+        }
+
         private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
             $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
                       VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
