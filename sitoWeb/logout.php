@@ -1,5 +1,5 @@
 <?php
     require_once("utils/headerFunction.php");
-    session_unset();
+    logOut();
     require('./login.php');
 ?>
