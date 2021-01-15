@@ -9,15 +9,23 @@
             if ($this->db->connect_error) {
                 die("Connection failed: " . $db->connect_error);
             }
+            $this->db->query("SET NAMES 'utf8'");
         }
 
         // ritorna tutti gli stati inseriti a database
-        public function getAllStates(){
-            $stmt = $this->db->prepare("SELECT * FROM stato");
+        public function getStates(){
+            $stmt = $this->db->prepare("SELECT * FROM stato ORDER BY nome ASC ");
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
+        public function getVitigni() {
+            $stmt = $this->db->prepare("SELECT * FROM vitigno ORDER BY vitigno.coloreBacca, vitigno.nomeSpecie ASC");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
         }
 
         // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
