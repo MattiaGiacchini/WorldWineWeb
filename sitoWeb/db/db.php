@@ -38,6 +38,20 @@
             return $result;
         }
 
+        // restituisce l'id di una cantina
+        public function getVitignoId($coloreBacca, $nomeSpecie) {
+            $query = "SELECT idVitigno FROM vitigno WHERE coloreBacca = ? AND nomeSpecie = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss',$coloreBacca, $nomeSpecie);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idVitigno"];
+            }
+        }
+
         // ritorna tutte le cantine
         public function getCantine() {
             $stmt = $this->db->prepare("SELECT idCantina, stato.nome as nomeStato, cantina.nome as nomeCantina FROM cantina, stato WHERE cantina.stato = stato.sigla ORDER BY stato.nome, cantina.nome ASC");
@@ -57,6 +71,20 @@
                 return null;
             } else {
                 return $result[0]["idCantina"];
+            }
+        }
+
+        // restituisce l'id di una cantina
+        public function getMentionId($menzione) {
+            $query = "SELECT idMenzione FROM menzione WHERE nome = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s',$menzione);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idMenzione"];
             }
         }
 
@@ -145,8 +173,18 @@
             return $stmt->execute();
         }
 
+        public function addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, $gas, $idCantina, $solfiti, $biologico, $classificazione, $idVitigno, $annata, $ig, $idMenzione) {
+            $query = "INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sssdiissssissiii', $mention);
 
+            return $stmt->execute();
+        }
 
+        public function addNewSpumante($categoria, $nome, $description, $colore, $alcol, $zucchero, $idCantina, $solfiti, $biologico) {
+            return $this->addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, null, $idCantina, $solfiti, $biologico, null, null, null, null, null, null);
+        }
+        
         public function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
         }
