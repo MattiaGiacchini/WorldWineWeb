@@ -2,14 +2,15 @@
     header ("Content-Type: text / html; charset = utf-8");
     $states = $dataBase->getStates();
     $vitigni = $dataBase->getVitigni();
-    $indexVitigno = 0;
+    $cantine = $dataBase->getCantine();
+    $menzioni = $dataBase->getMentions();
 ?><div class="utilityBar">
     <div class="titleBar">
         <h2><?php echo $templateParams["titoloPagina"]; ?></h2>
     </div>
 </div>
 
-<form name="newWineLabel" class="newWineLabel" action="#" method="GET">
+<form name="newWineLabel" class="newWineLabel" action="insertNewWineLabel.php" method="POST">
     <ul>
         <li class="id">
             <label for="id">ID Etichetta</label>
@@ -18,9 +19,9 @@
         <li>
             <fieldset>
                 <legend>Categoria</legend>
-                <input type="radio" name="categoria" value="vino" id="vino" checked />
+                <input type="radio" name="categoria" value="Vino" id="vino" checked />
                 <label for="vino" > Vino </label>
-                <input type="radio" name="categoria" value="spumante" id="spumante" />
+                <input type="radio" name="categoria" value="Spumante" id="spumante" />
                 <label for="spumante">Spumante</label>
             </fieldset>
         </li>
@@ -37,11 +38,11 @@
         <li>
             <fieldset>
                 <legend>Colore</legend>
-                <input type="radio" name="colore" value="rosso" id="rosso" checked />
+                <input type="radio" name="colore" value="Rosso" id="rosso" checked />
                 <label for="rosso"> Rosso </label>
-                <input type="radio" name="colore" value="rosé" id="rose" />
-                <label for="rose"> Rosé </label>
-                <input type="radio" name="colore" value="bianco" id="bianco" />
+                <input type="radio" name="colore" value="Rosato" id="rose" />
+                <label for="rose"> Rosato </label>
+                <input type="radio" name="colore" value="Bianco" id="bianco" />
                 <label for="bianco"> Bianco </label>
             </fieldset>
         </li>
@@ -55,28 +56,28 @@
             <select name="zucchero" id="zucchero" required>
                 <option value="">Ancora da selezionare...</option>
                 <optgroup label="Spumante" class="spumante">
-                    <option value="brut nature">Brut Nature </option>
-                    <option value="extra brut">Extra Brut </option>
-                    <option value="brut">Brut</option>
-                    <option value="extra dry">Extra Dry</option>
-                    <option value="dry">Dry</option>
-                    <option value="demi sec">Demi Sec</option>
-                    <option value="dolce">Dolce</option>
+                    <option value="Brut Nature">Brut Nature </option>
+                    <option value="Extra Brut">Extra Brut </option>
+                    <option value="Brut">Brut</option>
+                    <option value="Extra Dry">Extra Dry</option>
+                    <option value="Dry">Dry</option>
+                    <option value="Demi Sec">Demi Sec</option>
+                    <option value="Dolce">Dolce</option>
                 </optgroup>
                 <optgroup label="Vino" class="vino">
-                    <option value="secco">Secco</option>
-                    <option value="abboccato">Abboccato</option>
-                    <option value="amabile">Amabile</option>
-                    <option value="dolce">Dolce</option>
+                    <option value="Secco">Secco</option>
+                    <option value="Abboccato">Abboccato</option>
+                    <option value="Amabile">Amabile</option>
+                    <option value="Dolce">Dolce</option>
                 </optgroup>
             </select>
         </li>
         <li class="vino">
             <fieldset>
                 <legend>Fermo o Frizzante</legend>
-                <input type="radio" name="gas" value="fermo" id="fermo" />
+                <input type="radio" name="gas" value="Fermo" id="fermo" />
                 <label for="fermo">Fermo</label>
-                <input type="radio" name="gas" value="frizzante" id="frizzante" checked />
+                <input type="radio" name="gas" value="Frizzante" id="frizzante" checked />
                 <label for="frizzante">Frizzante</label>
             </fieldset>
         </li>
@@ -84,15 +85,27 @@
             <label for="cantina">Cantina</label>
             <select name="cantina" id="cantina" required>
                 <option value="">Ancora da selezionare...</option>
-                <option value="new">Aggiungi Nuova Cantina</option>
-                <optgroup label="Italia">
-                    <option value="cantina1">cantina1</option>
-                    <option value="cantina2">cantina2</option>
-                    <option value="cantina3">cantina3</option>
+                <option value="new">Aggiungi Nuova Cantina</option><?php
+                    $lastState = null;
+                    foreach ($cantine as $cantina) {
+                        if($lastState != $cantina["nomeStato"]){
+                            if($lastState != null) {
+                                ?>
                 </optgroup>
-                <optgroup label="Francia">
-                    <option value="cantina4">cantina4</option>
-                    <option value="cantina5">cantina5</option>
+                <?php
+                            }
+                            ?>
+
+                <optgroup label="<?php echo $cantina["nomeStato"]; ?>">
+                    <option value="<?php echo $cantina["idCantina"]; ?>"><?php echo $cantina["nomeCantina"]; ?></option>
+                   <?php
+                            $lastState = $cantina["nomeStato"];
+                        } else {?>
+                    <option value="<?php echo $cantina["idCantina"]; ?>"><?php echo $cantina["nomeCantina"]; ?></option>
+                    <?php
+                        }
+                    }
+                 ?>
                 </optgroup>
             </select>
         </li>
@@ -102,7 +115,7 @@
         </li>
         <li class="newCantina">
             <label for="stato">Stato di Origine nuova cantina</label>
-            <select class="" name="stato" id="stato" required>
+            <select class="" name="statoCantina" id="stato" required>
                 <option value="">Ancora da selezionare...</option>
                 <?php
                 foreach ($states as $state) {
@@ -114,44 +127,40 @@
             </select>
         </li>
         <li>
-            <label for="solfiti">Contiene Solfiti</label>
-            <input type="checkbox" name="solfiti" value="true" id="solfiti" />
+            <fieldset>
+                <legend>Solfiti</legend>
+                <input type="radio" name="solfiti" value="true" id="solfitiPresenti" required checked />
+                <label for="solfitiPresenti">Presenti</label>
+                <input type="radio" name="solfiti" value="false" id="solfitiNonPresenti" required />
+                <label for="solfitiNonPresenti">Assenti</label>
+            </fieldset>
         </li>
         <li>
-            <label for="biologico">Certificazione Biologica</label>
-            <input type="checkbox" name="biologico" value="true" id="biologico" />
+            <fieldset>
+                <legend>Certificazione Biologica</legend>
+                <input type="radio" name="biologico" value="true" id="biologicoPresenti" required  />
+                <label for="biologicoPresenti">Presente</label>
+                <input type="radio" name="biologico" value="false" id="biologicoNonPresenti" required checked />
+                <label for="biologicoNonPresenti">Assente</label>
+            </fieldset>
         </li>
         <li class="vino">
             <fieldset>
-                <legend>Indicazione Geografica</legend>
-                <input type="radio" name="ig" value="presente" id="presente" />
-                <label for="presente">Presente</label>
-                <input type="radio" name="ig" value="Assente" id="Assente" checked />
-                <label for="Assente">Assente</label>
-            </fieldset>
-        </li>
-        <li class="doFull">
-            <fieldset>
-                <legend>Certificazione</legend>
-                <input type="radio" name="certificato" value="igp" id="igp" required />
-                <label for="igp">IGP</label>
-                <input type="radio" name="certificato" value="igt" id="igt" required />
-                <label for="igt">IGT</label>
-                <input type="radio" name="certificato" value="doc" id="doc" required />
-                <label for="doc">DOC</label>
-                <input type="radio" name="certificato" value="docg" id="docg" required />
-                <label for="docg">DOCG</label>
-                <input type="radio" name="certificato" value="dop" id="dop" required />
-                <label for="dop">DOP</label>
-            </fieldset>
-        </li>
-        <li class="noIg">
-            <fieldset>
-                <legend>Classificazione</legend>
-                <input type="radio" name="classificazione" value="generico" id="generico" required />
+                <legend>Classificazione del Vino</legend>
+                <input type="radio" name="classificazione" value="Generico" id="generico" required checked/>
                 <label for="generico">Generico</label>
-                <input type="radio" name="classificazione" value="varietale" id="varietale" required />
+                <input type="radio" name="classificazione" value="Varietale" id="varietale" required />
                 <label for="varietale">Varietale</label>
+                <input type="radio" name="classificazione" value="IGP" id="igp" required />
+                <label for="igp">IGP</label>
+                <input type="radio" name="classificazione" value="IGP" id="igt" required />
+                <label for="igt">IGT</label>
+                <input type="radio" name="classificazione" value="DOC" id="doc" required />
+                <label for="doc">DOC</label>
+                <input type="radio" name="classificazione" value="DOCG" id="docg" required />
+                <label for="docg">DOCG</label>
+                <input type="radio" name="classificazione" value="DOP" id="dop" required />
+                <label for="dop">DOP</label>
             </fieldset>
         </li>
         <li class="varietale">
@@ -159,26 +168,27 @@
             <select name="vitigno" id="vitigno">
                 <option value="">Ancora da selezionare...</option>
                 <option value="new">Aggiungi Nuovo Vitigno</option>
-                <optgroup label="Bacca Chiara"><?php
+                <optgroup label="Bacca Chiara">
+                    <?php
                     foreach ($vitigni as $vitigno) {
                         if($vitigno["coloreBacca"]=="Chiara") {
                    ?>
-                    <option value="<?php echo $vitigno["idVitigno"]; ?>"><?php echo $vitigno["nomeSpecie"]; ?></option> <?php
+                    <option value="<?php echo $vitigno["idVitigno"]; ?>"><?php echo $vitigno["nomeSpecie"]; ?></option>
+                    <?php
                         }
                     }
-                    $indexVitigno++;
                  ?>
                 </optgroup>
-                <optgroup label="Bacca Scura"><?php
+                <optgroup label="Bacca Nera">
+                    <?php
                     foreach ($vitigni as $vitigno) {
                         if($vitigno["coloreBacca"]=="Nera") {
                    ?>
-                    <option value="<?php echo $vitigno["idVitigno"]; ?>"><?php echo $vitigno["nomeSpecie"]; ?></option> <?php
+                    <option value="<?php echo $vitigno["idVitigno"]; ?>"><?php echo $vitigno["nomeSpecie"]; ?></option>
+                    <?php
                         }
                     }
-                    $indexVitigno++;
                  ?>
-
             </optgroup>
             </select>
         </li>
@@ -186,8 +196,8 @@
             <label for="coloreBaccaNuovoVitigno">Colore della Bacca del Vitigno da aggiungere</label>
             <select name="coloreBaccaNuovoVitigno" id="coloreBaccaNuovoVitigno" required>
                 <option value="">Ancora da selezionare...</option>
-                <option value="chiara">Chiara</option>
-                <option value="scura">Scura</option>
+                <option value="Chiara">Chiara</option>
+                <option value="Nera">Nera</option>
             </select>
         </li>
         <li class="newVitigno">
@@ -203,22 +213,15 @@
             <input type="text" name="indicazioneGeografica" id="indicazioneGeografica" value="" required />
         </li>
         <li class="doFull">
-            <label for="vigna">Vigna di produzione (opzionale)</label>
-            <input type="text" name="vigna" id="vigna" value="" />
-        </li>
-        <li class="doFull">
             <label for="menzione">Menzione</label>
             <select class="" name="menzione" id="menzione">
                 <option value="">Ancora da selezionare...</option>
                 <option value="new">Aggiungi nuova menzione</option>
                 <optgroup label="Menzioni già utilizzate">
-                    <option value="1">Passito</option>
-                    <option value="2">Passito Liquoroso</option>
-                    <option value="3">Riserva</option>
-                    <option value="4">Riserva Superiore</option>
-                    <option value="5">Novello</option>
-                    <option value="6">Granselezione</option>
-                    <option value="7">Superiore</option>
+                    <?php
+                    foreach ($menzioni as $menzione) {?>
+                    <option value="<?php echo $menzione["idMenzione"]; ?>"><?php echo $menzione["menzione"]; ?></option>
+                <?php } ?>
                 </optgroup>
             </select>
         </li>
@@ -229,11 +232,11 @@
         <li class="doFull">
             <fieldset>
                 <legend>Specificazione</legend>
-                <input type="radio" name="specificazione" value="nessuna" id="nessuna" checked />
+                <input type="radio" name="specificazione" value="Nessuna" id="nessuna" checked />
                 <label for="nessuna">Nessuna</label>
-                <input type="radio" name="specificazione" value="storica" id="storica"  />
+                <input type="radio" name="specificazione" value="Storica" id="storica"  />
                 <label for="storica">Storica</label>
-                <input type="radio" name="specificazione" value="classica" id="classica"  />
+                <input type="radio" name="specificazione" value="Classica" id="classica"  />
                 <label for="classica">Classica</label>
             </fieldset>
         </li>
