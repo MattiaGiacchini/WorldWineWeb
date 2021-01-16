@@ -9,12 +9,12 @@
                     <legend>Ordine cronologico</legend>
                     <ul>
                         <li>
-                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
-                            <label for="crescente"> Crescente </label>
+                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked>
+                            <label for="decrescente"> Decrescente </label>
                         </li>
                         <li>
-                            <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
-                            <label for="decrescente"> Decrescente </label>
+                            <input type="radio" name="ordine" value="crescente" id="crescente"/>
+                            <label for="crescente"> Crescente </label>
                         </li>
                     </ul>
                 </fieldset>

@@ -78,11 +78,13 @@
         }
 
         public function getWarehouseMovements($idEtichetta, $idContenitore ) {
-            if ($_GET["ordine"] == "decrescente") {
-                $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ? ORDER BY data DESC";
+            if (isset($_GET["ordine"]) && $_GET["ordine"] == "crescente") {
+                $sort = "ASC";
             } else {
-                $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ? ORDER BY data ASC";
+                $sort = "DESC";
             }
+
+            $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ? ORDER BY data " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
             $stmt->execute();
