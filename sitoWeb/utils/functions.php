@@ -20,9 +20,9 @@
     }
 
     function getImgURL($idEtichetta, $idContenitore){
-        if (file_exists(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore ."/")){
+        if (is_dir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore)){
             $path = scandir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore ."/");
-            return $path[2];
+            return $idEtichetta . "_" . $idContenitore ."/" . $path[2];
         } else {
             return "default.png";
         }
