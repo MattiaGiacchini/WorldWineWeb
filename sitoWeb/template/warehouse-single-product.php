@@ -4,7 +4,7 @@
                 <h2><?php echo $templateParams["titoloPagina"] ?></h2>
                 <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
             </div>
-            <form class="filter" action="index.html" method="post">
+            <form class="filter" action="#" method="get">
                 <fieldset>
                     <legend>Ordine cronologico</legend>
                     <ul>
@@ -19,10 +19,9 @@
                     </ul>
                 </fieldset>
 
-                <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+                <input type="submit" name="applyFilters" id="applyFilters" value="applica filtri">
             </form>
         </div>
-
 
         <article class="tile ">
             <img class="tileImg" src="<?php echo UPLOAD_DIR; ?>/idVino/3_1.png" alt="vino">
@@ -46,10 +45,6 @@
                     <li>
                         <label for="amount">Quantità da aggiungere o rimuovere</label>
                         <input type="number" id="amount" name="amount" required step="1" autofocus/>
-                    </li>
-                    <li id="loadDateTime">
-                        <label for="currentdate">Data e ora</label>
-                        <input type="datetime-local" id="currentdate" name="currentdate" />
                     </li>
                     <li>
                         <input type="submit" name="submit" value="Aggiungi">

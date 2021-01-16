@@ -6,7 +6,7 @@ $(document).ready(function(){
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
-    
+
     nav.hide();
     $(".filter").hide();
 
@@ -19,7 +19,6 @@ $(document).ready(function(){
     });
 
     $("#applyFilters").click(function(event){
-        event.preventDefault();
         $(".filter").slideToggle();
     });
 
