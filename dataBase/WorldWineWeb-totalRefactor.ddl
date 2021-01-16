@@ -23,8 +23,8 @@ create table CANTINA (
      idCantina int not null auto_increment,
      nome varchar(50) not null,
      stato char(3) not null,
-     constraint ID_ID primary key (idCantina)),
-     constraint FKCANTINA_ID unique (nome, stato));
+     constraint ID_ID primary key (idCantina),
+     constraint FKCANTINA unique (nome, stato));
 
 create table CARRELLO (
      idContenitore int not null,
