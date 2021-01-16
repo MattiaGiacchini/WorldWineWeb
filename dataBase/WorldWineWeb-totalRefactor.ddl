@@ -64,8 +64,8 @@ create table ETICHETTA (
      vitigno int,
      menzione int,
      idCantina int not null,
-     attivo boolean not null default 1,
-     constraint ID primary key (idEtichetta));
+     constraint ID primary key (idEtichetta),
+     constraint FKETICHETTA unique (nome, annata, idCantina, menzione, specificazione));
 
 create table FATTURA (
      idFattura int not null,
@@ -89,7 +89,8 @@ create table INDIRIZZO (
 create table MENZIONE (
      idMenzione int not null auto_increment,
      menzione char(100) not null,
-     constraint IDMENZIONE primary key (idMenzione));
+     constraint IDMENZIONE primary key (idMenzione),
+     constraint FKMENZIONE unique (menzione));
 
 create table METODO_DI_PAGAMENTO (
      idCliente int not null,
@@ -200,6 +201,7 @@ create table VINO_CONFEZIONATO (
      idEtichetta int not null,
      scorteMazzino int not null,
      mediaRecensioni decimal(4,3) not null,
+     attivo boolean not null default 0,
      constraint IDVINO_CONFEZIONATO primary key (idContenitore, idEtichetta));
 
 create table VITIGNO (
