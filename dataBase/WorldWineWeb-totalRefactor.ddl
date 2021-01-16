@@ -61,7 +61,7 @@ create table ETICHETTA (
      indicazioneGeografica varchar(100),
      specificazione char(20),
      vitigno int,
-     menzione char(50),
+     menzione int,
      idCantina int not null,
      attivo boolean not null default 1,
      constraint ID primary key (idEtichetta));
@@ -86,8 +86,9 @@ create table INDIRIZZO (
      constraint IDINDIRIZZO primary key (idCliente, idIndirizzo));
 
 create table MENZIONE (
-     menzione char(50) not null,
-     constraint IDMENZIONE primary key (menzione));
+     idMenzione int not null auto_increment,
+     menzione char(100) not null,
+     constraint IDMENZIONE primary key (idMenzione));
 
 create table METODO_DI_PAGAMENTO (
      idCliente int not null,
@@ -234,7 +235,7 @@ alter table ETICHETTA add constraint FKESTRAZIONE
 
 alter table ETICHETTA add constraint FKSPECIFICA
      foreign key (menzione)
-     references MENZIONE (menzione);
+     references MENZIONE (idMenzione);
 
 alter table ETICHETTA add constraint FKPRODUZIONE
      foreign key (idCantina)
