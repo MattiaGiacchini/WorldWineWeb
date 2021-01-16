@@ -21,6 +21,16 @@
             return $result;
         }
 
+        // ritorna tutte le mezioni
+        public function getMentions() {
+            $stmt = $this->db->prepare("SELECT * FROM menzione ORDER BY menzione.menzione ASC ");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        // ritorna tutte i vitigni
         public function getVitigni() {
             $stmt = $this->db->prepare("SELECT * FROM vitigno ORDER BY vitigno.coloreBacca, vitigno.nomeSpecie ASC");
             $stmt->execute();
@@ -28,6 +38,7 @@
             return $result;
         }
 
+        // ritorna tutte le cantine
         public function getCantine() {
             $stmt = $this->db->prepare("SELECT idCantina, stato.nome as nomeStato, cantina.nome as nomeCantina FROM cantina, stato WHERE cantina.stato = stato.sigla ORDER BY stato.nome, cantina.nome ASC");
             $stmt->execute();
@@ -83,6 +94,7 @@
             return $this->addNewUser($email, $psw, 'admin', $name, $surname, $cf, $birthday, null, null);
         }
 
+        // funzione privata per aggiungere un nuovo utente
         private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
             $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
                       VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -100,6 +112,26 @@
 
             return $stmt->execute();
         }
+
+        // aggiunge una nuova cantina a database
+        public function addNewVitigno($coloreBacca, $nomeSpecie) {
+            $query = "INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (NULL, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss', $winery, $state);
+
+            return $stmt->execute();
+        }
+
+        // aggiunge una nuova cantina a database
+        public function addNewMention($mention) {
+            $query = "INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s', $mention);
+
+            return $stmt->execute();
+        }
+
+
 
         public function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
