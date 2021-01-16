@@ -46,6 +46,20 @@
             return $result;
         }
 
+        // restituisce l'id di una cantina
+        public function getWineryId($nomeCantina, $idStatoCantina) {
+            $query = "SELECT idCantina FROM cantina WHERE nome = ? AND stato = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss',$nomeCantina, $idStatoCantina);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idCantina"];
+            }
+        }
+
         // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
         public function getUserRole($idUtente) {
             if(isset($idUtente)) {
