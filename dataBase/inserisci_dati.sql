@@ -460,3 +460,13 @@ INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Villa Bonaga
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Casa Sant''Orsola', 'ITA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Terre Forti', 'ITA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Santa Barbara', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Chablis Vititours', 'FRA');
+
+
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Passito');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Passito Liquoroso');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Riserva');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Riserva Superiore');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Novello');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Gran Selezione');
+INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Superiore');
