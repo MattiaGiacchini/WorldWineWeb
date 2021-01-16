@@ -75,7 +75,7 @@ create table ETICHETTA (
      indicazioneGeografica char(50),
      specificazione char(15),
      idVitigno char(20),
-     idMenzione char(50),
+     idMenzione int,
      constraint ID primary key (idEtichetta));
 
 create table FATTURA (
@@ -97,8 +97,9 @@ create table INDIRIZZO (
      constraint IDINDIRIZZO unique (idCliente, idIndirizzo));
 
 create table MENZIONE (
-     menzione char(50) not null,
-     constraint IDMENZIONE primary key (menzione));
+     idMenzione int not null auto_increment,
+     menzione char(100) not null,
+     constraint IDMENZIONE primary key (idMenzione));
 
 create table METODO_DI_PAGAMENTO (
      intestatario char(50) not null,
@@ -237,7 +238,7 @@ alter table ETICHETTA add constraint FKESTRAZIONE
 
 alter table ETICHETTA add constraint FKSPECIFICA
      foreign key (idMenzione)
-     references MENZIONE (menzione);
+     references MENZIONE (idMenzione);
 
 -- Not implemented
 -- alter table FATTURA add constraint IDFATTURA_CHK
