@@ -28,6 +28,13 @@
             return $result;
         }
 
+        public function getCantine() {
+            $stmt = $this->db->prepare("SELECT idCantina, stato.nome as nomeStato, cantina.nome as nomeCantina FROM cantina, stato WHERE cantina.stato = stato.sigla ORDER BY stato.nome, cantina.nome ASC");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
         // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
         public function getUserRole($idUtente) {
             if(isset($idUtente)) {
@@ -81,6 +88,15 @@
                       VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('sssssssis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
+
+            return $stmt->execute();
+        }
+
+        // aggiunge una nuova cantina a database
+        public function addNewWinery($winery, $state) {
+            $query = "INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss', $winery, $state);
 
             return $stmt->execute();
         }
