@@ -63,7 +63,7 @@
             return $stmt->insert_id;
         }
 */
-        public function getCurrentDateTime() {
+        private function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
         }
 
@@ -78,13 +78,13 @@
         }
 
         public function getWarehouseMovements($idEtichetta, $idContenitore ) {
-            if (isset($_GET["ordine"]) && $_GET["ordine"] == "crescente") {
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "crescente") {
                 $sort = "ASC";
             } else {
                 $sort = "DESC";
             }
 
-            $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente WHERE modifica_scorte.idCollaboratore = utente.idUtente AND modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ? ORDER BY data " . $sort;
+            $query = "SELECT quantita, data, nome, cognome FROM modifica_scorte JOIN utente ON (modifica_scorte.idCollaboratore = utente.idUtente) WHERE modifica_scorte.idContenitore = ? AND modifica_scorte.idEtichetta = ? ORDER BY data " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
             $stmt->execute();
@@ -109,13 +109,22 @@
 
         public function getProductDetails($idEtichetta, $idContenitore)
         {
-            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina WHERE v.idContenitore = c.idContenitore AND v.idEtichetta = e.idEtichetta AND v.idContenitore = p.idContenitore AND v.idEtichetta = p.idEtichetta AND e.idCantina = cantina.idCantina AND v.idContenitore = ? AND v.idEtichetta = ? ORDER BY p.data DESC LIMIT 1";
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE v.idContenitore = ? AND v.idEtichetta = ? ORDER BY p.data DESC LIMIT 1";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
             $stmt->execute();
             $result = $stmt->get_result();
 
             return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function getWarehouseProducts()
+        {
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE p.data = (SELECT MAX(data) FROM prezzo WHERE prezzo.idContenitore = v.idContenitore AND prezzo.idEtichetta = v.idEtichetta) ORDER BY e.nome ASC";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
         }
 
         /*NOT ACTUALY USED TODO*/

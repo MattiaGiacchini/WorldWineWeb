@@ -1,4 +1,9 @@
-        <?php $product = $templateParams["product"]; ?>
+        <?php
+            $product = $templateParams["product"];
+            $idEtichetta = $_GET["etichetta"];
+            $idContenitore = $_GET["contenitore"];
+            $imgURL = getImgURL($idEtichetta, $idContenitore);
+        ?>
         <div class="utilityBar">
             <div class="titleBar">
                 <h2><?php echo $templateParams["titoloPagina"] ?></h2>
@@ -16,6 +21,7 @@
                             <input type="radio" name="ordine" value="crescente" id="crescente"/>
                             <label for="crescente"> Crescente </label>
                         </li>
+                    <?php  $_GET["etichetta"] = $idEtichetta; $_GET["contenitore"] = $idContenitore; ?>
                     </ul>
                 </fieldset>
 
@@ -24,7 +30,7 @@
         </div>
 
         <article class="tile ">
-            <img class="tileImg" src="<?php echo UPLOAD_DIR; ?>/idVino/3_1.png" alt="vino">
+            <img class="tileImg" src="<?php echo WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore . "/" . $imgURL ; ?>" alt="vino">
             <div class="tileContent">
                 <div class="tileBody">
                     <h3><?php echo $product[0]["NomeVino"] ?></h3>
@@ -75,13 +81,5 @@
                 <?php endforeach; ?>
 
             <?php } endif; ?>
-            <?php $templateParams ?>
-
-
-
-
-
-
-
 
         </section>

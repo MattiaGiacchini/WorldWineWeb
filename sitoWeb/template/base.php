@@ -66,7 +66,7 @@
 
                     case 'collaboratore':
                         echo '<li><a href="orders.php">Gestione Ordini</a></li>';
-                        echo '<li><a href="warehouse-management.php">Magazzino</a></li>';
+                        echo '<li><a href="warehouse.php">Magazzino</a></li>';
                         break;
 
                     default:

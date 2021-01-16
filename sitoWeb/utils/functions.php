@@ -19,4 +19,9 @@
         return $dataBase->getUserRole(getLoggedUserId());
     }
 
+    function getImgURL($idEtichetta, $idContenitore){
+        $path = scandir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore ."/");
+        return $path[2];
+    }
+
 ?>
