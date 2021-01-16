@@ -23,7 +23,8 @@ create table CANTINA (
      idCantina int not null auto_increment,
      nome varchar(50) not null,
      stato char(3) not null,
-     constraint ID_ID primary key (idCantina));
+     constraint ID_ID primary key (idCantina)),
+     constraint FKCANTINA_ID unique (nome, stato));
 
 create table CARRELLO (
      idContenitore int not null,
@@ -54,8 +55,8 @@ create table ETICHETTA (
      solfiti boolean not null,
      bio boolean not null,
      categoria enum('Vino','Spumante') not null,
-     classificazione enum('Generico', 'Varietale', 'IGP','IGT','DOC','DOCG','DOP') not null,
      tenoreZuccherino enum('Secco','Abboccato','Amabile','Dolce','Brut Nature','Extra Brut','Brut','Extra Dry','Dry','Demi Sec') not null,
+     classificazione enum('Generico','Varietale','IGP','IGT','DOC','DOCG','DOP'),
      gas enum('Fermo','Frizzante'),
      annata year(4),
      indicazioneGeografica varchar(100),
