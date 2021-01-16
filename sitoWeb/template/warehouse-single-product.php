@@ -21,16 +21,18 @@
                             <input type="radio" name="ordine" value="crescente" id="crescente"/>
                             <label for="crescente"> Crescente </label>
                         </li>
-                    <?php  $_GET["etichetta"] = $idEtichetta; $_GET["contenitore"] = $idContenitore; ?>
                     </ul>
                 </fieldset>
+
+                <input type="hidden" name="etichetta" value="<?php echo $idEtichetta ?>">
+                <input type="hidden" name="contenitore" value="<?php echo $idContenitore ?>">
 
                 <input type="submit" name="applyFilters" id="applyFilters" value="applica filtri">
             </form>
         </div>
 
         <article class="tile ">
-            <img class="tileImg" src="<?php echo WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore . "/" . $imgURL ; ?>" alt="vino">
+            <img class="tileImg" src="<?php echo WINE_PHOTO_DIR . $imgURL ; ?>" alt="vino">
             <div class="tileContent">
                 <div class="tileBody">
                     <h3><?php echo $product[0]["NomeVino"] ?></h3>

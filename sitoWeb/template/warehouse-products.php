@@ -49,7 +49,7 @@
 
             <?php
                 $idEtichetta = 3;
-                $idContenitore = 1;
+                $idContenitore = 2;
                 $imgURL = getImgURL($idEtichetta, $idContenitore);
             ?>
             <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $idEtichetta . "&contenitore=" . $idContenitore; ?>>
