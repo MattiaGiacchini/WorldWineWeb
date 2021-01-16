@@ -188,6 +188,7 @@ create table UTENTE (
      cf char(16),
      partitaIva bigint(11),
      ragioneSociale char(100),
+     attivo boolean not null default 1,
      constraint IDCLIENTE primary key (idUtente),
      constraint IDCLIENTE_1 unique (email),
      constraint IDCLIENTE_2 unique (cf),

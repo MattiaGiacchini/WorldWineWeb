@@ -138,5 +138,14 @@
             return $result[0]["scorteMagazzino"];
         }
 
+        public function getCollaborators() {
+            $query = "SELECT cognome, nome, idUtente FROM utente WHERE ruolo = 'admin' OR ruolo = 'collaborator' ORDER BY cognome, nome";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
     }
 ?>

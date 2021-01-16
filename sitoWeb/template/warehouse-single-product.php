@@ -2,7 +2,7 @@
             $product = $templateParams["product"];
             $idEtichetta = $_GET["etichetta"];
             $idContenitore = $_GET["contenitore"];
-            $imgURL = getImgURL($idEtichetta, $idContenitore);
+            $imgURL = getWineImgURL($idEtichetta, $idContenitore);
         ?>
         <div class="utilityBar">
             <div class="titleBar">

@@ -1,6 +1,6 @@
 <div class="utilityBar">
     <div class="titleBar">
-        <h2>Magazzino</h2>
+        <h2><?php echo $templateParams["titoloPagina"] ?></h2>
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
     <form class="filter" action="index.html" method="post">
@@ -50,7 +50,7 @@
             <?php
                 $idEtichetta = $products["idEtichetta"];
                 $idContenitore = $products["idContenitore"];
-                $imgURL = getImgURL($idEtichetta, $idContenitore);
+                $imgURL = getWineImgURL($idEtichetta, $idContenitore);
             ?>
             <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $idEtichetta . "&contenitore=" . $idContenitore; ?>>
                 <article class="tile ">
