@@ -109,7 +109,7 @@
 
         public function getProductDetails($idEtichetta, $idContenitore)
         {
-            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE v.idContenitore = ? AND v.idEtichetta = ? ORDER BY p.data DESC LIMIT 1";
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE v.idContenitore = ? AND v.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
             $stmt->execute();
@@ -121,9 +121,9 @@
         public function getWarehouseProducts()
         {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
-                $sort = "ORDER BY e.nome DESC, cantina.nome ASC";
+                $sort = "ORDER BY attivo DESC, e.nome DESC, cantina.nome ASC";
             } else {
-                $sort = "ORDER BY e.nome, cantina.nome ASC";
+                $sort = "ORDER BY attivo DESC, e.nome, cantina.nome ASC";
             }
 
             $status = [];
@@ -138,10 +138,9 @@
             $statusWhereCondition = "";
             if (!empty($status)) {
                 $statusWhereCondition = "AND v.attivo IN (" . implode(", ", $status) . ")";
-                echo $statusWhereCondition;
             }
 
-            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore, v.attivo FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE p.data = (SELECT MAX(data) FROM prezzo WHERE prezzo.idContenitore = v.idContenitore AND prezzo.idEtichetta = v.idEtichetta) " . $statusWhereCondition . " " . $sort;
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore, v.attivo FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE p.idContenitore = v.idContenitore AND p.idEtichetta = v.idEtichetta " . $statusWhereCondition . " " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -161,9 +160,9 @@
 
         public function getCollaborators() {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
-                $sort = "ORDER BY cognome DESC, nome ASC";
+                $sort = "ORDER BY attivo DESC, cognome DESC, nome ASC";
             } else {
-                $sort = "ORDER BY cognome, nome ASC";
+                $sort = "ORDER BY attivo DESC, cognome, nome ASC";
             }
 
             $status = [];
@@ -181,6 +180,51 @@
             }
 
             $query = "SELECT cognome, nome, idUtente, attivo FROM utente WHERE (ruolo = 'admin' OR ruolo = 'collaborator') " . $statusWhereCondition . " " . $sort;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getAllOrders(){
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
+                $sort = "ORDER BY data DESC";
+            } else {
+                $sort = "ORDER BY data ASC";
+            }
+
+            $status = [];
+            if (isset($_GET["accettazione"])) {
+                array_push($status, "accettazione");
+            }
+
+            if (isset($_GET["approvato"])) {
+                array_push($status, "approvato");
+            }
+
+            if (isset($_GET["elaborazione"])) {
+                array_push($status, "elaborazione");
+            }
+
+            if (isset($_GET["spedito"])) {
+                array_push($status, "spedito");
+            }
+
+            if (isset($_GET["consegnato"])) {
+                array_push($status, "consegnato");
+            }
+
+            if (isset($_GET["annullato"])) {
+                array_push($status, "annullato");
+            }
+
+            $statusWhereCondition = "";
+            if (!empty($status)) {
+                $statusWhereCondition = "WHERE statoDiAvanzamento IN (" . implode(", ", $status) . ")";
+            }
+
+            $query = "SELECT idOrdine, data, statoDiAvanzamento, totaleOrdine FROM ordine o JOIN totale_ordine to ON o.idOrdine = to.idOrdine";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

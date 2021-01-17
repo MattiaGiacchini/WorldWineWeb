@@ -1,6 +1,6 @@
 <div class="utilityBar">
     <div class="titleBar">
-        <h2><?php echo $templateParams["titoloPagina"] ?></h2>
+        <h2><?php echo $templateParams["titoloPagina"]; ?></h2>
 
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
