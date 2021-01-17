@@ -12,6 +12,10 @@
             $this->db->query("SET NAMES 'utf8'");
         }
 
+        public function getLastInsertIntoId() {
+            return $this->db->insert_id;
+        }
+
         // ritorna tutti gli stati inseriti a database
         public function getStates(){
             $stmt = $this->db->prepare("SELECT * FROM stato ORDER BY nome ASC ");
@@ -173,10 +177,10 @@
             return $stmt->execute();
         }
 
-        public function addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, $gas, $idCantina, $solfiti, $biologico, $classificazione, $idVitigno, $annata, $ig, $idMenzione) {
+        public function addNewWine($categoria, $nome, $description, $color, $alcol, $zucchero, $gas, $idCantina, $solfiti, $bio, $classificazione, $idVitigno, $annata, $ig, $idMenzione, $specificazione) {
             $query = "INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssdiissssissiii', $mention);
+            $stmt->bind_param('sssdiissssissiii', $nome, $description, $color, $alcol, $solfiti, $bio, $categoria, $zucchero, $classificazione, $gas, $annata, $ig, $specificazione, $idVitigno, $idMenzione, $idCantina);
 
             return $stmt->execute();
         }
@@ -184,7 +188,7 @@
         public function addNewSpumante($categoria, $nome, $description, $colore, $alcol, $zucchero, $idCantina, $solfiti, $biologico) {
             return $this->addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, null, $idCantina, $solfiti, $biologico, null, null, null, null, null, null);
         }
-        
+
         public function getCurrentDateTime() {
             return date("Y-m-d H:i:s");
         }
