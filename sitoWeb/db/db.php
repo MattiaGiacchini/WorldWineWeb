@@ -25,6 +25,19 @@
             return $result;
         }
 
+        public function getLabelFromId($idLabel) {
+            $query = "SELECT e.idEtichetta, e.nome as nomeEtichetta, c.nome as nomeCantina, c.stato  FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i',$idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
         // ritorna tutte le mezioni
         public function getMentions() {
             $stmt = $this->db->prepare("SELECT * FROM menzione ORDER BY menzione.menzione ASC ");
