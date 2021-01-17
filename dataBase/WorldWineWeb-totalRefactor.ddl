@@ -56,6 +56,8 @@ create table ETICHETTA (
      bio boolean not null,
      categoria enum('Vino','Spumante') not null,
      tenoreZuccherino enum('Secco','Abboccato','Amabile','Dolce','Brut Nature','Extra Brut','Brut','Extra Dry','Dry','Demi Sec') not null,
+     temperaturaMinima decimal(4,2),
+     temperaturaMassima decimal(4,2),
      classificazione enum('Generico','Varietale','IGP','IGT','DOC','DOCG','DOP'),
      gas enum('Fermo','Frizzante'),
      annata year(4),
