@@ -23,11 +23,11 @@
             <legend>Stato collaboratore</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="stato" value="active" id="active" checked />
+                    <input type="checkbox" name="attivo" value="true" id="active" checked />
                     <label for="active"> Attivi </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="stato" value="deactivated" id="deactivated" checked />
+                    <input type="checkbox" name="disattivato" value="true" id="deactivated" checked />
                     <label for="deactivated"> Disattivati </label>
                 </li>
             </ul>
@@ -53,7 +53,7 @@
             <?php $imgURL = getUserImgURL( $collaboratore["idUtente"]); ?>
 
             <a class="tileLink" href=<?php echo "user.php?utente=" .  $collaboratore["idUtente"]; ?>>
-                <article class="tile collaboratore">
+                <article class="tile collaboratore <?php if ($collaboratore["attivo"] == 0) echo "deactivated"; ?>">
                     <img class="tileImg" src="<?php echo $imgURL ; ?>" alt="<?php echo $collaboratore["cognome"] . " " . $collaboratore["nome"] ?>" />
                     <div class="tileContent">
                         <div class="tileBody">

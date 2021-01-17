@@ -120,7 +120,28 @@
 
         public function getWarehouseProducts()
         {
-            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE p.data = (SELECT MAX(data) FROM prezzo WHERE prezzo.idContenitore = v.idContenitore AND prezzo.idEtichetta = v.idEtichetta) ORDER BY e.nome ASC";
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
+                $sort = "ORDER BY e.nome DESC, cantina.nome ASC";
+            } else {
+                $sort = "ORDER BY e.nome, cantina.nome ASC";
+            }
+
+            $status = [];
+            if (isset($_GET["attivo"])) {
+                array_push($status, 1);
+            }
+
+            if (isset($_GET["disattivato"])) {
+                array_push($status, 0);
+            }
+
+            $statusWhereCondition = "";
+            if (!empty($status)) {
+                $statusWhereCondition = "AND v.attivo IN (" . implode(", ", $status) . ")";
+                echo $statusWhereCondition;
+            }
+
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore, v.attivo FROM contenitore AS c JOIN etichetta AS e JOIN prezzo AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE p.data = (SELECT MAX(data) FROM prezzo WHERE prezzo.idContenitore = v.idContenitore AND prezzo.idEtichetta = v.idEtichetta) " . $statusWhereCondition . " " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -139,7 +160,27 @@
         }
 
         public function getCollaborators() {
-            $query = "SELECT cognome, nome, idUtente FROM utente WHERE ruolo = 'admin' OR ruolo = 'collaborator' ORDER BY cognome, nome";
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
+                $sort = "ORDER BY cognome DESC, nome ASC";
+            } else {
+                $sort = "ORDER BY cognome, nome ASC";
+            }
+
+            $status = [];
+            if (isset($_GET["attivo"])) {
+                array_push($status, 1);
+            }
+
+            if (isset($_GET["disattivato"])) {
+                array_push($status, 0);
+            }
+
+            $statusWhereCondition = "";
+            if (!empty($status)) {
+                $statusWhereCondition = "AND attivo IN (" . implode(", ", $status) . ")";
+            }
+
+            $query = "SELECT cognome, nome, idUtente, attivo FROM utente WHERE (ruolo = 'admin' OR ruolo = 'collaborator') " . $statusWhereCondition . " " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
