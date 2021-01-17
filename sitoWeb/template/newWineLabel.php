@@ -12,6 +12,16 @@
 
 <form name="newWineLabel" class="newWineLabel" action="insertNewWineLabel.php" method="POST">
     <ul>
+     <?php
+     if (isset($_SESSION["msgError"])) {
+         ?>
+         <li>
+             <p><?php echo $_SESSION["msgError"];  ?></p>
+         </li>
+         <?php
+         unset($_SESSION["msgError"]);
+     }
+     ?>
         <li class="id">
             <label for="id">ID Etichetta</label>
             <input type="text" id="id" name="id" value="" readonly />
@@ -48,8 +58,18 @@
         </li>
         <li>
             <label for="alcol">Titolo alcolico</label>
-            <input type="number" name="alcol" value="0" id="alcol"
+            <input type="number" name="alcol" id="alcol"
                 min="0.0" max="100.0" step="0.1" required />
+        </li>
+        <li>
+            <label for="tMax">Temperatura Massima cui servire</label>
+            <input type="number" name="tMax" id="tMax"
+                min="0.0" max="100.0" step="0.1" />
+        </li>
+        <li>
+            <label for="tMin">Temperatura Minima cui servire</label>
+            <input type="number" name="tMin" id="tMin"
+                min="0.0" max="100.0" step="0.1" />
         </li>
         <li>
             <label for="zucchero">Tenore Zuccherino</label>
@@ -71,15 +91,6 @@
                     <option value="Dolce">Dolce</option>
                 </optgroup>
             </select>
-        </li>
-        <li class="vino">
-            <fieldset>
-                <legend>Fermo o Frizzante</legend>
-                <input type="radio" name="gas" value="Fermo" id="fermo" />
-                <label for="fermo">Fermo</label>
-                <input type="radio" name="gas" value="Frizzante" id="frizzante" checked />
-                <label for="frizzante">Frizzante</label>
-            </fieldset>
         </li>
         <li>
             <label for="cantina">Cantina</label>
@@ -146,6 +157,15 @@
         </li>
         <li class="vino">
             <fieldset>
+                <legend>Fermo o Frizzante</legend>
+                <input type="radio" name="gas" value="Fermo" id="fermo" />
+                <label for="fermo">Fermo</label>
+                <input type="radio" name="gas" value="Frizzante" id="frizzante" checked />
+                <label for="frizzante">Frizzante</label>
+            </fieldset>
+        </li>
+        <li class="vino">
+            <fieldset>
                 <legend>Classificazione del Vino</legend>
                 <input type="radio" name="classificazione" value="Generico" id="generico" required checked/>
                 <label for="generico">Generico</label>
@@ -163,7 +183,7 @@
                 <label for="dop">DOP</label>
             </fieldset>
         </li>
-        <li class="varietale">
+        <li class="vino vitigno">
             <label for="vitigno">Vitigno</label>
             <select name="vitigno" id="vitigno">
                 <option value="">Ancora da selezionare...</option>
@@ -192,27 +212,27 @@
             </optgroup>
             </select>
         </li>
-        <li class="newVitigno">
-            <label for="coloreBaccaNuovoVitigno">Colore della Bacca del Vitigno da aggiungere</label>
+        <li class="vino vitigno new">
+            <label for="coloreBaccaNuovoVitigno">Colore Bacca Nuovo Vitigno</label>
             <select name="coloreBaccaNuovoVitigno" id="coloreBaccaNuovoVitigno" required>
                 <option value="">Ancora da selezionare...</option>
                 <option value="Chiara">Chiara</option>
                 <option value="Nera">Nera</option>
             </select>
         </li>
-        <li class="newVitigno">
-            <label for="nomeNuovoVitigno">Nome della Specie del Vitigno da aggiungere</label>
+        <li class="vino vitigno new">
+            <label for="nomeNuovoVitigno">Nome Specie Nuovo Vitigno</label>
             <input type="text" name="nomeNuovoVitigno" value="" id="nomeNuovoVitigno" required/>
         </li>
-        <li class="varietale">
+        <li class="vino annata">
             <label for="anno">Annata</label>
             <input type="number" name="anno" id="anno" step="1" value="" min="1900" max="2099" />
         </li>
-        <li class="doFull">
+        <li class="vino indicazioneGeografica">
             <label for="indicazioneGeografica">Indicazione Geografica</label>
             <input type="text" name="indicazioneGeografica" id="indicazioneGeografica" value="" required />
         </li>
-        <li class="doFull">
+        <li class="vino menzione">
             <label for="menzione">Menzione</label>
             <select class="" name="menzione" id="menzione">
                 <option value="">Ancora da selezionare...</option>
@@ -225,11 +245,11 @@
                 </optgroup>
             </select>
         </li>
-        <li class="newMenzione">
+        <li class="vino menzione new">
             <label for="newMenzione">Nuova Menzione</label>
             <input type="text" name="newMenzione" id="newMenzione" value="" required/>
         </li>
-        <li class="doFull">
+        <li class="vino specificazione">
             <fieldset>
                 <legend>Specificazione</legend>
                 <input type="radio" name="specificazione" value="Nessuna" id="nessuna" checked />

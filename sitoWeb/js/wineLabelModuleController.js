@@ -4,9 +4,14 @@ function getOutLi(elements) {
     elements.attr("disabled", true);
     elements.find("*").attr("disabled", true);
 }
-function getInLi(elements) {
+function getInLi(elements, required) {
     elements.removeAttr("disabled");
     elements.find("*").removeAttr("disabled");
+    if(required) {
+        elements.find("*").attr("required", true);
+    } else {
+        elements.find("*").removeAttr("required");
+    }
     elements.slideDown();
 }
 
@@ -15,32 +20,64 @@ function getOutLiInstant(elements) {
     elements.attr("disabled", true);
     elements.find("*").attr("disabled", true);
 }
+
 function getInLiInstant(elements) {
     elements.removeAttr("disabled");
     elements.find("*").removeAttr("disabled");
     elements.show();
 }
 
-$(document).ready(function(){
-    const idBox       = $("form.newWineLabel .id");
-    const wineElement = $("form.newWineLabel .vino");
-    const newCantina  = $("form.newWineLabel .newCantina");
-    const newVitigno  = $("form.newWineLabel .newVitigno");
-    const spumElement = $("form.newWineLabel .spumante");
-    const doFull      = $("form.newWineLabel .doFull");
-    const varietale   = $("form.newWineLabel .varietale");
-    const noIg        = $("form.newWineLabel .noIg");
-    const newMenzione    = $("form.newWineLabel .newMenzione")
+function setRequiredIntoLi(elements, yes) {
+     elements.find("input select").attr("required", yes);
+}
 
-    let lastCatSelected;
+function checkVitigno(elements) {
+    if(document.forms["newWineLabel"]["vitigno"].value == "new") {
+        getInLi(elements, true);
+    } else {
+        getOutLi(elements);
+    }
+}
+
+function checkMenzione(elements) {
+    if(document.forms["newWineLabel"]["menzione"].value == "new") {
+        getInLi(elements, true);
+    } else {
+        getOutLi(elements);
+    }
+}
+
+$(document).ready(function(){
+    const idBox             = $("form.newWineLabel .id");
+    const newCantina        = $("form.newWineLabel .newCantina");
+    const allWineElement    = $("form.newWineLabel .vino");
+    const spumElement       = $("form.newWineLabel .spumante");
+    const vitigno           = allWineElement.filter(".vitigno").not(".new");
+    const newVitigno        = allWineElement.filter(".vitigno.new");
+    const annata            = allWineElement.filter(".annata");
+    const indiGeogr         = allWineElement.filter(".indicazioneGeografica");
+    const menzione          = allWineElement.filter(".menzione").not(".new");
+    const newMenzione       = allWineElement.filter(".menzione.new");
+    const specificazione    = allWineElement.filter(".specificazione")
+    const wineElement       = allWineElement.not(vitigno)
+                                            .not(newVitigno)
+                                            .not(annata)
+                                            .not(indiGeogr)
+                                            .not(menzione)
+                                            .not(newMenzione)
+                                            .not(specificazione);
+
+    let lastCategorySelected;
+    let actualCategorySelected;
+    let actualClassificat;
+    let wine;
 
     function changeForm() {
-        let actualCatSelected = document.forms["newWineLabel"]["categoria"].value;
-        let actualIgSelection = document.forms["newWineLabel"]["ig"].value;
-        let actualClassificat = document.forms["newWineLabel"]["classificazione"].value;
+        actualCategorySelected = document.forms["newWineLabel"]["categoria"].value;
+        actualClassificat = document.forms["newWineLabel"]["classificazione"].value;
 
         // si tratta di un vino?
-        let wine = actualCatSelected == "vino";
+        wine = actualCategorySelected == "Vino";
 
         // verifica se la cantina è da inserire nuova
         if(document.forms["newWineLabel"]["cantina"].value == "new"){
@@ -50,68 +87,56 @@ $(document).ready(function(){
         }
 
         // verifica se si tratta di un vino o di uno spumante
-        if(lastCatSelected != actualCatSelected) {
-            lastCatSelected = actualCatSelected;
-            if(actualCatSelected == "vino"){
-                getInLi(wineElement);
-                getOutLi(spumElement);
+        if(lastCategorySelected != actualCategorySelected) {
+            lastCategorySelected = actualCategorySelected;
+            if(wine){
+                getInLiInstant(wineElement);
+                getOutLiInstant(spumElement);
             } else {
-                getInLi(spumElement);
-                getOutLi(wineElement);
+                getInLiInstant(spumElement);
+                getOutLiInstant(allWineElement);
             }
             document.forms["newWineLabel"]["zucchero"].value = "";
         }
 
         if(wine) {
-            // verifica se si tratta di un vino con indicazioneGeografica
-            if(actualIgSelection == "presente") {
-                getInLi(doFull);
-                getOutLi(noIg);
-            } else {
-                getInLi(noIg);
-                getOutLi(doFull);
-            }
-
-            // se non possiede indicazioneGeografica
-            if(actualIgSelection == "presente" || actualClassificat == "varietale") {
-                getInLi(varietale);
-                if(actualIgSelection == "presente") {
-                    varietale.find("*").attr("required", true);
-                } else {
-                    varietale.find("*").removeAttr("required");   
-                }
-            } else {
-                getOutLi(varietale);
-            }
-
-            // verifica se è da inserire un nuovo vino
-            if(document.forms["newWineLabel"]["vitigno"].value == "new"
-               && (actualIgSelection == "presente"
-                   || actualClassificat == "varietale")){
-                getInLi(newVitigno);
-            } else {
+            if(actualClassificat == "Generico") {
+                getOutLi(vitigno);
                 getOutLi(newVitigno);
-            }
-
-
-            // verifica se è da inserire un nuovo vino
-            if(document.forms["newWineLabel"]["menzione"].value == "new"
-                && actualIgSelection == "presente") {
-                getInLi(newMenzione);
-            } else {
+                getOutLi(annata);
+                getOutLi(indiGeogr);
+                getOutLi(menzione);
                 getOutLi(newMenzione);
+                getOutLi(specificazione);
+            } else if (actualClassificat == "Varietale") {
+                getInLi(vitigno, false);
+                checkVitigno(newVitigno);
+                getInLi(annata, false);
+                getOutLi(indiGeogr);
+                getOutLi(menzione);
+                getOutLi(newMenzione);
+                getOutLi(specificazione);
+            } else if( actualClassificat == "IGT" || actualClassificat == "IGP") {
+                getInLi(vitigno, false);
+                checkVitigno(newVitigno);
+                getInLi(annata, false);
+                getInLi(indiGeogr, true);
+                getOutLi(menzione);
+                getOutLi(newMenzione);
+                getOutLi(specificazione);
+            } else if( actualClassificat == "DOP" || actualClassificat == "DOC" || actualClassificat == "DOCG") {
+                getInLi(vitigno, false);
+                checkVitigno(newVitigno);
+                getInLi(annata, true);
+                getInLi(indiGeogr, false);
+                getInLi(menzione, false);
+                checkMenzione(newMenzione);
+                getInLi(specificazione, true);
             }
         } else {
-            getOutLi(noIg);
-            getOutLi(doFull);
-            getOutLi(varietale);
-            getOutLi(newVitigno);
-            getOutLi(newMenzione);
+            getOutLi(allWineElement);
         }
     }
-
-    // VARIABILE DI TEST
-    // document.forms["newWineLabel"]["id"].value = "c";
 
     // Verifica se è presente o meno l'identificativo dell'Etichetta
     if(document.forms["newWineLabel"]["id"].value == "") {
@@ -127,11 +152,6 @@ $(document).ready(function(){
         *   Aggiungi o meno nuova cantina
         */
         document.getElementById("cantina").addEventListener("change", changeForm);
-
-        /**
-        *   Indicazione geografica presente o meno
-        */
-        $("form.newWineLabel input[name = ig]").on("change", changeForm);
 
         /**
         *   Vino Generico oppure varietale
