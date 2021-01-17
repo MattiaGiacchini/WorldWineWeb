@@ -80,7 +80,7 @@
 
         // restituisce l'id di una cantina
         public function getMentionId($menzione) {
-            $query = "SELECT idMenzione FROM menzione WHERE nome = ?";
+            $query = "SELECT idMenzione FROM menzione WHERE menzione = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('s',$menzione);
             $stmt->execute();
@@ -163,7 +163,7 @@
         public function addNewVitigno($coloreBacca, $nomeSpecie) {
             $query = "INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (NULL, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ss', $winery, $state);
+            $stmt->bind_param('ss', $coloreBacca, $nomeSpecie);
 
             return $stmt->execute();
         }
@@ -177,16 +177,26 @@
             return $stmt->execute();
         }
 
-        public function addNewWine($categoria, $nome, $description, $color, $alcol, $zucchero, $gas, $idCantina, $solfiti, $bio, $classificazione, $idVitigno, $annata, $ig, $idMenzione, $specificazione) {
-            $query = "INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        public function addNewWine($categoria, $nome, $description, $color, $alcol, $zucchero, $gas, $idCantina, $solfiti, $bio, $tMin, $tMax, $classificazione, $idVitigno, $annata, $ig, $idMenzione, $specificazione) {
+            if($solfiti === "true") {
+                $solfiti = 1;
+            } else {
+                $solfiti = 0;
+            }
+            if($bio === "true") {
+                $bio = 1;
+            } else {
+                $bio = 0;
+            }
+            $query = "INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `temperaturaMinima`, `temperaturaMassima`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina`) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssdiissssissiii', $nome, $description, $color, $alcol, $solfiti, $bio, $categoria, $zucchero, $classificazione, $gas, $annata, $ig, $specificazione, $idVitigno, $idMenzione, $idCantina);
+            $stmt->bind_param('sssdiissddssissiii', $nome, $description, $color, $alcol, $solfiti, $bio, $categoria, $zucchero, $tMin, $tMax, $classificazione, $gas, $annata, $ig, $specificazione, $idVitigno, $idMenzione, $idCantina);
 
             return $stmt->execute();
         }
 
-        public function addNewSpumante($categoria, $nome, $description, $colore, $alcol, $zucchero, $idCantina, $solfiti, $biologico) {
-            return $this->addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, null, $idCantina, $solfiti, $biologico, null, null, null, null, null, null);
+        public function addNewSpumante($categoria, $nome, $description, $colore, $alcol, $zucchero, $idCantina, $solfiti, $biologico, $tMin, $tMax) {
+            return $this->addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, null, $idCantina, $solfiti, $biologico, $tMin, $tMax, null, null, null, null, null, null);
         }
 
         public function getCurrentDateTime() {
