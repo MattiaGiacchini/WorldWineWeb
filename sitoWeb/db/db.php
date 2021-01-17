@@ -188,10 +188,31 @@
         }
 
         public function getAllOrders(){
+            $query = "SELECT o.idOrdine, o.data, o.statoDiAvanzamento, tot.totaleOrdine FROM ordine o JOIN totale_ordine tot ON (o.idOrdine = tot.idOrdine) WHERE 1" . $this->getOrderFilters();
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getClientOrders($userId){
+            $query = "SELECT o.idOrdine, o.data, o.statoDiAvanzamento, tot.totaleOrdine FROM ordine o JOIN totale_ordine tot ON o.idOrdine = tot.idOrdine WHERE o.idCliente = ? " . $this->getOrderFilters();
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        private function getOrderFilters(){
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
-                $sort = "ORDER BY data DESC";
+                $sort = "ORDER BY o.data DESC";
             } else {
-                $sort = "ORDER BY data ASC";
+                $sort = "ORDER BY o.data ASC";
             }
 
             $status = [];
@@ -221,15 +242,12 @@
 
             $statusWhereCondition = "";
             if (!empty($status)) {
-                $statusWhereCondition = "WHERE statoDiAvanzamento IN (" . implode(", ", $status) . ")";
+                array_walk($status, function(&$status) {$status = "'$status'";});
+                $statusWhereCondition = " AND statoDiAvanzamento IN (" . implode(', ', $status) . ")";
             }
 
-            $query = "SELECT idOrdine, data, statoDiAvanzamento, totaleOrdine FROM ordine o JOIN totale_ordine to ON o.idOrdine = to.idOrdine";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $statusWhereCondition . " " . $sort;
 
-            return $result;
         }
 
     }

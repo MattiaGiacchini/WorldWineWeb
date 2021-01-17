@@ -25,23 +25,23 @@
                     <label for="waiting"> Da accettare </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="approvato" value="true" id="approved" />
+                    <input type="checkbox" name="approvato" value="true" id="approved" checked/>
                     <label for="approved"> Approvati </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="elaborazione" value="true" id="processing" />
+                    <input type="checkbox" name="elaborazione" value="true" id="processing" checked />
                     <label for="processing"> In elaborazione </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="spedito" value="true" id="shipped" />
+                    <input type="checkbox" name="spedito" value="true" id="shipped" checked/>
                     <label for="shipped"> Spediti </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="consegnato" value="true" id="delivered" />
+                    <input type="checkbox" name="consegnato" value="true" id="delivered" checked/>
                     <label for="delivered"> Consegnati </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="annullato" value="true" id="rejected" />
+                    <input type="checkbox" name="annullato" value="true" id="rejected" checked/>
                     <label for="rejected"> Rifiutati </label>
                 </li>
             </ul>
@@ -56,18 +56,20 @@
 
     <?php if (count($templateParams["orders"]) == 0): ?>
         <article>
-            <p>Nessun collaboratore trovato</p>
+            <p>Nessun ordine trovato</p>
         </article>
     <?php else: {
         foreach ($templateParams["orders"] as $orders): ?>
 
-            <a class="tileLink" href=<?php echo "user.php?utente=" .  $collaboratore["idUtente"]; ?>>
-                <article class="tile collaboratore <?php if ($collaboratore["attivo"] == 0) echo "deactivated"; ?>">
-                    <img class="tileImg" src="<?php echo $imgURL ; ?>" alt="<?php echo $collaboratore["cognome"] . " " . $collaboratore["nome"] ?>" />
+            <a class="tileLink" href=<?php echo "order-management.php?ordine=" . $orders["idOrdine"]; ?>>
+                <article class="tile etichetta <?php if ($orders["statoDiAvanzamento"] === "annullato") echo "deactivated"; ?>">
                     <div class="tileContent">
-                        <div class="tileBody">
-                            <h3><?php echo $collaboratore["cognome"] . " " . $collaboratore["nome"]; ?></h3>
-                            <p>ID <?php printf("%05d", $collaboratore["idUtente"]); ?></p>
+                        <h3><?php echo $orders["data"]; ?></h3>
+                        <h4>€ <?php echo $orders["totaleOrdine"]; ?></h4>
+                        <p><?php echo $orders["statoDiAvanzamento"]; ?></p>
+
+                        <div class="tileFooter">
+                            <p class="tileImportantInfo"># <?php printf("%05d", $orders["idOrdine"]); ?></p>
                         </div>
                     </div>
                 </article>
@@ -77,18 +79,5 @@
 
     <?php } endif; ?>
 
-    <a class="tileLink" href="orderManagement.html">
-        <article class="tile etichetta">
-            <div class="tileContent">
-                    <h3>26/01/2021</h3>
-                    <h4>€ 126.24</h4>
-                    <p>Consegnato</p>
-
-                <div class="tileFooter">
-                    <p class="tileImportantInfo">#47884</p>
-                </div>
-            </div>
-        </article>
-    </a>
 
 </div>
