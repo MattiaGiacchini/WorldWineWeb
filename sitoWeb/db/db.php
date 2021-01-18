@@ -25,9 +25,25 @@
             return $result;
         }
 
+        public function getProductsByIdLabel($idLabel) {
+            $stmt = $this->db->prepare("SELECT c.idContenitore, c.tipologia as nomeContenitore, c.capacita as capacitaContenitore, v.idEtichetta, v.attivo, p.prezzo, p.iva
+                                        FROM contenitore AS c
+                                        LEFT JOIN ( SELECT * FROM vino_confezionato WHERE vino_confezionato.idEtichetta = ?) AS v ON v.idContenitore = c.idContenitore
+                                        LEFT JOIN prezzo_recente AS p ON c.idContenitore = p.idContenitore AND v.idEtichetta = p.idEtichetta
+                                        ORDER BY c.idContenitore");
+            $stmt->bind_param('i',$idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result;
+            }
+        }
+
         // ritorna tutte le informazioni di un'etichetta attraverso il suo ID
         public function getLabelFromId($idLabel) {
-            $query = "SELECT e.nome as nomeEtichetta, c.nome as nomeCantina, c.*  FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
+            $query = "SELECT e.nome as nomeEtichetta, c.nome as nomeCantina, c.stato as stato FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i',$idLabel);
             $stmt->execute();
