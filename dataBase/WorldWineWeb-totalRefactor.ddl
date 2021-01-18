@@ -188,6 +188,7 @@ create table UTENTE (
      cf char(16),
      partitaIva bigint(11),
      ragioneSociale char(100),
+     attivo boolean not null default 1,
      constraint IDCLIENTE primary key (idUtente),
      constraint IDCLIENTE_1 unique (email),
      constraint IDCLIENTE_2 unique (cf),
@@ -196,7 +197,7 @@ create table UTENTE (
 create table VINO_CONFEZIONATO (
      idContenitore int not null,
      idEtichetta int not null,
-     scorteMazzino int not null,
+     scorteMagazzino int not null,
      mediaRecensioni decimal(4,3) not null,
      constraint IDVINO_CONFEZIONATO primary key (idContenitore, idEtichetta));
 
@@ -323,3 +324,10 @@ alter table VINO_CONFEZIONATO add constraint FKRIF_CONTENITORE
 
 -- Index Section
 -- _____________
+
+
+--View Section
+-- _____________
+CREATE VIEW totale_ordine AS SELECT totale_prezzo_prodotto.idOrdine AS idOrdine, totale_prezzo_prodotto.idCliente AS idCliente, sum(totale_prezzo_prodotto.totaleProdotto) AS totaleOrdine FROM totale_prezzo_prodotto GROUP BY totale_prezzo_prodotto.idOrdine, totale_prezzo_prodotto.idCliente;
+
+CREATE VIEW totale_prezzo_prodotto AS SELECT dettaglio.idOrdine AS idOrdine, dettaglio.idCliente AS idCliente, dettaglio.idContenitore AS idContenitore, dettaglio.idEtichetta AS idEtichetta, dettaglio.quantita* prezzo_recente.prezzo AS totaleProdotto, prezzo_recente.iva AS iva FROM (dettaglio join prezzo_recente on(dettaglio.idContenitore = prezzo_recente.idContenitore and dettaglio.idEtichetta = prezzo_recente.idEtichetta)) ;

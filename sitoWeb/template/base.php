@@ -75,6 +75,7 @@
                 }
 
                 if ($userRole) {
+                    echo '<li><a href="notification.php">Notifiche</a></li>';
                     echo '<li><a href="personalArea.php">Area Personale</a></li>';
                     echo '<li><a href="logout.php">Logout</a></li>';
                 }
