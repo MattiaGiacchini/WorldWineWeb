@@ -25,8 +25,9 @@
             return $result;
         }
 
+        // ritorna tutte le informazioni di un'etichetta attraverso il suo ID
         public function getLabelFromId($idLabel) {
-            $query = "SELECT e.idEtichetta, e.nome as nomeEtichetta, c.nome as nomeCantina, c.stato  FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
+            $query = "SELECT e.nome as nomeEtichetta, c.nome as nomeCantina, c.*  FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i',$idLabel);
             $stmt->execute();
@@ -131,6 +132,15 @@
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
             return $result;
+        }
+
+        // aggiunge una nuova valutazione al prodotto
+        public function addNewEvaluationProduct($idLabel, $idContainer, $price, $iva) {
+            $query = "INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sssdd', $idContainer, $idLabel, $this->getCurrentDateTime(), $price, $iva);
+
+            return $stmt->execute();
         }
 
         // aggiunge un nuovo utente business a database
