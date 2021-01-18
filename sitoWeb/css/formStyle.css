@@ -210,18 +210,31 @@ form.editProduct fieldset.modify input[type = checkbox]{
 /* label price */
 form.addNewProduct fieldset.modify label:nth-of-type(2),
 form.editProduct fieldset.modify label:nth-of-type(2) {
-    grid-column: span 2;
+    grid-column: span 3;
 }
 /* input price */
 form.addNewProduct fieldset.modify input[type=number],
 form.editProduct fieldset.modify input[type=number] {
-    grid-column: span 4;
+    text-align: right;
+    grid-column: span 3;
     padding: 0px;
     width: 100%;
 }
-/* label Photo */
+
+/* label iva */
 form.addNewProduct fieldset.modify label:nth-of-type(3),
 form.editProduct fieldset.modify label:nth-of-type(3) {
+    grid-column: span 3;
+}
+
+form.addNewProduct fieldset.modify input[type=number]:nth-of-type(3),
+form.editProduct fieldset.modify input[type=number]:nth-of-type(3) {
+    text-align: right;
+    grid-column: span 3;
+}
+/* label Photo */
+form.addNewProduct fieldset.modify label:nth-of-type(4),
+form.editProduct fieldset.modify label:nth-of-type(4) {
     grid-column: span 6;
 }
 /* input photo */
