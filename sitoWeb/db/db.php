@@ -249,6 +249,22 @@
             return $statusWhereCondition . " " . $sort;
 
         }
+        
+        public function getWineLabels() {
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
+                $sort = "ORDER BY vino DESC, cantina ASC, annata DESC";
+            } else {
+                $sort = "ORDER BY vino ASC, cantina ASC, annata DESC";
+            }
+            
+            $query = "SELECT e.idEtichetta, e.nome as vino, c.nome as cantina, c.stato, e.annata, e.indicazioneGeografica as origine, e.colore FROM etichetta e JOIN cantina c ON (e.idCantina = c.idCantina) " . $sort;
+            $stmt = $this->db->prepare($query);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
 
     }
 ?>

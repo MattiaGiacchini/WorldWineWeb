@@ -5,7 +5,7 @@
     </div>
     <form class="filter" action="#" method="get">
         <fieldset>
-            <legend>Ordine alfabetico</legend>
+            <legend>Ordine cronologico</legend>
             <ul>
                 <li>
                     <input type="radio" name="ordine" value="decrescente" id="decrescente" checked/>
@@ -47,7 +47,7 @@
             </ul>
         </fieldset>
 
-        <input type="submit" name="applyFilters" id="applyFilters" value="Applica filtri">
+        <input type="submit" name="applyFilters" id="applyFilters" value="applica filtri">
     </form>
 </div>
 
