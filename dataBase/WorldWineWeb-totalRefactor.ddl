@@ -343,7 +343,7 @@ CREATE VIEW totale_prezzo_prodotto AS SELECT d.idOrdine AS idOrdine, o.idCliente
 
 CREATE VIEW totale_ordine AS SELECT totale_prezzo_prodotto.idOrdine AS idOrdine, totale_prezzo_prodotto.idCliente AS idCliente, sum(totale_prezzo_prodotto.totaleProdotto) AS totaleOrdine FROM totale_prezzo_prodotto GROUP BY totale_prezzo_prodotto.idOrdine, totale_prezzo_prodotto.idCliente;
 
-
+CREATE VIEW totale_prodotto_carrello AS SELECT c.idCliente AS idCliente, c.idContenitore AS idContenitore, c.idEtichetta AS idEtichetta, c.quantita* pr.prezzo AS totaleProdotto, pr.iva AS iva FROM carrello c join prezzo_recente pr on(c.idContenitore = pr.idContenitore) and (c.idEtichetta = pr.idEtichetta);
 
 
 
