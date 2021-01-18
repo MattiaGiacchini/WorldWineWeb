@@ -330,14 +330,21 @@ alter table VINO_CONFEZIONATO add constraint FKRIF_CONTENITORE
 -- Index Section
 -- _____________
 
-CREATE VIEW `prezzo_recente` AS SELECT `v`.`idContenitore` AS `idContenitore`, `v`.`idEtichetta` AS `idEtichetta`, `p`.`prezzo` AS `prezzo`, `p`.`iva` AS `iva`
-FROM (`prezzo` `p` join `vino_confezionato` `v` on(`v`.`idContenitore` = `p`.`idContenitore` and `v`.`idEtichetta` = `p`.`idEtichetta`))
-WHERE `p`.`data` = (select max(`prezzo`.`data`)
-                    from `prezzo`
-                    where `v`.`idContenitore` = `prezzo`.`idContenitore` AND `v`.`idEtichetta` = `prezzo`.`idEtichetta`)
 
---View Section
+-- View Section
 -- _____________
+CREATE VIEW prezzo_recente AS SELECT v.idContenitore AS idContenitore, v.idEtichetta AS idEtichetta, p.prezzo AS prezzo, p.iva AS iva
+FROM (prezzo p join vino_confezionato v on(v.idContenitore = p.idContenitore and v.idEtichetta = p.idEtichetta))
+WHERE p.data = (select max(prezzo.data)
+from prezzo
+where v.idContenitore = prezzo.idContenitore AND v.idEtichetta = prezzo.idEtichetta);
+
+CREATE VIEW totale_prezzo_prodotto AS SELECT d.idOrdine AS idOrdine, o.idCliente AS idCliente, d.idContenitore AS idContenitore, d.idEtichetta AS idEtichetta, d.quantita* pr.prezzo AS totaleProdotto, pr.iva AS iva FROM dettaglio d join prezzo_recente pr JOIN ordine o on(d.idContenitore = pr.idContenitore) and (d.idEtichetta = pr.idEtichetta) AND (d.idOrdine = o.idOrdine) ;
+
 CREATE VIEW totale_ordine AS SELECT totale_prezzo_prodotto.idOrdine AS idOrdine, totale_prezzo_prodotto.idCliente AS idCliente, sum(totale_prezzo_prodotto.totaleProdotto) AS totaleOrdine FROM totale_prezzo_prodotto GROUP BY totale_prezzo_prodotto.idOrdine, totale_prezzo_prodotto.idCliente;
 
-CREATE VIEW totale_prezzo_prodotto AS SELECT dettaglio.idOrdine AS idOrdine, dettaglio.idCliente AS idCliente, dettaglio.idContenitore AS idContenitore, dettaglio.idEtichetta AS idEtichetta, dettaglio.quantita* prezzo_recente.prezzo AS totaleProdotto, prezzo_recente.iva AS iva FROM (dettaglio join prezzo_recente on(dettaglio.idContenitore = prezzo_recente.idContenitore and dettaglio.idEtichetta = prezzo_recente.idEtichetta)) ;
+
+
+
+
+INSERT INTO utente (idUtente, email, password, ruolo, nome, cognome, dataDiNascita, cf, partitaIva, ragioneSociale, attivo) VALUES (NULL, 'ma.giacchini99@gmail.com', 'a123', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199O', NULL, NULL, '1');
