@@ -326,6 +326,11 @@ alter table VINO_CONFEZIONATO add constraint FKRIF_CONTENITORE
      foreign key (idContenitore)
      references CONTENITORE (idContenitore);
 
-
 -- Index Section
 -- _____________
+
+CREATE VIEW `prezzo_recente` AS SELECT `v`.`idContenitore` AS `idContenitore`, `v`.`idEtichetta` AS `idEtichetta`, `p`.`prezzo` AS `prezzo`, `p`.`iva` AS `iva`
+FROM (`prezzo` `p` join `vino_confezionato` `v` on(`v`.`idContenitore` = `p`.`idContenitore` and `v`.`idEtichetta` = `p`.`idEtichetta`))
+WHERE `p`.`data` = (select max(`prezzo`.`data`)
+                    from `prezzo`
+                    where `v`.`idContenitore` = `prezzo`.`idContenitore` AND `v`.`idEtichetta` = `prezzo`.`idEtichetta`)
