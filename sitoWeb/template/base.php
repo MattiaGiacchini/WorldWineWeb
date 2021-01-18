@@ -1,6 +1,8 @@
 <?php
     $userRole = getUserRole();
-?><!DOCTYPE html>
+    $username = getUserName();
+?>
+<!DOCTYPE html>
 <html lang="it" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +43,7 @@
             <a href="areaPersonale.php">
                 <h2>Benvenuto <?php echo getUserName(); ?></h2>
                 <p><?php if(getUserRole() != "client") { echo $userRole; } ?></p>
-                <img src="../upload/users/user.jpg" alt="nomeCognome" /> <?php // TODO:  ?>
+                <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" alt="<?php echo $username; ?>" /> 
             </a>
         </section> <?php } ?>
         <ul>
