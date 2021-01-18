@@ -1,6 +1,7 @@
 <?php
 
     class Database{
+        private $basicUser = "user";
         private $db;
 
         public function __construct($servername, $username, $password, $dbname, $port){
@@ -8,40 +9,138 @@
             if ($this->db->connect_error) {
                 die("Connection failed: " . $db->connect_error);
             }
+            $this->db->query("SET NAMES 'utf8'");
+        }
+
+        public function getLastInsertIntoId() {
+            return $this->db->insert_id;
         }
 
         // ritorna tutti gli stati inseriti a database
-        public function getAllStates(){
-            $stmt = $this->db->prepare("SELECT * FROM stato");
+        public function getStates(){
+            $stmt = $this->db->prepare("SELECT * FROM stato ORDER BY nome ASC ");
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result->fetch_all(MYSQLI_ASSOC);
+            return $result;
         }
 
-        // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
-        public function getUserRole($idUtente){
-            $query = "SELECT ruolo FROM utente WHERE idUtente = ?";
+        // ritorna tutte le informazioni di un'etichetta attraverso il suo ID
+        public function getLabelFromId($idLabel) {
+            $query = "SELECT e.nome as nomeEtichetta, c.nome as nomeCantina, c.*  FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('i', $idUtente);
+            $stmt->bind_param('i',$idLabel);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             if(count($result)==0) {
-                return false;
+                return null;
             } else {
-                return $result[0]["ruolo"];
+                return $result[0];
             }
+        }
+
+        // ritorna tutte le mezioni
+        public function getMentions() {
+            $stmt = $this->db->prepare("SELECT * FROM menzione ORDER BY menzione.menzione ASC ");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        // ritorna tutte i vitigni
+        public function getVitigni() {
+            $stmt = $this->db->prepare("SELECT * FROM vitigno ORDER BY vitigno.coloreBacca, vitigno.nomeSpecie ASC");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
+        // restituisce l'id di una cantina
+        public function getVitignoId($coloreBacca, $nomeSpecie) {
+            $query = "SELECT idVitigno FROM vitigno WHERE coloreBacca = ? AND nomeSpecie = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss',$coloreBacca, $nomeSpecie);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idVitigno"];
+            }
+        }
+
+        // ritorna tutte le cantine
+        public function getCantine() {
+            $stmt = $this->db->prepare("SELECT idCantina, stato.nome as nomeStato, cantina.nome as nomeCantina FROM cantina, stato WHERE cantina.stato = stato.sigla ORDER BY stato.nome, cantina.nome ASC");
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
+        // restituisce l'id di una cantina
+        public function getWineryId($nomeCantina, $idStatoCantina) {
+            $query = "SELECT idCantina FROM cantina WHERE nome = ? AND stato = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss',$nomeCantina, $idStatoCantina);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idCantina"];
+            }
+        }
+
+        // restituisce l'id di una cantina
+        public function getMentionId($menzione) {
+            $query = "SELECT idMenzione FROM menzione WHERE menzione = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s',$menzione);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0]["idMenzione"];
+            }
+        }
+
+        // restituisce il ruolo ricoperto dall'utente di cui viene passato il suo id
+        public function getUserRole($idUtente) {
+            if(isset($idUtente)) {
+                $query = "SELECT ruolo FROM utente WHERE idUtente = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param('i',$idUtente);
+                $stmt->execute();
+                $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                if(count($result)==0) {
+                    return $this->basicUser;
+                } else {
+                    return $result[0]["ruolo"];
+                }
+            }
+            return $this->basicUser;
         }
 
         // restituisce l'id dell'utente se password e email vengono riconosciute
         public function checkLogin($email, $password){
-            $query = "SELECT idUtente FROM utente WHERE email = ? AND password = ?";
+            $query = "SELECT idUtente, nome, cognome, ragioneSociale FROM utente WHERE email = ? AND password = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ss', $email, $password);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
+        // aggiunge una nuova valutazione al prodotto
+        public function addNewEvaluationProduct($idLabel, $idContainer, $price, $iva) {
+            $query = "INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sssdd', $idContainer, $idLabel, $this->getCurrentDateTime(), $price, $iva);
+
+            return $stmt->execute();
         }
 
         // aggiunge un nuovo utente business a database
@@ -64,6 +163,7 @@
             return $this->addNewUser($email, $psw, 'admin', $name, $surname, $cf, $birthday, null, null);
         }
 
+        // funzione privata per aggiungere un nuovo utente
         private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
             $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
                       VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -71,6 +171,55 @@
             $stmt->bind_param('sssssssis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
 
             return $stmt->execute();
+        }
+
+      // aggiunge una nuova cantina a database
+        public function addNewWinery($winery, $state) {
+            $query = "INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss', $winery, $state);
+
+            return $stmt->execute();
+        }
+
+        // aggiunge una nuova cantina a database
+        public function addNewVitigno($coloreBacca, $nomeSpecie) {
+            $query = "INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES (NULL, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ss', $coloreBacca, $nomeSpecie);
+
+            return $stmt->execute();
+        }
+
+        // aggiunge una nuova cantina a database
+        public function addNewMention($mention) {
+            $query = "INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s', $mention);
+
+            return $stmt->execute();
+        }
+
+        public function addNewWine($categoria, $nome, $description, $color, $alcol, $zucchero, $gas, $idCantina, $solfiti, $bio, $tMin, $tMax, $classificazione, $idVitigno, $annata, $ig, $idMenzione, $specificazione) {
+            if($solfiti === "true") {
+                $solfiti = 1;
+            } else {
+                $solfiti = 0;
+            }
+            if($bio === "true") {
+                $bio = 1;
+            } else {
+                $bio = 0;
+            }
+            $query = "INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `temperaturaMinima`, `temperaturaMassima`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina`) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('sssdiissddssissiii', $nome, $description, $color, $alcol, $solfiti, $bio, $categoria, $zucchero, $tMin, $tMax, $classificazione, $gas, $annata, $ig, $specificazione, $idVitigno, $idMenzione, $idCantina);
+
+            return $stmt->execute();
+        }
+
+        public function addNewSpumante($categoria, $nome, $description, $colore, $alcol, $zucchero, $idCantina, $solfiti, $biologico, $tMin, $tMax) {
+            return $this->addNewWine($categoria, $nome, $description, $colore, $alcol, $zucchero, null, $idCantina, $solfiti, $biologico, $tMin, $tMax, null, null, null, null, null, null);
         }
 
         private function getCurrentDateTime() {
@@ -259,14 +408,14 @@
             return $statusWhereCondition . " " . $sort;
 
         }
-        
+
         public function getWineLabels() {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
                 $sort = "ORDER BY vino DESC, cantina ASC, annata DESC";
             } else {
                 $sort = "ORDER BY vino ASC, cantina ASC, annata DESC";
             }
-            
+
             $query = "SELECT e.idEtichetta, e.nome as vino, c.nome as cantina, c.stato, e.annata, e.indicazioneGeografica as origine, e.colore FROM etichetta e JOIN cantina c ON (e.idCantina = c.idCantina) " . $sort;
             $stmt = $this->db->prepare($query);
 

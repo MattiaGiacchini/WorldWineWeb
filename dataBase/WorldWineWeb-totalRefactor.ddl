@@ -23,7 +23,8 @@ create table CANTINA (
      idCantina int not null auto_increment,
      nome varchar(50) not null,
      stato char(3) not null,
-     constraint ID_ID primary key (idCantina));
+     constraint ID_ID primary key (idCantina),
+     constraint FKCANTINA unique (nome, stato));
 
 create table CARRELLO (
      idContenitore int not null,
@@ -54,17 +55,19 @@ create table ETICHETTA (
      solfiti boolean not null,
      bio boolean not null,
      categoria enum('Vino','Spumante') not null,
-     classificazione enum('Generico', 'Varietale', 'IGP','IGT','DOC','DOCG','DOP') not null,
      tenoreZuccherino enum('Secco','Abboccato','Amabile','Dolce','Brut Nature','Extra Brut','Brut','Extra Dry','Dry','Demi Sec') not null,
+     temperaturaMinima decimal(4,2),
+     temperaturaMassima decimal(4,2),
+     classificazione enum('Generico','Varietale','IGP','IGT','DOC','DOCG','DOP'),
      gas enum('Fermo','Frizzante'),
      annata year(4),
      indicazioneGeografica varchar(100),
      specificazione char(20),
      vitigno int,
-     menzione char(50),
+     menzione int,
      idCantina int not null,
-     attivo boolean not null default 1,
-     constraint ID primary key (idEtichetta));
+     constraint ID primary key (idEtichetta),
+     constraint FKETICHETTA unique (nome, annata, idCantina, menzione, specificazione));
 
 create table FATTURA (
      idFattura int not null,
@@ -86,8 +89,10 @@ create table INDIRIZZO (
      constraint IDINDIRIZZO primary key (idCliente, idIndirizzo));
 
 create table MENZIONE (
-     menzione char(50) not null,
-     constraint IDMENZIONE primary key (menzione));
+     idMenzione int not null auto_increment,
+     menzione char(100) not null,
+     constraint IDMENZIONE primary key (idMenzione),
+     constraint FKMENZIONE unique (menzione));
 
 create table METODO_DI_PAGAMENTO (
      idCliente int not null,
@@ -199,6 +204,7 @@ create table VINO_CONFEZIONATO (
      idEtichetta int not null,
      scorteMagazzino int not null,
      mediaRecensioni decimal(4,3) not null,
+     attivo boolean not null default 0,
      constraint IDVINO_CONFEZIONATO primary key (idContenitore, idEtichetta));
 
 create table VITIGNO (
@@ -235,7 +241,7 @@ alter table ETICHETTA add constraint FKESTRAZIONE
 
 alter table ETICHETTA add constraint FKSPECIFICA
      foreign key (menzione)
-     references MENZIONE (menzione);
+     references MENZIONE (idMenzione);
 
 alter table ETICHETTA add constraint FKPRODUZIONE
      foreign key (idCantina)
@@ -321,10 +327,14 @@ alter table VINO_CONFEZIONATO add constraint FKRIF_CONTENITORE
      foreign key (idContenitore)
      references CONTENITORE (idContenitore);
 
-
 -- Index Section
 -- _____________
 
+CREATE VIEW `prezzo_recente` AS SELECT `v`.`idContenitore` AS `idContenitore`, `v`.`idEtichetta` AS `idEtichetta`, `p`.`prezzo` AS `prezzo`, `p`.`iva` AS `iva`
+FROM (`prezzo` `p` join `vino_confezionato` `v` on(`v`.`idContenitore` = `p`.`idContenitore` and `v`.`idEtichetta` = `p`.`idEtichetta`))
+WHERE `p`.`data` = (select max(`prezzo`.`data`)
+                    from `prezzo`
+                    where `v`.`idContenitore` = `prezzo`.`idContenitore` AND `v`.`idEtichetta` = `prezzo`.`idEtichetta`)
 
 --View Section
 -- _____________

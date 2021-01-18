@@ -1,12 +1,6 @@
 <?php
-    if(isUserLoggedIn()){
-        $userRole = $dataBase->getUserRole($_SESSION["idUtente"]);
-    } else {
-        $userRole = false;
-    }
-?>
-
-<!DOCTYPE html>
+    $userRole = getUserRole();
+?><!DOCTYPE html>
 <html lang="it" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,42 +36,42 @@
         <button type="button" name="menu">≡</button>
         <a href="index.php"><h1>World Wine Web</h1></a>
     </header>
-    <nav>
+    <nav><?php if(isUserLoggedIn()) { ?>
         <section>
             <a href="areaPersonale.php">
-                <h2>Dani/Login</h2> <?php // TODO:  ?>
-                <p><?php echo $userRole; ?></p> <?php // TODO:  ?>
+                <h2>Benvenuto <?php echo getUserName(); ?></h2>
+                <p><?php if(getUserRole() != "client") { echo $userRole; } ?></p>
                 <img src="../upload/users/user.jpg" alt="nomeCognome" /> <?php // TODO:  ?>
             </a>
-        </section>
+        </section> <?php } ?>
         <ul>
             <li><a href="index.php">Home</a></li>
 
             <?php
                 switch ($userRole) {
-                    case 'cliente':
+                    case 'client':
                         echo '<li><a href="cart.php">Carrello</a></li>';
                         echo '<li><a href="orders.php">Ordini</a></li>';
+                        echo '<li><a href="personalArea.php">Area Personale</a></li>';
+                        echo '<li><a href="logout.php">Logout</a></li>';
                         break;
 
                     case 'admin':
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
+                        echo '<li><a href="personalArea.php">Area Personale</a></li>';
+                        echo '<li><a href="logout.php">Logout</a></li>';
 
-                    case 'collaboratore':
+                    case 'collaborator':
                         echo '<li><a href="orders.php">Gestione Ordini</a></li>';
                         echo '<li><a href="warehouse.php">Magazzino</a></li>';
+                        echo '<li><a href="personalArea.php">Area Personale</a></li>';
+                        echo '<li><a href="logout.php">Logout</a></li>';
                         break;
 
                     default:
                         echo '<li><a href="login.php">Login</a></li>';
                         break;
-                }
-
-                if ($userRole) {
-                    echo '<li><a href="notification.php">Notifiche</a></li>';
-                    echo '<li><a href="personalArea.php">Area Personale</a></li>';
-                    echo '<li><a href="logout.php">Logout</a></li>';
                 }
             ?>
 

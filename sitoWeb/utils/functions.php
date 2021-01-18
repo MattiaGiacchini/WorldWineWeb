@@ -1,6 +1,6 @@
 <?php
     function getLoggedUserId() {
-        return isset($_SESSION["idUtente"]) ? $_SESSION["idUtente"] : NULL;
+        return isset($_SESSION["idUtente"]) ? $_SESSION["idUtente"] : null;
     }
 
     function isUserLoggedIn() {
@@ -9,6 +9,11 @@
 
     function registerLoggedUser($user){
         $_SESSION["idUtente"] = $user["idUtente"];
+        if(isset($user["ragioneSociale"])) {
+            $_SESSION["nomeUtente"] = $user["ragioneSociale"];
+        } else {
+            $_SESSION["nomeUtente"] = $user["nome"]." ".$user["cognome"];
+        }
     }
 
     function getUserRole() {
@@ -33,4 +38,13 @@
         }
     }
 
+    function getUserName() {
+        return isset($_SESSION["nomeUtente"]) ? $_SESSION["nomeUtente"] : "";
+    }
+
+    function logOut() {
+        if(isUserLoggedIn()) {
+            session_unset();
+        }
+    }
 ?>
