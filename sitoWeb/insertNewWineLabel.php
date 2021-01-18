@@ -166,7 +166,7 @@
             if($result == 0) {
                 callBackWithError("inserimento annullato! Database non risponde");
             } else {
-                header("Location:./editProduct.php?idProdotto=".$result);
+                header("Location:./editProduct.php?idEtichetta=".$result);
             }
         } else {
             callBackWithError("inserimento annullato! Errore con i dati inseriti");
