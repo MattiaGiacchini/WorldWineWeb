@@ -12,14 +12,20 @@
             <label for="id">Contenitori Abbinati</label>
             <select class="id" name="id" id="id">
                 <option value="">Seleziona per i dettagli...</option>
-                <optgroup label="non visibili a catalogo">
-                    <option value="">nome  0,375L</option>
-                    <option value="">nome  0,75L</option>
-                </optgroup>
+                <?php if(count($templateParams["visible"]) !=0 ) { ?>
                 <optgroup label="visibili a catalogo">
-                    <option value="">nome  0,375L</option>
-                    <option value="">nome  0,75L</option>
+                <?php   foreach ($templateParams["visible"] as $container) { ?>
+                    <option value="<?php echo $container["idContenitore"] ?>"><?php echo sprintf('%2.3f',$container["capacitaContenitore"])."L - ".$container["nomeContenitore"]; ?></option>
+                <?php   } ?>
                 </optgroup>
+                <?php }
+                if(count($templateParams["invisible"]) !=0 ) {?>
+                <optgroup label="non visibili a catalogo">
+                <?php foreach ($templateParams["visible"] as $container) { ?>
+                    <option value="<?php echo $container["idContenitore"] ?>"><?php echo sprintf('%2.3f',$container["capacitaContenitore"])."L - ".$container["nomeContenitore"]; ?></option>
+                <?php } ?>
+                </optgroup>
+                <?php } ?>
             </select>
         </li>
         <li class="update">
@@ -29,6 +35,8 @@
                 <input type="checkbox" name="Visibile" id="visible" value="true">
                 <label for="price">Prezzo €</label>
                 <input type="number" name="price" id="price" value="" min="0.00" step="0.01">
+                <label for="iva">Imponibile %</label>
+                <input type="number" name="iva" id="iva" value="" max="100.00" min="0.00" step="0.01">
                 <label for="photo">Foto del Prodotto</label>
                 <input type="file" id="photo" name="photo" accept="image/*"/>
             </fieldset>
@@ -47,11 +55,16 @@
             <p>Contenitore da Abbinare</p>
         <li>
         <li>
-            <label for="idNewContainer">Contenitori Abbinabili</label>
+            <label for="idNewContainer">Contenitori non ancora Abbinati</label>
             <select class="idNewContainer" name="idNewContainer" id="idNewContainer">
                 <option value="">Seleziona il contenitore...</option>
-                <option value="">nome  0,375L</option>
-                <option value="">nome  0,75L</option>
+                <?php if(count($templateParams["unsetted"]) !=0 ) { ?>
+                <optgroup label="visibili a catalogo">
+                <?php   foreach ($templateParams["unsetted"] as $container) { ?>
+                    <option value="<?php echo $container["idContenitore"] ?>"><?php echo sprintf('%06.3f', $container["capacitaContenitore"])."L - ".$container["nomeContenitore"]; ?></option>
+                <?php   } ?>
+                </optgroup>
+            <?php } ?>
             </select>
         </li>
         <li>
@@ -61,6 +74,8 @@
                 <input type="checkbox" name="visibleNewContainer" id="visibleNewContainer" value="true">
                 <label for="priceNewContainer">Prezzo €</label>
                 <input type="number" name="priceNewContainer" id="priceNewContainer" value="" min="0.00" step="0.01">
+                <label for="ivaNewContainer">Imponibile (iva %)</label>
+                <input type="number" name="ivaNewContainer" id="ivaNewContainer" value="" max="100.00" min="0.00" step="0.01">
                 <label for="photoNewContainer">Foto del Prodotto</label>
                 <input type="file" id="photoNewContainer" name="photoNewContainer" accept="image/*"/>
             </fieldset>
