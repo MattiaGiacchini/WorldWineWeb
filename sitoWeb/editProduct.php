@@ -3,19 +3,23 @@
 
     function checkDatabaseInput() {
         global $templateParams;
+        $numberProducts = count($templateParams["products"]);
         $templateParams["visible"]  = array();
         $templateParams["invisible"]= array();
         $templateParams["unsetted"] = array();
 
-        foreach ($templateParams["products"] as $product) {
-            if($product["idEtichetta"] != null && $product["attivo"] == "1") {
-                array_push($templateParams["visible"], $product);
+        for ($i = 0; $i < $numberProducts; $i++) {
+
+            $templateParams["products"][$i]["photo"] = getWineImgURL($templateParams["products"][$i]["idEtichetta"],$templateParams["products"][$i]["idContenitore"]);
+
+            if($templateParams["products"][$i]["idEtichetta"] != null && $templateParams["products"][$i]["attivo"] == "1") {
+                array_push($templateParams["visible"], $templateParams["products"][$i]);
             }
-            if($product["idEtichetta"] != null && $product["attivo"] == "0") {
-                array_push($templateParams["invisible"], $product);
+            if($templateParams["products"][$i]["idEtichetta"] != null && $templateParams["products"][$i]["attivo"] == "0") {
+                array_push($templateParams["invisible"], $templateParams["products"][$i]);
             }
-            if($product["idEtichetta"] == null) {
-                array_push($templateParams["unsetted"], $product);
+            if($templateParams["products"][$i]["idEtichetta"] == null) {
+                array_push($templateParams["unsetted"], $templateParams["products"][$i]);
             }
         }
     }
@@ -33,8 +37,8 @@
         $templateParams["jsAggiuntivi"] = '
         <script type="text/javascript" src="../js/containerModuleController.js"></script>
         ';
-        
-        setcookie("label", json_encode($dataBase->getProductsByIdLabel($_GET["idEtichetta"])), time() + 60);
+
+        setcookie("label", json_encode($templateParams["products"]), time() + 60);
 
         require('./template/base.php');
     } else {
