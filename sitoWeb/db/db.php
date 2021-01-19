@@ -469,5 +469,23 @@
             return $result;
         }
 
+        public function insertNewAddress($userId, $nome, $via, $civico, $citta, $provincia, $cap, $stato){
+            $query = "INSERT INTO indirizzo (idIndirizzo, idCliente, nome, via, civico, citta, provincia, cap, stato) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ississis', $userId, $nome, $via, $civico, $citta, $provincia, $cap, $stato);
+
+            return $stmt->execute();
+        }
+
+        public function insertNewPayment($userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia) {
+            $query = "INSERT INTO metodo_di_pagamento (idCliente, intestatario, numeroCarta, scadenza, cvv, tipologiaCarta) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('isisis', $userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia);
+
+            return $stmt->execute();
+        }
+
+
+
     }
 ?>
