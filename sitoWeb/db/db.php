@@ -425,5 +425,27 @@
             return $result;
         }
 
+        public function getCartProducts($userId) {
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore, v.attivo, carrello.quantita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina JOIN carrello ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) AND (carrello.idEtichetta = v.idEtichetta) AND (carrello.idContenitore = v.idContenitore) WHERE p.idContenitore = v.idContenitore AND p.idEtichetta = v.idEtichetta AND carrello.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getCartValue($userId) {
+            $query = "SELECT sum(totale_prodotto_carrello.totaleProdotto) AS totaleCarrello FROM totale_prodotto_carrello WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0]["totaleCarrello"];
+        }
+
     }
 ?>

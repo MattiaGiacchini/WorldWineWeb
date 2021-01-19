@@ -54,7 +54,7 @@
             ?>
             <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $idEtichetta . "&contenitore=" . $idContenitore; ?>>
                 <article class="tile <?php if ($products["attivo"] == 0) echo "deactivated"; ?>">
-                    <img class="tileImg" src=<?php echo WINE_PHOTO_DIR . $imgURL ; ?> alt="vino">
+                    <img class="tileImg" src=<?php echo $imgURL ; ?> alt="vino">
                     <div class="tileContent">
                         <div class="tileBody">
                             <h3><?php echo $products["NomeVino"] ?></h3>
