@@ -9,7 +9,7 @@
         $templateParams["titoloScheda"] = "Checkout";
         $templateParams["indirizzoPagina"] = "template/checkout-page.php";
         $templateParams["cssAggiuntivi"] = '<link rel="stylesheet" type="text/css" href="./css/cart.css">';
-        $templateParams["jsAggiuntivi"] = '<script src="./js/checkout.js"></script>';
+        $templateParams["jsAggiuntivi"] = '<script src="./js/checkout.js"></script> <script src="./js/checkoutHelper.js"></script>';
 
 
         $templateParams["cartProducts"] = $dataBase->getCartProducts(getLoggedUserId());

@@ -1,3 +1,7 @@
+<?php
+    header ("Content-Type: text / html; charset = utf-8");
+    $states = $dataBase->getStates();
+?>
 <div class="utilityBar">
     <div class="titleBar"> <h2><?php echo $templateParams["titoloPagina"]; ?></h2> </div>
 </div>
@@ -80,9 +84,14 @@
                 <label for="province">Provincia</label>
                 <input type="text" id="province" name="province" required readonly />
             </li>
-            <li>
+            <li class="newCantina">
                 <label for="state">Stato</label>
-                <input type="text" id="state" name="state" required readonly />
+                <select class="stato" name="stato" id="state" required>
+                    <option value="">Selezione stato</option>
+                    <?php foreach ($states as $state) { ?>
+                        <option value="<?php echo $state["sigla"]; ?>"><?php echo $state["nome"]; ?></option>
+                    <?php } ?>
+                </select>
             </li>
             <li>
                 <label for="zip">Codice postale</label>
@@ -110,7 +119,7 @@
             </li>
             <li>
                 <label for="cardTipology">Tipologia carta</label>
-                <select name="cardTipology" id="cardTipology" required>
+                <select name="cardTipology" id="cardTipology" required readonly>
                     <option value="">Seleziona tipologia</option>
                     <option value="visa">VISA</option>
                     <option value="vpay">V-PAY</option>
