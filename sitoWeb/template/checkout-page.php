@@ -51,15 +51,23 @@
                     <input type="text" id="lastname" name="lastname" required readonly />
                 </li>
                 <li>
-                    <label for="adr">Address</label>
+                    <label for="adr">Via</label>
                     <input type="text" id="adr" name="address" required readonly />
                 </li>
                 <li>
-                    <label for="city">City</label>
+                    <label for="civic">Civico</label>
+                    <input type="number" id="civic" name="civic" min="1" max="99999999" required readonly />
+                </li>
+                <li>
+                    <label for="city">Città</label>
                     <input type="text" id="city" name="city" required readonly />
                 </li>
                 <li>
-                    <label for="state">State</label>
+                    <label for="province">Provincia</label>
+                    <input type="text" id="province" name="province" required readonly />
+                </li>
+                <li>
+                    <label for="state">Stato</label>
                     <input type="text" id="state" name="state" required readonly />
                 </li>
                 <li>
@@ -83,6 +91,16 @@
                 <li>
                     <label for="cardname">Intestatario</label>
                     <input type="text" id="cardname" name="cardname" required readonly />
+                </li>
+                <li>
+                    <label for="cardTipology">Tipologia carta</label>
+                    <select name="cardTipology" id="cardTipology" required>
+                        <option value="">Seleziona tipologia</option>
+                        <option value="visa">VISA</option>
+                        <option value="vpay">V-PAY</option>
+                        <option value="mastercard">Mastercard</option>
+                        <option value="maestro">Maestro</option>
+                    </select>
                 </li>
                 <li>
                     <label for="cardnumber">Numero della carta</label>
