@@ -16,8 +16,8 @@ function lockUnlock(elements, lock) {
     }
 }
 
-function slideUpAndDown(elements, up) {
-    if(up) {
+function slideUpAndDown(elements, down) {
+    if(down) {
         elements.find("*").removeAttr("disabled");
         elements.slideDown();
     } else {
@@ -54,7 +54,6 @@ $(document).ready(function(){
     document.cookie =  "label=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
 
-    const formNewProd       = $("form.addNewProduct");
     const inputFormUpdate   = $("form.editProduct fieldset.modify").find("input");
     const id                = document.getElementById("id");
     const checkbox          = document.getElementById("visible");
@@ -64,7 +63,7 @@ $(document).ready(function(){
     const iva               = document.getElementById("iva");
     const submit            = $("form.editProduct input[type = submit]");
     const update            = $("form.editProduct .update");
-
+    const newIdContainer    = $("form.editProduct .newContainer");
 
     const defaultImg      = photo.src;
     const defaultAlt      = photo.alt;
@@ -74,40 +73,55 @@ $(document).ready(function(){
     let phaseFormNewProd  = false;
     let index;
 
-    showAndHide(formNewProd, phaseFormNewProd);
+    showAndHide(newIdContainer, false);
     lockUnlock(update, false);
 
 
     function showAnotherProduct() {
-        if(id.value != "") {
-            lockUnlock(update, true);
-            index = id.value-1;
-            checkbox.checked = products[index]["attivo"] == 1;
-            iva.value = products[index]["iva"];
-            price.value = products[index]["prezzo"];
-            photo.src = products[index]["photo"];
-            photo.alt = products[index]["photo"].includes("default") ? defaultAlt : products[index]["photo"];
-
-            lastCheckboxValue = checkbox.checked;
-            lastPriceValue = price.value;
-            lastNewPhotoValue = photo.value;
-            setOrRemoveRequired();
-            checkVariation();
-        } else {
+        if(id.value == "") {
             checkbox.checked = false;
             iva.value = "";
             price.value = "";
             photo.src = defaultImg;
             photo.alt = defaultAlt;
+            submit.val("submit");
             lockUnlock(update, false);
+            slideUpAndDown(newIdContainer, false);
+
+        } else if(id.value == "new"){
+            checkbox.checked = false;
+            iva.value   = "";
+            price.value = "";
+            photo.src   = defaultImg;
+            photo.alt   = defaultAlt;
+            submit.val("abbina nuovo");
+            lockUnlock(update, true);
+            slideUpAndDown(newIdContainer, true);
+
+        } else {
+            lockUnlock(update, true);
+            slideUpAndDown(newIdContainer, false);
+            index = id.value-1;
+            checkbox.checked = products[index]["attivo"] == 1;
+            iva.value   = products[index]["iva"];
+            price.value = products[index]["prezzo"];
+            photo.src   = products[index]["photo"];
+            photo.alt   = products[index]["photo"].includes("default") ? defaultAlt : products[index]["photo"];
+
+            submit.val("aggiorna");
+            lastCheckboxValue = checkbox.checked;
+            lastPriceValue = price.value;
+            lastNewPhotoValue = photo.value;
+            setOrRemoveRequired();
+            checkVariation();
         }
     }
 
     function setOrRemoveRequired() {
         if(checkbox.checked == true) {
-            inputFormUpdate.not("[type = checkbox]").attr("required", true);
+            inputFormUpdate.not("[type = checkbox]").not("[type = file]").attr("required", true);
         } else {
-            inputFormUpdate.not("[type = checkbox]").removeAttr("required");
+            inputFormUpdate.not("[type = checkbox]").not("[type = file]").removeAttr("required");
         }
     }
 
@@ -124,6 +138,7 @@ $(document).ready(function(){
     checkbox.addEventListener("change", setOrRemoveRequired);
     document.getElementById("id").addEventListener("change", showAnotherProduct);
     inputFormUpdate.change(checkVariation);
+    id.value = "";
 
     $("button[name = addNewProduct]").click(function() {
         if(phaseFormNewProd) {
