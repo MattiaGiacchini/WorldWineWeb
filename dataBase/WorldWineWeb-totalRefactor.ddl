@@ -100,7 +100,7 @@ create table METODO_DI_PAGAMENTO (
      numeroCarta bigint not null,
      scadenza date not null,
      cvv int not null,
-     tipologiaCarta varchar(20) not null,
+     tipologiaCarta ENUM('VISA', 'V-PAY', 'Mastercard', 'Maestro') not null,
      constraint IDMETODO_DI_PAGAMENTO primary key (idCliente, numeroCarta),
      constraint IDMETODO_DI_PAGAMENTO_1 unique (numeroCarta));
 
