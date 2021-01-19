@@ -34,7 +34,7 @@
         if (glob(USER_PHOTO_DIR . $idUtente . ".*")){
             return glob(USER_PHOTO_DIR . $idUtente . ".*")[0];
         } else {
-            return USER_PHOTO_DIR . "defaultUser.png", ;
+            return USER_PHOTO_DIR . "defaultUser.png" ;
         }
     }
 
