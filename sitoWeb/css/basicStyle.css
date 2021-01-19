@@ -261,7 +261,12 @@ div.utilityBar section {
 
 div.link {
     background-color: var(--background-dark);
+    border: 0px;
+    padding-top: 10px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 div.link button {
