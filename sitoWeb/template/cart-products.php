@@ -2,7 +2,7 @@
     <div class="titleBar"> <h2><?php echo $templateParams["titoloPagina"]; ?></h2> </div>
 </div>
 
-<form class="singleButtonForm" action="#" method="post">
+<form class="singleButtonForm" action="checkout.php" method="post">
 <section class="articoli">
     <h3>Articoli</h3>
 
