@@ -1,4 +1,4 @@
-form * {
+focusform * {
     outline: none;
 }
 
@@ -70,6 +70,10 @@ form input[type = password] {
 form input :disabled{
     background-color: var(--text-deactivated);
     color: var(--text-dark);
+}
+
+form input[type = submit]:focus, input[type = button]:focus, button:focus, a.button:focus{
+    outline: none;
 }
 
 form input[type = submit], input[type = button], button, a.button{
