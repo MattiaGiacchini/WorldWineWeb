@@ -188,6 +188,23 @@ a.tileLink {
     text-decoration: none;
 }
 
+.tile.prodotto.checkout .tileImg {
+    max-width: 30%;
+    max-height: 100%;
+    width: 75px;
+    vertical-align: middle;
+    margin: auto 2% auto 1%;
+}
+
+.tile.prodotto.checkout .tileContent {
+    width: 70%;
+}
+
+.tile.prodotto.checkout {
+    min-height: inherit;
+    width: 80%;
+}
+
 @media screen and (min-width: 480px) {
 
     .tile {

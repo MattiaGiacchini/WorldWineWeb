@@ -28,7 +28,7 @@ section.articoli, section.riepilogoOrdine {
 
 section.riepilogoOrdine .tile.riepilogo{
     width: 90%;
-    margin: 1% auto;
+    margin: 1% auto 3% auto;
 }
 
 section.riepilogoOrdine ul {
