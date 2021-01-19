@@ -176,6 +176,12 @@ a.tileLink {
     margin: auto 0px 10px auto;
 }
 
+.tile.cart.product .tileImg {
+    max-width: 100%;
+    width: 100%;
+    width: 100%;
+}
+
 a.tileLink {
     width: auto;
     margin: 1%;

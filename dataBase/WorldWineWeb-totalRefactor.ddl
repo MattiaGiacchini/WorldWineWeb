@@ -124,7 +124,7 @@ create table MODIFICA_SCORTE (
      idEtichetta int not null,
      idCollaboratore int not null,
      quantita int not null,
-     data date not null,
+     data datetime not null,
      constraint IDMODIFICA_SCORTE primary key (idContenitore, idEtichetta, idCollaboratore, data));
 
 create table NOTIFICA (
