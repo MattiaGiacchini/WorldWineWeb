@@ -447,5 +447,27 @@
             return $result[0]["totaleCarrello"];
         }
 
+        public function getUserAddresses($userId) {
+            $query = "SELECT * FROM indirizzo WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getUserPayments($userId) {
+            $query = "SELECT * FROM metodo_di_pagamento WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
     }
 ?>
