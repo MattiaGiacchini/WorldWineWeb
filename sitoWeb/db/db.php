@@ -150,6 +150,24 @@
             return $result;
         }
 
+        // aggiunge a database un nuovo prodotto
+        public function addNewProduct($idContainer, $idLabel, $active) {
+            $query = "INSERT INTO vino_confezionato (idContenitore, idEtichetta, scorteMazzino, mediaRecensioni, attivo) VALUES (?, ?, 0, 0.0, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', $idContainer, $idLabel, $active);
+
+            return $stmt->execute();
+        }
+
+        // aggiorna a dataBase un prodotto
+        public function updateProduct($idContainer, $idLabel, $active) {
+            $query = "UPDATE vino_confezionato SET attivo = ? WHERE vino_confezionato.idContenitore = ? AND vino_confezionato.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', $active, $idContainer, $idLabel);
+
+            return $stmt->execute();
+        }
+
         // aggiunge una nuova valutazione al prodotto
         public function addNewEvaluationProduct($idLabel, $idContainer, $price, $iva) {
             $query = "INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES (?, ?, ?, ?, ?)";
