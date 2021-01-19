@@ -21,15 +21,15 @@
         return $dataBase->getUserRole(getLoggedUserId());
     }
 
-    function getWineImgURL($idEtichetta, $idContenitore){
-        if (is_dir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore)){
+    function getWineImgURL($idEtichetta, $idContenitore) {
+        if (is_dir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore)) {
             $path = scandir(WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore ."/");
-            return $idEtichetta . "_" . $idContenitore ."/" . $path[2];
+            return WINE_PHOTO_DIR . $idEtichetta . "_" . $idContenitore ."/" . $path[2];
         } else {
-            return "default.png";
+            return WINE_PHOTO_DIR . "default.png";
         }
     }
-
+    
     function getUserImgURL($idUtente){
         if (glob(USER_PHOTO_DIR . $idUtente . ".*")){
             return glob(USER_PHOTO_DIR . $idUtente . ".*")[0];
