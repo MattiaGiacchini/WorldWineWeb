@@ -18,7 +18,7 @@
                 </li>
             </ul>
         </fieldset>
-            
+
         <fieldset>
             <legend>Colore</legend>
             <ul>
@@ -32,7 +32,7 @@
                 </li>
             </ul>
         </fieldset>
-        
+
         <fieldset>
             <legend>Gas</legend>
             <ul>
@@ -46,7 +46,7 @@
                 </li>
             </ul>
         </fieldset>
-    
+
         <fieldset>
             <legend>Tenore zuccherino</legend>
             <ul>
@@ -60,7 +60,7 @@
                 </li>
             </ul>
         </fieldset>
-        
+
         <fieldset>
             <legend>Cantina</legend>
             <ul>
@@ -70,33 +70,33 @@
                 </li>
             </ul>
         </fieldset>
-        
+
         <input type="submit" name="applyFilters" id="applyFilters" value="applica filtri">
     </form>
 </div>
 
 <div class="article-container">
-
+<?php foreach($templateParams["products"] as $prodotto):?>
     <article class="wineCard">
-        <a href="#">
+        <a href="./showLabelDetails.php?idLabel=<?php echo $prodotto["idEtichetta"]."&idContainer=".$prodotto["idContenitore"];?>">
             <div class="wineCard-Container">
-                <img class="fotoVino" src="../upload/idVino/vino.png" alt="foto vino rosso" />
+                <img class="fotoVino" src="<?php echo getWineImgURL($prodotto["idEtichetta"], $prodotto["idContenitore"]); ?>" alt="Foto <?php echo $prodotto["categoria"]." ".$prodotto["colore"]; ?>" />
                 <div class="etichetta">
-                    <h3>Labrusco di Modena</h3>
-                    <h4>BotteBuona</h4>
+                    <h3><?php echo $prodotto["nomeEtichetta"]; ?></h3>
+                    <h4><?php echo $prodotto["nomeCantina"]; ?></h4>
                     <div class="LiterVol">
-                        <h5>0,75L</h5> <h5>15,0% Vol</h5>
+                        <h5><?php echo $prodotto["capacita"]; ?>L</h5> <h5><?php echo round($prodotto["titoloAlcolico"], 1); ?>% Vol</h5>
                     </div>
-                    <p class="origine">Rubicone - ITA</p>
-                    <p class="certificato">D.O.C.G.</p>
-                    <p class="annata">2019</p>
-                    <img src="../img/ratingStar-rev2.png" alt="voto: 2 su 5" />
-                    <h6>642,90€</h6>
-                    <p>non disponibile</p>
+                    <p class="origine"><?php echo $prodotto["indicazioneGeografica"]!=null ? $prodotto["indicazioneGeografica"]." - " : ""; echo $prodotto["stato"] != null ? $prodotto["stato"] : "";?></p>
+                    <p class="certificato"><?php echo $prodotto["classificazione"]; ?></p>
+                    <p class="annata"><?php echo $prodotto["annata"]; ?></p>
+                    <img src="../img/ratingStar-rev2.png" alt="voto: <?php echo $prodotto["mediaRecensioni"]; ?> su 5" />
+                    <h6><?php echo $prodotto["prezzo"]; ?>€</h6>
+                    <p><?php echo $prodotto["scorteMagazzino"] > 0 ? "Disponibile" : "Non Disponibile"; ?></p>
                 </div>
             </div>
         </a>
         <button class="preference favourite" name="preference favourite"></button>
     </article>
-
+<?php endforeach; ?>
 </div>

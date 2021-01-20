@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    const time = 1000;
+    const time = 500;
     const buttons = $("div.details button");
     const nextElement = buttons.next();
     let element;

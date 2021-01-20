@@ -25,6 +25,31 @@
             return $result;
         }
 
+        // restituisce tutti i prodotti attivi
+        public function getAllProductDetails($idLabel, $idContainer) {
+            $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
+                        e.idEtichetta, e.nome AS nomeEtichetta, e.descrizione, e.colore, e.titoloAlcolico, e.solfiti, e.bio, e.categoria, e.tenoreZuccherino, e.temperaturaMinima AS tMin, e.temperaturaMassima as tMax, e.classificazione, e.gas, e.annata, e.indicazioneGeografica, e.specificazione, ca.idCantina, ca.nome AS nomeCantina, ca.stato, vi.coloreBacca, vi.nomeSpecie, me.menzione, pr.prezzo, pr.iva
+                        FROM (SELECT * FROM vino_confezionato WHERE vino_confezionato.idContenitore = ? AND vino_confezionato.idEtichetta = ?) AS vc
+                        JOIN contenitore AS co ON vc.idContenitore = co.idContenitore
+                        JOIN etichetta AS e ON e.idEtichetta = vc.idEtichetta
+                        JOIN cantina AS ca ON ca.idCantina = e.idCantina
+                        JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
+                        LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
+                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
+                        WHERE 1";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContainer, $idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
+        // restituisce tutti i dettagli di un prodotto
         public function getAllProductsHomePage($n) {
             $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
                         e.idEtichetta, e.nome AS nomeEtichetta, e.descrizione, e.colore, e.titoloAlcolico, e.solfiti, e.bio, e.categoria, e.tenoreZuccherino, e.temperaturaMinima AS tMin, e.temperaturaMassima as tMax, e.classificazione, e.gas, e.annata, e.indicazioneGeografica, e.specificazione, ca.idCantina, ca.nome AS nomeCantina, ca.stato, vi.coloreBacca, vi.nomeSpecie, me.menzione, pr.prezzo, pr.iva
