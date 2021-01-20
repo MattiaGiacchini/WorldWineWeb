@@ -138,7 +138,7 @@ create table NOTIFICA (
 create table ORDINE (
      idOrdine int not null auto_increment,
      idCliente int not null,
-     data date not null,
+     data datetime not null,
      statoDiAvanzamento char(20) not null,
      pagamentoIntestatario char(50) not null,
      pagamentoNumeroCarta bigint not null,
