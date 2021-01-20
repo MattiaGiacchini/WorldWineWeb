@@ -25,6 +25,29 @@
             return $result;
         }
 
+        public function getAllProductsHomePage($n) {
+            $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
+                        e.idEtichetta, e.nome AS nomeEtichetta, e.descrizione, e.colore, e.titoloAlcolico, e.solfiti, e.bio, e.categoria, e.tenoreZuccherino, e.temperaturaMinima AS tMin, e.temperaturaMassima as tMax, e.classificazione, e.gas, e.annata, e.indicazioneGeografica, e.specificazione, ca.idCantina, ca.nome AS nomeCantina, ca.stato, vi.coloreBacca, vi.nomeSpecie, me.menzione, pr.prezzo, pr.iva
+                        FROM (SELECT * FROM vino_confezionato WHERE vino_confezionato.attivo = 1) AS vc
+                        JOIN contenitore AS co ON vc.idContenitore = co.idContenitore
+                        JOIN etichetta AS e ON e.idEtichetta = vc.idEtichetta
+                        JOIN cantina AS ca ON ca.idCantina = e.idCantina
+                        JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
+                        LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
+                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
+                        WHERE 1";
+            if(isset($n) && $n > 0){
+                $query .= " LIMIT ?";
+            }
+            $stmt = $this->db->prepare($query);
+            if(isset($n) && $n > 0){
+                $stmt->bind_param('i',$n);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
         public function getProductsByIdLabel($idLabel) {
             $stmt = $this->db->prepare("SELECT c.idContenitore, c.tipologia as nomeContenitore, c.capacita as capacitaContenitore, v.idEtichetta, v.attivo, p.prezzo, p.iva
                                         FROM contenitore AS c
