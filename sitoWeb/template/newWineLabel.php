@@ -24,7 +24,7 @@
      ?>
         <li class="id">
             <label for="id">ID Etichetta</label>
-            <input type="text" id="id" name="id" value="" readonly />
+            <input type="text" id="id" name="id" value="<?php echo isset($_GET["idLabel"]) ? $_GET["idLabel"] : ""; ?>" readonly />
         </li>
         <li>
             <fieldset>

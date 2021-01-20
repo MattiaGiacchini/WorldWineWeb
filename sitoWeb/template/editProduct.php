@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="link">
-    <button type="button" name="button" onclick="document.location='./newWineLabel.html?idEtichetta=<?php echo $_GET["idEtichetta"]; ?>'">Visualizza Etichetta</button>
+    <button type="button" name="button" onclick="document.location='./showWineLabel.php?idLabel=<?php echo $_GET["idEtichetta"]; ?>'">Visualizza Etichetta</button>
 </div>
 <form name="editProduct" class="editProduct" action="./insertUpdateProduct.php" method="POST" enctype="multipart/form-data">
     <ul><?php if (isset($_SESSION["msg"])): ?>
