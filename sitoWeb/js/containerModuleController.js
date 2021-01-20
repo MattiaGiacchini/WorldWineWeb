@@ -159,6 +159,8 @@ $(document).ready(function(){
 
     checkbox.addEventListener("change", setOrRemoveRequired);
     document.getElementById("id").addEventListener("change", showAnotherProduct);
+
+    inputFormUpdate.keydown(checkVariation);
     inputFormUpdate.change(checkVariation);
     id.value = "";
 
