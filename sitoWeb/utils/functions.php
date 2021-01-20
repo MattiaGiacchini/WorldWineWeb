@@ -94,13 +94,18 @@
         //Se non ci sono errori, sposto il file dalla posizione temporanea alla cartella di destinazione
         if(strlen($msg)==0){
 
-            //Controllo se esiste file con stesso nome ed eventualmente, quello esistente lo cancello
-            $newFullPath = $path.$imgNewName.".".$imageFileType;
-            if (file_exists($newFullPath)) {
-                chmod($newFullPath,0755);
-                unlink($newFullPath);
+            //Controllo se esiste uno o più file con stesso nome ed eventualmente, quello esistente lo cancello
+            $files = scandir($path);
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    if($file != '.' && $file != '..') {
+                        chmod($path.$file,0755);
+                        unlink($path.$file);
+                    }
+                }
             }
-
+            
+            $newFullPath = $path.$imgNewName.".".$imageFileType;
             if(!move_uploaded_file($image["tmp_name"], $newFullPath)){
                 $msg.= "Errore nel caricamento dell'immagine.";
             }

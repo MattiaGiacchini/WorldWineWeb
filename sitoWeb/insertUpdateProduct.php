@@ -54,7 +54,7 @@
 
                 if (isset($_FILES["newPhoto"]) && strlen($_FILES["newPhoto"]["name"])>0) {
                     list($result, $msg) = upLoadWineImage($_FILES["newPhoto"], $_POST["idLabel"], $_POST["id"]);
-                    if($result == 0){
+                    if($result == 0) {
                         callBackWithError($_POST["idLabel"], $msg);
                     }
                 }
