@@ -156,7 +156,7 @@ create table ORDINE (
 create table PREZZO (
      idContenitore int not null,
      idEtichetta int not null,
-     data date not null,
+     data datetime not null,
      prezzo decimal(8,2) not null,
      iva decimal(4,2) not null,
      constraint IDPREZZO primary key (idContenitore, idEtichetta, data));
