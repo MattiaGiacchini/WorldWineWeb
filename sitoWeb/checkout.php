@@ -23,8 +23,7 @@
                 $dataBase->insertNewAddress(getLoggedUserId(), $_POST["name"], $_POST["address"], $_POST["civic"], $_POST["city"], $_POST["province"], $_POST["zip"], $_POST["state"]);
                 $_POST["shippingAddress"] = $dataBase->getLastAddedAddress(getLoggedUserId());
             }
-            $orderAddress = $dataBase->getUserSpecificiAddress(getLoggedUserId(), $_POST["shippingAddress"]);
-            var_dump($orderAddress);
+            $orderAddress = $_POST["shippingAddress"];
         }
 
         if(isset($_POST["payment"])) {
@@ -32,8 +31,11 @@
                 $dataBase->insertNewPayment(getLoggedUserId(), $_POST["cardname"], $_POST["cardnumber"], $_POST["expiration"]."-01", $_POST["cvv"], $_POST["cardTipology"]);
                 $_POST["payment"] = $_POST["cardnumber"];
             }
-            $orderPayment = $dataBase->getUserSpecificPayment(getLoggedUserId(), $_POST["payment"]);
-            var_dump($orderPayment);
+            $orderPayment = $_POST["payment"];
+        }
+
+        if(isset($_POST["submit"]) && isset($_POST["payment"]) && isset($_POST["shippingAddress"])){
+            $dataBase->createOrder(getLoggedUserId(), $orderPayment, $orderAddress);
         }
 
         require('./template/base.php');

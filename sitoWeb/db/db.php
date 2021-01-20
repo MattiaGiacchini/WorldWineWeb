@@ -266,8 +266,7 @@
             $stmt->execute();
         }
 
-        public function getProductDetails($idEtichetta, $idContenitore)
-        {
+        public function getProductDetails($idEtichetta, $idContenitore) {
             $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE v.idContenitore = ? AND v.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
@@ -277,8 +276,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        public function getWarehouseProducts()
-        {
+        public function getWarehouseProducts() {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
                 $sort = "ORDER BY attivo DESC, e.nome DESC, cantina.nome ASC";
             } else {
@@ -458,7 +456,7 @@
             return $result;
         }
 
-        public function getUserSpecificiAddress($userId, $addressId) {
+        public function getUserSpecificAddress($userId, $addressId) {
             $query = "SELECT * FROM indirizzo WHERE idCliente = ? AND idIndirizzo = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $userId, $addressId);
@@ -466,7 +464,7 @@
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result;
+            return $result[0];
         }
 
         public function getLastAddedAddress($userId) {
@@ -499,7 +497,7 @@
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result;
+            return $result[0];
         }
 
         public function insertNewAddress($userId, $nome, $via, $civico, $citta, $provincia, $cap, $stato){
@@ -516,6 +514,56 @@
             $stmt->bind_param('isssis', $userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia);
 
             return $stmt->execute();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public function createOrder($userId, $cardNumber, $addressId) {
+            $currentdate = $this->getCurrentDateTime();
+            $defaultState = "accettazione";
+            $address = $this->getUserSpecificAddress($userId, $addressId);
+            $payment = $this->getUserSpecificPayment($userId, $cardNumber);
+
+            //order creation
+            $query = "INSERT INTO ordine (idOrdine, idCliente, data, statoDiAvanzamento, pagamentoIntestatario, pagamentoNumeroCarta, pagamentoScadenza, pagamentoCvv, pagamentoTipologiaCarta, spedizioneNome, spedizioneVia, spedizioneCivico, spedizioneCitta, spedizioneProvincia, spedizioneCap) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('isssisisssissi', $userId, $currentdate, $defaultState, $payment["intestatario"], $payment["numeroCarta"], $payment["scadenza"], $payment["cvv"], $payment["tipologiaCarta"], $address["nome"], $address["via"], $address["civico"], $address["citta"], $address["provincia"], $address["cap"]);
+
+            $stmt->execute();
+
+            //order detail stats_stat_correlation
+            $orderId = $this->getLastOrderId($userId);
+        }
+
+        private function getLastOrderId($userId) {
+            $query = "SELECT idOrdine FROM ordine WHERE idCliente = ? ORDER BY data DESC LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        private function getProductsForOrder($userId) {
+            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
         }
 
 
