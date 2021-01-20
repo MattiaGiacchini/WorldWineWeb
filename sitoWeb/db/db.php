@@ -41,9 +41,23 @@
             }
         }
 
-        // ritorna tutte le informazioni di un'etichetta attraverso il suo ID
+        // ritorna tutte le informazioni specifiche di un'etichetta e della sua cantina
         public function getLabelFromId($idLabel) {
             $query = "SELECT e.nome as nomeEtichetta, c.nome as nomeCantina, c.stato as stato FROM etichetta e, cantina c WHERE idEtichetta = ? AND e.idCantina = c.idCantina";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i',$idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
+        // ritorna tutte le informazioni di un'etichetta attraverso il suo ID
+        public function getLabelDetailsFromId($idLabel) {
+            $query = "SELECT * FROM etichetta WHERE idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i',$idLabel);
             $stmt->execute();
