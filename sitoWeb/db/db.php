@@ -301,7 +301,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        private function updateWarehouseAvailability($idEtichetta, $idContenitore, $amount){
+        /*private function updateWarehouseAvailability($idEtichetta, $idContenitore, $amount){
             $query = "SELECT SUM(quantita) as 'QuantitaDisponibile' FROM modifica_scorte WHERE idContenitore = ? AND idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
@@ -313,6 +313,31 @@
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iii', $finalAmount, $idContenitore, $idEtichetta);
             $stmt->execute();
+        }*/
+
+        private function updateWarehouseAvailability($idEtichetta, $idContenitore, $amount){
+            $this->db->begin_transaction();
+
+            try {
+                $query = "SELECT scorteMagazzino FROM vino_confezionato WHERE idContenitore = ? AND idEtichetta = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param('ii', $idContenitore, $idEtichetta);
+                $stmt->execute();
+                $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                $finalAmount = intval($oldAmount[0]["scorteMagazzino"]) + $amount;
+                echo $amount;
+
+                $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param('iii', $finalAmount, $idContenitore, $idEtichetta);
+                $stmt->execute();
+
+                $this->db->commit();
+            } catch (mysqli_sql_exception $exception) {
+                $this->db->rollback();
+                throw $exception;
+
+            }
         }
 
         public function getProductDetails($idEtichetta, $idContenitore) {
@@ -577,8 +602,41 @@
 
 
         public function createOrder($userId, $cardNumber, $addressId) {
-            $currentdate = $this->getCurrentDateTime();
+
+            //Begin transaction for order submit
+            $this->db->begin_transaction();
+
+            try {
+                $this->checkOrderProductsAvailability($userId);
+                $orderId = $this->createDefinitiveOrder($userId, $cardNumber, $addressId);
+                $this->addProductsToDetail($userId, $orderId);
+                //$this->clearCart($userId);
+
+                $this->db->commit();
+            } catch (mysqli_sql_exception $exception) {
+                $this->db->rollback();
+                throw $exception;
+
+            }
+
+
+
+
+
+
+
+        }
+
+        private function checkOrderProductsAvailability($userId){
+            $query = "UPDATE carrello AS c JOIN vino_confezionato AS v ON c.idEtichetta = v.idEtichetta AND c.idContenitore = v.idContenitore SET c.quantita = IF(c.quantita > v.scorteMagazzino, v.scorteMagazzino, c.quantita) WHERE c.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+        }
+
+        private function createDefinitiveOrder($userId, $cardNumber, $addressId) {
             $defaultState = "accettazione";
+            $currentdate = $this->getCurrentDateTime();
             $address = $this->getUserSpecificAddress($userId, $addressId);
             $payment = $this->getUserSpecificPayment($userId, $cardNumber);
 
@@ -586,11 +644,12 @@
             $query = "INSERT INTO ordine (idOrdine, idCliente, data, statoDiAvanzamento, pagamentoIntestatario, pagamentoNumeroCarta, pagamentoScadenza, pagamentoCvv, pagamentoTipologiaCarta, spedizioneNome, spedizioneVia, spedizioneCivico, spedizioneCitta, spedizioneProvincia, spedizioneCap) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('isssisisssissi', $userId, $currentdate, $defaultState, $payment["intestatario"], $payment["numeroCarta"], $payment["scadenza"], $payment["cvv"], $payment["tipologiaCarta"], $address["nome"], $address["via"], $address["civico"], $address["citta"], $address["provincia"], $address["cap"]);
-
             $stmt->execute();
 
-            //order detail creation
-            $orderId = $this->getLastOrderId($userId);
+            return  $this->getLastOrderId($userId);
+        }
+
+        private function addProductsToDetail($userId, $orderId) {
             $orderProducts = $this->getProductsForOrder($userId);
             if (count($orderProducts) > 0) {
                 foreach ($orderProducts as $product){
@@ -598,8 +657,22 @@
                     $stmt = $this->db->prepare($query);
                     $stmt->bind_param('iiii', $orderId, $product["idContenitore"], $product["idEtichetta"], $product["quantita"]);
                     $stmt->execute();
+
+                    $this->updateWarehouseAvailability($product["idEtichetta"], $product["idContenitore"], -$product["quantita"]);
+
                 }
             }
+        }
+
+        private function getProductsForOrder($userId) {
+            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
         }
 
         private function getLastOrderId($userId) {
@@ -613,16 +686,16 @@
             return $result[0]["idOrdine"];
         }
 
-        private function getProductsForOrder($userId) {
-            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ?";
+        private function clearCart($userId) {
+            $query = "DELETE FROM `carrello` WHERE idCliente = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
             $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-            return $result;
         }
+
+
+
 
 
 
