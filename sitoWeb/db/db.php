@@ -480,7 +480,7 @@
         public function insertNewPayment($userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia) {
             $query = "INSERT INTO metodo_di_pagamento (idCliente, intestatario, numeroCarta, scadenza, cvv, tipologiaCarta) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('isisis', $userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia);
+            $stmt->bind_param('isssis', $userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia);
 
             return $stmt->execute();
         }

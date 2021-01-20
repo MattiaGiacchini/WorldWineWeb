@@ -6,9 +6,10 @@
     <div class="titleBar"> <h2><?php echo $templateParams["titoloPagina"]; ?></h2> </div>
 </div>
 
+<?php if(isset($_POST)) {var_dump($_POST);} ?>
 
 <div>
-    <form name="checkoutForm" class="checkout" action="index.html" method="post">
+    <form name="checkoutForm" class="checkout" action="checkout.php" method="post">
         <section class="riepilogoOrdine">
             <h3>Riepilogo ordine</h3>
             <article class="tile riepilogo">
@@ -61,12 +62,8 @@
                 </select>
             </li>
             <li>
-                <label for="firstname">Nome</label>
-                <input type="text" id="firstname" name="firstname" required readonly />
-            </li>
-            <li>
-                <label for="lastname">Cognome</label>
-                <input type="text" id="lastname" name="lastname" required readonly />
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" required readonly />
             </li>
             <li>
                 <label for="adr">Via</label>
@@ -81,21 +78,21 @@
                 <input type="text" id="city" name="city" required readonly />
             </li>
             <li>
+                <label for="zip">Codice postale</label>
+                <input type="number" id="zip" name="zip" min="00001" max="99999" required readonly />
+            </li>
+            <li>
                 <label for="province">Provincia</label>
                 <input type="text" id="province" name="province" required readonly />
             </li>
-            <li class="newCantina">
+            <li>
                 <label for="state">Stato</label>
-                <select class="stato" name="stato" id="state" required>
+                <select class="state" name="state" id="state" required >
                     <option value="">Selezione stato</option>
                     <?php foreach ($states as $state) { ?>
                         <option value="<?php echo $state["sigla"]; ?>"><?php echo $state["nome"]; ?></option>
                     <?php } ?>
                 </select>
-            </li>
-            <li>
-                <label for="zip">Codice postale</label>
-                <input type="number" id="zip" name="zip" min="00001" max="99999" required readonly />
             </li>
         </ul>
         <ul class="payment">
@@ -119,17 +116,17 @@
             </li>
             <li>
                 <label for="cardTipology">Tipologia carta</label>
-                <select name="cardTipology" id="cardTipology" required readonly>
+                <select name="cardTipology" id="cardTipology" required >
                     <option value="">Seleziona tipologia</option>
-                    <option value="visa">VISA</option>
-                    <option value="vpay">V-PAY</option>
-                    <option value="mastercard">Mastercard</option>
-                    <option value="maestro">Maestro</option>
+                    <option value="VISA">VISA</option>
+                    <option value="V-PAY">V-PAY</option>
+                    <option value="Mastercard">Mastercard</option>
+                    <option value="Maestro">Maestro</option>
                 </select>
             </li>
             <li>
                 <label for="cardnumber">Numero della carta</label>
-                <input type="text" id="cardnumber" name="cardnumber" required readonly />
+                <input type="text" maxlength="16" id="cardnumber" name="cardnumber" required readonly />
             </li>
             <li>
                 <label for="expiration">Scadenza</label>
