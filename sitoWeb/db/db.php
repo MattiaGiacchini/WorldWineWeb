@@ -276,7 +276,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        public function getWarehouseProducts() {
+            public function getWarehouseProducts() {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
                 $sort = "ORDER BY attivo DESC, e.nome DESC, cantina.nome ASC";
             } else {
@@ -540,8 +540,17 @@
 
             $stmt->execute();
 
-            //order detail stats_stat_correlation
+            //order detail creation
             $orderId = $this->getLastOrderId($userId);
+            $orderProducts = $this->getProductsForOrder($userId);
+            if (count($orderProducts) > 0) {
+                foreach ($orderProducts as $product){
+                    $query = "INSERT INTO dettaglio (idOrdine, idContenitore, idEtichetta, quantita) VALUES (?, ?, ?, ?)";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->bind_param('iiii', $orderId, $product["idContenitore"], $product["idEtichetta"], $product["quantita"]);
+                    $stmt->execute();
+                }
+            }
         }
 
         private function getLastOrderId($userId) {
@@ -552,7 +561,7 @@
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result;
+            return $result[0]["idOrdine"];
         }
 
         private function getProductsForOrder($userId) {
@@ -569,4 +578,5 @@
 
 
     }
+
 ?>
