@@ -419,7 +419,7 @@
         }
 
         public function getAllOrders(){
-            $query = "SELECT o.idOrdine, o.data, o.statoDiAvanzamento, tot.totaleOrdine FROM ordine o JOIN totale_ordine tot ON (o.idOrdine = tot.idOrdine) WHERE 1" . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine, o.data, o.statoDiAvanzamento " . $this->getOrderFilters();
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -429,7 +429,8 @@
         }
 
         public function getClientOrders($userId){
-            $query = "SELECT o.idOrdine, o.data, o.statoDiAvanzamento, tot.totaleOrdine FROM ordine o JOIN totale_ordine tot ON o.idOrdine = tot.idOrdine WHERE o.idCliente = ? " . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine
+" . $this->getOrderFilters();
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -618,11 +619,6 @@
                 throw $exception;
 
             }
-
-
-
-
-
 
 
         }
