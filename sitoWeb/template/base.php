@@ -43,7 +43,7 @@
             <a href="areaPersonale.php">
                 <h2>Benvenuto <?php echo getUserName(); ?></h2>
                 <p><?php if(getUserRole() != "client") { echo $userRole; } ?></p>
-                <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" alt="<?php echo $username; ?>" /> 
+                <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" alt="<?php echo $username; ?>" />
             </a>
         </section> <?php } ?>
         <ul>
@@ -61,8 +61,6 @@
                     case 'admin':
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
-                        echo '<li><a href="personalArea.php">Area Personale</a></li>';
-                        echo '<li><a href="logout.php">Logout</a></li>';
 
                     case 'collaborator':
                         echo '<li><a href="orders.php">Gestione Ordini</a></li>';
