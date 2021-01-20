@@ -77,8 +77,8 @@ create table FATTURA (
      constraint FKRICHIESTA_ID unique (idOrdine));
 
 create table INDIRIZZO (
+     idIndirizzo int not null auto_increment,
      idCliente int not null,
-     idIndirizzo int not null,
      nome char(50) not null,
      via varchar(100) not null,
      civico int not null,
@@ -86,7 +86,7 @@ create table INDIRIZZO (
      provincia varchar(80) not null,
      cap int not null,
      stato char(3) not null,
-     constraint IDINDIRIZZO primary key (idCliente, idIndirizzo));
+     constraint IDINDIRIZZO primary key (idIndirizzo));
 
 create table MENZIONE (
      idMenzione int not null auto_increment,
@@ -100,9 +100,8 @@ create table METODO_DI_PAGAMENTO (
      numeroCarta bigint not null,
      scadenza date not null,
      cvv int not null,
-     tipologiaCarta varchar(20) not null,
-     constraint IDMETODO_DI_PAGAMENTO primary key (idCliente, numeroCarta),
-     constraint IDMETODO_DI_PAGAMENTO_1 unique (numeroCarta));
+     tipologiaCarta enum('VISA', 'V-PAY', 'Mastercard', 'Maestro') not null,
+     constraint IDMETODO_DI_PAGAMENTO primary key (numeroCarta));
 
 create table DETTAGLIO (
      idOrdine int not null,
@@ -124,7 +123,7 @@ create table MODIFICA_SCORTE (
      idEtichetta int not null,
      idCollaboratore int not null,
      quantita int not null,
-     data date not null,
+     data datetime not null,
      constraint IDMODIFICA_SCORTE primary key (idContenitore, idEtichetta, idCollaboratore, data));
 
 create table NOTIFICA (
@@ -139,7 +138,7 @@ create table NOTIFICA (
 create table ORDINE (
      idOrdine int not null auto_increment,
      idCliente int not null,
-     data date not null,
+     data datetime not null,
      statoDiAvanzamento char(20) not null,
      pagamentoIntestatario char(50) not null,
      pagamentoNumeroCarta bigint not null,
@@ -343,8 +342,4 @@ CREATE VIEW totale_prezzo_prodotto AS SELECT d.idOrdine AS idOrdine, o.idCliente
 
 CREATE VIEW totale_ordine AS SELECT totale_prezzo_prodotto.idOrdine AS idOrdine, totale_prezzo_prodotto.idCliente AS idCliente, sum(totale_prezzo_prodotto.totaleProdotto) AS totaleOrdine FROM totale_prezzo_prodotto GROUP BY totale_prezzo_prodotto.idOrdine, totale_prezzo_prodotto.idCliente;
 
-
-
-
-
-INSERT INTO utente (idUtente, email, password, ruolo, nome, cognome, dataDiNascita, cf, partitaIva, ragioneSociale, attivo) VALUES (NULL, 'ma.giacchini99@gmail.com', 'a123', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199O', NULL, NULL, '1');
+CREATE VIEW totale_prodotto_carrello AS SELECT c.idCliente AS idCliente, c.idContenitore AS idContenitore, c.idEtichetta AS idEtichetta, c.quantita* pr.prezzo AS totaleProdotto, pr.iva AS iva FROM carrello c join prezzo_recente pr on(c.idContenitore = pr.idContenitore) and (c.idEtichetta = pr.idEtichetta);

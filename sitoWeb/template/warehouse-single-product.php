@@ -32,7 +32,7 @@
         </div>
 
         <article class="tile ">
-            <img class="tileImg" src="<?php echo WINE_PHOTO_DIR . $imgURL ; ?>" alt="vino">
+            <img class="tileImg" src="<?php echo $imgURL ; ?>" alt="vino">
             <div class="tileContent">
                 <div class="tileBody">
                     <h3><?php echo $product[0]["NomeVino"] ?></h3>

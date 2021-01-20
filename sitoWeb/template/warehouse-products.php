@@ -48,13 +48,11 @@
         foreach ($templateParams["warehouseProducts"] as $products): ?>
 
             <?php
-                $idEtichetta = $products["idEtichetta"];
-                $idContenitore = $products["idContenitore"];
-                $imgURL = getWineImgURL($idEtichetta, $idContenitore);
+                $imgURL = getWineImgURL($products["idEtichetta"], $products["idContenitore"]);
             ?>
-            <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $idEtichetta . "&contenitore=" . $idContenitore; ?>>
+            <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $products["idEtichetta"] . "&contenitore=" . $products["idContenitore"]; ?>>
                 <article class="tile <?php if ($products["attivo"] == 0) echo "deactivated"; ?>">
-                    <img class="tileImg" src=<?php echo WINE_PHOTO_DIR . $imgURL ; ?> alt="vino">
+                    <img class="tileImg" src=<?php echo $imgURL ; ?> alt="vino">
                     <div class="tileContent">
                         <div class="tileBody">
                             <h3><?php echo $products["NomeVino"] ?></h3>

@@ -176,10 +176,32 @@ a.tileLink {
     margin: auto 0px 10px auto;
 }
 
+.tile.cart.product .tileImg {
+    max-width: 100%;
+    width: 100%;
+    width: 100%;
+}
+
 a.tileLink {
     width: auto;
     margin: 1%;
     text-decoration: none;
+}
+
+.tile.prodotto.checkout .tileImg {
+    max-width: 15%;
+    max-height: 100%;
+    vertical-align: middle;
+    margin: 0 2% 0 1%;
+}
+
+.tile.prodotto.checkout .tileContent {
+    width: 70%;
+}
+
+.tile.prodotto.checkout {
+    min-height: inherit;
+    width: 80%;
 }
 
 @media screen and (min-width: 480px) {

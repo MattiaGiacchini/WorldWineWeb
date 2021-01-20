@@ -315,8 +315,7 @@
             $stmt->execute();
         }
 
-        public function getProductDetails($idEtichetta, $idContenitore)
-        {
+        public function getProductDetails($idEtichetta, $idContenitore) {
             $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) WHERE v.idContenitore = ? AND v.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
@@ -326,8 +325,7 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        public function getWarehouseProducts()
-        {
+            public function getWarehouseProducts() {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
                 $sort = "ORDER BY attivo DESC, e.nome DESC, cantina.nome ASC";
             } else {
@@ -474,5 +472,160 @@
             return $result;
         }
 
+        public function getCartProducts($userId) {
+            $query = "SELECT e.nome AS NomeVino, cantina.nome AS NomeCantina, p.prezzo, v.scorteMagazzino, c.capacita, v.idEtichetta, v.idContenitore, v.attivo, carrello.quantita, IF(carrello.quantita > v.scorteMagazzino, v.scorteMagazzino, carrello.quantita) as quantitaDefinitiva FROM contenitore AS c JOIN etichetta AS e JOIN prezzo_recente AS p JOIN vino_confezionato AS v JOIN cantina JOIN carrello ON (v.idContenitore = c.idContenitore) AND (v.idEtichetta = e.idEtichetta) AND (v.idContenitore = p.idContenitore) AND (v.idEtichetta = p.idEtichetta) AND (e.idCantina = cantina.idCantina) AND (carrello.idEtichetta = v.idEtichetta) AND (carrello.idContenitore = v.idContenitore) WHERE p.idContenitore = v.idContenitore AND p.idEtichetta = v.idEtichetta AND carrello.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getCartValue($userId) {
+            $query = "SELECT sum(totale_prodotto_carrello.totaleProdotto) AS totaleCarrello FROM totale_prodotto_carrello WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0]["totaleCarrello"];
+        }
+
+        public function getUserAddresses($userId) {
+            $query = "SELECT * FROM indirizzo WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getUserSpecificAddress($userId, $addressId) {
+            $query = "SELECT * FROM indirizzo WHERE idCliente = ? AND idIndirizzo = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $userId, $addressId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0];
+        }
+
+        public function getLastAddedAddress($userId) {
+            $query = "SELECT idIndirizzo FROM indirizzo WHERE idCliente = ? ORDER BY idIndirizzo DESC LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $userId, $addressId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getUserPayments($userId) {
+            $query = "SELECT * FROM metodo_di_pagamento WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getUserSpecificPayment($userId, $cardNumber) {
+            $query = "SELECT * FROM metodo_di_pagamento WHERE idCliente = ? AND numeroCarta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('is', $userId, $cardNumber);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0];
+        }
+
+        public function insertNewAddress($userId, $nome, $via, $civico, $citta, $provincia, $cap, $stato){
+            $query = "INSERT INTO indirizzo (idIndirizzo, idCliente, nome, via, civico, citta, provincia, cap, stato) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ississis', $userId, $nome, $via, $civico, $citta, $provincia, $cap, $stato);
+
+            return $stmt->execute();
+        }
+
+        public function insertNewPayment($userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia) {
+            $query = "INSERT INTO metodo_di_pagamento (idCliente, intestatario, numeroCarta, scadenza, cvv, tipologiaCarta) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('isssis', $userId, $intestatario, $numeroCarta, $scadanza, $cvv, $tipologia);
+
+            return $stmt->execute();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public function createOrder($userId, $cardNumber, $addressId) {
+            $currentdate = $this->getCurrentDateTime();
+            $defaultState = "accettazione";
+            $address = $this->getUserSpecificAddress($userId, $addressId);
+            $payment = $this->getUserSpecificPayment($userId, $cardNumber);
+
+            //order creation
+            $query = "INSERT INTO ordine (idOrdine, idCliente, data, statoDiAvanzamento, pagamentoIntestatario, pagamentoNumeroCarta, pagamentoScadenza, pagamentoCvv, pagamentoTipologiaCarta, spedizioneNome, spedizioneVia, spedizioneCivico, spedizioneCitta, spedizioneProvincia, spedizioneCap) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('isssisisssissi', $userId, $currentdate, $defaultState, $payment["intestatario"], $payment["numeroCarta"], $payment["scadenza"], $payment["cvv"], $payment["tipologiaCarta"], $address["nome"], $address["via"], $address["civico"], $address["citta"], $address["provincia"], $address["cap"]);
+
+            $stmt->execute();
+
+            //order detail creation
+            $orderId = $this->getLastOrderId($userId);
+            $orderProducts = $this->getProductsForOrder($userId);
+            if (count($orderProducts) > 0) {
+                foreach ($orderProducts as $product){
+                    $query = "INSERT INTO dettaglio (idOrdine, idContenitore, idEtichetta, quantita) VALUES (?, ?, ?, ?)";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->bind_param('iiii', $orderId, $product["idContenitore"], $product["idEtichetta"], $product["quantita"]);
+                    $stmt->execute();
+                }
+            }
+        }
+
+        private function getLastOrderId($userId) {
+            $query = "SELECT idOrdine FROM ordine WHERE idCliente = ? ORDER BY data DESC LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0]["idOrdine"];
+        }
+
+        private function getProductsForOrder($userId) {
+            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+
+
     }
+
 ?>

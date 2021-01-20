@@ -27,6 +27,10 @@ $(document).ready(function(){
     });
 
 
+    $("#addNewLabel").click(function(){
+        window.location='insertNewWineLabel.php';
+    });
+
     warehouseLoad.each(function(){
         warehouseLoadingValue = Number($(this).html());
         if(warehouseLoadingValue > 0){

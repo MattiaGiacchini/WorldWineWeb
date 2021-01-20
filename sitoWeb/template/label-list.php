@@ -22,7 +22,7 @@
     </form>
 </div>
 
-<?php 
+<?php
     if(getUserRole() === "admin") {
         echo '<button id="addNewLabel" type="button" name="button">Nuova etichetta</button>';
     }
@@ -30,7 +30,7 @@
 
 
 <div class="mainContent">
-    
+
     <?php if (count($templateParams["labels"]) == 0): ?>
         <article>
             <p>Nessuna etichetta trovata</p>
@@ -44,14 +44,14 @@
                         <h3><?php echo $label["vino"]; ?></h3>
                         <h4><?php echo $label["cantina"]; ?></h4>
                         <p>
-                            <?php 
+                            <?php
                                 if(!is_null($label["origine"])) {
                                     echo $label["origine"] . " - ";
                                 }
-                                echo $label["stato"]; 
+                                echo $label["stato"];
                                 if(!is_null($label["annata"])) {
                                     echo " - " . $label["annata"];
-                                } 
+                                }
                             ?>
                         </p>
                         <div class="tileFooter">
@@ -65,5 +65,5 @@
     <?php } endif; ?>
 
 
-    
+
 </div>
