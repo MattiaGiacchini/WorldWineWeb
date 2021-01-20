@@ -1,9 +1,31 @@
 
+function getCookie(cookieName) {
+  let cookie = cookieName + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  let found = false;
+  let c;
+  for(let i = 0; i <ca.length; i++) {
+    c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cookie) == 0) {
+      found = true;
+    }
+  }
+  if(found) {
+      return c.substring(cookie.length, c.length);
+  }
+  return "";
+}
+
 function getOutLi(elements) {
     elements.slideUp();
     elements.attr("disabled", true);
     elements.find("*").attr("disabled", true);
 }
+
 function getInLi(elements, required) {
     elements.removeAttr("disabled");
     elements.find("*").removeAttr("disabled");
@@ -167,10 +189,36 @@ $(document).ready(function(){
         *   apparizione o scoparsa del vitigno da aggiungere
         */
         document.getElementById("menzione").addEventListener("change", changeForm);
+
+        changeForm();
     } else {
         getInLiInstant(idBox);
-        $("form.newWineLabel > ul > li").find("*").not("[type = button]").attr("disabled", true);
-    }
 
-    changeForm();
+        const details = JSON.parse(getCookie("labelDetails"));
+        document.cookie =  "labelDetails=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        console.log(details);
+
+        document.forms["newWineLabel"]["categoria"].value               = details["categoria"];
+        document.forms["newWineLabel"]["nome"].value                    = details["nome"];
+        document.forms["newWineLabel"]["description"].value             = details["descrizione"];
+        document.forms["newWineLabel"]["colore"].value                  = details["colore"];
+        document.forms["newWineLabel"]["alcol"].value                   = details["titoloAlcolico"];
+        document.forms["newWineLabel"]["tMax"].value                    = details["temperaturaMassima"];
+        document.forms["newWineLabel"]["tMin"].value                    = details["temperaturaMinima"];
+        document.forms["newWineLabel"]["zucchero"].value                = details["tenoreZuccherino"];
+        document.forms["newWineLabel"]["cantina"].value                 = details["idCantina"];
+        document.forms["newWineLabel"]["solfiti"].value                 = details["solfiti"];
+        document.forms["newWineLabel"]["biologico"].value               = details["bio"];
+        document.forms["newWineLabel"]["gas"].value                     = details["gas"];
+        document.forms["newWineLabel"]["classificazione"].value         = details["classificazione"];
+        document.forms["newWineLabel"]["vitigno"].value                 = details["vitigno"];
+        document.forms["newWineLabel"]["anno"].value                    = details["annata"];
+        document.forms["newWineLabel"]["indicazioneGeografica"].value   = details["indicazioneGeografica"];
+        document.forms["newWineLabel"]["menzione"].value                = details["menzione"];
+        document.forms["newWineLabel"]["specificazione"].value          = details["specificazione"];
+
+        $("form.newWineLabel > ul > li.new, form.newWineLabel > ul > li.newCantina").hide();
+        $("form.newWineLabel > ul > li").find("*").not("[type = button]").attr("disabled", true);
+        $("form.newWineLabel > ul > li > input[type = submit], form.newWineLabel > ul > li > input[type = button]").hide();
+    }
 });
