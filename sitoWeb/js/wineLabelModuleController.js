@@ -200,7 +200,7 @@ $(document).ready(function(){
 
         document.forms["newWineLabel"]["categoria"].value               = details["categoria"];
         document.forms["newWineLabel"]["nome"].value                    = details["nome"];
-        document.forms["newWineLabel"]["description"].value             = details["descrizione"];
+        document.forms["newWineLabel"]["description"].value             = details["descrizione"].replaceAll("+", " ");
         document.forms["newWineLabel"]["colore"].value                  = details["colore"];
         document.forms["newWineLabel"]["alcol"].value                   = details["titoloAlcolico"];
         document.forms["newWineLabel"]["tMax"].value                    = details["temperaturaMassima"];
