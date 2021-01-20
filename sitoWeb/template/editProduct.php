@@ -7,8 +7,18 @@
     <button type="button" name="button" onclick="document.location='./newWineLabel.html?idEtichetta=<?php echo $_GET["idEtichetta"]; ?>'">Visualizza Etichetta</button>
 </div>
 <form name="editProduct" class="editProduct" action="./insertUpdateProduct.php" method="POST" enctype="multipart/form-data">
-    <ul>
+    <ul><?php if (isset($_SESSION["msg"])): ?>
         <li>
+            <p><?php echo $_SESSION["msg"]; ?></p>
+        </li>
+        <?php unset($_SESSION["msg"]); endif;?>
+        <li>
+            <input type="hidden" name="idLabel"         id="idLabel"        value="<?php echo $_GET["idEtichetta"]; ?>">
+            <input type="hidden" name="lastVisible"     id="lastVisible"    value="">
+            <input type="hidden" name="lastPrice"       id="lastPrice"      value="">
+            <input type="hidden" name="lastiva"         id="lastIva"        value="">
+            <input type="hidden" name="lastPhoto"       id="lastPhoto"      value="">
+
             <label for="id">Contenitori Abbinati</label>
             <select class="id" name="id" id="id">
                 <option value="">Seleziona il contenitore...</option><?php
@@ -42,6 +52,14 @@
                 } ?>
             </select>
         </li>
+        <li>
+            <div class="figure">
+                <figure>
+                    <figcaption>Immagine attualmente in uso</figcaption>
+                    <img src="<?php echo getWineImgURL(0,0); ?>" id="photo" alt="Immagine di default">
+                </figure>
+            </div>
+        </li>
         <li class="update">
             <fieldset class="modify">
                 <p>Dati del Contenitore Abbinato</p>
@@ -52,18 +70,9 @@
                 <label for="iva">Imponibile %</label>
                 <input type="number" name="iva" id="iva" value="" max="100.00" min="0.00" step="0.01">
                 <label for="newPhoto">Carica nuova foto</label>
-                <input type="file" id="newPhoto" name="newPhoto" accept=".gif,.jpg,.jpeg,.png,"/>
+                <input type="file" id="newPhoto" name="newPhoto" accept="image/gif,image/jpeg,image/png"/>
             </fieldset>
         </li>
-        <li class="update">
-            <div class="figure">
-                <figure>
-                    <figcaption>Immagine attualmente in uso</figcaption>
-                    <img src="<?php echo getWineImgURL(0,0); ?>" id="photo" alt="Immagine di default">
-                </figure>
-            </div>
-        </li>
-            <input type="hidden" name="idLabel" value="<?php echo $_GET["idEtichetta"]; ?>">
         <li class="update">
             <input type="submit" value="inserisci">
         </li>

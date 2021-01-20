@@ -170,9 +170,10 @@
 
         // aggiunge una nuova valutazione al prodotto
         public function addNewEvaluationProduct($idLabel, $idContainer, $price, $iva) {
+            $time = $this->getCurrentDateTime();
             $query = "INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssdd', $idContainer, $idLabel, $this->getCurrentDateTime(), $price, $iva);
+            $stmt->bind_param('iisdd', $idContainer, $idLabel, $time, $price, $iva);
 
             return $stmt->execute();
         }
