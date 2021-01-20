@@ -458,10 +458,43 @@
             return $result;
         }
 
+        public function getUserSpecificiAddress($userId, $addressId) {
+            $query = "SELECT * FROM indirizzo WHERE idCliente = ? AND idIndirizzo = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $userId, $addressId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getLastAddedAddress($userId) {
+            $query = "SELECT idIndirizzo FROM indirizzo WHERE idCliente = ? ORDER BY idIndirizzo DESC LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $userId, $addressId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
         public function getUserPayments($userId) {
             $query = "SELECT * FROM metodo_di_pagamento WHERE idCliente = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getUserSpecificPayment($userId, $cardNumber) {
+            $query = "SELECT * FROM metodo_di_pagamento WHERE idCliente = ? AND numeroCarta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('is', $userId, $cardNumber);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

@@ -6,8 +6,6 @@
     <div class="titleBar"> <h2><?php echo $templateParams["titoloPagina"]; ?></h2> </div>
 </div>
 
-<?php if(isset($_POST)) {var_dump($_POST);} ?>
-
 <div>
     <form name="checkoutForm" class="checkout" action="checkout.php" method="post">
         <section class="riepilogoOrdine">
@@ -126,7 +124,7 @@
             </li>
             <li>
                 <label for="cardnumber">Numero della carta</label>
-                <input type="text" maxlength="16" id="cardnumber" name="cardnumber" required readonly />
+                <input type="text" pattern="[0-9]{16}" maxlength="16" id="cardnumber" name="cardnumber" required readonly />
             </li>
             <li>
                 <label for="expiration">Scadenza</label>
