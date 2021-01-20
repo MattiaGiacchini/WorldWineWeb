@@ -166,7 +166,7 @@
 
         // aggiunge a database un nuovo prodotto
         public function addNewProduct($idContainer, $idLabel, $active) {
-            $query = "INSERT INTO vino_confezionato (idContenitore, idEtichetta, scorteMazzino, mediaRecensioni, attivo) VALUES (?, ?, 0, 0.0, ?)";
+            $query = "INSERT INTO vino_confezionato (idContenitore, idEtichetta, scorteMagazzino, mediaRecensioni, attivo) VALUES (?, ?, '0', '0.0', ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iii', $idContainer, $idLabel, $active);
 

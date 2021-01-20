@@ -477,7 +477,8 @@ INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Superiore');
 
 INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`, `attivo`) VALUES
 (1, 'ma.giacchini99@gmail.com', 'a123', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199O', NULL, NULL, 1),
-(2, 'a@b.it', 'a123', 'client', 'a', 'b', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1);
+(2, 'a@b.it', 'a123', 'client', 'a', 'b', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1),
+(3, 'dejackdani@gmail.com', '123456aA', 'admin', 'Daniele', 'Ercoles', '1992-10-19', 'RCLDNL92R19C357C', NULL, NULL, 1);
 
 INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `temperaturaMinima`, `temperaturaMassima`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina`) VALUES
 (1, 'Il Merlot', 'Perfezione come ricerca. Ci sono uve che si preannunciano bellissime, come una promessa di felicità. Succede quando la natura, il terroir, il sole, si allineano in un\'annata speciale e forse irripetibile. E allora non si può che accettare la sfida della perfezione. Nasce il desiderio di non perdere l\'eccezionalità di quella magica coincidenza e ricercare il meglio. C\'è la tensione a mantenere quella promessa, creando il vino più equilibrato, elegante, espressivo e longevo. Il merlot esce solo ne', 'Rosso', '12.00', 1, 0, 'Vino', 'Secco', '16.00', '18.00', 'DOCG', 'Frizzante', 1950, 'Cervia', 'Nessuna', 108, 4, 2);
