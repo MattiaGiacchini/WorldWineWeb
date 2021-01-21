@@ -7,7 +7,6 @@
     <div class="left">
 
         <article class="wineCard">
-            <a href="#">
                 <div class="wineCard-Container">
                     <img class="fotoVino" src="<?php echo getWineImgURL($prodotto["idEtichetta"], $prodotto["idContenitore"]); ?>" alt="Foto <?php echo $prodotto["categoria"]." ".$prodotto["colore"]; ?>" />
                     <div class="etichetta">
@@ -17,22 +16,24 @@
                             <h5><?php echo round($prodotto["capacita"], 3); ?>L</h5> <h5><?php echo round($prodotto["titoloAlcolico"], 1); ?>% Vol</h5>
                         </div>
                         <p class="origine"><?php echo $prodotto["indicazioneGeografica"]!=null ? $prodotto["indicazioneGeografica"]." - " : ""; echo $prodotto["stato"] != null ? $prodotto["stato"] : "";?></p>
-                        <p class="certificato"><?php echo $prodotto["classificazione"]; ?></p>
+                        <p class="certificato"><?php echo $prodotto["categoria"] == 'Vino' ? "Vino ".$prodotto["classificazione"] : "Spumante ".$prodotto["tenoreZuccherino"]; ; ?></p>
                         <p class="annata"><?php echo $prodotto["annata"]; ?></p>
                         <img src="./img/ratingStar-rev2.png" alt="voto: <?php echo $prodotto["mediaRecensioni"]; ?> su 5" />
                         <h6><?php echo $prodotto["prezzo"]; ?>€</h6>
                         <p><?php echo $prodotto["scorteMagazzino"] > 0 ? "Disponibile" : "Non Disponibile"; ?></p>
                     </div>
                 </div>
-            </a>
             <button class="preference favourite" name="preference favourite"></button>
         </article>
-
-        <form class="quantityToOrder" action="#" method="post">
+        <?php if($isClient): ?>
+        <form class="quantityToOrder" action="insertUpdateCartElement.php" method="post">
+            <input type="hidden" name="idLabel" value="<?php echo $prodotto["idEtichetta"]; ?>">
+            <input type="hidden" name="idContainer" value="<?php echo $prodotto["idContenitore"]; ?>">
+            <input type="hidden" name="idUser" value="<?php echo getLoggedUserId(); ?>">
             <label for="qnt">Quantità da Ordinare</label>
-            <input type="number" id="qnt" name="qnt" value="" min="0" max="<?php echo $prodotto["scorteMagazzino"]; ?>" step="1">
+            <input type="number" id="qnt" name="qnt" value="" min="0" max="<?php echo $cartElement; ?>" >
             <input type="submit" name="submit" value="aggiungi a carrello">
-        </form>
+        </form><?php endif; ?>
     </div>
     <div class="right">
         <button>Descrizione Organolettica</button>
@@ -51,19 +52,19 @@
                 <tr>
                   <th id="wineMaker">Cantina</th>
                   <td headers="wineMaker"><?php echo $prodotto["nomeCantina"]; ?></td>
-                </tr>
+                </tr><?php if($prodotto["annata"]): ?>
                 <tr>
                   <th id="year">Annata</th>
                   <td headers="year"><?php echo $prodotto["annata"]; ?></td>
-                </tr>
+                </tr><?php endif; if($prodotto["classificazione"]): ?>
                 <tr>
                   <th id="certificate">Certificato</th>
                   <td headers="certificate"><?php echo $prodotto["classificazione"]; ?></td>
-                </tr>
+                </tr><?php endif;  if($prodotto["nomeSpecie"]):?>
                 <tr>
                   <th id="wineVariety">Vitigno</th>
-                  <td headers="wineVariety"><?php echo $prodotto["nomeSpecie"] != null ? $prodotto["nomeSpecie"] : "Sconosciuto"; ?></td>
-                </tr>
+                  <td headers="wineVariety"><?php echo $prodotto["nomeSpecie"]; ?></td>
+                </tr><?php endif; ?>
                 <tr>
                   <th id="alcol">Alcol(%)</th>
                   <td headers="alcol"><?php echo $prodotto["titoloAlcolico"]; ?>%</td>
@@ -86,6 +87,7 @@
                 </tr>
             </table>
         </div>
+        <?php if($isClient): ?>
         <button><?php echo $myReview ? "Aggiorna la Tua Recensione" : "Aggiungi Nuova Recensione"; ?></button>
         <form class="newReview" action="addUpdateNewReview.php" method="POST">
             <ul>
@@ -109,6 +111,7 @@
                 </li>
             </ul>
         </form>
+    <?php endif; ?>
         <button>Recensioni dei Clienti</button>
         <ul><?php if($recensioni): foreach($recensioni as $recensione):?>
             <li>
