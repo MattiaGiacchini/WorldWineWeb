@@ -113,12 +113,33 @@
                 </div>
             </div>
         </article>
-        <div class="orderManagementButtons">
-            <button type="button" name="accettazione">Accetta</button>
-            <button type="button" name="spedito">Spedisci</button>
-            <button type="button" name="consegnato">Registra consegna</button>
-            <button type="button" name="annullato">Annulla ordine</button>
-            <button type="button" class="print" onclick="window.print()" name="print">Stampa fattura</button>
-        </div>
+        <form class="orderManagementButtons" id="orderManagementButtons" action="single-order.php?<?php echo "ordine=" . $orderDetail["idOrdine"]; ?>" method="post">
+            <?php
+                if (getUserRole() === "client") {
+                    if ($orderDetail["statoDiAvanzamento"] == ORDER_STATUS[0]) {
+                        echo '<input type="submit" name="statoDiAvanzamento" value="annulla ordine"/>';
+                    }
+                }else {
+                    switch ($orderDetail["statoDiAvanzamento"]) {
+                        case ORDER_STATUS[0]:
+                            echo '<input type="submit" name="statoDiAvanzamento" value="accetta"/>';
+                            echo '<input type="submit" name="statoDiAvanzamento" value="annulla ordine"/>';
+                            break;
+                        case  ORDER_STATUS[1]:
+                            echo '<input type="submit" name="statoDiAvanzamento" value="spedisci"/>';
+                            break;
+                        case  ORDER_STATUS[2]:
+                            echo '<input type="submit" name="statoDiAvanzamento" value="consegnato"/>';
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if ($orderDetail["statoDiAvanzamento"] != ORDER_STATUS[-1]) {
+                    echo '<button type="button" class="print" onclick="window.print()" name="print">Stampa fattura</button>';
+                }
+            ?>
+        </form>
     </section>
 </div>

@@ -72,11 +72,11 @@ form input :disabled{
     color: var(--text-dark);
 }
 
-form input[type = submit]:focus, input[type = button]:focus, button:focus, a.button:focus{
+form input[type = "submit"]:focus, input[type = "submit"]:focus, input[type = "button"]:focus, button:focus, a.button:focus{
     outline: none;
 }
 
-form input[type = submit], input[type = button], button, a.button{
+form input[type = "submit"], input[type = "submit"]:focus, input[type = "button"], button, a.button{
     height: 50px;
     width: 200px;
     background-color: var(--background-ligh);
@@ -95,7 +95,7 @@ button {
     background-color: var(--background-white);
 }
 
-form input[type = submit]{
+form input[type = "submit"], input[type = "submit"]{
     min-width: 200px;
     display: inline-block;
 }
@@ -149,7 +149,7 @@ input.unmatch {
     box-shadow: 0 0 5px 2px var(--text-red) ;
 }
 
-form input:hover, button:hover, a.button:hover{
+input:hover, button:hover, a.button:hover{
     transform: scale(1.02);
 }
 
@@ -325,7 +325,7 @@ div.details form.quantityToOrder input[type = number] {
     background-color: var(--secondary-dark);
 }
 
-div.details form.quantityToOrder input[type = submit] {
+div.details form.quantityToOrder input[type = "submit"] {
     grid-column: span 5;
    /* width: 80%;*/
 }
@@ -334,6 +334,8 @@ div.details form.quantityToOrder input[type = submit] {
 
 form.singleButtonForm {
     background-color: transparent;
+    display: flex;
+    flex-direction: row;
 }
 
 form.checkout ul {
@@ -364,7 +366,7 @@ form fieldset.privateOrBusiness input[type = radio]:first-of-type {
 }
 
 @media screen and (min-width: 480px) {
-    form:not(.filter) {
+    form:not(.filter), form:not(.orderManagementButtons) {
         width: 90%;
         padding: 0 5% 5% 5%;
     }
@@ -381,7 +383,7 @@ form fieldset.privateOrBusiness input[type = radio]:first-of-type {
         width: 100%;
     }
 
-    form.newReview input[type = submit] {
+    form.newReview input[type = "submit"] {
         width: 100%;
         min-width: inherit;
     }
@@ -399,7 +401,7 @@ form fieldset.privateOrBusiness input[type = radio]:first-of-type {
 }
 
 @media screen and (min-width: 800px) {
-    form:not(.filter) {
+    form:not(.filter), form:not(.orderManagementButtons) {
         display: flex;
         flex-direction: row;
         justify-content: center;

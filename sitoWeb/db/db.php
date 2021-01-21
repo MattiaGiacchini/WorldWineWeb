@@ -462,7 +462,6 @@
                 $stmt->execute();
                 $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 $finalAmount = intval($oldAmount[0]["scorteMagazzino"]) + $amount;
-                echo $amount;
 
                 $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
                 $stmt = $this->db->prepare($query);
@@ -671,13 +670,13 @@
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            return $result[0];
+            return $result;
         }
 
         public function getLastAddedAddress($userId) {
             $query = "SELECT idIndirizzo FROM indirizzo WHERE idCliente = ? ORDER BY idIndirizzo DESC LIMIT 1";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ii', $userId, $addressId);
+            $stmt->bind_param('i', $userId);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -824,7 +823,7 @@
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
+            var_dump($result);
             return $result[0]["idOrdine"];
         }
 
@@ -877,6 +876,20 @@
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
             return $result[0];
+        }
+
+        public function updateOrderState($orderId, $collaboratorId, $state){
+            $time = $this->getCurrentDateTime();
+
+            $query = "UPDATE ordine SET statoDiAvanzamento = ? WHERE idOrdine = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('si', $state, $orderId);
+            $stmt->execute();
+
+            $query = "INSERT INTO gestione_ordine (idOrdine, idCollaboratore, data, stato, note) VALUES (?, ?, ?, ?, NULL)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iiss', $orderId, $collaboratorId, $time, $state);
+            $stmt->execute();
         }
 
     }
