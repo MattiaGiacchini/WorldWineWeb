@@ -392,6 +392,7 @@
             $stmt->bind_param('iisdd', $idContainer, $idLabel, $time, $price, $iva);
 
             return $stmt->execute();
+            // TODO: notifica utente cambio prezzo
         }
 
         // aggiunge un nuovo utente business a database
@@ -485,6 +486,7 @@
             $stmt->execute();
 
             $this->updateWarehouseAvailability($idEtichetta, $idContenitore, $amount);
+            // TODO: notifica torna disponibile prodotto preferito
         }
 
         public function getWarehouseMovements($idEtichetta, $idContenitore ) {
@@ -527,7 +529,7 @@
                 $stmt->execute();
                 $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 $finalAmount = intval($oldAmount[0]["scorteMagazzino"]) + $amount;
-
+                // TODO: NOTIFICA ADMIN
                 $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
                 $stmt = $this->db->prepare($query);
                 $stmt->bind_param('iii', $finalAmount, $idContenitore, $idEtichetta);
@@ -807,7 +809,8 @@
                 $this->addProductsToDetail($userId, $orderId);
 
                 $this->db->commit();
-                //$this->clearCart($userId);
+                $this->clearCart($userId);
+                // TODO: notidica collaborator
             } catch (mysqli_sql_exception $exception) {
                 $this->db->rollback();
                 throw $exception;
@@ -952,6 +955,8 @@
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iiss', $orderId, $collaboratorId, $time, $state);
             $stmt->execute();
+
+            // TODO: notifica client
         }
 
     }
