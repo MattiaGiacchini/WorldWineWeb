@@ -148,9 +148,15 @@ table td:nth-child(4), table tfoot td:last-of-type {
     section.clientData {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         max-width: 90%;
         min-width: 410px;
         justify-content: space-between;
+    }
+
+    section.clientData > h3 {
+        display: block;
+        width: 100%;
     }
 
     article.tile {

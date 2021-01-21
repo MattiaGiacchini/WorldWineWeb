@@ -419,7 +419,7 @@
         }
 
         public function getAllOrders(){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine, o.data, o.statoDiAvanzamento " . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o LEFT JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine, o.data, o.statoDiAvanzamento " . $this->getOrderFilters();
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -429,7 +429,7 @@
         }
 
         public function getClientOrders($userId){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -604,17 +604,16 @@
 
             try {
                 $this->checkOrderProductsAvailability($userId);
-                $this->removeUnavailableProducts($userId);
                 $orderId = $this->createDefinitiveOrder($userId, $cardNumber, $addressId);
                 $this->addProductsToDetail($userId, $orderId);
 
                 $this->db->commit();
+                //$this->clearCart($userId);
             } catch (mysqli_sql_exception $exception) {
                 $this->db->rollback();
                 throw $exception;
             }
 
-            //$this->clearCart($userId);
 
         }
 
@@ -701,7 +700,7 @@
         }
 
         public function getOrderProductsDetails($orderId) {
-            $query = "SELECT d.idContenitore, d.idEtichetta, d.quantita, (100 * p.prezzo / (100 + p.iva)) as prezzo, c.nome as nomeCantina, e.nome as nomeVino FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo AS p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta JOIN etichetta AS e ON d.idEtichetta = e.idEtichetta JOIN cantina as c ON e.idCantina = c.idCantina WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) ORDER BY o.idOrdine";
+            $query = "SELECT d.idContenitore, d.idEtichetta, d.quantita, (100 * p.prezzo / (100 + p.iva)) as prezzo, c.nome as nomeCantina, e.nome as nomeVino FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo AS p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta JOIN etichetta AS e ON d.idEtichetta = e.idEtichetta JOIN cantina as c ON e.idCantina = c.idCantina WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) ORDER BY o.idOrdine";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $orderId);
 
@@ -723,13 +722,12 @@
         }
 
         public function getOrderSubtotal($orderId) {
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine ";
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine ";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $orderId);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
             return $result[0]["totaleOrdine"];
         }
 
