@@ -88,7 +88,7 @@
                         <h5><?php echo round($prodotto["capacita"], 3); ?>L</h5> <h5><?php echo round($prodotto["titoloAlcolico"], 1); ?>% Vol</h5>
                     </div>
                     <p class="origine"><?php echo $prodotto["indicazioneGeografica"]!=null ? $prodotto["indicazioneGeografica"]." - " : ""; echo $prodotto["stato"] != null ? $prodotto["stato"] : "";?></p>
-                    <p class="certificato"><?php echo $prodotto["classificazione"]; ?></p>
+                    <p class="certificato"><?php echo $prodotto["categoria"] == 'Vino' ? "Vino ".$prodotto["classificazione"] : "Spumante ".$prodotto["tenoreZuccherino"]; ?></p>
                     <p class="annata"><?php echo $prodotto["annata"]; ?></p>
                     <img src="./img/ratingStar-rev2.png" alt="voto: <?php echo $prodotto["mediaRecensioni"]; ?> su 5" />
                     <h6><?php echo $prodotto["prezzo"]; ?>€</h6>
