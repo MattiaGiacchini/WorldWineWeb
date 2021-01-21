@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    const products = JSON.parse(getCookie("checkoutData"));
+    document.cookie =  "checkoutData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log(products);
+
     $("form.checkout select[name = shippingAddress]").click(function(){
         if (document.forms["checkoutForm"]["shippingAddress"].value == "new") {
             $("ul.address li input").each(function(){
@@ -50,6 +54,32 @@ $(document).ready(function(){
 
         }
     })
+
+    function getCookie(cookieName) {
+        let cookie = cookieName + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        let found = false;
+        let c;
+        for(let i = 0; i <ca.length; i++) {
+            c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+
+        if (c.indexOf(cookie) == 0) {
+          found = true;
+        }
+    }
+        if(found) {
+            return c.substring(cookie.length, c.length);
+        }
+
+        return "";
+    }
+
+
+
 
 
 });

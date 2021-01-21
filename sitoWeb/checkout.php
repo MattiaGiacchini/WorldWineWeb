@@ -20,6 +20,9 @@
         $templateParams["addresses"] = $dataBase->getUserAddresses($userId);
         $templateParams["payments"] = $dataBase-> getUserPayments($userId);
 
+        $checkoutData = array($templateParams["addresses"], $templateParams["payments"]);
+        setcookie("checkoutData", json_encode($checkoutData), time() + 60, "/");
+
         if (isset($_POST["shippingAddress"])) {
             if ($_POST["shippingAddress"] === "new") {
                 $dataBase->insertNewAddress($userId, $_POST["name"], $_POST["address"], $_POST["civic"], $_POST["city"], $_POST["province"], $_POST["zip"], $_POST["state"]);
@@ -39,6 +42,7 @@
         if(isset($_POST["submit"]) && isset($_POST["payment"]) && isset($_POST["shippingAddress"])){
             $dataBase->createOrder($userId, $orderPayment, $orderAddress);
         }
+
 
         require('./template/base.php');
     }

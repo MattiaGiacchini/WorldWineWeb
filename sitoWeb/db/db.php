@@ -643,10 +643,10 @@
         }
 
         private function getOrderFilters(){
-            if (isset($_GET["ordine"]) && $_GET["ordine"] === "decrescente") {
-                $sort = "ORDER BY o.data DESC";
-            } else {
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "crescente") {
                 $sort = "ORDER BY o.data ASC";
+            } else {
+                $sort = "ORDER BY o.data DESC";
             }
 
             $status = [];
