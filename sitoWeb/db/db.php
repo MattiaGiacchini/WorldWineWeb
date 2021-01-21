@@ -604,6 +604,7 @@
 
             try {
                 $this->checkOrderProductsAvailability($userId);
+                $this->removeUnavailableProducts($userId);
                 $orderId = $this->createDefinitiveOrder($userId, $cardNumber, $addressId);
                 $this->addProductsToDetail($userId, $orderId);
 
@@ -622,6 +623,22 @@
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
             $stmt->execute();
+        }
+
+        public function removeUnavailableProducts($userId) {
+            $this->checkOrderProductsAvailability($userId);
+            $products = $this->getProductsForOrder($userId);
+            if (count($products) > 0) {
+                foreach ($products as $product){
+                    if ($product["quantita"] <= 0) {
+                        $query = "DELETE FROM carrello WHERE idCliente = ? AND idContenitore = ? AND idEtichetta = ?";
+                        $stmt = $this->db->prepare($query);
+                        $stmt->bind_param('iii', $userId, $product["idContenitore"], $product["idEtichetta"]);
+                        $stmt->execute();
+                    }
+                }
+            }
+            return;
         }
 
         private function createDefinitiveOrder($userId, $cardNumber, $addressId) {
@@ -649,13 +666,12 @@
                     $stmt->execute();
 
                     $this->updateWarehouseAvailability($product["idEtichetta"], $product["idContenitore"], -$product["quantita"]);
-
                 }
             }
         }
 
         private function getProductsForOrder($userId) {
-            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ? and quantita > 0";
+            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ? ";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -677,7 +693,7 @@
         }
 
         private function clearCart($userId) {
-            $query = "DELETE FROM `carrello` WHERE idCliente = ?";
+            $query = "DELETE FROM carrello WHERE idCliente = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
