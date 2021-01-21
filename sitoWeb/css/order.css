@@ -7,6 +7,8 @@ table td, table th {
 
 form.orderManagementButtons#orderManagementButtons {
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
 form.orderManagementButtons#orderManagementButtons input {
