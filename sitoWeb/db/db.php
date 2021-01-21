@@ -429,8 +429,7 @@
         }
 
         public function getClientOrders($userId){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine
-" . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -449,27 +448,23 @@
 
             $status = [];
             if (isset($_GET["accettazione"])) {
-                array_push($status, "accettazione");
-            }
-
-            if (isset($_GET["approvato"])) {
-                array_push($status, "approvato");
+                array_push($status, ORDER_STATUS[0]);
             }
 
             if (isset($_GET["elaborazione"])) {
-                array_push($status, "elaborazione");
+                array_push($status, ORDER_STATUS[1]);
             }
 
             if (isset($_GET["spedito"])) {
-                array_push($status, "spedito");
+                array_push($status, ORDER_STATUS[2]);
             }
 
             if (isset($_GET["consegnato"])) {
-                array_push($status, "consegnato");
+                array_push($status, ORDER_STATUS[3]);
             }
 
             if (isset($_GET["annullato"])) {
-                array_push($status, "annullato");
+                array_push($status, ORDER_STATUS[-1]);
             }
 
             $statusWhereCondition = "";
@@ -611,15 +606,14 @@
                 $this->checkOrderProductsAvailability($userId);
                 $orderId = $this->createDefinitiveOrder($userId, $cardNumber, $addressId);
                 $this->addProductsToDetail($userId, $orderId);
-                //$this->clearCart($userId);
 
                 $this->db->commit();
             } catch (mysqli_sql_exception $exception) {
                 $this->db->rollback();
                 throw $exception;
-
             }
 
+            //$this->clearCart($userId);
 
         }
 
@@ -631,7 +625,7 @@
         }
 
         private function createDefinitiveOrder($userId, $cardNumber, $addressId) {
-            $defaultState = "accettazione";
+            $defaultState = ORDER_STATUS[0];
             $currentdate = $this->getCurrentDateTime();
             $address = $this->getUserSpecificAddress($userId, $addressId);
             $payment = $this->getUserSpecificPayment($userId, $cardNumber);
@@ -661,7 +655,7 @@
         }
 
         private function getProductsForOrder($userId) {
-            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ?";
+            $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ? and quantita > 0";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -690,10 +684,49 @@
             $stmt->execute();
         }
 
+        public function getOrderProductsDetails($orderId) {
+            $query = "SELECT d.idContenitore, d.idEtichetta, d.quantita, (100 * p.prezzo / (100 + p.iva)) as prezzo, c.nome as nomeCantina, e.nome as nomeVino FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo AS p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta JOIN etichetta AS e ON d.idEtichetta = e.idEtichetta JOIN cantina as c ON e.idCantina = c.idCantina WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) ORDER BY o.idOrdine";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $orderId);
 
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
+            return $result;
+        }
 
+        public function getOrderDetails($orderId) {
+            $query = "SELECT * FROM ordine WHERE idOrdine = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $orderId);
 
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0];
+        }
+
+        public function getOrderSubtotal($orderId) {
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idOrdine = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $orderId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0]["totaleOrdine"];
+        }
+
+        public function getUserData($userId){
+            $query = "SELECT * FROM utente WHERE idUtente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0];
+        }
 
     }
 

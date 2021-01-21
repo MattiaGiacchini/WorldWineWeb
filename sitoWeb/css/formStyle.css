@@ -91,6 +91,10 @@ form input[type = submit], input[type = button], button, a.button{
     font-weight: 700;
 }
 
+button {
+    background-color: var(--background-white);
+}
+
 form input[type = submit]{
     min-width: 200px;
     display: inline-block;

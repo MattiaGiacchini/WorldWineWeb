@@ -29,7 +29,7 @@
                         <div class="tileFooter">
                             <div class="quantity">
                                 <label for="<?php echo $product["idEtichetta"] ."_" . $product["idContenitore"]; ?>">Quantità</label>
-                                <input class="quantityInput" id="<?php echo $product["idEtichetta"] . "_" . $product["idContenitore"]; ?>" type="number" name="<?php echo $product["idEtichetta"] ."_" . $product["idContenitore"]; ?>" max="<?php echo $product["scorteMagazzino"]; ?>" value="<?php echo $product["quantitaDefinitiva"] ?>">
+                                <input class="quantityInput" id="<?php echo $product["idEtichetta"] . "_" . $product["idContenitore"]; ?>" type="number" name="<?php echo $product["idEtichetta"] ."_" . $product["idContenitore"]; ?>" min="0" max="<?php echo $product["scorteMagazzino"]; ?>" value="<?php echo $product["quantitaDefinitiva"] ?>">
                                 <p> pezzi</p>
                             </div>
                             <p class="tileImportantInfo"><?php echo $product["prezzo"] ?> €</p>

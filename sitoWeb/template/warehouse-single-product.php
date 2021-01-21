@@ -35,9 +35,9 @@
             <img class="tileImg" src="<?php echo $imgURL ; ?>" alt="vino">
             <div class="tileContent">
                 <div class="tileBody">
-                    <h3><?php echo $product[0]["NomeVino"] ?></h3>
-                    <h4><?php echo $product[0]["NomeCantina"] ?></h4>
-                    <p><?php echo $product[0]["capacita"] ?>L</p>
+                    <h3><?php echo $product[0]["NomeVino"]; ?></h3>
+                    <h4><?php echo $product[0]["NomeCantina"]; ?></h4>
+                    <p><?php echo round($product[0]["capacita"], 3); ?>L</p>
                 </div>
                 <div class="tileFooter">
                     <p>Quantità: <?php echo $product[0]["scorteMagazzino"] ?> pezzi</p>
