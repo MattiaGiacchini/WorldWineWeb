@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    // TODO: 
+    // TODO:
     $("form.warehouseStock > input[type = submit]").on("click", insertCurrentDateTime());
 
     function insertCurrentDateTime(){
@@ -8,10 +8,7 @@ $(document).ready(function(){
         const time = today.getHours() + ":" + today.getMinutes();
         const dateTime = date+' '+time;
 
-        console.log(today);
-        console.log(dateTime);
         $("#currentdate").val(today.toUTCString());
-        console.log($("#currentdate").value);
         //// TODO:
     }
 

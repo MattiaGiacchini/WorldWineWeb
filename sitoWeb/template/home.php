@@ -90,7 +90,7 @@
                     <p class="origine"><?php echo $prodotto["indicazioneGeografica"]!=null ? $prodotto["indicazioneGeografica"]." - " : ""; echo $prodotto["stato"] != null ? $prodotto["stato"] : "";?></p>
                     <p class="certificato"><?php echo $prodotto["classificazione"]; ?></p>
                     <p class="annata"><?php echo $prodotto["annata"]; ?></p>
-                    <img src="../img/ratingStar-rev2.png" alt="voto: <?php echo $prodotto["mediaRecensioni"]; ?> su 5" />
+                    <img src="./img/ratingStar-rev2.png" alt="voto: <?php echo $prodotto["mediaRecensioni"]; ?> su 5" />
                     <h6><?php echo $prodotto["prezzo"]; ?>€</h6>
                     <p><?php echo $prodotto["scorteMagazzino"] > 0 ? "Disponibile" : "Non Disponibile"; ?></p>
                 </div>

@@ -14,7 +14,7 @@
             $templateParams["orderProductsDetails"] = $dataBase->getOrderProductsDetails($_GET["ordine"]);
             $templateParams["orderDetails"] = $dataBase->getOrderDetails($_GET["ordine"]);
             $templateParams["orderValue"] = $dataBase->getOrderSubtotal($_GET["ordine"]);
-            $templateParams["userData"] = $dataBase->getUserData($templateParams["orderDetails"]["idCliente"]);     
+            $templateParams["userData"] = $dataBase->getUserData($templateParams["orderDetails"]["idCliente"]);
         }
 
         require('./template/base.php');

@@ -196,7 +196,6 @@ $(document).ready(function(){
 
         const details = JSON.parse(getCookie("labelDetails"));
         document.cookie =  "labelDetails=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        console.log(details);
 
         document.forms["newWineLabel"]["categoria"].value               = details["categoria"];
         document.forms["newWineLabel"]["nome"].value                    = details["nome"];

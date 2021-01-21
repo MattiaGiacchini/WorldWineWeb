@@ -153,7 +153,6 @@ $(document).ready(function(){
         && check == lastCheckbox.value ) {
             submit.attr("disabled", true);
         } else {
-            console.log("lo riabilito");
             submit.removeAttr("disabled");
         }
     }

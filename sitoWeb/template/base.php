@@ -23,9 +23,9 @@
     ?>
 
     <link rel="stylesheet" type="text/css" href="./css/basicStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/productCard.css">
     <link rel="stylesheet" type="text/css" href="./css/tileStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/productCard.css">
 
 
     <link rel="shortcut icon" href="<?php echo UPLOAD_DIR; ?>/favicon.ico" type="image/x-icon">
