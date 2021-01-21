@@ -16,6 +16,63 @@
             return $this->db->insert_id;
         }
 
+        // aggiunge un nuovo articolo a carrello
+        private function addNewArticleToCart($idContainer, $idLabel, $idUser, $quantity) {
+            $query = "INSERT INTO carrello (idContenitore, idEtichetta, idCliente, quantita) VALUES (?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iiii', $idContainer, $idLabel, $idUser, $quantity);
+
+            return $stmt->execute();
+        }
+
+        // legge i dati da un articolo a carrello
+        public function getSingleCartElement($idContainer, $idLabel, $idUser) {
+            $query =   "SELECT *
+                        FROM carrello AS c
+                        WHERE c.idContenitore = ?
+                            AND c.idEtichetta = ?
+                            AND c.idCliente = ? ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', $idContainer, $idLabel, $idUser);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
+        // aggiorna il valore di un articolo a carrello
+        private function updateSingleArticleToCart($idContainer, $idLabel, $idUser, $quantity) {
+            $query = "UPDATE carrello AS c
+                      SET quantita = ?
+                      WHERE c.idContenitore = ?
+                        AND c.idEtichetta = ?
+                        AND c.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iiii', $quantity, $idContainer, $idLabel, $idUser);
+
+            return $stmt->execute();
+        }
+
+        public function insertUpdateSingleCartElement($idContainer, $idLabel, $idUser, $quantity) {
+            $cartQntDetail = $this->getSingleCartElement($idContainer, $idLabel, $idUser);
+            $mag = $this->getProductAvailability($idLabel, $idContainer);   // carico la disponibilità a mag
+            if($cartQntDetail) { // esiste l'articolo a carrello, allora ne aggiorno le quantità
+                var_dump($cartQntDetail, $quantity);
+                if($quantity + $cartQntDetail["quantita"] > $mag) {
+                    $quantity = $mag;
+                } else {
+                    $quantity = $quantity + $cartQntDetail["quantita"];
+                }
+                $this->updateSingleArticleToCart($idContainer, $idLabel, $idUser, $quantity);
+            } else {
+                $quantity = $quantity > $mag ? $mag : $quantity;
+                $this->addNewArticleToCart($idContainer, $idLabel, $idUser, $quantity);
+            }
+        }
+
         // ritorna tutti gli stati inseriti a database
         public function getStates(){
             $stmt = $this->db->prepare("SELECT * FROM stato ORDER BY nome ASC ");
