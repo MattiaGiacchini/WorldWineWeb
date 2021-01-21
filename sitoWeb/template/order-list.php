@@ -25,10 +25,6 @@
                     <label for="waiting"> Da accettare </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="approvato" value="true" id="approved" checked/>
-                    <label for="approved"> Approvati </label>
-                </li>
-                <li>
                     <input type="checkbox" name="elaborazione" value="true" id="processing" checked />
                     <label for="processing"> In elaborazione </label>
                 </li>
@@ -61,7 +57,7 @@
     <?php else: {
         foreach ($templateParams["orders"] as $orders): ?>
 
-            <a class="tileLink" href=<?php echo "order-management.php?ordine=" . $orders["idOrdine"]; ?>>
+            <a class="tileLink" href=<?php echo "single-order.php?ordine=" . $orders["idOrdine"]; ?>>
                 <article class="tile etichetta <?php if ($orders["statoDiAvanzamento"] === "annullato") echo "deactivated"; ?>">
                     <div class="tileContent">
                         <h3><?php echo $orders["data"]; ?></h3>

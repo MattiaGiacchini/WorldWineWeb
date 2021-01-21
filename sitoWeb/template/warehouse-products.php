@@ -55,9 +55,9 @@
                     <img class="tileImg" src=<?php echo $imgURL ; ?> alt="vino">
                     <div class="tileContent">
                         <div class="tileBody">
-                            <h3><?php echo $products["NomeVino"] ?></h3>
-                            <h4><?php echo $products["NomeCantina"] ?></h4>
-                            <p><?php echo $products["capacita"] ?>L</p>
+                            <h3><?php echo $products["NomeVino"]; ?></h3>
+                            <h4><?php echo $products["NomeCantina"]; ?></h4>
+                            <p><?php echo round($products["capacita"], 3); ?>L</p>
                         </div>
                         <div class="tileFooter">
                             <p>Quantità: <?php echo $products["scorteMagazzino"] ?> pezzi</p>

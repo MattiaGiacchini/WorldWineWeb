@@ -113,7 +113,7 @@ create table DETTAGLIO (
 create table GESTIONE_ORDINE (
      idOrdine int not null,
      idCollaboratore int not null,
-     data date not null,
+     data datetime not null,
      stato char(20) not null,
      note varchar(500),
      constraint IDCOMANDA primary key (idOrdine, idCollaboratore, data));
@@ -129,7 +129,7 @@ create table MODIFICA_SCORTE (
 create table NOTIFICA (
      idUtente int not null,
      idNotifica int not null,
-     data date not null,
+     data datetime not null,
      messaggio varchar(500) not null,
      visualizzato char not null,
      categoria int not null,
@@ -139,7 +139,7 @@ create table ORDINE (
      idOrdine int not null auto_increment,
      idCliente int not null,
      data datetime not null,
-     statoDiAvanzamento char(20) not null,
+     statoDiAvanzamento enum('Accettazione', 'Elaborazione', 'Spedito', 'Consegnato', 'Annullato') not null,
      pagamentoIntestatario char(50) not null,
      pagamentoNumeroCarta bigint not null,
      pagamentoScadenza date not null,

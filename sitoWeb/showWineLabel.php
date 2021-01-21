@@ -8,7 +8,7 @@
         $templateParams["indirizzoPagina"] = "template/newWineLabel.php";
 
 
-        setcookie("labelDetails", json_encode($templateParams["labelInfo"]), time() + 60);
+        setcookie("labelDetails", json_encode($templateParams["labelInfo"]), time() + 60, "/");
 
         $templateParams["jsAggiuntivi"] = '
             <script type="text/javascript" src="./js/wineLabelModuleController.js"></script>

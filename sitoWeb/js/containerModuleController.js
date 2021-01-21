@@ -48,6 +48,7 @@ function getCookie(cookieName) {
 }
 
 $(document).ready(function(){
+
     // recupero delle informazioni passate attraverso cookie dal server
     // successiva eliminazione del cookie dopo la lettura
     const products = JSON.parse(getCookie("label"));
