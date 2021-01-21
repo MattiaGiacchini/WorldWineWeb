@@ -369,6 +369,14 @@
 
         // aggiorna a dataBase un prodotto
         public function updateProduct($idContainer, $idLabel, $active) {
+            if($active == 0) {
+                $query = "DELETE FROM carrello
+                          WHERE carrello.idContenitore = ?
+                          AND carrello.idEtichetta = ?";
+                $stmt = $this->db->prepare($query);
+                $stmt->bind_param('ii', $idContainer, $idLabel);
+                $stmt->execute();
+            }
             $query = "UPDATE vino_confezionato SET attivo = ? WHERE vino_confezionato.idContenitore = ? AND vino_confezionato.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iii', $active, $idContainer, $idLabel);
