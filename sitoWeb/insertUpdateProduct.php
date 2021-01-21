@@ -37,10 +37,10 @@
 
             } else if (is_numeric($_POST["id"])
                 && isset($_POST["lastVisible"], $_POST["lastiva"], $_POST["lastPrice"])
-                && in_array($_POST["lastVisible"], array("true", "false"))
-                && is_numeric($_POST["lastiva"])
-                && is_numeric($_POST["lastPrice"])) {  // aggiornamento nuovo prodotto
+                && in_array($_POST["lastVisible"], array("true", "false"))) {  // aggiornamento nuovo prodotto
 
+                $_POST["lastiva"] = $_POST["lastiva"] == '' ? 0.0 : $_POST["lastiva"];
+                $_POST["lastPrice"] = $_POST["lastPrice"] == '' ? 0.0 : $_POST["lastPrice"];
                 $lastActive = $_POST["lastVisible"] == "true" ? 1 : 0;
 
                 if($active != $lastActive && !$dataBase->updateProduct($_POST["id"], $_POST["idLabel"], $active)) {
