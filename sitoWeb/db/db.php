@@ -527,7 +527,6 @@
                 $stmt->execute();
                 $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 $finalAmount = intval($oldAmount[0]["scorteMagazzino"]) + $amount;
-                echo $amount;
 
                 $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
                 $stmt = $this->db->prepare($query);
@@ -631,7 +630,7 @@
         }
 
         public function getClientOrders($userId){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.statoDiAvanzamento, o.data FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -735,19 +734,17 @@
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
             return $result[0];
         }
 
         public function getLastAddedAddress($userId) {
             $query = "SELECT idIndirizzo FROM indirizzo WHERE idCliente = ? ORDER BY idIndirizzo DESC LIMIT 1";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ii', $userId, $addressId);
+            $stmt->bind_param('i', $userId);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-            return $result;
+            return $result[0]["idIndirizzo"];
         }
 
         public function getUserPayments($userId) {
@@ -889,7 +886,6 @@
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
             return $result[0]["idOrdine"];
         }
 
@@ -942,6 +938,20 @@
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
             return $result[0];
+        }
+
+        public function updateOrderState($orderId, $collaboratorId, $state){
+            $time = $this->getCurrentDateTime();
+
+            $query = "UPDATE ordine SET statoDiAvanzamento = ? WHERE idOrdine = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('si', $state, $orderId);
+            $stmt->execute();
+
+            $query = "INSERT INTO gestione_ordine (idOrdine, idCollaboratore, data, stato, note) VALUES (?, ?, ?, ?, NULL)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iiss', $orderId, $collaboratorId, $time, $state);
+            $stmt->execute();
         }
 
     }

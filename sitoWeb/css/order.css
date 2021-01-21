@@ -5,6 +5,16 @@ table td, table th {
     border-bottom: 1px solid var(--secondary-dark);
 }
 
+form.orderManagementButtons#orderManagementButtons {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+form.orderManagementButtons#orderManagementButtons input {
+    background-color: var(--background-white);
+}
+
 h3 {
     color: var(--text-dark);
 }
@@ -95,7 +105,7 @@ table td:nth-child(4), table tfoot td:last-of-type {
         width: 94%;
     }
 
-    div.orderManagementButtons {
+    form.orderManagementButtons {
         margin-top: auto;
         margin-bottom: auto;
         display: flex;
@@ -105,7 +115,7 @@ table td:nth-child(4), table tfoot td:last-of-type {
 }
 
 @media print {
-    header > button, nav *, div.utilityBar, div.orderManagementButtons {
+    header > button, nav *, div.utilityBar, form.orderManagementButtons {
         display: none;
     }
 
