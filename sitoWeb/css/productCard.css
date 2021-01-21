@@ -24,12 +24,14 @@
 
 .wineCard  a {
     color: inherit;
+       min-height: 240px;
     text-decoration: inherit;
 }
 
 .wineCard-Container {
     box-sizing: border-box;
     height: 100%;
+
     width: 100%;
     margin: 0px;
     padding: 0px;
