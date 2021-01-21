@@ -85,7 +85,7 @@
                     <h3><?php echo $prodotto["nomeEtichetta"]; ?></h3>
                     <h4><?php echo $prodotto["nomeCantina"]; ?></h4>
                     <div class="LiterVol">
-                        <h5><?php echo $prodotto["capacita"]; ?>L</h5> <h5><?php echo round($prodotto["titoloAlcolico"], 1); ?>% Vol</h5>
+                        <h5><?php echo round($prodotto["capacita"], 3); ?>L</h5> <h5><?php echo round($prodotto["titoloAlcolico"], 1); ?>% Vol</h5>
                     </div>
                     <p class="origine"><?php echo $prodotto["indicazioneGeografica"]!=null ? $prodotto["indicazioneGeografica"]." - " : ""; echo $prodotto["stato"] != null ? $prodotto["stato"] : "";?></p>
                     <p class="certificato"><?php echo $prodotto["classificazione"]; ?></p>
