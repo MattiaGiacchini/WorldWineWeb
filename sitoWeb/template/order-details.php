@@ -114,9 +114,10 @@
             </div>
         </article>
         <div class="orderManagementButtons">
-            <button type="button" name="accept">Accetta</button>
-            <button type="button" name="reject">Rifiuta</button>
-            <button type="button" name="cancel">Annulla</button>
+            <button type="button" name="accettazione">Accetta</button>
+            <button type="button" name="spedito">Spedisci</button>
+            <button type="button" name="consegnato">Registra consegna</button>
+            <button type="button" name="annullato">Annulla ordine</button>
             <button type="button" class="print" onclick="window.print()" name="print">Stampa fattura</button>
         </div>
     </section>
