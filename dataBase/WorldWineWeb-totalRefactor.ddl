@@ -177,7 +177,7 @@ create table RECENSIONE (
      idEtichetta int not null,
      idCliente int not null,
      titolo varchar(100) not null,
-     valutazione int not null,
+     valutazione int(1) not null,
      testo varchar(500) not null,
      constraint IDRECENSIONE primary key (idCliente, idContenitore, idEtichetta));
 

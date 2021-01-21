@@ -25,6 +25,95 @@
             return $result;
         }
 
+        // restituisce tutte le recensioni di un determinato prodotto
+        public function getAllProductReviews($idContainer, $idLabel) {
+            $query =   "SELECT r.idContenitore, r.idEtichetta, r.titolo, r.valutazione, r.testo, u.nome, u.cognome, u.ragioneSociale
+                        FROM recensione AS r
+                        JOIN utente AS u
+                        ON u.idUtente = r.idCliente
+                        WHERE r.idContenitore = ? AND r.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContainer, $idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result;
+            }
+        }
+
+        private function updateAvarageReviewsOnProduct($idContainer, $idLabel){
+            // calcolo la media delle recensioni del prodotto
+            $query =   "SELECT AVG(r.valutazione) AS media
+                        FROM recensione AS r
+                        WHERE r.idContenitore = ? AND r.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContainer, $idLabel);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+               return false;
+            }
+            $result = round($result[0]["media"], 3);
+
+            // aggiorno il valore della media dei voti al Prodotto
+            $query = "UPDATE vino_confezionato AS v
+                      SET mediaRecensioni = ?
+                      WHERE v.idContenitore = ? AND v.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('dii', $result, $idContainer, $idLabel);
+            if(!$stmt->execute()) {
+                return false;
+            }
+            return true;
+        }
+
+        public function addNewProductReview($idContainer, $idLabel, $idUser, $title, $rating, $text) {
+            // inserisco una nuova recensione
+            $query = "INSERT INTO recensione (idContenitore, idEtichetta, idCliente, titolo, valutazione, testo) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iiisis', $idContainer, $idLabel, $idUser, $title, $rating, $text);
+            if(!$stmt->execute()) {
+                return false;
+            }
+            return $this->updateAvarageReviewsOnProduct($idContainer, $idLabel);
+        }
+
+        public function updateProductReview($idContainer, $idLabel, $idUser, $title, $rating, $text) {
+            // aggiorno la recensione
+            $query = "  UPDATE 	recensione AS r
+                        SET		r.titolo = ?, r.testo = ?, r.valutazione = ?
+                        WHERE 	r.idContenitore  = ?
+                        AND 	r.idEtichetta    = ?
+                        AND 	r.idCliente      = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ssiiii', $title, $text, $rating, $idContainer, $idLabel, $idUser);
+            if(!$stmt->execute()) {
+                return false;
+            }
+            return $this->updateAvarageReviewsOnProduct($idContainer, $idLabel);
+        }
+
+        public function getMyProductReview($idContainer, $idLabel, $idUser) {
+            $query =   "SELECT r.idContenitore, r.idEtichetta, r.titolo, r.valutazione, r.testo, u.nome, u.cognome, u.ragioneSociale
+                        FROM recensione AS r
+                        JOIN utente AS u
+                        ON u.idUtente = r.idCliente
+                        WHERE r.idContenitore = ?
+                        AND r.idEtichetta = ?
+                        AND r.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', $idContainer, $idLabel, $idUser);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
         // restituisce tutti i prodotti attivi
         public function getAllProductDetails($idLabel, $idContainer) {
             $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
