@@ -33,11 +33,11 @@
 
 
             $templateParams["cssAggiuntivi"] = '
-            <link rel="stylesheet" type="text/css" href="../css/wineDetails.css">
+            <link rel="stylesheet" type="text/css" href="./css/wineDetails.css">
             ';
             $templateParams["jsAggiuntivi"] = '
-                <script type="text/javascript" src="../js/wineDetails.js"></script>
-                <script type="text/javascript" src="../js/wineCard.js"></script>
+                <script type="text/javascript" src="./js/wineDetails.js"></script>
+                <script type="text/javascript" src="./js/wineCard.js"></script>
             ';
 
             require('./template/base.php');
