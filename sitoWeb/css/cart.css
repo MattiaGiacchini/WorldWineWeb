@@ -36,6 +36,10 @@ section.riepilogoOrdine ul {
     margin: 1% auto;
 }
 
+form.singleButtonForm * {
+    color: var(--text-dark);
+}
+
 div.quantity {
     display: flex;
     flex-direction: row;

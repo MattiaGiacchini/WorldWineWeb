@@ -33,12 +33,6 @@ create table CARRELLO (
      quantita int not null,
      constraint IDCARRELLO primary key (idCliente, idContenitore, idEtichetta));
 
-create table CATEGORIA_NOTIFICA (
-     idCategoria int not null auto_increment,
-     nome char(20) not null,
-     constraint ID_CATEGORIA primary key (idCategoria),
-     constraint FK_CATEGORIA_NOTIFICA unique (nome));
-
 create table CONTENITORE (
      idContenitore int not null auto_increment,
      capacita decimal(7,3) not null,
@@ -115,7 +109,6 @@ create table GESTIONE_ORDINE (
      idCollaboratore int not null,
      data datetime not null,
      stato char(20) not null,
-     note varchar(500),
      constraint IDCOMANDA primary key (idOrdine, idCollaboratore, data));
 
 create table MODIFICA_SCORTE (
@@ -128,12 +121,12 @@ create table MODIFICA_SCORTE (
 
 create table NOTIFICA (
      idUtente int not null,
-     idNotifica int not null,
+     idNotifica int auto_increment not null,
      data datetime not null,
      messaggio varchar(500) not null,
      visualizzato char not null,
-     categoria int not null,
-     constraint IDNOTIFICA primary key (idUtente, idNotifica));
+     categoria enum('Ordine', 'Prodotto') not null,
+     constraint IDNOTIFICA primary key (idNotifica));
 
 create table ORDINE (
      idOrdine int not null auto_increment,
@@ -285,10 +278,6 @@ alter table MODIFICA_SCORTE add constraint FKMOD_UTE
 alter table MODIFICA_SCORTE add constraint FKMOD_VIN
      foreign key (idContenitore, idEtichetta)
      references VINO_CONFEZIONATO (idContenitore, idEtichetta);
-
-alter table NOTIFICA add constraint FKREFERENZA
-     foreign key (categoria)
-     references CATEGORIA_NOTIFICA (idCategoria);
 
 alter table NOTIFICA add constraint FKRICEZIONE
      foreign key (idUtente)

@@ -499,20 +499,10 @@ INSERT INTO `modifica_scorte` (`idContenitore`, `idEtichetta`, `idCollaboratore`
 (6, 1, 1, -100, '2021-01-19 11:24:14'),
 (6, 1, 1, -1000, '2021-01-19 11:24:16');
 
-INSERT INTO `ordine` (`idOrdine`, `idCliente`, `data`, `statoDiAvanzamento`, `pagamentoIntestatario`, `pagamentoNumeroCarta`, `pagamentoScadenza`, `pagamentoCvv`, `pagamentoTipologiaCarta`, `spedizioneNome`, `spedizioneVia`, `spedizioneCivico`, `spedizioneCitta`, `spedizioneProvincia`, `spedizioneCap`) VALUES
-(5, 1, '2021-01-18', 'spedito', 'a', 4023610001213161, '2021-05-17', 441, 'Visa', 'Marco', 'asdf', 4, 'asdf', 'asdf', 48901);
-
 INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES
 (1, 1, '2021-01-18', '50.00', '22.00'),
 (6, 1, '2020-12-11', '504.00', '22.00'),
 (9, 1, '2021-01-18', '1000.00', '22.00'),
 (13, 1, '2021-01-18', '35.00', '22.00');
 
-INSERT INTO `carrello` (`idContenitore`, `idEtichetta`, `idCliente`, `quantita`) VALUES
-(1, 1, 1, 20),
-(6, 1, 1, 1),
-(9, 1, 1, 1),
-(13, 1, 1, 10);
-
-INSERT INTO `dettaglio` (`idOrdine`, `idContenitore`, `idEtichetta`, `quantita`) VALUES
-(5, 1, 1, 20);
+INSERT INTO `categoria_notifica` (`idCategoria`, `nome`) VALUES (NULL, 'Prodotto'), (NULL, 'Ordine');
