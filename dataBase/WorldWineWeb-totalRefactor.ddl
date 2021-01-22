@@ -121,7 +121,7 @@ create table MODIFICA_SCORTE (
 
 create table NOTIFICA (
      idUtente int not null,
-     idNotifica int auto_increment not null,
+     idNotifica int not null auto_increment,
      data datetime not null,
      messaggio varchar(500) not null,
      visualizzato char not null,

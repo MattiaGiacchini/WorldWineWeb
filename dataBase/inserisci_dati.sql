@@ -504,5 +504,3 @@ INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) V
 (6, 1, '2020-12-11', '504.00', '22.00'),
 (9, 1, '2021-01-18', '1000.00', '22.00'),
 (13, 1, '2021-01-18', '35.00', '22.00');
-
-INSERT INTO `categoria_notifica` (`idCategoria`, `nome`) VALUES (NULL, 'Prodotto'), (NULL, 'Ordine');

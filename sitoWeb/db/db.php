@@ -797,7 +797,11 @@
 
 
 
+        /******************************************************************
+                    NOTIFICHE
+        ********************************************************************/
 
+        /*Order creation process*/
         public function createOrder($userId, $cardNumber, $addressId) {
 
             //Begin transaction for order submit
@@ -819,6 +823,7 @@
 
         }
 
+        /*Checks if products are available, otherwise reduce*/
         private function checkOrderProductsAvailability($userId){
             $query = "UPDATE carrello AS c JOIN vino_confezionato AS v ON c.idEtichetta = v.idEtichetta AND c.idContenitore = v.idContenitore SET c.quantita = IF(c.quantita > v.scorteMagazzino, v.scorteMagazzino, c.quantita) WHERE c.idCliente = ?";
             $stmt = $this->db->prepare($query);
@@ -826,6 +831,7 @@
             $stmt->execute();
         }
 
+        /*remove unavailable products from the cart before creating the order*/
         public function removeUnavailableProducts($userId) {
             $this->checkOrderProductsAvailability($userId);
             $products = $this->getProductsForOrder($userId);
@@ -842,6 +848,7 @@
             return;
         }
 
+        /*create order instance in the database*/
         private function createDefinitiveOrder($userId, $cardNumber, $addressId) {
             $defaultState = ORDER_STATUS[0];
             $currentdate = $this->getCurrentDateTime();
@@ -857,6 +864,7 @@
             return  $this->getLastOrderId($userId);
         }
 
+        /*add products to the detail table in the database*/
         private function addProductsToDetail($userId, $orderId) {
             $orderProducts = $this->getProductsForOrder($userId);
             if (count($orderProducts) > 0) {
@@ -871,6 +879,7 @@
             }
         }
 
+        /*gets the products from the cart in order to create the order*/
         private function getProductsForOrder($userId) {
             $query = "SELECT idContenitore, idEtichetta, quantita FROM carrello WHERE idCliente = ? ";
             $stmt = $this->db->prepare($query);
@@ -882,6 +891,7 @@
             return $result;
         }
 
+        /*gets the id of the last order created*/
         private function getLastOrderId($userId) {
             $query = "SELECT idOrdine FROM ordine WHERE idCliente = ? ORDER BY data DESC LIMIT 1";
             $stmt = $this->db->prepare($query);
@@ -892,6 +902,7 @@
             return $result[0]["idOrdine"];
         }
 
+        /*removes all the products from the cart after creating the order*/
         private function clearCart($userId) {
             $query = "DELETE FROM carrello WHERE idCliente = ?";
             $stmt = $this->db->prepare($query);
@@ -943,6 +954,7 @@
             return $result[0];
         }
 
+        /*updates the order's state when update by the collaborator or the user*/
         public function updateOrderState($orderId, $collaboratorId, $state){
             $time = $this->getCurrentDateTime();
 
@@ -959,11 +971,26 @@
             // TODO: notifica client
         }
 
+        /*updates the cart with the new values setted*/
         public function updateCartValues($userId, $products) {
             foreach ($products as $product) {
                 $this->updateSingleArticleToCart($product["idContenitore"], $product["idEtichetta"], $userId, $product["quantita"]);
             }
             return;
+        }
+
+
+
+        /******************************************************************
+                    NOTIFICHE
+        ********************************************************************/
+        private function addNewNotification($userId, $message, $category) {
+            $time = $this->getCurrentDateTime();
+
+            $query = "INSERT INTO notifica (idUtente, idNotifica, data, messaggio, visualizzato, categoria) VALUES (?, NULL, ?, ?, 'false', ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('isss', $userId, $time, $message, $category);
+            $stmt->execute();
         }
 
     }
