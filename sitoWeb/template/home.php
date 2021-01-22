@@ -4,7 +4,7 @@
 
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
-    <form class="filter" action="#" method="GET">
+    <form class="filter" action="#" method="get">
         <fieldset>
             <legend>Macrocategoria</legend>
             <ul>

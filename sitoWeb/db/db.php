@@ -259,22 +259,93 @@
         }
 
         private function homeFilters() {
-            $macroCategoria = array();
-            $colore = array();
-            $gas = array();
-            $classificazione = array();
+            $macroCategoria = [];
+            $colore = [];
+            $gas = [];
+            $classificazione = [];
 
-
+            /*Categoria vino*/
             if(isset($_GET["Vino"])){
                 array_push($macroCategoria, "Vino");
             }
 
+            if(isset($_GET["Spumante"])){
+                array_push($macroCategoria, "Spumante");
+            }
+
             $statusWhereCondition = "WHERE 1";
-/*
-            if(count($macroCategoria) != 0) {
-                array_walk($macroCategoria, function($macroCategoria) {return "'$macroCategoria'";} );
-                $statusWhereCondition .= " AND categoria IN (" .implode(", ", $status) . ")";
-            }*/
+
+            if(!empty($macroCategoria)) {
+                array_walk($macroCategoria, function(&$macroCategoria) {$macroCategoria = "'$macroCategoria'";});
+                $statusWhereCondition .= " AND categoria IN (" .implode(", ", $macroCategoria) . ")";
+            }
+
+            /*Categoria vino*/
+            if(isset($_GET["Rosso"])){
+                array_push($colore, "Rosso");
+            }
+
+            if(isset($_GET["Rosato"])){
+                array_push($colore, "Rosato");
+            }
+
+            if(isset($_GET["Bianco"])){
+                array_push($colore, "Bianco");
+            }
+
+            if(!empty($colore)) {
+                array_walk($colore, function(&$colore) {$colore = "'$colore'";});
+                $statusWhereCondition .= " AND colore IN (" .implode(", ", $colore) . ")";
+            }
+
+            /*Gas vino*/
+            if(isset($_GET["Fermo"])){
+                array_push($gas, "Fermo");
+            }
+
+            if(isset($_GET["Frizzante"])){
+                array_push($gas, "Frizzante");
+            }
+
+            if(!empty($gas)) {
+                array_walk($gas, function(&$gas) {$gas = "'$gas'";});
+                $statusWhereCondition .= " AND gas IN (" .implode(", ", $gas) . ")";
+            }
+
+            /*Categoria vino*/
+            if(isset($_GET["Varietale"])){
+                array_push($classificazione, "Varietale");
+            }
+
+            if(isset($_GET["Generico"])){
+                array_push($classificazione, "Generico");
+            }
+
+            if(isset($_GET["IGP"])){
+                array_push($classificazione, "IGP");
+            }
+
+            if(isset($_GET["IGT"])){
+                array_push($classificazione, "IGT");
+            }
+
+            if(isset($_GET["DOC"])){
+                array_push($classificazione, "DOC");
+            }
+
+            if(isset($_GET["DOP"])){
+                array_push($classificazione, "DOP");
+            }
+
+            if(isset($_GET["DOCG"])){
+                array_push($classificazione, "DOCG");
+            }
+
+            if(!empty($classificazione)) {
+                array_walk($classificazione, function(&$classificazione) {$classificazione = "'$classificazione'";});
+                $statusWhereCondition .= " AND classificazione IN (" .implode(", ", $classificazione) . ")";
+            }
+
             return $statusWhereCondition;
         }
 
@@ -292,6 +363,7 @@
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
             return $result;
         }
 
@@ -601,19 +673,6 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        /*private function updateWarehouseAvailability($idEtichetta, $idContenitore, $amount){
-            $query = "SELECT SUM(quantita) as 'QuantitaDisponibile' FROM modifica_scorte WHERE idContenitore = ? AND idEtichetta = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ii', $idContenitore, $idEtichetta);
-            $stmt->execute();
-            $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            $finalAmount = intval($oldAmount[0]["QuantitaDisponibile"]);
-
-            $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('iii', $finalAmount, $idContenitore, $idEtichetta);
-            $stmt->execute();
-        }*/
 
         private function updateWarehouseAvailability($idEtichetta, $idContenitore, $amount){
             $this->db->begin_transaction();
