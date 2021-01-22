@@ -1,7 +1,7 @@
 <?php
     require_once("utils/headerFunction.php");
 
-    if (!isUserLoggedIn() && ( getUserRole() != "client" || getUserRole() != "admin" )) { // TODO: remove admin
+    if (!isUserLoggedIn() && ( getUserRole() != "client")) { 
         header("location: login.php");
     } else {
 
