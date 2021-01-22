@@ -22,11 +22,11 @@
             <legend>Stato prodotto</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="attivo" value="true" id="active" checked/>
+                    <input type="checkbox" name="attivo" value="true" id="active" />
                     <label for="active"> Attivi </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="disattivato" value="true" id="deactivated" checked />
+                    <input type="checkbox" name="disattivato" value="true" id="deactivated" />
                     <label for="deactivated"> Disattivati </label>
                 </li>
             </ul>

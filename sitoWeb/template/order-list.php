@@ -21,23 +21,23 @@
             <legend>Stato ordini</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="accettazione" value="true" id="waiting" checked/>
+                    <input type="checkbox" name="accettazione" value="true" id="waiting" />
                     <label for="waiting"> Da accettare </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="elaborazione" value="true" id="processing" checked />
+                    <input type="checkbox" name="elaborazione" value="true" id="processing" />
                     <label for="processing"> In elaborazione </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="spedito" value="true" id="shipped" checked/>
+                    <input type="checkbox" name="spedito" value="true" id="shipped"/>
                     <label for="shipped"> Spediti </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="consegnato" value="true" id="delivered" checked/>
+                    <input type="checkbox" name="consegnato" value="true" id="delivered" />
                     <label for="delivered"> Consegnati </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="annullato" value="true" id="rejected" checked/>
+                    <input type="checkbox" name="annullato" value="true" id="rejected" />
                     <label for="rejected"> Rifiutati </label>
                 </li>
             </ul>

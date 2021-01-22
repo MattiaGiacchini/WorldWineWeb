@@ -4,7 +4,19 @@
 
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
-    <form class="filter" action="#" method="GET">
+    <form class="filter" action="#" method="get">
+        <?php if (getUserRole() === "client") { ?>
+            <fieldset>
+                <legend>Preferiti</legend>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="Preferiti" value="Preferiti" id="filterPreferiti"/>
+                        <label for="filterPreferiti"> Preferiti </label>
+                    </li>
+                </ul>
+            </fieldset>
+        <?php } ?>
+
         <fieldset>
             <legend>Macrocategoria</legend>
             <ul>
@@ -88,6 +100,14 @@
         <input type="submit" name="applyFilters" id="applyFilters" value="applica filtri">
     </form>
 </div>
+
+<?php if (isset($_SESSION["orderCreated"])) { ?>
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <em>Grazie!</em> Il tuo ordine è stato ricevuto.
+    </div>
+    <?php unset($_SESSION["orderCreated"]); ?>
+<?php } ?>
 
 <div class="article-container">
 <?php foreach($templateParams["products"] as $prodotto):?>
