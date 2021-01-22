@@ -101,6 +101,14 @@
     </form>
 </div>
 
+<?php if (isset($_SESSION["orderCreated"])) { ?>
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <em>Grazie!</em> Il tuo ordine è stato ricevuto.
+    </div>
+    <?php unset($_SESSION["orderCreated"]); ?>
+<?php } ?>
+
 <div class="article-container">
 <?php foreach($templateParams["products"] as $prodotto):?>
     <article class="wineCard">
