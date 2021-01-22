@@ -243,6 +243,7 @@ form.editProduct fieldset.modify input[type = file] {
     text-transform: inherit;
 }
 
+form.personal-area figure,
 form.editProduct figure {
     display: block;
     height: 100%;
@@ -250,10 +251,16 @@ form.editProduct figure {
     box-sizing: border-box;
 }
 
+form.personal-area div.figure {
+    display: block;
+    margin: 10px 0px;
+}
+
 form.editProduct div.figure {
     display: block;
 }
 
+form.personal-area figure img,
 form.editProduct figure img {
     display: block;
     margin: 0px auto;
@@ -263,6 +270,9 @@ form.editProduct figure img {
     box-sizing: border-box;
 }
 
+form.personal-area figure img{
+    margin-bottom: 10px;
+}
 /* cancel button */
 form.editProduct button {
     background-color: var(--background-dark);
