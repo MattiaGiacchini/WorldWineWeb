@@ -1010,6 +1010,14 @@
             $stmt->execute();
         }
 
+        public function readNotification($idNotification) {
+            $query = "UPDATE notifica SET visualizzato = 1 WHERE idNotifica = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $idNotification);
+
+            return $stmt->execute();
+        }
+
         public function getClientNotifications($userId) {
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "crescente") {
                 $sort = "ORDER BY visualizzato ASC, data ASC";

@@ -50,7 +50,7 @@
                 <div class="tileContent">
                     <h3><?php echo $notification["categoria"]; ?></h3>
                     <?php if ($notification["visualizzato"] == 0) { ?>
-                        <button type="button" name="<?php echo "notifica".$notification["idNotifica"]; ?>">segna come letto</button>
+                        <button type="button" id="<?php echo $notification["idNotifica"]; ?>" name="<?php echo "notifica".$notification["idNotifica"]; ?>">segna come letto</button>
                     <?php } ?>
 
                     <p><?php echo $notification["data"]; ?></p>
