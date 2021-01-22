@@ -235,11 +235,15 @@
         }
 
         public function updateUserInfo($idUser, $email, $password) {
+            return $this->adminUpdateUserInfo($idUser, $email, $password, 1);
+        }
+
+        public function adminUpdateUserInfo($idUser, $email, $password, $attivo) {
             $query = "UPDATE utente
-                      SET email = ?, password = ?
+                      SET email = ?, password = ?, attivo = ?
                       WHERE utente.idUtente = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ssi', $email, $password, $idUser);
+            $stmt->bind_param('ssii', $email, $password, $attivo, $idUser);
             return $stmt->execute();
         }
 

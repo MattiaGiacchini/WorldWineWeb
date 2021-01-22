@@ -4,13 +4,13 @@
     </div>
 </div>
 
-<form name="personal-area" class="personal-area" action="personalArea.php" method="post" enctype="multipart/form-data">
+<form name="personal-area" class="personal-area" action="#" method="post" enctype="multipart/form-data">
     <ul>
         <li>
             <input type="hidden" name="id" value="<?php echo getLoggedUserId(); ?>">
             <div class="figure">
                 <figure>
-                    <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" id="photo" alt="Immagine di Profilo">
+                    <img src="<?php if(getUserRole() == "admin") { echo getUserImgURL($_GET["idCollaborator"]); } else { echo getUserImgURL(getLoggedUserId()); } ?>" id="photo" alt="Immagine di Profilo">
                     <figcaption>Immagine profilo attualmente in uso</figcaption>
                 </figure>
             </div>
@@ -49,8 +49,12 @@
             <label class="private" for="birthday">Data di Nascita</label>
             <input class="private" type="date" id="birthday" name="birthday"
              max="<?php $time = strtotime("-18 year", time()); echo date("Y-m-d", $time); ?>" value="<?php echo $templateParams["userInfo"]["dataDiNascita"]; ?>" disabled/>
-        </li><?php endif; ?>
+        </li><?php endif; if(getUserRole() == "admin"):?>
         <li>
+            <label for="attivo">Collaboratore attivo</label>
+            <input type="checkbox" id="attivo" name="attivo" value="1" <?php echo $templateParams["userInfo"]["attivo"] == 1 ? "checked" : ""; ?>>
+        </li>
+        <?php endif; ?><li>
             <label for="email">E-mail</label>
             <input type="email" id="email" name="email" autocomplete="on" value="<?php echo $templateParams["userInfo"]["email"]; ?> "
                 pattern="\b[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,6}\b"
