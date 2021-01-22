@@ -622,7 +622,7 @@
         }
 
         public function getAllOrders(){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o LEFT JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine, o.data, o.statoDiAvanzamento " . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o LEFT JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) " . $this->getOrderFilters();
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -670,13 +670,13 @@
                 array_push($status, ORDER_STATUS[-1]);
             }
 
-            $statusWhereCondition = "";
+            $statusWhereCondition = "AND statoDiAvanzamento = 'Accettazione'";
             if (!empty($status)) {
                 array_walk($status, function(&$status) {$status = "'$status'";});
                 $statusWhereCondition = " AND statoDiAvanzamento IN (" . implode(', ', $status) . ")";
             }
 
-            return $statusWhereCondition . " " . $sort;
+            return $statusWhereCondition . " GROUP BY o.idOrdine, o.data, o.statoDiAvanzamento " . $sort;
 
         }
 

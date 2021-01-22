@@ -116,7 +116,7 @@
                 <label for="cardTipology">Tipologia carta</label>
                 <select name="cardTipology" id="cardTipology" required >
                     <option value="">Seleziona tipologia</option>
-                    <option value="VISA">VISA</option>
+                        <option value="VISA">VISA</option>
                     <option value="V-PAY">V-PAY</option>
                     <option value="Mastercard">Mastercard</option>
                     <option value="Maestro">Maestro</option>
@@ -134,10 +134,11 @@
                 <label for="cvv">CVV</label>
                 <input type="number" id="cvv" name="cvv" min="001" max="999" required readonly />
             </li>
-
-            <li>
-                <input id="confirmOrder" type="submit" name="submit" value="Conferma" />
-            </li>
+            <?php if (count($templateParams["cartProducts"]) > 0): ?>
+                <li>
+                    <input id="confirmOrder" type="submit" name="submit" value="Conferma" />
+                </li>
+            <?php endif; ?>
         </ul>
     </form>
 

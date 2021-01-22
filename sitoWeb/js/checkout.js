@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     const products = JSON.parse(getCookie("checkoutData"));
     document.cookie =  "checkoutData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    console.log(products);
+    console.log(products[1]);
 
     $("form.checkout select[name = shippingAddress]").click(function(){
         if (document.forms["checkoutForm"]["shippingAddress"].value == "new") {
@@ -26,6 +26,19 @@ $(document).ready(function(){
             });
 
             $("ul.address li select#state").css('pointer-events','none');
+
+            const addressId = document.forms["checkoutForm"]["shippingAddress"].value;
+            products[0].forEach(element => {
+                if(element["idIndirizzo"] == addressId) {
+                    document.getElementById("name").value = element["nome"];
+                    document.getElementById("adr").value = element["via"];
+                    document.getElementById("civic").value = element["civico"];
+                    document.getElementById("city").value = element["citta"];
+                    document.getElementById("province").value = element["provincia"];
+                    document.getElementById("zip").value = element["cap"];
+                    document.getElementById("state").value = element["stato"];
+                }
+            });
         }
     })
 
@@ -52,6 +65,16 @@ $(document).ready(function(){
 
             $("ul.payment li select#cardTipology").css('pointer-events','none');
 
+            const paymentId = document.forms["checkoutForm"]["payment"].value;
+            products[1].forEach(element => {
+                if(element["numeroCarta"] == paymentId) {
+                    document.getElementById("cardname").value = element["intestatario"];
+                    document.getElementById("cardTipology").value = element["tipologiaCarta"];
+                    document.getElementById("cardnumber").value = element["numeroCarta"];
+                    document.getElementById("expiration").value = element["scadenza"].slice(0,7);
+                    document.getElementById("cvv").value = element["cvv"];
+                }
+            });
         }
     })
 

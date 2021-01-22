@@ -9,19 +9,19 @@
 
         $updateCartProducts = getProductsId(array_keys($_POST));
         $dataBase->updateCartValues(getLoggedUserId(), $updateCartProducts);
-
-        $templateParams["titoloPagina"] = "Checkout";
-        $templateParams["titoloScheda"] = "Checkout";
-        $templateParams["indirizzoPagina"] = "template/checkout-page.php";
-        $templateParams["cssAggiuntivi"] = '<link rel="stylesheet" type="text/css" href="./css/cart.css">';
-        $templateParams["jsAggiuntivi"] = '<script type="text/javascript" src="./js/checkout.js"></script>';
-
         $dataBase->removeUnavailableProducts($userId);
         $templateParams["cartProducts"] = $dataBase->getCartProducts($userId);
         $templateParams["cartValue"] = $dataBase->getCartValue($userId);
 
         $templateParams["addresses"] = $dataBase->getUserAddresses($userId);
         $templateParams["payments"] = $dataBase-> getUserPayments($userId);
+
+
+        $templateParams["titoloPagina"] = "Checkout";
+        $templateParams["titoloScheda"] = "Checkout";
+        $templateParams["indirizzoPagina"] = "template/checkout-page.php";
+        $templateParams["cssAggiuntivi"] = '<link rel="stylesheet" type="text/css" href="./css/cart.css">';
+        $templateParams["jsAggiuntivi"] = '<script type="text/javascript" src="./js/checkout.js"></script>';
 
         $checkoutData = array($templateParams["addresses"], $templateParams["payments"]);
         setcookie("checkoutData", json_encode($checkoutData), time() + 60, "/");
@@ -44,6 +44,7 @@
 
         if(isset($_POST["submit"]) && isset($_POST["payment"]) && isset($_POST["shippingAddress"])){
             $dataBase->createOrder($userId, $orderPayment, $orderAddress);
+            header("location: login.php");
         }
 
 
@@ -55,14 +56,17 @@
             unset($string[$key]);
         }
         $products = array();
-        foreach ($string as $value) {
-            $product = array();
-            $id = explode("_", $value);
-            $product["idEtichetta"] = $id[0];
-            $product["idContenitore"] = $id[1];
-            $product["quantita"] = $_POST[$value];
+        if (count($string) > 0) {
+            foreach ($string as $value) {
+                $product = array();
+                $id = explode("_", $value);
+                //var_dump($id);
+                $product["idEtichetta"] = $id[0];
+                $product["idContenitore"] = $id[1];
+                $product["quantita"] = $_POST[$value];
 
-            array_push($products, $product);
+                array_push($products, $product);
+            }
         }
 
         return $products;
