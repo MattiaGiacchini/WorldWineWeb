@@ -56,7 +56,7 @@
             <div class="figure">
                 <figure>
                     <figcaption>Immagine attualmente in uso</figcaption>
-                    <img src="<?php echo getWineImgURL(0,0); ?>" id="photo" alt="Immagine di default">
+                    <img src="<?php echo getWineImgURL(0,0); ?>" id="photo" alt="Immagine del vino">
                 </figure>
             </div>
         </li>
