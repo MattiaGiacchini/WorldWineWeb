@@ -6,6 +6,7 @@
         $prodotto = $dataBase->getAllProductDetails($_GET["idLabel"], $_GET["idContainer"]);
         if($prodotto) {
 
+
             $isClient = isUserLoggedIn() && getUserRole() === "client";
 
             // carico le recensioni ed eventualmente, se sono un cliente, anche la mia vecchia recensione
@@ -22,6 +23,9 @@
                 } else {
                     $cartElement = $prodotto["scorteMagazzino"];
                 }
+                
+                $favouriteClass = $dataBase->existSingleFavourite($_GET["idContainer"], $_GET["idLabel"], getLoggedUserId())
+                                   ? "favourite" : "not-favourite";
             }
 
 

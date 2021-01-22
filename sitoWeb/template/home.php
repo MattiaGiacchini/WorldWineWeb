@@ -95,8 +95,8 @@
                     <p><?php echo $prodotto["scorteMagazzino"] > 0 ? "Disponibile" : "Non Disponibile"; ?></p>
                 </div>
             </div>
-        </a>
-        <button class="preference favourite" name="preference favourite"></button>
+        </a><?php if($isClient): ?>
+        <button class="preference <?php echo $prodotto["favorite"] ? "favourite" : "not-favourite"; ?>" name="preference" id="<?php echo $prodotto["idEtichetta"]."-".$prodotto["idContenitore"]."-".$userId; ?>"></button><?php endif; ?>
     </article>
 <?php endforeach; ?>
 </div>

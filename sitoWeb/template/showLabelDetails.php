@@ -22,8 +22,8 @@
                         <h6><?php echo $prodotto["prezzo"]; ?>€</h6>
                         <p><?php echo $prodotto["scorteMagazzino"] > 0 ? "Disponibile" : "Non Disponibile"; ?></p>
                     </div>
-                </div>
-            <button class="preference favourite" name="preference favourite"></button>
+                </div><?php if($isClient): ?>
+            <button class="preference  <?php echo $favouriteClass; ?>" name="preference" id="<?php echo $prodotto["idEtichetta"]."-".$prodotto["idContenitore"]."-".getLoggedUserId(); ?>"></button><?php endif; ?>
         </article>
         <?php if($isClient): ?>
         <form class="quantityToOrder" action="insertUpdateCartElement.php" method="post">
