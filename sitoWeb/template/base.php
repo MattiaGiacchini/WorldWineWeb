@@ -54,6 +54,7 @@
                     case 'client':
                         echo '<li><a href="cart.php">Carrello</a></li>';
                         echo '<li><a href="orders.php">Ordini</a></li>';
+                        echo '<li><a href="notifications.php">Notifiche</a></li>';
                         echo '<li><a href="personalArea.php">Area Personale</a></li>';
                         echo '<li><a href="logout.php">Logout</a></li>';
                         break;

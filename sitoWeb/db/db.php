@@ -390,9 +390,10 @@
             $query = "INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iisdd', $idContainer, $idLabel, $time, $price, $iva);
+            $result = $stmt->execute();
 
-            return $stmt->execute();
-            // TODO: notifica utente cambio prezzo
+            $this->notificationFavouriteProductPriceChange($idLabel, $idContainer);
+            return $result;
         }
 
         // aggiunge un nuovo utente business a database
@@ -1010,6 +1011,38 @@
             $stmt->execute();
         }
 
+        public function getClientNotifications($userId) {
+            if (isset($_GET["ordine"]) && $_GET["ordine"] === "crescente") {
+                $sort = "ORDER BY visualizzato ASC, data ASC";
+            } else {
+                $sort = "ORDER BY visualizzato ASC, data DESC";
+            }
+
+            $status = [];
+            if (isset($_GET["daLeggere"])) {
+                array_push($status, "0");
+            }
+
+            if (isset($_GET["lette"])) {
+                array_push($status, "1");
+            }
+
+            $statusWhereCondition = "AND visualizzato IN (0)";
+            if (!empty($status)) {
+                $statusWhereCondition = "AND visualizzato IN (" . implode(", ", $status) . ")";
+            }
+
+            $query = "SELECT * FROM notifica WHERE idUtente = ? " . $statusWhereCondition . " " . $sort;
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+            var_dump($query);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
         private function getStateMessage($state) {
             $status = "";
             switch ($state) {
@@ -1034,6 +1067,23 @@
             }
 
             return $status;
+        }
+
+        private function notificationFavouriteProductPriceChange($idEtichetta, $idContenitore) {
+            $query = "SELECT utente.idUtente, utente.nome as nomeUtente, etichetta.nome as nomeVino FROM preferenza JOIN utente ON utente.idUtente = preferenza.idCliente JOIN etichetta ON preferenza.idEtichetta = etichetta.idEtichetta WHERE preferenza.idContenitore = ? AND preferenza.idEtichetta = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ii', $idContenitore, $idEtichetta);
+            var_dump($query);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            foreach ($result as $data) {
+                $message = "Gentile " . $data["nomeUtente"] . ", il prodotto #" . $idEtichetta . "_" . $idContenitore . " " . $data["nomeVino"] . " ha subito un cambio di prezzo.";
+                $this->addNewNotification($data["idUtente"], $message, "Prodotto");
+            }
+
+            return;
         }
 
     }
