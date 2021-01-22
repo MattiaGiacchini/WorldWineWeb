@@ -23,11 +23,11 @@
             <legend>Stato notifiche</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="daLeggere" value="true" id="daLeggere" checked/>
+                    <input type="checkbox" name="daLeggere" value="true" id="daLeggere" />
                     <label for="daLeggere"> Da leggere </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="lette" value="true" id="lette" checked/>
+                    <input type="checkbox" name="lette" value="true" id="lette" />
                     <label for="lette"> Già lette </label>
                 </li>
             </ul>

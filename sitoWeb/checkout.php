@@ -44,6 +44,7 @@
 
         if(isset($_POST["submit"]) && isset($_POST["payment"]) && isset($_POST["shippingAddress"])){
             $dataBase->createOrder($userId, $orderPayment, $orderAddress);
+            $_SESSION["orderCreated"] = "true";
             header("location: login.php");
         }
 

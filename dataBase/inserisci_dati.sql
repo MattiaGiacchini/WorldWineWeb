@@ -463,6 +463,7 @@ INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Villa Bonaga
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Casa Sant''Orsola', 'ITA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Terre Forti', 'ITA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Santa Barbara', 'ITA');
+INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Tenuta Coccapane', 'ITA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'Chablis Vititours', 'FRA');
 INSERT INTO `cantina` (`idCantina`, `nome`, `stato`) VALUES (NULL, 'La Bodega Tinedo', 'ESP');
 
@@ -477,30 +478,5 @@ INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES (NULL, 'Superiore');
 
 INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`, `attivo`) VALUES
 (1, 'ma.giacchini99@gmail.com', 'a123', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199O', NULL, NULL, 1),
-(2, 'a@b.it', 'a123', 'client', 'a', 'b', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1),
-(3, 'dejackdani@gmail.com', '123456aA', 'admin', 'Daniele', 'Ercoles', '1992-10-19', 'RCLDNL92R19C357C', NULL, NULL, 1);
-
-INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titoloAlcolico`, `solfiti`, `bio`, `categoria`, `tenoreZuccherino`, `temperaturaMinima`, `temperaturaMassima`, `classificazione`, `gas`, `annata`, `indicazioneGeografica`, `specificazione`, `vitigno`, `menzione`, `idCantina`) VALUES
-(1, 'Il Merlot', 'Perfezione come ricerca. Ci sono uve che si preannunciano bellissime, come una promessa di felicità. Succede quando la natura, il terroir, il sole, si allineano in un\'annata speciale e forse irripetibile. E allora non si può che accettare la sfida della perfezione. Nasce il desiderio di non perdere l\'eccezionalità di quella magica coincidenza e ricercare il meglio. C\'è la tensione a mantenere quella promessa, creando il vino più equilibrato, elegante, espressivo e longevo. Il merlot esce solo ne', 'Rosso', '12.00', 1, 0, 'Vino', 'Secco', '16.00', '18.00', 'DOCG', 'Frizzante', 1950, 'Cervia', 'Nessuna', 108, 4, 2);
-
-INSERT INTO `vino_confezionato` (`idContenitore`, `idEtichetta`, `scorteMagazzino`, `mediaRecensioni`, `attivo`) VALUES
-(1, 1, 1, '0.000', 1),
-(6, 1, 350, '2.000', 1),
-(9, 1, 20, '5.000', 1),
-(13, 1, 205, '5.000', 0);
-
-INSERT INTO `modifica_scorte` (`idContenitore`, `idEtichetta`, `idCollaboratore`, `quantita`, `data`) VALUES
-(6, 1, 1, 50, '2021-01-19 00:00:00'),
-(6, 1, 1, 500, '2021-01-19 11:23:45'),
-(6, 1, 1, -600, '2021-01-19 11:23:48'),
-(6, 1, 1, 10000, '2021-01-19 11:23:51'),
-(6, 1, 1, -8000, '2021-01-19 11:24:09'),
-(6, 1, 1, -500, '2021-01-19 11:24:11'),
-(6, 1, 1, -100, '2021-01-19 11:24:14'),
-(6, 1, 1, -1000, '2021-01-19 11:24:16');
-
-INSERT INTO `prezzo` (`idContenitore`, `idEtichetta`, `data`, `prezzo`, `iva`) VALUES
-(1, 1, '2021-01-18', '50.00', '22.00'),
-(6, 1, '2020-12-11', '504.00', '22.00'),
-(9, 1, '2021-01-18', '1000.00', '22.00'),
-(13, 1, '2021-01-18', '35.00', '22.00');
+(2, 'dejackdani@gmail.com', '123456aA', 'admin', 'Daniele', 'Ercoles', '1992-10-19', 'RCLDNL92R19C357C', NULL, NULL, 1),
+(3, 'a@b.it', 'a123', 'client', 'Grandi', 'Filomeno', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1);

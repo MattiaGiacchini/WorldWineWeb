@@ -278,3 +278,36 @@ button#addNewColaborator, button#addNewLabel {
     margin-bottom: 5%;
     display: block;
 }
+
+.alert {
+    position: inherit;
+    z-index: 10;
+    margin: 3% auto;
+    padding: 20px;
+    width: 80%;
+    background-color: var(--background-red);
+    color: var(--text-light);
+    text-align: center;
+    font-size: 22px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: var(--text-light);
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: var(--background-dark);
+}
+
+@media screen and (min-width: 480px) {
+    .alert {
+        width: 50%;
+    }
+}
