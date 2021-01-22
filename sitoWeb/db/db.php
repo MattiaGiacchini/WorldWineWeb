@@ -959,6 +959,13 @@
             // TODO: notifica client
         }
 
+        public function updateCartValues($userId, $products) {
+            foreach ($products as $product) {
+                $this->updateSingleArticleToCart($product["idContenitore"], $product["idEtichetta"], $userId, $product["quantita"]);
+            }
+            return;
+        }
+
     }
 
 ?>

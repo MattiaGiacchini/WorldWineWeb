@@ -7,6 +7,9 @@
 
         $userId = getLoggedUserId();
 
+        $updateCartProducts = getProductsId(array_keys($_POST));
+        $dataBase->updateCartValues(getLoggedUserId(), $updateCartProducts);
+
         $templateParams["titoloPagina"] = "Checkout";
         $templateParams["titoloScheda"] = "Checkout";
         $templateParams["indirizzoPagina"] = "template/checkout-page.php";
@@ -45,5 +48,23 @@
 
 
         require('./template/base.php');
+    }
+
+    function getProductsId($string) {
+        if (($key = array_search('checkout', $string)) !== false) {
+            unset($string[$key]);
+        }
+        $products = array();
+        foreach ($string as $value) {
+            $product = array();
+            $id = explode("_", $value);
+            $product["idEtichetta"] = $id[0];
+            $product["idContenitore"] = $id[1];
+            $product["quantita"] = $_POST[$value];
+
+            array_push($products, $product);
+        }
+
+        return $products;
     }
 ?>
