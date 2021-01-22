@@ -234,6 +234,30 @@
             }
         }
 
+        public function updateUserInfo($idUser, $email, $password) {
+            $query = "UPDATE utente
+                      SET email = ?, password = ?
+                      WHERE utente.idUtente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('ssi', $email, $password, $idUser);
+            return $stmt->execute();
+        }
+
+        public function getAllUserInfo($idUser){
+            $query =   "SELECT *
+                        FROM utente AS u
+                        WHERE u.idUtente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $idUser);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result[0];
+            }
+        }
+
         // restituisce tutti i prodotti attivi
         public function getAllProductDetails($idLabel, $idContainer) {
             $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
