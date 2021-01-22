@@ -4,16 +4,16 @@
 
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
-    <form class="filter" action="index.html" method="post">
+    <form class="filter" action="#" method="GET">
         <fieldset>
             <legend>Macrocategoria</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="categoria1" value="vino" id="filterVino"/>
+                    <input type="checkbox" name="Vino" value="Vino" id="filterVino"/>
                     <label for="filterVino"> Vino </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="categoria2" value="spumante" id="filterSpumante"/>
+                    <input type="checkbox" name="Spumante" value="Spumante" id="filterSpumante"/>
                     <label for="filterSpumante"> Spumante </label>
                 </li>
             </ul>
@@ -23,11 +23,15 @@
             <legend>Colore</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="colore1" value="rosso" id="filterRed"/>
+                    <input type="checkbox" name="Rosso" value="Rosso" id="filterRed"/>
                     <label for="filterRed"> Rosso </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="colore2" value="bianco" id="filterWhite"/>
+                    <input type="checkbox" name="Rosato" value="Rosato" id="filterRose"/>
+                    <label for="filterRose"> Rosato </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="Bianco" value="Bianco" id="filterWhite"/>
                     <label for="filterWhite"> Bianco </label>
                 </li>
             </ul>
@@ -37,36 +41,46 @@
             <legend>Gas</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="gas1" value="fermo" id="filterFermo"/>
+                    <input type="checkbox" name="Fermo" value="Fermo" id="filterFermo"/>
                     <label for="filterFermo"> Fermo </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="gas2" value="frizzante" id="filterFrizzante"/>
+                    <input type="checkbox" name="Frizzante" value="Frizzante" id="filterFrizzante"/>
                     <label for="filterFrizzante"> Frizzante </label>
                 </li>
             </ul>
         </fieldset>
 
         <fieldset>
-            <legend>Tenore zuccherino</legend>
+            <legend>Classificazione</legend>
             <ul>
                 <li>
-                    <input type="checkbox" name="sugar1" value="dry" id="filterDry"/>
-                    <label for="filterDry"> Dry </label>
+                    <input type="checkbox" name="Generico" value="Generico" id="filterGenerico"/>
+                    <label for="filterGenerico"> Generico </label>
                 </li>
                 <li>
-                    <input type="checkbox" name="sugar2" value="extraDry" id="filterExtraDry"/>
-                    <label for="filterExtraDry"> Extra Dry </label>
+                    <input type="checkbox" name="Varietale" value="Varietale" id="filterVarietale"/>
+                    <label for="filterVarietale"> Varietale </label>
                 </li>
-            </ul>
-        </fieldset>
-
-        <fieldset>
-            <legend>Cantina</legend>
-            <ul>
                 <li>
-                    <input type="checkbox" name="cantina1" value="ginopino" id="filterGinopino"/>
-                    <label for="filterGinopino"> Gino Pino </label>
+                    <input type="checkbox" name="IGP" value="IGP" id="filterIGP"/>
+                    <label for="filterIGP"> IGP </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="IGT" value="IGT" id="filterIGT"/>
+                    <label for="filterIGT"> IGT </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="DOC" value="DOC" id="filterDOC"/>
+                    <label for="filterDOC"> DOC </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="DOP" value="DOP" id="filterDOP"/>
+                    <label for="filterDOP"> DOP </label>
+                </li>
+                <li>
+                    <input type="checkbox" name="DOCG" value="DOCG" id="filterDOCG"/>
+                    <label for="filterDOCG"> DOCG </label>
                 </li>
             </ul>
         </fieldset>

@@ -258,6 +258,26 @@
             }
         }
 
+        private function homeFilters() {
+            $macroCategoria = array();
+            $colore = array();
+            $gas = array();
+            $classificazione = array();
+
+
+            if(isset($_GET["Vino"])){
+                array_push($macroCategoria, "Vino");
+            }
+
+            $statusWhereCondition = "WHERE 1";
+/*
+            if(count($macroCategoria) != 0) {
+                array_walk($macroCategoria, function($macroCategoria) {return "'$macroCategoria'";} );
+                $statusWhereCondition .= " AND categoria IN (" .implode(", ", $status) . ")";
+            }*/
+            return $statusWhereCondition;
+        }
+
         // restituisce tutti i dettagli di un prodotto
         public function getAllProductsHomePage() {
             $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
@@ -268,8 +288,7 @@
                         JOIN cantina AS ca ON ca.idCantina = e.idCantina
                         JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
                         LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
-                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
-                        WHERE 1";
+                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione ".$this->homeFilters();
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
