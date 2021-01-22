@@ -5,6 +5,18 @@
         <button type="button" name="filters" id="filterDropdown">Filtri &#9660;</button>
     </div>
     <form class="filter" action="#" method="get">
+        <?php if (getUserRole() === "client") { ?>
+            <fieldset>
+                <legend>Preferiti</legend>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="Preferiti" value="Preferiti" id="filterPreferiti"/>
+                        <label for="filterPreferiti"> Preferiti </label>
+                    </li>
+                </ul>
+            </fieldset>
+        <?php } ?>
+
         <fieldset>
             <legend>Macrocategoria</legend>
             <ul>

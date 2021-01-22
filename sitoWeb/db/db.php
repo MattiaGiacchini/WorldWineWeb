@@ -312,7 +312,7 @@
                 $statusWhereCondition .= " AND gas IN (" .implode(", ", $gas) . ")";
             }
 
-            /*Categoria vino*/
+            /*Classificazione vino*/
             if(isset($_GET["Varietale"])){
                 array_push($classificazione, "Varietale");
             }
@@ -346,6 +346,11 @@
                 $statusWhereCondition .= " AND classificazione IN (" .implode(", ", $classificazione) . ")";
             }
 
+            /*Gas vino*/
+            if(isset($_GET["Preferiti"])){
+                $statusWhereCondition .= " AND pref.idCliente IS NOT NULL ";
+            }
+
             return $statusWhereCondition;
         }
 
@@ -359,7 +364,7 @@
                         JOIN cantina AS ca ON ca.idCantina = e.idCantina
                         JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
                         LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
-                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione ".$this->homeFilters();
+                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione " . $this->homeFilters();
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -378,7 +383,7 @@
                         JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
                         LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
                         LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
-                        LEFT JOIN preferenza AS pref ON e.idEtichetta = pref.idEtichetta AND co.idContenitore = pref.idContenitore AND pref.idCliente = ?';
+                        LEFT JOIN preferenza AS pref ON e.idEtichetta = pref.idEtichetta AND co.idContenitore = pref.idContenitore AND pref.idCliente = ? ' . $this->homeFilters();
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i',$userId);
             $stmt->execute();
@@ -736,7 +741,6 @@
             return $result;
         }
 
-        /*NOT ACTUALY USED TODO*/
         private function getProductAvailability($idEtichetta, $idContenitore) {
             $query = "SELECT scorteMagazzino FROM vino_confezionato WHERE idContenitore = ? AND idEtichetta = ?";
             $stmt = $this->db->prepare($query);
@@ -946,16 +950,6 @@
             return $stmt->execute();
         }
 
-
-
-
-
-
-
-
-
-
-
         /******************************************************************
                     NOTIFICHE
         ********************************************************************/
@@ -978,8 +972,6 @@
                 $this->db->rollback();
                 throw $exception;
             }
-
-
         }
 
         /*Checks if products are available, otherwise reduce*/
