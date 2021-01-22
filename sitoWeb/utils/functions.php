@@ -31,11 +31,18 @@
     }
 
     function getUserImgURL($idUtente){
+        if (is_dir(USER_PHOTO_DIR . $idUtente )) {
+            $path = scandir(USER_PHOTO_DIR . $idUtente . "/");
+            return USER_PHOTO_DIR . $idUtente . "/" . $path[2];
+        } else {
+            return USER_PHOTO_DIR . "defaultUser.png";
+        }
+/*
         if (glob(USER_PHOTO_DIR . $idUtente . ".*")){
             return glob(USER_PHOTO_DIR . $idUtente . ".*")[0];
         } else {
             return USER_PHOTO_DIR . "defaultUser.png" ;
-        }
+        }*/
     }
 
     function getUserName() {
@@ -62,7 +69,16 @@
     }
 
     function upLoadUserImage($image, $idUser) {
-        return uploadImage(USER_PHOTO_DIR, $image, $idUser);
+        $pathName = USER_PHOTO_DIR . $idUser;
+        if (!is_dir($pathName)) {
+            mkdir($pathName, 0755, true);
+        }
+        $pathDirectory = $pathName."/";
+        $result = uploadImage($pathDirectory, $image, $idUser);
+        if($result[0] == 0 && !glob($pathDirectory . "*")) {
+            rmdir($pathName);
+        }
+        return $result;
     }
 
     function uploadImage($path, $image, $imgNewName){
@@ -104,7 +120,7 @@
                     }
                 }
             }
-            
+
             $newFullPath = $path.$imgNewName.".".$imageFileType;
             if(!move_uploaded_file($image["tmp_name"], $newFullPath)){
                 $msg.= "Errore nel caricamento dell'immagine.";
