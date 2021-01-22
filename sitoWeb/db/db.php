@@ -60,7 +60,6 @@
             $cartQntDetail = $this->getSingleCartElement($idContainer, $idLabel, $idUser);
             $mag = $this->getProductAvailability($idLabel, $idContainer);   // carico la disponibilità a mag
             if($cartQntDetail) { // esiste l'articolo a carrello, allora ne aggiorno le quantità
-                var_dump($cartQntDetail, $quantity);
                 if($quantity + $cartQntDetail["quantita"] > $mag) {
                     $quantity = $mag;
                 } else {
@@ -1035,7 +1034,6 @@
             $query = "SELECT * FROM notifica WHERE idUtente = ? " . $statusWhereCondition . " " . $sort;
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
-            var_dump($query);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -1073,7 +1071,6 @@
             $query = "SELECT utente.idUtente, utente.nome as nomeUtente, etichetta.nome as nomeVino FROM preferenza JOIN utente ON utente.idUtente = preferenza.idCliente JOIN etichetta ON preferenza.idEtichetta = etichetta.idEtichetta WHERE preferenza.idContenitore = ? AND preferenza.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
-            var_dump($query);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
