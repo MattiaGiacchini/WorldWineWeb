@@ -26,7 +26,7 @@ if(isUserLoggedIn() && getUserRole() == "admin" && isset($_GET["idCollaborator"]
 
         $psw = null;
         if(isset($_POST["psw"])) {
-            if($_POST["psw"] === $templateParams["userInfo"]["password"]) {
+            if($_POST["psw"] === $templateParams["userInfo"]["password"] || $_POST["psw"] == '') {
                 $psw = $templateParams["userInfo"]["password"];
                 unset($_POST["psw"]);
             } else {
@@ -38,7 +38,7 @@ if(isUserLoggedIn() && getUserRole() == "admin" && isset($_GET["idCollaborator"]
 
         $email = null;
         if(isset($_POST["email"])) {
-            if($_POST["email"] === $templateParams["userInfo"]["email"]) {
+            if($_POST["email"] === $templateParams["userInfo"]["email"] || $_POST["email"] == '') {
                 $email = $templateParams["userInfo"]["email"];
                 unset($_POST["email"]);
             } else {

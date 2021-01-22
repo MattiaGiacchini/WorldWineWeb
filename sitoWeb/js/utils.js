@@ -23,7 +23,7 @@ $(document).ready(function(){
     });
 
     $("#addNewColaborator").click(function(){
-        location.href = "register.html";
+        location.href = "../addNewCollaborator.php";
     });
 
 

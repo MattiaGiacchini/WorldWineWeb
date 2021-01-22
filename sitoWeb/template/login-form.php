@@ -25,7 +25,7 @@
         ?>
         <li>
             <label for="email">E-mail</label> <input type="email" id="email" name="email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required />
         </li>
         <li>
             <label for="psw">Password</label> <input type="Password" id="psw" name="psw" required />

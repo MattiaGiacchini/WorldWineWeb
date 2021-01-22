@@ -4,7 +4,8 @@
     }
 
     function isUserLoggedIn() {
-        return !empty($_SESSION["idUtente"]);
+        global $dataBase;
+        return !empty($_SESSION["idUtente"]) && $dataBase->getAllUserInfo($_SESSION["idUtente"])["attivo"] == 1 ;
     }
 
     function registerLoggedUser($user){
@@ -37,12 +38,6 @@
         } else {
             return USER_PHOTO_DIR . "defaultUser.png";
         }
-/*
-        if (glob(USER_PHOTO_DIR . $idUtente . ".*")){
-            return glob(USER_PHOTO_DIR . $idUtente . ".*")[0];
-        } else {
-            return USER_PHOTO_DIR . "defaultUser.png" ;
-        }*/
     }
 
     function getUserName() {
