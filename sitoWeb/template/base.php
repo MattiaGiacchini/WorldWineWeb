@@ -40,7 +40,7 @@
     </header>
     <nav><?php if(isUserLoggedIn()) { ?>
         <section>
-            <a href="areaPersonale.php">
+            <a href="personalArea.php">
                 <h2>Benvenuto <?php echo getUserName(); ?></h2>
                 <p><?php if(getUserRole() != "client") { echo $userRole; } ?></p>
                 <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" alt="<?php echo $username; ?>" />
