@@ -622,7 +622,7 @@
         }
 
         public function getAllOrders(){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o LEFT JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) " . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.data, o.statoDiAvanzamento FROM ordine AS o LEFT JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) " . $this->getOrderFilters(0);
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -632,7 +632,7 @@
         }
 
         public function getClientOrders($userId){
-            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.statoDiAvanzamento, o.data FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) GROUP BY o.idOrdine" . $this->getOrderFilters();
+            $query = "SELECT o.idOrdine, sum(p.prezzo * d.quantita) as totaleOrdine, o.statoDiAvanzamento, o.data FROM ordine AS o JOIN dettaglio AS d ON o.idOrdine = d.idOrdine JOIN prezzo p ON p.idContenitore = d.idContenitore AND p.idEtichetta = d.idEtichetta WHERE o.idCliente = ? AND p.data = (SELECT data FROM prezzo WHERE data < o.data AND prezzo.idContenitore = d.idContenitore AND prezzo.idEtichetta = d.idEtichetta ORDER BY data DESC LIMIT 1) " . $this->getOrderFilters(1);
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $userId);
 
@@ -642,7 +642,7 @@
             return $result;
         }
 
-        private function getOrderFilters(){
+        private function getOrderFilters($orderView){
             if (isset($_GET["ordine"]) && $_GET["ordine"] === "crescente") {
                 $sort = "ORDER BY o.data ASC";
             } else {
@@ -670,7 +670,11 @@
                 array_push($status, ORDER_STATUS[-1]);
             }
 
-            $statusWhereCondition = "AND statoDiAvanzamento = 'Accettazione'";
+            if ($orderView == 0) {
+                $statusWhereCondition = "AND statoDiAvanzamento = 'Accettazione'";
+            } else {
+                $statusWhereCondition = "";
+            }
             if (!empty($status)) {
                 array_walk($status, function(&$status) {$status = "'$status'";});
                 $statusWhereCondition = " AND statoDiAvanzamento IN (" . implode(', ', $status) . ")";
@@ -963,12 +967,14 @@
             $stmt->bind_param('si', $state, $orderId);
             $stmt->execute();
 
-            $query = "INSERT INTO gestione_ordine (idOrdine, idCollaboratore, data, stato, note) VALUES (?, ?, ?, ?, NULL)";
+            $query = "INSERT INTO gestione_ordine (idOrdine, idCollaboratore, data, stato) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('iiss', $orderId, $collaboratorId, $time, $state);
             $stmt->execute();
 
-            // TODO: notifica client
+            $clientInfo = $this->getClientIdFromOrder($orderId);
+            $message = "Gentile " . $clientInfo["nome"] . ", il tuo ordine #" . $orderId . " " . $this->getStateMessage($state);
+            $this->addNewNotification($clientInfo["idCliente"], $message, "Ordine");
         }
 
         /*updates the cart with the new values setted*/
@@ -979,6 +985,17 @@
             return;
         }
 
+        private function getClientIdFromOrder($orderId) {
+            $query = "SELECT o.idCliente, u.nome FROM ordine o JOIN utente u ON o.idCliente = u.idUtente WHERE o.idOrdine = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $orderId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0];
+        }
+
 
 
         /******************************************************************
@@ -987,10 +1004,36 @@
         private function addNewNotification($userId, $message, $category) {
             $time = $this->getCurrentDateTime();
 
-            $query = "INSERT INTO notifica (idUtente, idNotifica, data, messaggio, visualizzato, categoria) VALUES (?, NULL, ?, ?, 'false', ?)";
+            $query = "INSERT INTO notifica (idUtente, idNotifica, data, messaggio, visualizzato, categoria) VALUES (?, NULL, ?, ?, 0, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('isss', $userId, $time, $message, $category);
             $stmt->execute();
+        }
+
+        private function getStateMessage($state) {
+            $status = "";
+            switch ($state) {
+                case ORDER_STATUS[0]:
+                    $status = "è in fase di accettazione";
+                    break;
+                case ORDER_STATUS[1]:
+                    $status = "è in fase di elaborazione";
+                    break;
+                case ORDER_STATUS[2]:
+                    $status = "è stato spedito";
+                    break;
+                case ORDER_STATUS[3]:
+                    $status = "è stato consegnato";
+                    break;
+                case ORDER_STATUS[-1]:
+                    $status = "è stato annullato";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return $status;
         }
 
     }
