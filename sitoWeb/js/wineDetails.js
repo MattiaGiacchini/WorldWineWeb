@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     const time = 500;
-    const buttons = $("div.details button");
+    const buttons = $("div.details button").not(".preference");
     const nextElement = buttons.next();
     let element;
 

@@ -16,6 +16,70 @@
             return $this->db->insert_id;
         }
 
+        // ritorna l'oggetto dei preferiti
+        public function getAllFavoritesOfClientId($idClient) {
+            $query =   "SELECT *
+                        FROM preferenza AS p
+                        WHERE p.idCliente = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $idClient);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return null;
+            } else {
+                return $result;
+            }
+        }
+
+        public function existSingleFavourite($idContainer, $idLabel, $idClient) {
+            $query =   "SELECT *
+                        FROM preferenza AS p
+                        WHERE p.idCliente = ?
+                        AND p.idEtichetta = ?
+                        AND p.idContenitore = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', intval($idClient), intval($idLabel), intval($idContainer));
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if(count($result)==0) {
+                return false;
+            } else {
+                return $result[0];
+            }
+        }
+
+        private function createFavorite($idContainer, $idLabel, $idClient) {
+            $query = "INSERT INTO preferenza (idContenitore, idEtichetta, idCliente)
+                             VALUES (?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('iii', $idContainer, $idLabel, $idClient);
+
+            return $stmt->execute();
+        }
+
+        private function deleteFavorite($idContainer, $idLabel, $idClient) {
+        $query = "DELETE FROM preferenza
+                  WHERE preferenza.idContenitore = ?
+                  AND preferenza.idEtichetta = ?
+                  AND preferenza.idCliente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii', $idContainer, $idLabel, $idClient);
+
+        return $stmt->execute();
+
+        }
+
+        public function toggleSingleFavorite($idContainer, $idLabel, $idClient) {
+            if($this->existSingleFavourite($idContainer, $idLabel, $idClient) != NULL) {
+                $this->deleteFavorite($idContainer, $idLabel, $idClient);
+                return false;
+            } else {
+                $this->createFavorite($idContainer, $idLabel, $idClient);
+                return true;
+            }
+        }
+
         // aggiunge un nuovo articolo a carrello
         private function addNewArticleToCart($idContainer, $idLabel, $idUser, $quantity) {
             $query = "INSERT INTO carrello (idContenitore, idEtichetta, idCliente, quantita) VALUES (?, ?, ?, ?)";
@@ -195,7 +259,7 @@
         }
 
         // restituisce tutti i dettagli di un prodotto
-        public function getAllProductsHomePage($n) {
+        public function getAllProductsHomePage() {
             $query =   "SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino,
                         e.idEtichetta, e.nome AS nomeEtichetta, e.descrizione, e.colore, e.titoloAlcolico, e.solfiti, e.bio, e.categoria, e.tenoreZuccherino, e.temperaturaMinima AS tMin, e.temperaturaMassima as tMax, e.classificazione, e.gas, e.annata, e.indicazioneGeografica, e.specificazione, ca.idCantina, ca.nome AS nomeCantina, ca.stato, vi.coloreBacca, vi.nomeSpecie, me.menzione, pr.prezzo, pr.iva
                         FROM (SELECT * FROM vino_confezionato WHERE vino_confezionato.attivo = 1) AS vc
@@ -206,13 +270,26 @@
                         LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
                         LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
                         WHERE 1";
-            if(isset($n) && $n > 0){
-                $query .= " LIMIT ?";
-            }
             $stmt = $this->db->prepare($query);
-            if(isset($n) && $n > 0){
-                $stmt->bind_param('i',$n);
-            }
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $result;
+        }
+
+        // restituisce tutti i dettagli di un prodotto
+        public function getAllProductsHomePageByClient($userId) {
+            $query =   'SELECT co.*, vc.mediaRecensioni, vc.scorteMagazzino, pref.idCliente AS favorite, e.idEtichetta, e.nome AS nomeEtichetta, e.descrizione, e.colore, e.titoloAlcolico, e.solfiti, e.bio, e.categoria, e.tenoreZuccherino, e.temperaturaMinima AS tMin, e.temperaturaMassima as tMax,
+                        e.classificazione, e.gas, e.annata, e.indicazioneGeografica, e.specificazione, ca.idCantina, ca.nome AS nomeCantina, ca.stato, vi.coloreBacca, vi.nomeSpecie, me.menzione, pr.prezzo, pr.iva
+                        FROM (SELECT * FROM vino_confezionato WHERE vino_confezionato.attivo = 1) AS vc
+                        JOIN contenitore AS co ON vc.idContenitore = co.idContenitore
+                        JOIN etichetta AS e ON e.idEtichetta = vc.idEtichetta
+                        JOIN cantina AS ca ON ca.idCantina = e.idCantina
+                        JOIN prezzo_recente AS pr ON pr.idContenitore = co.idContenitore AND pr.idEtichetta = e.idEtichetta
+                        LEFT JOIN vitigno AS vi ON e.vitigno = vi.idVitigno
+                        LEFT JOIN menzione AS me ON me.idMenzione = e.menzione
+                        LEFT JOIN preferenza AS pref ON e.idEtichetta = pref.idEtichetta AND co.idContenitore = pref.idContenitore AND pref.idCliente = ?';
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i',$userId);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             return $result;
