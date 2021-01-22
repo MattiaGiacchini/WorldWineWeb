@@ -39,7 +39,7 @@
                         AND p.idEtichetta = ?
                         AND p.idContenitore = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('iii', intval($idClient), intval($idLabel), intval($idContainer));
+            $stmt->bind_param('iii', $idClient, $idLabel, $idContainer);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             if(count($result)==0) {
