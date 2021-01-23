@@ -1,7 +1,7 @@
 <?php
     require_once("utils/headerFunction.php");
 
-    if (!isUserLoggedIn() && ( getUserRole() != "admin" || getUserRole() != "collaborator" )) {
+    if (!isUserLoggedIn() && ( getUserRole() === "client" )) {
         header("location: login.php");
     } else {
 

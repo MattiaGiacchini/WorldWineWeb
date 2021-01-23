@@ -16,7 +16,7 @@
 
             <?php $imgURL = getWineImgURL($product["idEtichetta"], $product["idContenitore"]); ?>
                 <article class="tile cart product <?php if ($product["attivo"] == 0) echo "deactivated"; ?>">
-                    <a class="tileLink" href=<?php echo "warehouse-management.php?etichetta=" . $product["idEtichetta"] . "&contenitore=" . $product["idContenitore"]; ?>>
+                    <a class="tileLink" href=<?php echo "showLabelDetails.php?idLabel=" . $product["idEtichetta"] . "&idContainer=" . $product["idContenitore"]; ?>>
                         <img class="tileImg" src=<?php echo $imgURL ; ?> alt="vino">
                     </a>
                     <div class="tileContent">

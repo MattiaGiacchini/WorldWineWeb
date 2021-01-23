@@ -1,4 +1,4 @@
-<?php
+ <?php
     require_once("utils/headerFunction.php");
 
     if(isset($_GET["idLabel"], $_GET["idContainer"]) && is_numeric($_GET["idLabel"]) && is_numeric($_GET["idContainer"])) {
@@ -23,7 +23,7 @@
                 } else {
                     $cartElement = $prodotto["scorteMagazzino"];
                 }
-                
+
                 $favouriteClass = $dataBase->existSingleFavourite($_GET["idContainer"], $_GET["idLabel"], getLoggedUserId())
                                    ? "favourite" : "not-favourite";
             }
