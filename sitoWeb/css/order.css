@@ -181,7 +181,7 @@ table td:nth-child(4), table tfoot td:last-of-type {
         margin: 0, auto;
     }
 
-    .orderManagementButtons * {
+    form#orderManagementButtons input, form#orderManagementButtons button {
         display: none;
     }
 }

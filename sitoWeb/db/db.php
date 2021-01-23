@@ -687,7 +687,6 @@
             $stmt->execute();
 
             $this->updateWarehouseAvailability($idEtichetta, $idContenitore, $amount);
-            // TODO: notifica torna disponibile prodotto preferito
         }
 
         public function getWarehouseMovements($idEtichetta, $idContenitore ) {
@@ -1101,6 +1100,17 @@
             return $result;
         }
 
+        private function getProductsFromOrder($orderId) {
+            $query = "SELECT * FROM dettaglio WHERE idOrdine = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $orderId);
+
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
         public function getOrderDetails($orderId) {
             $query = "SELECT * FROM ordine WHERE idOrdine = ?";
             $stmt = $this->db->prepare($query);
@@ -1147,6 +1157,11 @@
             $stmt->bind_param('iiss', $orderId, $collaboratorId, $time, $state);
             $stmt->execute();
 
+            if ($state === ORDER_STATUS[-1]) {
+                $this->rejectOrder($orderId);
+            }
+
+
             $clientInfo = $this->getClientIdFromOrder($orderId);
             $message = "Gentile " . $clientInfo["nome"] . ", il tuo ordine #" . $orderId . " " . $this->getStateMessage($state);
             $this->addNewNotification($clientInfo["idCliente"], $message, "Ordine");
@@ -1169,6 +1184,13 @@
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
             return $result[0];
+        }
+
+        public function rejectOrder($orderId) {
+            $products = $this->getProductsFromOrder($orderId);
+            foreach ($products as $product) {
+                $this->updateWarehouseAvailability($product["idEtichetta"], $product["idContenitore"], $product["quantita"]);
+            }
         }
 
 
