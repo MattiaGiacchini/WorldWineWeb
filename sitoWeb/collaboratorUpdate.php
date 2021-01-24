@@ -55,7 +55,8 @@ if(isUserLoggedIn() && getUserRole() == "admin" && isset($_GET["idCollaborator"]
         unset($_POST);
     }
 
-    $templateParams["titoloPagina"] = "Area Personale";
+    $templateParams["user"] = "admin";
+    $templateParams["titoloPagina"] = "Collaborator Update";
     $templateParams["titoloScheda"] = "World Wine Web";
     $templateParams["indirizzoPagina"] = "template/personalArea.php";
     $templateParams["jsAggiuntivi"] = '

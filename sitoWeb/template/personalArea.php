@@ -10,7 +10,7 @@
             <input type="hidden" name="id" value="<?php echo getLoggedUserId(); ?>">
             <div class="figure">
                 <figure>
-                    <img src="<?php if(getUserRole() == "admin") { $img = isset($_GET["idCollaborator"]) ? getUserImgURL($_GET["idCollaborator"]) : getUserImgURL(getLoggedUserId()); echo $img; } else { echo getUserImgURL(getLoggedUserId()); } ?>" id="photo" alt="Immagine di Profilo">
+                    <img src="<?php if($templateParams["user"] == "admin") { $img = isset($_GET["idCollaborator"]) ? getUserImgURL($_GET["idCollaborator"]) : getUserImgURL(getLoggedUserId()); echo $img; } else { echo getUserImgURL(getLoggedUserId()); } ?>" id="photo" alt="Immagine di Profilo">
                     <figcaption>Immagine profilo attualmente in uso</figcaption>
                 </figure>
             </div>
@@ -49,7 +49,7 @@
             <label class="private" for="birthday">Data di Nascita</label>
             <input class="private" type="date" id="birthday" name="birthday"
              max="<?php $time = strtotime("-18 year", time()); echo date("Y-m-d", $time); ?>" value="<?php echo $templateParams["userInfo"]["dataDiNascita"]; ?>" disabled/>
-        </li><?php endif; if(getUserRole() == "admin"):?>
+        </li><?php endif; if($templateParams["user"] == "admin"):?>
         <li>
             <label for="attivo">Collaboratore attivo</label>
             <input type="checkbox" id="attivo" name="attivo" value="1" <?php echo $templateParams["userInfo"]["attivo"] == 1 ? "checked" : ""; ?>>

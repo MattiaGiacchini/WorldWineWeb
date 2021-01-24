@@ -173,7 +173,7 @@
                 <label for="varietale">Varietale</label>
                 <input type="radio" name="classificazione" value="IGP" id="igp" required />
                 <label for="igp">IGP</label>
-                <input type="radio" name="classificazione" value="IGP" id="igt" required />
+                <input type="radio" name="classificazione" value="IGT" id="igt" required />
                 <label for="igt">IGT</label>
                 <input type="radio" name="classificazione" value="DOC" id="doc" required />
                 <label for="doc">DOC</label>
