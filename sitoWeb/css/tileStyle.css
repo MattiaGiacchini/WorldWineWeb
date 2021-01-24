@@ -78,7 +78,8 @@ a.tileLink {
 
 .tileImg {
     border-radius: 15px 0px 0px 15px;
-    max-height: 100px;;
+    max-height: 100px;
+    margin: auto 0;
     max-width: 20%;
     object-fit: cover;
 }
