@@ -10,7 +10,7 @@
             <input type="hidden" name="id" value="<?php echo getLoggedUserId(); ?>">
             <div class="figure">
                 <figure>
-                    <img src="<?php if(getUserRole() == "admin") { echo getUserImgURL($_GET["idCollaborator"]); } else { echo getUserImgURL(getLoggedUserId()); } ?>" id="photo" alt="Immagine di Profilo">
+                    <img src="<?php if(getUserRole() == "admin") { $img = isset($_GET["idCollaborator"]) ? getUserImgURL($_GET["idCollaborator"]) : getUserImgURL(getLoggedUserId()); echo $img; } else { echo getUserImgURL(getLoggedUserId()); } ?>" id="photo" alt="Immagine di Profilo">
                     <figcaption>Immagine profilo attualmente in uso</figcaption>
                 </figure>
             </div>

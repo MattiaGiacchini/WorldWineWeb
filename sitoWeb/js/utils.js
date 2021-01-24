@@ -23,7 +23,7 @@ $(document).ready(function(){
     });
 
     $("#addNewColaborator").click(function(){
-        location.href = "../addNewCollaborator.php";
+        location.href = "./addNewCollaborator.php";
     });
 
 
