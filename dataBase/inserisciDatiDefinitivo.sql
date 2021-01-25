@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 25, 2021 alle 01:55
+-- Creato il: Gen 25, 2021 alle 02:02
 -- Versione del server: 10.4.16-MariaDB
 -- Versione PHP: 7.4.12
 
@@ -747,42 +747,6 @@ INSERT INTO `vitigno` (`idVitigno`, `coloreBacca`, `nomeSpecie`) VALUES
 (103, 'Nera', 'Vernaccia'),
 (104, 'Nera', 'Vespolina'),
 (105, 'Nera', 'Vin de Nus');
-
--- --------------------------------------------------------
-
---
--- Struttura per vista `prezzo_recente`
---
-DROP TABLE IF EXISTS `prezzo_recente`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prezzo_recente`  AS SELECT `v`.`idContenitore` AS `idContenitore`, `v`.`idEtichetta` AS `idEtichetta`, `p`.`prezzo` AS `prezzo`, `p`.`iva` AS `iva` FROM (`prezzo` `p` join `vino_confezionato` `v` on(`v`.`idContenitore` = `p`.`idContenitore` and `v`.`idEtichetta` = `p`.`idEtichetta`)) WHERE `p`.`data` = (select max(`prezzo`.`data`) from `prezzo` where `v`.`idContenitore` = `prezzo`.`idContenitore` AND `v`.`idEtichetta` = `prezzo`.`idEtichetta`) ;
-
--- --------------------------------------------------------
-
---
--- Struttura per vista `totale_ordine`
---
-DROP TABLE IF EXISTS `totale_ordine`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totale_ordine`  AS SELECT `totale_prezzo_prodotto`.`idOrdine` AS `idOrdine`, `totale_prezzo_prodotto`.`idCliente` AS `idCliente`, sum(`totale_prezzo_prodotto`.`totaleProdotto`) AS `totaleOrdine` FROM `totale_prezzo_prodotto` GROUP BY `totale_prezzo_prodotto`.`idOrdine`, `totale_prezzo_prodotto`.`idCliente` ;
-
--- --------------------------------------------------------
-
---
--- Struttura per vista `totale_prezzo_prodotto`
---
-DROP TABLE IF EXISTS `totale_prezzo_prodotto`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totale_prezzo_prodotto`  AS SELECT `d`.`idOrdine` AS `idOrdine`, `o`.`idCliente` AS `idCliente`, `d`.`idContenitore` AS `idContenitore`, `d`.`idEtichetta` AS `idEtichetta`, `d`.`quantita`* `pr`.`prezzo` AS `totaleProdotto`, `pr`.`iva` AS `iva` FROM ((`dettaglio` `d` join `prezzo_recente` `pr`) join `ordine` `o` on(`d`.`idContenitore` = `pr`.`idContenitore` and `d`.`idEtichetta` = `pr`.`idEtichetta` and `d`.`idOrdine` = `o`.`idOrdine`)) ;
-
--- --------------------------------------------------------
-
---
--- Struttura per vista `totale_prodotto_carrello`
---
-DROP TABLE IF EXISTS `totale_prodotto_carrello`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totale_prodotto_carrello`  AS SELECT `c`.`idCliente` AS `idCliente`, `c`.`idContenitore` AS `idContenitore`, `c`.`idEtichetta` AS `idEtichetta`, `c`.`quantita`* `pr`.`prezzo` AS `totaleProdotto`, `pr`.`iva` AS `iva` FROM (`carrello` `c` join `prezzo_recente` `pr` on(`c`.`idContenitore` = `pr`.`idContenitore` and `c`.`idEtichetta` = `pr`.`idEtichetta`)) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
