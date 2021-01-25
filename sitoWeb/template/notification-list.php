@@ -41,7 +41,7 @@
 
     <?php if (count($templateParams["notifiche"]) == 0): ?>
         <article>
-            <p>Nessuna notifica trovata</p>
+            <p>Non ci sono nuove notifiche</p>
         </article>
     <?php else: {
         foreach ($templateParams["notifiche"] as $notification): ?>
