@@ -1163,7 +1163,8 @@
 
 
             $clientInfo = $this->getClientIdFromOrder($orderId);
-            $message = "Gentile " . $clientInfo["nome"] . ", il tuo ordine #" . $orderId . " " . $this->getStateMessage($state);
+            $username = $clientInfo["ragioneSociale"] == null ? $clientInfo["nomeUtente"] : $clientInfo["ragioneSociale"];
+            $message = "Gentile " . $username . ", il tuo ordine #" . $orderId . " " . $this->getStateMessage($state);
             $this->addNewNotification($clientInfo["idCliente"], $message, "Ordine");
         }
 
@@ -1176,7 +1177,7 @@
         }
 
         private function getClientIdFromOrder($orderId) {
-            $query = "SELECT o.idCliente, u.nome FROM ordine o JOIN utente u ON o.idCliente = u.idUtente WHERE o.idOrdine = ?";
+            $query = "SELECT o.idCliente, u.nome, u.ragioneSociale FROM ordine o JOIN utente u ON o.idCliente = u.idUtente WHERE o.idOrdine = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('i', $orderId);
 
@@ -1273,7 +1274,7 @@
         }
 
         private function notificationFavouriteProductPriceChange($idEtichetta, $idContenitore) {
-            $query = "SELECT utente.idUtente, utente.nome as nomeUtente, etichetta.nome as nomeVino FROM preferenza JOIN utente ON utente.idUtente = preferenza.idCliente JOIN etichetta ON preferenza.idEtichetta = etichetta.idEtichetta WHERE preferenza.idContenitore = ? AND preferenza.idEtichetta = ?";
+            $query = "SELECT utente.idUtente, utente.nome as nomeUtente, utente.ragioneSociale, etichetta.nome as nomeVino FROM preferenza JOIN utente ON utente.idUtente = preferenza.idCliente JOIN etichetta ON preferenza.idEtichetta = etichetta.idEtichetta WHERE preferenza.idContenitore = ? AND preferenza.idEtichetta = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ii', $idContenitore, $idEtichetta);
 
@@ -1281,7 +1282,8 @@
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
             foreach ($result as $data) {
-                $message = "Gentile " . $data["nomeUtente"] . ", il prodotto #" . $idEtichetta . "_" . $idContenitore . " " . $data["nomeVino"] . " ha subito un cambio di prezzo.";
+                $username = $data["ragioneSociale"] == null ? $data["nomeUtente"] : $data["ragioneSociale"];
+                $message = "Gentile " . $username . ", il prodotto #" . $idEtichetta . "_" . $idContenitore . " " . $data["nomeVino"] . " ha subito un cambio di prezzo.";
                 $this->addNewNotification($data["idUtente"], $message, "Prodotto");
             }
 
