@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `worldwineweb`
 --
+use worldwineweb;
 
 --
 -- Dump dei dati per la tabella `cantina`
