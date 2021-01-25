@@ -311,3 +311,42 @@ button#addNewColaborator, button#addNewLabel {
         width: 50%;
     }
 }
+
+@media screen and (min-width: 1200px) {
+
+    body > nav ul {
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+    }
+
+    body > nav > ul > li {
+        margin: auto;
+    }
+
+    body nav {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 0% 5% 1% 5%;
+        margin: 0;
+        width: 90%;
+    }
+
+    body nav section {
+        align-self: flex-end;
+        margin: auto auto;
+    }
+
+    body > header > button {
+        display: none;
+    }
+
+    body > nav > section > a > h2, body > nav > section > a p {
+        display: none;
+    }
+
+    header {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}

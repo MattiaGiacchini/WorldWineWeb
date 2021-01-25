@@ -2,12 +2,14 @@ $(document).ready(function(){
     const nav = $("body > nav");
     const warehouseLoad = $("article.tile.magazzino > p");
     let warehouseLoadingValue;
-
+    let windowWidth = window.innerWidth;
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
 
-    nav.hide();
+    if (windowWidth < 1200) {
+        nav.hide();
+    }
     $(".filter").hide();
 
     $("body > header > button").click(function(){
