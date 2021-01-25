@@ -12,7 +12,7 @@
 
 
 
-        if (isUserLoggedIn() && getUserRole() == "client" ) {
+        if (isUserLoggedIn() && (getUserRole() == "client" || getUserRole() == "admin")) {
             $templateParams["notifiche"] = $dataBase->getClientNotifications(getLoggedUserId());
         }
 

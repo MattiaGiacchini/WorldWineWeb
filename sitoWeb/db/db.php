@@ -716,6 +716,9 @@
                 $stmt->execute();
                 $oldAmount = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 $finalAmount = intval($oldAmount[0]["scorteMagazzino"]) + $amount;
+                if ($finalAmount < 1) {
+                    $this->outOfStockNotification($idEtichetta, $idContenitore);
+                }
                 // TODO: NOTIFICA ADMIN
                 $query = "UPDATE vino_confezionato SET scorteMagazzino = ? WHERE idContenitore = ? AND idEtichetta = ?";
                 $stmt = $this->db->prepare($query);
@@ -1289,7 +1292,22 @@
 
             return;
         }
+        
+        private function outOfStockNotification($idEtichetta, $idContenitore) {
+            $query = "SELECT idUtente FROM utente WHERE ruolo = 'admin'";
+            $stmt = $this->db->prepare($query);
 
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            
+            if(count($result) > 0){
+                foreach ($result as $admin) {
+                    $message = "ATTENZIONE! Il prodotto #" . $idEtichetta . "_" . $idContenitore . " è esaurito.";
+                    $this->addNewNotification($admin["idUtente"], $message, "Prodotto");
+                }
+            }
+            return;
+        }
     }
 
 ?>

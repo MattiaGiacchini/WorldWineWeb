@@ -60,6 +60,7 @@
                         break;
 
                     case 'admin':
+                        echo '<li><a href="notifications.php">Notifiche</a></li>';
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
 
