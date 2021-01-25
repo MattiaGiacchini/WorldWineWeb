@@ -7,7 +7,7 @@ $(document).ready(function(){
         window.history.replaceState( null, null, window.location.href );
     }
 
-    if (windowWidth < 1200) {
+    if (windowWidth < 1000) {
         nav.hide();
     }
     $(".filter").hide();

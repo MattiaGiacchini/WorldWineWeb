@@ -42,7 +42,6 @@
         <section>
             <a href="personalArea.php">
                 <h2>Benvenuto <?php echo getUserName(); ?></h2>
-                <p><?php if(getUserRole() != "client") { echo $userRole; } ?></p>
                 <img src="<?php echo getUserImgURL(getLoggedUserId()); ?>" alt="<?php echo $username; ?>" />
             </a>
         </section> <?php } ?>
@@ -54,13 +53,13 @@
                     case 'client':
                         echo '<li><a href="cart.php">Carrello</a></li>';
                         echo '<li><a href="orders.php">Ordini</a></li>';
-                        echo '<li><a href="notifications.php">Notifiche</a></li>';
+                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge"> 3 </span></a></li>';
                         echo '<li><a href="personalArea.php">Area Personale</a></li>';
                         echo '<li><a href="logout.php">Logout</a></li>';
                         break;
 
                     case 'admin':
-                        echo '<li><a href="notifications.php">Notifiche</a></li>';
+                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge"> 3 </span></a></li>';
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
 
