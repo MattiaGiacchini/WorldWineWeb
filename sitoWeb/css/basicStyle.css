@@ -205,13 +205,17 @@ body nav ul li a, body nav h2, body nav p, body nav img {
 }
 
 body nav img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 50%;
     vertical-align: middle;
-    margin: auto 2% auto 1%;
+    margin: auto 0 auto 1%;
     float: right;
+}
+
+body nav p {
+    margin-right: 3%;
 }
 
 div.utilityBar{
@@ -279,6 +283,40 @@ button#addNewColaborator, button#addNewLabel {
     display: block;
 }
 
+body nav ul li a {
+  padding: 1% 2% 0 0;
+  display: flex;
+  text-align: center;
+}
+
+body nav ul li a:not(.notification):hover {
+    text-decoration: underline;
+}
+
+body nav ul li a.notification {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    vertical-align: middle;
+}
+
+body nav ul li a.notification:hover span:first-of-type {
+    text-decoration: underline;
+}
+
+body nav ul li a.notification span:first-of-type {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+span.notificationBadge {
+    margin-left: 5px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    background: var(--background-red-light);
+    color: var(--text-light);
+}
+
 .alert {
     position: inherit;
     z-index: 10;
@@ -309,5 +347,49 @@ button#addNewColaborator, button#addNewLabel {
 @media screen and (min-width: 480px) {
     .alert {
         width: 50%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+
+    body > nav ul {
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+    }
+
+    body > nav > ul > li {
+        margin: auto;
+    }
+
+    body nav {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 0% 5% 1% 5%;
+        margin: 0;
+        width: 90%;
+    }
+
+    body nav section {
+        align-self: flex-end;
+        margin: auto auto;
+    }
+
+    body > header > button {
+        display: none;
+    }
+
+    body > nav > section > a > h2{
+        display: none;
+    }
+
+    header {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    body nav section a img {
+        height: 70px;
+        width: 70px;
     }
 }
