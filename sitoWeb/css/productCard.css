@@ -24,7 +24,7 @@
 
 .wineCard  a {
     color: inherit;
-       min-height: 240px;
+    min-height: 240px;
     text-decoration: inherit;
 }
 
@@ -37,8 +37,11 @@
     padding: 0px;
 
     display: grid;
-    grid-template-columns: 9fr 14fr;
+    grid-template-columns: 35% 65%;
     grid-gap: 0px;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .wineCard-Container > * {
@@ -46,21 +49,23 @@
 }
 
 .fotoVino {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
     max-width: 100%;
     object-fit:cover;
     box-sizing: border-box;
-    border-right: 10px solid white;
 }
 
-.fotoVino[alt *= "Rosso"] {
-    border-right: 10px solid #690b22;
+article.wineCard .etichetta.Rosso {
+    border-left: 10px solid #690b22;
 }
-.fotoVino[alt *= "Rosato"] {
-    border-right: 10px solid #b46271;
+article.wineCard .etichetta.Rosato {
+    border-left: 10px solid #b46271;
 }
-.fotoVino[alt *= "Bianco"] {
-    border-right: 10px solid #987254;
+article.wineCard .etichetta.Bianco {
+    border-left: 10px solid #987254;
 }
 
 article.wineCard * {

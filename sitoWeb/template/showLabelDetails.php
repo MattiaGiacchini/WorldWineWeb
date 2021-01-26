@@ -9,7 +9,7 @@
         <article class="wineCard">
                 <div class="wineCard-Container">
                     <img class="fotoVino" src="<?php echo getWineImgURL($prodotto["idEtichetta"], $prodotto["idContenitore"]); ?>" alt="Foto <?php echo $prodotto["categoria"]." ".$prodotto["colore"]; ?>" />
-                    <div class="etichetta">
+                    <div class="etichetta <?php echo $prodotto["colore"]; ?>">
                         <h3><?php echo $prodotto["nomeEtichetta"]; ?></h3>
                         <h4><?php echo $prodotto["nomeCantina"]; ?></h4>
                         <div class="LiterVol">
