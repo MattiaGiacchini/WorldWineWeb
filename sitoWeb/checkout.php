@@ -7,11 +7,13 @@
 
         $userId = getLoggedUserId();
 
-        $updateCartProducts = getProductsId(array_keys($_POST));
-        $dataBase->updateCartValues(getLoggedUserId(), $updateCartProducts);
-        $dataBase->removeUnavailableProducts($userId);
-        $templateParams["cartProducts"] = $dataBase->getCartProducts($userId);
-        $templateParams["cartValue"] = $dataBase->getCartValue($userId);
+        if(!isset($_POST["payment"]) && !isset($_POST["shippingAddress"])){
+            $updateCartProducts = getProductsId(array_keys($_POST));
+            $dataBase->updateCartValues(getLoggedUserId(), $updateCartProducts);
+            $dataBase->removeUnavailableProducts($userId);
+            $templateParams["cartProducts"] = $dataBase->getCartProducts($userId);
+            $templateParams["cartValue"] = $dataBase->getCartValue($userId);
+        }
 
         $templateParams["addresses"] = $dataBase->getUserAddresses($userId);
         $templateParams["payments"] = $dataBase-> getUserPayments($userId);
