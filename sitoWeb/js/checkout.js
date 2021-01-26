@@ -30,13 +30,13 @@ $(document).ready(function(){
             const addressId = document.forms["checkoutForm"]["shippingAddress"].value;
             products[0].forEach(element => {
                 if(element["idIndirizzo"] == addressId) {
-                    document.getElementById("name").value = element["nome"];
-                    document.getElementById("adr").value = element["via"];
+                    document.getElementById("name").value = element["nome"].replace("+", "");
+                    document.getElementById("adr").value = element["via"].replace("+", "");
                     document.getElementById("civic").value = element["civico"];
-                    document.getElementById("city").value = element["citta"];
-                    document.getElementById("province").value = element["provincia"];
+                    document.getElementById("city").value = element["citta"].replace("+", "");
+                    document.getElementById("province").value = element["provincia"].replace("+", "");
                     document.getElementById("zip").value = element["cap"];
-                    document.getElementById("state").value = element["stato"];
+                    document.getElementById("state").value = element["stato"].replace("+", "");
                 }
             });
         }
@@ -68,7 +68,7 @@ $(document).ready(function(){
             const paymentId = document.forms["checkoutForm"]["payment"].value;
             products[1].forEach(element => {
                 if(element["numeroCarta"] == paymentId) {
-                    document.getElementById("cardname").value = element["intestatario"];
+                    document.getElementById("cardname").value = element["intestatario"].replace("+", "");
                     document.getElementById("cardTipology").value = element["tipologiaCarta"];
                     document.getElementById("cardnumber").value = element["numeroCarta"];
                     document.getElementById("expiration").value = element["scadenza"].slice(0,7);
