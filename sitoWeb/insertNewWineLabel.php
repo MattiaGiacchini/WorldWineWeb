@@ -38,7 +38,7 @@
        return !isset($_POST["specificazione"]) || (isset($_POST["specificazione"]) && in_array($_POST["specificazione"], array("Nessuna", "Storica", "Classica")));
     }
 
-    function checkVarietale() { var_dump(checkAnnata(false)); return checkAnnata(false) && checkVitigno(); }
+    function checkVarietale() { return checkAnnata(false) && checkVitigno(); }
 
     function checkIg() { return checkVarietale() && checkCertficateIg(true); }
 

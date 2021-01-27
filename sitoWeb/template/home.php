@@ -133,15 +133,4 @@
         <button class="preference <?php echo $prodotto["favorite"] ? "favourite" : "not-favourite"; ?>" name="preference" id="<?php echo $prodotto["idEtichetta"]."-".$prodotto["idContenitore"]."-".$userId; ?>"></button><?php endif; ?>
     </article>
 <?php endforeach; ?>
-
-<?php
-    $psw = "test123";
-    echo $psw;
-    echo "<br>";
-    $hashedPsw = password_hash("test123", PASSWORD_DEFAULT);
-    echo $hashedPsw;
-    echo "<br>";
-    echo password_verify($psw, $hashedPsw);
-
- ?>
 </div>
