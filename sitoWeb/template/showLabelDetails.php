@@ -31,7 +31,7 @@
             <input type="hidden" name="idContainer" value="<?php echo $prodotto["idContenitore"]; ?>">
             <input type="hidden" name="idUser" value="<?php echo getLoggedUserId(); ?>">
             <label for="qnt">Quantità da Ordinare</label>
-            <input type="number" id="qnt" name="qnt" value="" min="0" max="<?php echo $cartElement; ?>" >
+            <input type="number" id="qnt" name="qnt" value="<?php if($cartElement != 0) { echo "1";}?>" min="0" max="<?php echo $cartElement; ?>" >
             <input type="submit" name="submit" value="aggiungi a carrello">
         </form><?php endif; ?>
     </div>

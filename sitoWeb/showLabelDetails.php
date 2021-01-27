@@ -23,6 +23,7 @@
                 } else {
                     $cartElement = $prodotto["scorteMagazzino"];
                 }
+                $cartElement = $cartElement < 0 ? 0 : $cartElement;
 
                 $favouriteClass = $dataBase->existSingleFavourite($_GET["idContainer"], $_GET["idLabel"], getLoggedUserId())
                                    ? "favourite" : "not-favourite";
