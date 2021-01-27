@@ -353,6 +353,10 @@ form.checkout ul {
 }
 
 form.loginForm > ul  p {
+    margin: 4% auto 0 auto;
+}
+
+form.loginForm > ul li:last-of-type p {
     margin: 4% auto 100% auto;
 }
 
