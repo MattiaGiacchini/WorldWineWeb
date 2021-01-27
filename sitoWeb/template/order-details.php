@@ -136,7 +136,7 @@
                     }
                 }
 
-                if ($orderDetail["statoDiAvanzamento"] != ORDER_STATUS[-1]) {
+                if ($orderDetail["statoDiAvanzamento"] != ORDER_STATUS[-1] && $orderDetail["statoDiAvanzamento"] != ORDER_STATUS[0]) {
                     echo '<button type="button" class="print" onclick="window.print()" name="print">Stampa fattura</button>';
                 }
             ?>
