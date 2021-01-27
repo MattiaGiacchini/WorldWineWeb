@@ -26,11 +26,11 @@ if(isUserLoggedIn() && getUserRole() == "admin" && isset($_GET["idCollaborator"]
 
         $psw = null;
         if(isset($_POST["psw"])) {
-            if($_POST["psw"] === $templateParams["userInfo"]["password"] || $_POST["psw"] == '') {
+            if(password_verify($_POST["psw"], $templateParams["userInfo"]["password"]) || $_POST["psw"] == '') {
                 $psw = $templateParams["userInfo"]["password"];
                 unset($_POST["psw"]);
             } else {
-                $psw = $_POST["psw"];
+                $psw = password_hash($_POST["psw"], PASSWORD_DEFAULT);
             }
         } else {
             $psw = $templateParams["userInfo"]["password"];
