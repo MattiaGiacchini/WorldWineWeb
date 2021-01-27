@@ -6,7 +6,7 @@
     } else {
 
         if (isset($_POST["amount"])) {
-            $dataBase->warehouseLoad($_GET["etichetta"], $_GET["contenitore"], $_SESSION["idUtente"] , $_POST["amount"]);
+            $dataBase->warehouseLoad($_GET["etichetta"], $_GET["contenitore"], getLoggedUserId() , $_POST["amount"]);
             unset($_POST);
         }
 
