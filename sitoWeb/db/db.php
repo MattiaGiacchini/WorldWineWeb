@@ -549,7 +549,7 @@
 
         // restituisce l'id dell'utente se password e email vengono riconosciute
         public function checkLogin($email, $password){
-            $query = "SELECT idUtente, nome, cognome, ragioneSociale, password, email FROM utente WHERE email = ?";
+            $query = "SELECT idUtente, nome, cognome, ragioneSociale, password, email FROM utente WHERE email = ? AND utente.attivo = 1";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('s', $email);
             $stmt->execute();
