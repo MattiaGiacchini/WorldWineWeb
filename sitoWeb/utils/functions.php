@@ -3,18 +3,65 @@
         return isset($_SESSION["idUtente"]) ? $_SESSION["idUtente"] : null;
     }
 
+    function createUserCookie($data, $tim){
+        setcookie("user", myCrypt(json_encode($data)), $tim, "/");
+    }
+
+    function getUserCookie() {
+        if(isset($_COOKIE["user"])) {
+            return json_decode(myDecript($_COOKIE["user"]), true);
+        }
+        return null;
+    }
+
+    function logOut() {
+        if(isUserLoggedIn()) {
+            $keys = array_keys($_SESSION);
+            foreach ($keys as $key){
+                unset($_SESSION[$key]);
+            }
+            $data["tempo"] = 1;
+            createUserCookie($data, time()-3600);
+        }
+    }
+
     function isUserLoggedIn() {
         global $dataBase;
-        return !empty($_SESSION["idUtente"]) && $dataBase->getAllUserInfo($_SESSION["idUtente"])["attivo"] == 1 ;
+        if(!isset($_SESSION["idUtente"])) {
+            $cookie = getUserCookie();
+            if($cookie == null) {
+                return false;
+            } else {
+                if($dataBase->getAllUserInfo($cookie["idUtente"])["attivo"] == 1
+                    && $cookie["tempo"] > time()) {
+                    reactiveLoggedUser($cookie);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return $dataBase->getAllUserInfo($_SESSION["idUtente"])["attivo"] == 1;
+        }
+    }
+
+    function reactiveLoggedUser($cookie) {
+        $_SESSION["idUtente"] = $cookie["idUtente"];
+        $_SESSION["nomeUtente"] = $cookie["nomeUtente"];
     }
 
     function registerLoggedUser($user){
         $_SESSION["idUtente"] = $user["idUtente"];
+        $data["idUtente"] = $user["idUtente"];
         if(isset($user["ragioneSociale"])) {
             $_SESSION["nomeUtente"] = $user["ragioneSociale"];
+            $data["nomeUtente"] = $_SESSION["ragioneSociale"];
         } else {
             $_SESSION["nomeUtente"] = $user["nome"]." ".$user["cognome"];
+            $data["nomeUtente"] = $user["nome"]." ".$user["cognome"];
         }
+        $data["tempo"] = 60*60*24*30+ time();
+        createUserCookie($data, 60*60*24*30 + time());
     }
 
     function getUserRole() {
@@ -42,12 +89,6 @@
 
     function getUserName() {
         return isset($_SESSION["nomeUtente"]) ? $_SESSION["nomeUtente"] : "";
-    }
-
-    function logOut() {
-        if(isUserLoggedIn()) {
-            session_unset();
-        }
     }
 
     function upLoadWineImage($image, $idLabel, $idContainer) {
@@ -126,5 +167,26 @@
             }
         }
         return array($result, $msg);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
+
+    function myCrypt($string){
+        $met_enc = 'aes256';
+        $key_enc = AES_KEY;
+        $iv = 'aksju39fjziurn34';   //una stringa random con 16 caratteri
+
+        return openssl_encrypt($string, $met_enc, $key_enc, 0, $iv);
+    }
+
+    function myDecript($string) {
+        $met_enc = 'aes256';
+        $key_enc = AES_KEY;
+        $iv = 'aksju39fjziurn34';   //una stringa random con 16 caratteri
+
+        return openssl_decrypt($string, $met_enc, $key_enc, 0, $iv);
     }
 ?>
