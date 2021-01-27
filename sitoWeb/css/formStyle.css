@@ -353,7 +353,7 @@ form.checkout ul {
 }
 
 form.loginForm > ul  p {
-    margin: 4% auto 0 auto;
+    margin: 4% auto 100% auto;
 }
 
 form.loginForm > ul > li > p > a {
