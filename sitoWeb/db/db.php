@@ -548,13 +548,30 @@
         }
 
         // restituisce l'id dell'utente se password e email vengono riconosciute
-        public function checkLogin($email, $password){
+        /*public function checkLogin($email, $password){
             $query = "SELECT idUtente, nome, cognome, ragioneSociale FROM utente WHERE email = ? AND password = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bind_param('ss', $email, $password);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
+            return $result;
+        }*/
+
+        public function checkLogin($email, $password){
+            $query = "SELECT idUtente, nome, cognome, ragioneSociale, password, email FROM utente WHERE email = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            if (count($result) > 0) {
+                $pwdCheck = password_verify($password, $result[0]["password"]);
+                if ($pwdCheck) {
+                    return $result;
+                } else {
+                    return array();
+                }
+            }
             return $result;
         }
 
@@ -618,10 +635,11 @@
 
         // funzione privata per aggiungere un nuovo utente
         private function addNewUser($email, $psw, $ruolo, $name, $surname, $cf, $birthday, $company, $pIva) {
+            $hashedPwd = password_hash($psw, PASSWORD_DEFAULT);
             $query = "INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`)
                       VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('sssssssis',$email, $psw, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
+            $stmt->bind_param('sssssssis',$email, $hashedPwd, $ruolo, $name, $surname, $birthday, $cf, $pIva, $company);
 
             return $stmt->execute();
         }
@@ -1292,14 +1310,14 @@
 
             return;
         }
-        
+
         private function outOfStockNotification($idEtichetta, $idContenitore) {
             $query = "SELECT idUtente FROM utente WHERE ruolo = 'admin'";
             $stmt = $this->db->prepare($query);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            
+
             if(count($result) > 0){
                 foreach ($result as $admin) {
                     $message = "ATTENZIONE! Il prodotto #" . $idEtichetta . "_" . $idContenitore . " è esaurito.";
