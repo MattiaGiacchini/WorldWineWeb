@@ -310,6 +310,7 @@ body nav ul li a.notification span:first-of-type {
 }
 
 span.notificationBadge {
+    display: none;
     margin-left: 5px;
     padding: 10px 15px;
     border-radius: 50%;
