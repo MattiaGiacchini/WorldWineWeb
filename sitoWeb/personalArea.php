@@ -53,7 +53,7 @@
         $templateParams["titoloScheda"] = "World Wine Web";
         $templateParams["indirizzoPagina"] = "template/personalArea.php";
         $templateParams["jsAggiuntivi"] = '
-            <script type="text/javascript" src="./js/personalAreaController.js"></script>
+            <script src="./js/personalAreaController.js"></script>
         ';
 
 

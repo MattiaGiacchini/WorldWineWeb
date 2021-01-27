@@ -8,7 +8,7 @@
 
 
         $templateParams["jsAggiuntivi"] = '
-            <script type="text/javascript" src="./js/wineLabelModuleController.js"></script>
+            <script src="./js/wineLabelModuleController.js"></script>
         ';
 
         require('./template/base.php');

@@ -35,7 +35,7 @@
         $templateParams["titoloScheda"] = $templateParams["label"]["nomeEtichetta"];
         $templateParams["indirizzoPagina"] = "template/editProduct.php";
         $templateParams["jsAggiuntivi"] = '
-        <script type="text/javascript" src="./js/containerModuleController.js"></script>
+        <script src="./js/containerModuleController.js"></script>
         ';
 
         setcookie("label", json_encode($templateParams["products"]), time() + 60, "/");
