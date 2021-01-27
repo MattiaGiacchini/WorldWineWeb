@@ -1174,7 +1174,7 @@
 
 
             $clientInfo = $this->getClientIdFromOrder($orderId);
-            $username = $clientInfo["ragioneSociale"] == null ? $clientInfo["nomeUtente"] : $clientInfo["ragioneSociale"];
+            $username = $clientInfo["ragioneSociale"] == null ? $clientInfo["nome"] : $clientInfo["ragioneSociale"];
             $message = "Gentile " . $username . ", il tuo ordine #" . $orderId . " " . $this->getStateMessage($state);
             $this->addNewNotification($clientInfo["idCliente"], $message, "Ordine");
         }

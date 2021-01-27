@@ -57,7 +57,7 @@
     <?php else: {
         foreach ($templateParams["orders"] as $orders): ?>
 
-            <a class="tileLink" href=<?php echo "single-order.php?ordine=" . $orders["idOrdine"]; ?>>
+            <a class="tileLink" href=<?php echo '"single-order.php?ordine=' . $orders["idOrdine"] . '"'; ?>>
                 <article class="tile etichetta <?php if ($orders["statoDiAvanzamento"] === "Annullato") echo "deactivated"; ?>">
                     <div class="tileContent">
                         <h3><?php echo $orders["data"]; ?></h3>

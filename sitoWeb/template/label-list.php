@@ -38,7 +38,7 @@
     <?php else: {
         foreach ($templateParams["labels"] as $label): ?>
 
-            <a class="tileLink" href=<?php echo "editProduct.php?idEtichetta=" . $label["idEtichetta"]; ?>>
+            <a class="tileLink" href=<?php echo '"editProduct.php?idEtichetta=' . $label["idEtichetta"] . '"'; ?>>
                 <article class="tile etichetta">
                     <div class="tileContent">
                         <h3><?php echo $label["vino"]; ?></h3>

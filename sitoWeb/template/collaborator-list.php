@@ -52,7 +52,7 @@
 
             <?php $imgURL = getUserImgURL( $collaboratore["idUtente"]); ?>
 
-            <a class="tileLink" href=<?php echo "collaboratorUpdate.php?idCollaborator=" .  $collaboratore["idUtente"]; ?>>
+            <a class="tileLink" href=<?php echo '"collaboratorUpdate.php?idCollaborator=' .  $collaboratore["idUtente"] . '"'; ?>>
                 <article class="tile collaboratore <?php if ($collaboratore["attivo"] == 0) echo "deactivated"; ?>">
                     <img class="tileImg" src="<?php echo $imgURL ; ?>" alt="<?php echo $collaboratore["cognome"] . " " . $collaboratore["nome"] ?>" />
                     <div class="tileContent">
