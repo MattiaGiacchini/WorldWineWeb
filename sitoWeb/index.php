@@ -16,7 +16,7 @@
     $templateParams["indirizzoPagina"] = "template/home.php";
 
     $templateParams["jsAggiuntivi"] = '
-    <script type="text/javascript" src="./js/wineCard.js"></script>
+    <script src="./js/wineCard.js"></script>
     ';
 
     shuffle($templateParams["products"]);

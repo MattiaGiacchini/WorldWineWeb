@@ -10,12 +10,12 @@
 
     <title><?php echo $templateParams["titoloScheda"]; ?></title>
 
-    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"> </script>
-    <script type="text/javascript" src="./js/utils.js"></script>
+    <script src="./js/jquery-1.11.3.min.js"> </script>
+    <script src="./js/utils.js"></script>
 
     <?php
         if(in_array(getUserRole(), array("client", "admin"))){
-            echo '<script type="text/javascript" src="./js/notify.js"></script>';
+            echo '<script src="./js/notify.js"></script>';
         }
         if (isset($templateParams["jsAggiuntivi"])) {
             echo $templateParams["jsAggiuntivi"];
