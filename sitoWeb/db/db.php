@@ -1202,6 +1202,17 @@
         /******************************************************************
                     NOTIFICHE
         ********************************************************************/
+
+        public function getNumberNotificationsYetToBeRead($userId){
+            $query = " SELECT COUNT(*) AS numeroNotifiche FROM notifica WHERE notifica.idUtente = ? AND notifica.visualizzato = 0";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            return $result[0]["numeroNotifiche"];
+        }
+
         private function addNewNotification($userId, $message, $category) {
             $time = $this->getCurrentDateTime();
 
@@ -1292,14 +1303,14 @@
 
             return;
         }
-        
+
         private function outOfStockNotification($idEtichetta, $idContenitore) {
             $query = "SELECT idUtente FROM utente WHERE ruolo = 'admin'";
             $stmt = $this->db->prepare($query);
 
             $stmt->execute();
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            
+
             if(count($result) > 0){
                 foreach ($result as $admin) {
                     $message = "ATTENZIONE! Il prodotto #" . $idEtichetta . "_" . $idContenitore . " è esaurito.";

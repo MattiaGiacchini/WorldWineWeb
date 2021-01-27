@@ -14,6 +14,9 @@
     <script type="text/javascript" src="./js/utils.js"></script>
 
     <?php
+        if(in_array(getUserRole(), array("client", "admin"))){
+            echo '<script type="text/javascript" src="./js/notify.js"></script>';
+        }
         if (isset($templateParams["jsAggiuntivi"])) {
             echo $templateParams["jsAggiuntivi"];
         }
@@ -53,13 +56,13 @@
                     case 'client':
                         echo '<li><a href="cart.php">Carrello</a></li>';
                         echo '<li><a href="orders.php">Ordini</a></li>';
-                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge"> 3 </span></a></li>';
+                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge">  </span></a></li>';
                         echo '<li><a href="personalArea.php">Area Personale</a></li>';
                         echo '<li><a href="logout.php">Logout</a></li>';
                         break;
 
                     case 'admin':
-                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge"> 3 </span></a></li>';
+                        echo '<li class="notification"><a class="notification" href="notifications.php"><span>Notifiche</span><span class="notificationBadge">  </span></a></li>';
                         echo '<li><a href="labels.php">Listino etichette</a></li>';
                         echo '<li><a href="collaborators.php">Collaboratori</a></li>';
 
