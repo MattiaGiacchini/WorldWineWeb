@@ -50,8 +50,8 @@
                   <td headers="name"><?php echo $prodotto["nomeEtichetta"]; ?></td>
                 </tr>
                 <tr>
-                  <th id="name">Tenore Zuccherino</th>
-                  <td headers="name"><?php echo $prodotto["tenoreZuccherino"]; ?></td>
+                  <th id="sugar">Tenore Zuccherino</th>
+                  <td headers="sugar"><?php echo $prodotto["tenoreZuccherino"]; ?></td>
                 </tr>
                 <tr>
                   <th id="wineMaker">Cantina</th>
