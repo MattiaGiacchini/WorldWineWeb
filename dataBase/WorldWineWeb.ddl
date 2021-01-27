@@ -177,7 +177,7 @@ create table RECENSIONE (
 create table UTENTE (
      idUtente int not null auto_increment,
      email varchar(100) not null,
-     password char(20) not null,
+     password char(255) not null,
      ruolo enum('admin','client','collaborator') not null,
      nome char(20),
      cognome char(20),
