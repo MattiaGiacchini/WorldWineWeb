@@ -548,16 +548,6 @@
         }
 
         // restituisce l'id dell'utente se password e email vengono riconosciute
-        /*public function checkLogin($email, $password){
-            $query = "SELECT idUtente, nome, cognome, ragioneSociale FROM utente WHERE email = ? AND password = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ss', $email, $password);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-            return $result;
-        }*/
-
         public function checkLogin($email, $password){
             $query = "SELECT idUtente, nome, cognome, ragioneSociale, password, email FROM utente WHERE email = ?";
             $stmt = $this->db->prepare($query);
