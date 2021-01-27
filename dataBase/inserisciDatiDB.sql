@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 25, 2021 alle 02:02
+-- Creato il: Gen 27, 2021 alle 18:16
 -- Versione del server: 10.4.16-MariaDB
 -- Versione PHP: 7.4.12
 
@@ -20,7 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `worldwineweb`
 --
-use worldwineweb;
 
 --
 -- Dump dei dati per la tabella `cantina`
@@ -73,15 +72,24 @@ INSERT INTO `dettaglio` (`idOrdine`, `idContenitore`, `idEtichetta`, `quantita`)
 (7, 2, 2, 3),
 (9, 2, 2, 11),
 (7, 2, 3, 3),
+(16, 2, 3, 1),
 (7, 2, 6, 3),
 (8, 2, 6, 5),
+(14, 2, 6, 5),
+(17, 2, 6, 4),
 (7, 2, 7, 6),
 (8, 2, 7, 2),
 (11, 2, 7, 12),
+(19, 2, 7, 182),
 (7, 2, 8, 1),
 (10, 2, 8, 1),
+(18, 2, 8, 1),
+(13, 2, 9, 2),
 (6, 2, 10, 4),
-(8, 3, 5, 1);
+(15, 3, 4, 6),
+(8, 3, 5, 1),
+(12, 3, 5, 2),
+(20, 3, 5, 2);
 
 --
 -- Dump dei dati per la tabella `etichetta`
@@ -96,7 +104,7 @@ INSERT INTO `etichetta` (`idEtichetta`, `nome`, `descrizione`, `colore`, `titolo
 (7, 'Ribolla', 'Le note di degustazione evidenziano uno stretto equilibrio di sentori minerali e agrumi, che col tempo si trasformano in una più densa sensazione di fiori selvatici, miele di trifoglio e pera matura. La sua struttura tannica e acida lo rende di impatto immediato, oltre a conferirgli longevità. Al naso appare maturo e strutturato, con profumi di mandarino, arancia, melone e pera.', 'Bianco', '12.50', 1, 0, 'Vino', 'Abboccato', '6.00', '8.00', 'DOC', 'Frizzante', 2019, 'Friuli Venezia Giulia', 'Classica', 172, NULL, 13),
 (8, 'Gewurztraminer ', 'Da giovane può accompagnare i fritti o il pesce crudo, ma è anche fantastico con piatti molto piccanti e speziati (Indiano o Tailandese). Con il tempo diventa un magnifico abbinamento a formaggi teneri come Taleggio o robiola. Va assolutamente servito fresco, alla temperatura massima di 8° C in bicchieri tipo “Renano” alti ed affusolati.', 'Bianco', '13.50', 1, 0, 'Vino', 'Secco', '10.00', '12.00', 'DOC', 'Fermo', 2013, 'Germania', 'Storica', 187, NULL, 17),
 (9, 'Franciacorta Cuvees Prestige ', 'All’esame organolettico questo vino Franciacorta si presenta con un aspetto rosa salmone con perlage fine e persistente. Il profumo è sorprendentemente ricco al naso, con una profondità sul floreale di rosa e peonia, e sul fruttato di melograno e fragola. Il gusto all’assaggio si conferma fruttato, ed è fresco con un’effervescenza sottile e delicata.', 'Rosato', '12.50', 1, 0, 'Vino', 'Amabile', '6.00', '6.00', 'DOC', 'Frizzante', 2014, 'Lombardia', 'Storica', 78, 8, 2),
-(10, 'Franciacorta Brut Cuvees Prestige ', 'All’esame organolettico questo Spumante Franciacorta si presenta di colore giallo paglierino, lucente. Perlage fine e persistente. Il profumo all’olfatto, mostra sentori delicati di fiori bianchi e frutta a polpa gialla, con un bel sentore di pasticceria e un lieve rimando erbaceo. Il gusto è assolutamente piacevole, pulito e vivace, si distende armonicamente su una trama minerale spiccata e note di frutta esotica.', 'Bianco', '12.50', 1, 0, 'Spumante', 'Brut', '6.00', '6.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
+(10, 'Franciacorta Brut Prestige ', 'All’esame organolettico questo Spumante Franciacorta si presenta di colore giallo paglierino, lucente. Perlage fine e persistente. Il profumo all’olfatto, mostra sentori delicati di fiori bianchi e frutta a polpa gialla, con un bel sentore di pasticceria e un lieve rimando erbaceo. Il gusto è assolutamente piacevole, pulito e vivace, si distende armonicamente su una trama minerale spiccata e note di frutta esotica.', 'Bianco', '12.50', 1, 0, 'Spumante', 'Brut', '6.00', '6.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 
 --
 -- Dump dei dati per la tabella `gestione_ordine`
@@ -124,7 +132,9 @@ INSERT INTO `gestione_ordine` (`idOrdine`, `idCollaboratore`, `data`, `stato`) V
 (10, 1, '2021-01-25 01:31:29', 'Consegnato'),
 (11, 1, '2021-01-25 01:34:46', 'Elaborazione'),
 (11, 1, '2021-01-25 01:38:45', 'Spedito'),
-(11, 1, '2021-01-25 01:39:14', 'Consegnato');
+(11, 1, '2021-01-25 01:39:14', 'Consegnato'),
+(19, 3, '2021-01-27 18:10:02', 'Annullato'),
+(20, 3, '2021-01-27 18:12:36', 'Annullato');
 
 --
 -- Dump dei dati per la tabella `indirizzo`
@@ -132,7 +142,8 @@ INSERT INTO `gestione_ordine` (`idOrdine`, `idCollaboratore`, `data`, `stato`) V
 
 INSERT INTO `indirizzo` (`idIndirizzo`, `idCliente`, `nome`, `via`, `civico`, `citta`, `provincia`, `cap`, `stato`) VALUES
 (1, 3, 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015, 'ITA'),
-(2, 5, 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015, 'ITA');
+(2, 5, 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015, 'ITA'),
+(3, 3, 'Grandi Filomeno', 'Giuseppe Verdi ', 54, 'Bologna', 'Bologna', 40121, 'ITA');
 
 --
 -- Dump dei dati per la tabella `menzione`
@@ -154,7 +165,8 @@ INSERT INTO `menzione` (`idMenzione`, `menzione`) VALUES
 
 INSERT INTO `metodo_di_pagamento` (`idCliente`, `intestatario`, `numeroCarta`, `scadenza`, `cvv`, `tipologiaCarta`) VALUES
 (3, 'Giacomo Franchi', 4785478547854785, '2026-12-01', 785, 'Mastercard'),
-(5, 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY');
+(5, 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY'),
+(3, 'Grandi Filomeno', 6521454111445478, '2024-07-01', 124, 'Maestro');
 
 --
 -- Dump dei dati per la tabella `modifica_scorte`
@@ -162,6 +174,7 @@ INSERT INTO `metodo_di_pagamento` (`idCliente`, `intestatario`, `numeroCarta`, `
 
 INSERT INTO `modifica_scorte` (`idContenitore`, `idEtichetta`, `idCollaboratore`, `quantita`, `data`) VALUES
 (2, 2, 1, 500, '2021-01-25 00:50:55'),
+(2, 2, 1, 20, '2021-01-27 14:41:08'),
 (2, 3, 1, 100, '2021-01-25 00:51:03'),
 (2, 6, 1, 20, '2021-01-25 00:51:32'),
 (2, 7, 1, 150, '2021-01-25 00:51:41'),
@@ -174,6 +187,10 @@ INSERT INTO `modifica_scorte` (`idContenitore`, `idEtichetta`, `idCollaboratore`
 (2, 10, 1, 50, '2021-01-25 00:50:33'),
 (2, 10, 1, 10, '2021-01-25 00:50:34'),
 (2, 10, 1, 100, '2021-01-25 00:50:36'),
+(3, 2, 1, 21, '2021-01-25 18:51:00'),
+(3, 2, 1, -21, '2021-01-25 18:51:05'),
+(3, 2, 1, -21, '2021-01-25 18:52:37'),
+(3, 2, 1, -21, '2021-01-25 18:54:27'),
 (3, 4, 1, 20, '2021-01-25 00:50:04'),
 (3, 4, 1, 10, '2021-01-25 00:50:05'),
 (3, 4, 1, -5, '2021-01-25 00:50:24'),
@@ -192,22 +209,28 @@ INSERT INTO `notifica` (`idUtente`, `idNotifica`, `data`, `messaggio`, `visualiz
 (3, 5, '2021-01-23 20:45:02', 'Gentile Grandi, il tuo ordine #4 è stato spedito', '1', 'Ordine'),
 (3, 6, '2021-01-23 20:46:00', 'Gentile Grandi, il tuo ordine #4 è stato consegnato', '1', 'Ordine'),
 (3, 7, '2021-01-24 00:24:24', 'Gentile Grandi, il tuo ordine #5 è stato annullato', '0', 'Ordine'),
-(3, 8, '2021-01-25 01:26:32', 'Gentile Grandi, il tuo ordine #6 è in fase di elaborazione', '0', 'Ordine'),
-(3, 9, '2021-01-25 01:26:33', 'Gentile Grandi, il tuo ordine #6 è stato spedito', '0', 'Ordine'),
-(3, 10, '2021-01-25 01:26:34', 'Gentile Grandi, il tuo ordine #6 è stato consegnato', '0', 'Ordine'),
-(5, 11, '2021-01-25 01:26:41', 'Gentile , il tuo ordine #9 è in fase di elaborazione', '0', 'Ordine'),
-(5, 12, '2021-01-25 01:26:42', 'Gentile , il tuo ordine #9 è stato spedito', '0', 'Ordine'),
-(5, 13, '2021-01-25 01:26:43', 'Gentile , il tuo ordine #9 è stato consegnato', '0', 'Ordine'),
-(3, 14, '2021-01-25 01:27:35', 'Gentile Grandi, il tuo ordine #7 è in fase di elaborazione', '0', 'Ordine'),
-(3, 15, '2021-01-25 01:27:37', 'Gentile Grandi, il tuo ordine #7 è stato spedito', '0', 'Ordine'),
-(5, 16, '2021-01-25 01:27:43', 'Gentile , il tuo ordine #8 è stato annullato', '0', 'Ordine'),
-(5, 17, '2021-01-25 01:31:27', 'Gentile , il tuo ordine #10 è in fase di elaborazione', '0', 'Ordine'),
-(5, 18, '2021-01-25 01:31:28', 'Gentile , il tuo ordine #10 è stato spedito', '0', 'Ordine'),
-(5, 19, '2021-01-25 01:31:29', 'Gentile , il tuo ordine #10 è stato consegnato', '0', 'Ordine'),
-(5, 20, '2021-01-25 01:34:46', 'Gentile , il tuo ordine #11 è in fase di elaborazione', '0', 'Ordine'),
+(3, 8, '2021-01-25 01:26:32', 'Gentile Grandi, il tuo ordine #6 è in fase di elaborazione', '1', 'Ordine'),
+(3, 9, '2021-01-25 01:26:33', 'Gentile Grandi, il tuo ordine #6 è stato spedito', '1', 'Ordine'),
+(3, 10, '2021-01-25 01:26:34', 'Gentile Grandi, il tuo ordine #6 è stato consegnato', '1', 'Ordine'),
+(5, 11, '2021-01-25 01:26:41', 'Gentile Villa Martina, il tuo ordine #9 è in fase di elaborazione', '0', 'Ordine'),
+(5, 12, '2021-01-25 01:26:42', 'Gentile Villa Martina, il tuo ordine #9 è stato spedito', '0', 'Ordine'),
+(5, 13, '2021-01-25 01:26:43', 'Gentile Villa Martina, il tuo ordine #9 è stato consegnato', '0', 'Ordine'),
+(3, 14, '2021-01-25 01:27:35', 'Gentile Grandi, il tuo ordine #7 è in fase di elaborazione', '1', 'Ordine'),
+(3, 15, '2021-01-25 01:27:37', 'Gentile Grandi, il tuo ordine #7 è stato spedito', '1', 'Ordine'),
+(5, 16, '2021-01-25 01:27:43', 'Gentile Villa Martina, il tuo ordine #8 è stato annullato', '0', 'Ordine'),
+(5, 17, '2021-01-25 01:31:27', 'Gentile Villa Martina, il tuo ordine #10 è in fase di elaborazione', '0', 'Ordine'),
+(5, 18, '2021-01-25 01:31:28', 'Gentile Villa Martina, il tuo ordine #10 è stato spedito', '0', 'Ordine'),
+(5, 19, '2021-01-25 01:31:29', 'Gentile Villa Martina, il tuo ordine #10 è stato consegnato', '0', 'Ordine'),
+(5, 20, '2021-01-25 01:34:46', 'Gentile Villa Martina, il tuo ordine #11 è in fase di elaborazione', '0', 'Ordine'),
 (5, 21, '2021-01-25 01:38:18', 'Gentile Villa Martina, il prodotto #9_2 Franciacorta Cuvees Prestige  ha subito un cambio di prezzo.', '0', 'Prodotto'),
-(5, 22, '2021-01-25 01:38:45', 'Gentile , il tuo ordine #11 è stato spedito', '0', 'Ordine'),
-(5, 23, '2021-01-25 01:39:14', 'Gentile Villa Martina, il tuo ordine #11 è stato consegnato', '0', 'Ordine');
+(5, 22, '2021-01-25 01:38:45', 'Gentile Villa Martina, il tuo ordine #11 è stato spedito', '0', 'Ordine'),
+(5, 23, '2021-01-25 01:39:14', 'Gentile Villa Martina, il tuo ordine #11 è stato consegnato', '0', 'Ordine'),
+(1, 24, '2021-01-25 18:54:27', 'ATTENZIONE! Il prodotto #2_3 è esaurito.', '1', 'Prodotto'),
+(2, 25, '2021-01-25 18:54:27', 'ATTENZIONE! Il prodotto #2_3 è esaurito.', '0', 'Prodotto'),
+(1, 26, '2021-01-27 18:09:54', 'ATTENZIONE! Il prodotto #7_2 è esaurito.', '1', 'Prodotto'),
+(2, 27, '2021-01-27 18:09:54', 'ATTENZIONE! Il prodotto #7_2 è esaurito.', '0', 'Prodotto'),
+(3, 28, '2021-01-27 18:10:02', 'Gentile Villa Martina, il tuo ordine #19 è stato annullato', '0', 'Ordine'),
+(3, 29, '2021-01-27 18:12:36', 'Gentile Grandi, il tuo ordine #20 è stato annullato', '0', 'Ordine');
 
 --
 -- Dump dei dati per la tabella `ordine`
@@ -224,7 +247,16 @@ INSERT INTO `ordine` (`idOrdine`, `idCliente`, `data`, `statoDiAvanzamento`, `pa
 (8, 5, '2021-01-25 01:22:38', 'Annullato', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
 (9, 5, '2021-01-25 01:23:00', 'Consegnato', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
 (10, 5, '2021-01-25 01:31:21', 'Consegnato', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
-(11, 5, '2021-01-25 01:34:37', 'Consegnato', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015);
+(11, 5, '2021-01-25 01:34:37', 'Consegnato', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
+(12, 3, '2021-01-25 21:26:53', 'Accettazione', 'Giacomo Franchi', 4785478547854785, '2026-12-01', 785, 'Mastercard', 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015),
+(13, 3, '2021-01-25 21:30:32', 'Accettazione', 'Grandi Filomeno', 6521454111445478, '2024-07-01', 124, 'Maestro', 'Grandi Filomeno', 'Giuseppe Verdi ', 54, 'Bologna', 'Bologna', 40121),
+(14, 5, '2021-01-26 09:24:13', 'Accettazione', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
+(15, 5, '2021-01-26 09:39:01', 'Accettazione', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
+(16, 5, '2021-01-26 10:09:20', 'Accettazione', 'Villa Martina SRL', 4789652144478787, '2026-01-01', 785, 'V-PAY', 'Martina Villa', 'Romagna', 245, 'Cervia', 'Ravenna', 48015),
+(17, 3, '2021-01-27 18:07:43', 'Accettazione', 'Giacomo Franchi', 4785478547854785, '2026-12-01', 785, 'Mastercard', 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015),
+(18, 3, '2021-01-27 18:09:04', 'Accettazione', 'Grandi Filomeno', 6521454111445478, '2024-07-01', 124, 'Maestro', 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015),
+(19, 3, '2021-01-27 18:09:54', 'Annullato', 'Giacomo Franchi', 4785478547854785, '2026-12-01', 785, 'Mastercard', 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015),
+(20, 3, '2021-01-27 18:12:32', 'Annullato', 'Giacomo Franchi', 4785478547854785, '2026-12-01', 785, 'Mastercard', 'Alberto Franchi', 'Ragazzena', 147, 'Cervia', 'Ravenna', 48015);
 
 --
 -- Dump dei dati per la tabella `preferenza`
@@ -240,7 +272,8 @@ INSERT INTO `preferenza` (`idContenitore`, `idEtichetta`, `idCliente`) VALUES
 (2, 7, 5),
 (2, 9, 5),
 (3, 2, 5),
-(3, 5, 5);
+(3, 5, 5),
+(3, 5, 8);
 
 --
 -- Dump dei dati per la tabella `prezzo`
@@ -534,27 +567,29 @@ INSERT INTO `stato` (`sigla`, `nome`) VALUES
 --
 
 INSERT INTO `utente` (`idUtente`, `email`, `password`, `ruolo`, `nome`, `cognome`, `dataDiNascita`, `cf`, `partitaIva`, `ragioneSociale`, `attivo`) VALUES
-(1, 'ma.giacchini99@gmail.com', 'a123', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199X', NULL, NULL, 1),
-(2, 'dani@gmail.com', '123456aA', 'admin', 'Daniele', 'Ercoles', '1992-10-19', 'RCLDNL88C22H777Z', NULL, NULL, 1),
-(3, 'a@b.it', 'a123', 'client', 'Grandi', 'Filomeno', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1),
-(4, 'mario@biondi.com', '123456aA', 'collaborator', 'Mario', 'Biondi', '2002-02-02', 'abcabc15e11g198f', NULL, NULL, 0),
-(5, 'info@villamartina.it', '123456aA', 'client', NULL, NULL, NULL, NULL, 11454785441, 'Villa Martina', 1);
+(1, 'ma.giacchini99@gmail.com', '$2y$10$Dr.Tma9Csb2VPl34pcXI5uMnnoITzqvczXJmh0Mbh.qgf49jiRzX6', 'admin', 'Mattia', 'Giacchini', '1999-05-11', 'GCCMTT99E11H199X', NULL, NULL, 1),
+(2, 'dani@gmail.com', '$2y$10$3b8rZrXiKCzUXFDiPouAiOcV4HEXgZETHf.PDZS.ZWxYPCwTWFA9O', 'admin', 'Daniele', 'Ercoles', '1992-10-19', 'RCLDNL88C22H777Z', NULL, NULL, 1),
+(3, 'a@b.it', '$2y$10$fvX0tiZa.USnd.59yLbBHuztq1A70cYTw0eC8DDUq8mviHhQurYLe', 'client', 'Grandi', 'Filomeno', '1991-01-20', 'GRNFMN02T04A944S', NULL, NULL, 1),
+(4, 'mario@biondi.com', '$2y$10$lUOzM3vwA.z8BhuvCRHw7O5DDfPjO0LqvdFBC.WBL6lmVw7lDSeiK', 'collaborator', 'Mario', 'Biondi', '2002-02-02', 'abcabc15e11g198f', NULL, NULL, 0),
+(5, 'info@villamartina.it', '$2y$10$zIjIuFzPTwM4wOlM8DrOMuxu6.MY.F3EbIE5NIBITYZ9RmhgYwbbq', 'client', NULL, NULL, NULL, NULL, 11454785441, 'Villa Martina', 1),
+(8, 'enoteca.cesena@centro.it', '$2y$10$/slMLC45gBBG6e2CBV.B8.JAMEx59UsxlJkBbdmNzDTzXke.d3ngW', 'client', NULL, NULL, NULL, NULL, 32132131313, 'Enoteca SNC', 1),
+(9, 'ginopino@gmail.com', '$2y$10$ttcUzFoPhQMlUTQccE2iTOcTiNw5BhZ.PLU66DLHnYZqZuh9GKvaG', 'collaborator', 'Gino', 'Pino', '1991-01-01', 'AAABBB99G55D945A', NULL, NULL, 1);
 
 --
 -- Dump dei dati per la tabella `vino_confezionato`
 --
 
 INSERT INTO `vino_confezionato` (`idContenitore`, `idEtichetta`, `scorteMagazzino`, `mediaRecensioni`, `attivo`) VALUES
-(2, 2, 486, '3.000', 1),
-(2, 3, 97, '0.000', 1),
-(2, 6, 17, '3.000', 1),
+(2, 2, 506, '3.000', 1),
+(2, 3, 96, '0.000', 1),
+(2, 6, 8, '3.000', 1),
 (2, 7, 182, '3.500', 1),
-(2, 8, 8, '4.000', 1),
-(2, 9, 85, '5.000', 1),
+(2, 8, 7, '4.000', 1),
+(2, 9, 83, '5.000', 1),
 (2, 10, 156, '5.000', 1),
 (3, 2, 0, '0.000', 1),
-(3, 4, 25, '1.000', 1),
-(3, 5, 20, '4.000', 1);
+(3, 4, 19, '1.000', 1),
+(3, 5, 18, '4.000', 1);
 
 --
 -- Dump dei dati per la tabella `vitigno`
